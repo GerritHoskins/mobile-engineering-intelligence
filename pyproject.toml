@@ -1,0 +1,18 @@
+[project]
+name = "mobile-engineering-intelligence"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.13"
+dependencies = [
+    "alembic>=1.20.0",
+    "fastapi>=0.141.1",
+    "psycopg[binary]>=3.3.5",
+    "pydantic>=2.13.5",
+    "sqlalchemy>=2",
+]
+
+[dependency-groups]
+dev = [
+    "pytest>=9.1.1",
+]
