@@ -54,6 +54,7 @@ def db_session():
 def test_invalid_subject_type_returns_400(client: TestClient) -> None:
     response = client.get("/v1/state/device/install-case-a")
     assert response.status_code == 400
+    assert "Unsupported subject_type" in response.json()["detail"]
 
 
 def test_omitted_domain_defaults_to_push(client: TestClient, db_session) -> None:
@@ -74,9 +75,16 @@ def test_explicit_domain_push_matches_omitted_default(client: TestClient, db_ses
     assert omitted == explicit
 
 
-def test_invalid_domain_returns_400(client: TestClient) -> None:
+def test_unknown_domain_returns_400(client: TestClient) -> None:
+    response = client.get("/v1/state/account/account-case-p1?domain=bogus")
+    assert response.status_code == 400
+    assert "Unsupported domain" in response.json()["detail"]
+
+
+def test_installation_with_profile_domain_returns_400(client: TestClient) -> None:
     response = client.get("/v1/state/installation/install-case-a?domain=profile")
     assert response.status_code == 400
+    assert "requires subject_type 'account'" in response.json()["detail"]
 
 
 def test_empty_observation_subject_returns_200_with_unknown_contract(client: TestClient) -> None:
@@ -171,11 +179,13 @@ def test_account_with_omitted_domain_returns_400(client: TestClient) -> None:
     # Omitted domain still defaults to push, which is installation-scoped.
     response = client.get("/v1/state/account/account-case-p1")
     assert response.status_code == 400
+    assert "requires subject_type 'installation'" in response.json()["detail"]
 
 
 def test_account_with_push_domain_returns_400(client: TestClient) -> None:
     response = client.get("/v1/state/account/account-case-p1?domain=push")
     assert response.status_code == 400
+    assert "requires subject_type 'installation'" in response.json()["detail"]
 
 
 def test_push_observations_do_not_leak_into_profile_domain(client: TestClient, db_session) -> None:
