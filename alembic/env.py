@@ -1,4 +1,3 @@
-import os
 from logging.config import fileConfig
 
 from sqlalchemy import engine_from_config
@@ -6,7 +5,7 @@ from sqlalchemy import pool
 
 from alembic import context
 
-from app.db import Base
+from app.db import Base, database_url
 from app import models  # noqa: F401 - registers StateObservation on Base.metadata
 
 # this is the Alembic Config object, which provides
@@ -18,10 +17,10 @@ config = context.config
 if config.config_file_name is not None:
     fileConfig(config.config_file_name)
 
-database_url = os.environ.get(
-    "DATABASE_URL", "postgresql+psycopg://mei:mei@localhost:5432/mei"
-)
-config.set_main_option("sqlalchemy.url", database_url)
+# Same resolution as the app (DATABASE_URL, else DB_* parts), so migrations and
+# the API can never point at different databases. "%" is escaped because
+# configparser interpolates it, and quoted passwords can contain it.
+config.set_main_option("sqlalchemy.url", database_url().replace("%", "%%"))
 
 target_metadata = Base.metadata
 
