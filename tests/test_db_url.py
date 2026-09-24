@@ -26,3 +26,21 @@ def test_composed_url_defaults_port_and_name() -> None:
 
 def test_falls_back_to_local_default() -> None:
     assert database_url({}) == DEFAULT_DATABASE_URL
+
+
+def test_quoted_password_survives_alembic_config_interpolation() -> None:
+    # alembic/env.py escapes "%" because Config is a configparser: every
+    # URL-quoted RDS password contains "%", and unescaped it would either
+    # raise or be silently mangled by interpolation.
+    from alembic.config import Config
+
+    url = database_url(
+        {"DB_HOST": "h", "DB_USER": "mei", "DB_PASSWORD": "p@ss%w/rd", "DB_NAME": "mei"}
+    )
+    assert "%" in url
+
+    config = Config()
+    config.set_main_option("sqlalchemy.url", url.replace("%", "%%"))
+
+    assert config.get_main_option("sqlalchemy.url") == url
+    assert config.get_section(config.config_ini_section)["sqlalchemy.url"] == url
