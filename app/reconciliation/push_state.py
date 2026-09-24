@@ -1,36 +1,33 @@
 from datetime import datetime
-from typing import Any, Literal
+from typing import Any
 
 from pydantic import BaseModel
+
+# Shared types live in common.py; re-exported here so existing imports keep working.
+from app.reconciliation.common import (
+    ConsistencyIssue,
+    Evidence,
+    RawObservation,
+    UnrecognizedObservationValue,
+    evidence_for as _evidence_for,
+    latest_per_key,
+)
+
+__all__ = [
+    "ConsistencyIssue",
+    "Evidence",
+    "PushEvaluation",
+    "RawObservation",
+    "UnrecognizedObservationValue",
+    "evaluate_push_state",
+    "normalize",
+]
 
 DESIRED_VALUES = {"ENABLED", "DISABLED", "UNKNOWN"}
 CAPABILITY_VALUES = {"ALLOWED", "DENIED", "UNKNOWN"}
 REGISTRATION_VALUES = {"REGISTERED", "NOT_REGISTERED", "MISSING", "STALE"}
 
 STALE_REGISTRATION_THRESHOLD_DAYS = 30
-
-
-class RawObservation(BaseModel):
-    """Minimal shape the evaluator needs from a StateObservation row."""
-
-    source: str
-    key: str
-    value: Any
-    observed_at: datetime
-
-
-class Evidence(BaseModel):
-    source: str
-    key: str
-    value: Any
-    observed_at: datetime
-
-
-class ConsistencyIssue(BaseModel):
-    code: str
-    severity: Literal["INFO", "WARNING", "ERROR"]
-    remediation: Literal["USER_ACTION_REQUIRED", "BACKEND_SYNC_NEEDED", "NONE"]
-    evidence: list[Evidence]
 
 
 class PushEvaluation(BaseModel):
@@ -40,10 +37,6 @@ class PushEvaluation(BaseModel):
     registration_state: dict
     effective_state: dict
     consistency_issues: list[ConsistencyIssue]
-
-
-class UnrecognizedObservationValue(ValueError):
-    pass
 
 
 def _normalize_desired(value: Any) -> str:
@@ -98,11 +91,7 @@ def normalize(
     """
     now = now or datetime.now(observations[0].observed_at.tzinfo) if observations else datetime.now()
 
-    latest: dict[tuple[str, str], RawObservation] = {}
-    for obs in observations:
-        existing = latest.get((obs.source, obs.key))
-        if existing is None or obs.observed_at > existing.observed_at:
-            latest[(obs.source, obs.key)] = obs
+    latest = latest_per_key(observations)
 
     backend_enabled = latest.get(("backend", "enabled"))
     os_permission = latest.get(("os", "permission"))
@@ -117,21 +106,6 @@ def normalize(
     )
 
     return desired, capability, registration
-
-
-def _evidence_for(observations: list[RawObservation], source: str, key: str) -> list[Evidence]:
-    matches = [o for o in observations if o.source == source and o.key == key]
-    if not matches:
-        return []
-    latest = max(matches, key=lambda o: o.observed_at)
-    return [
-        Evidence(
-            source=latest.source,
-            key=latest.key,
-            value=latest.value,
-            observed_at=latest.observed_at,
-        )
-    ]
 
 
 def evaluate_push_state(

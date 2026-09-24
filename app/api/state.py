@@ -1,15 +1,17 @@
+from collections.abc import Callable
+from dataclasses import dataclass
+
 from fastapi import APIRouter, Depends, HTTPException, Query
 from sqlalchemy import func, select
 from sqlalchemy.orm import Session
 
 from app.db import get_session
 from app.models import StateObservation
-from app.reconciliation.push_state import RawObservation, evaluate_push_state
+from app.reconciliation.common import RawObservation
+from app.reconciliation.profile_state import empty_field_states, evaluate_profile_state
+from app.reconciliation.push_state import evaluate_push_state
 
 router = APIRouter(prefix="/v1/state")
-
-VALID_SUBJECT_TYPES = {"installation"}
-VALID_DOMAINS = {"push"}
 
 
 def _load_latest_raw_observations(
@@ -57,7 +59,7 @@ def _load_latest_raw_observations(
     ]
 
 
-def _empty_observation_response(subject_type: str, subject_id: str, domain: str) -> dict:
+def _empty_push_state() -> dict:
     """A subject with zero observations at all is distinct from a subject with
     some observations but a specific key missing (e.g. scenario D's missing
     braze registration, which is a genuine PROVIDER_REGISTRATION_MISSING
@@ -65,14 +67,51 @@ def _empty_observation_response(subject_type: str, subject_id: str, domain: str)
     there are no issues to report -- there's no `subjects` table to distinguish
     "doesn't exist" from "hasn't reported yet", so the API doesn't pretend to."""
     return {
-        "subject": {"type": subject_type, "id": subject_id},
-        "domain": domain,
         "desired_state": {"push_enabled": "UNKNOWN"},
         "capability_state": {"os_permission": "UNKNOWN"},
         "registration_state": {"provider_registration": "UNKNOWN"},
         "effective_state": {"deliverable": None},
-        "consistency_issues": [],
     }
+
+
+def _push_state(observations: list[RawObservation]) -> dict:
+    evaluation = evaluate_push_state(observations)
+    return {
+        "desired_state": evaluation.desired_state,
+        "capability_state": evaluation.capability_state,
+        "registration_state": evaluation.registration_state,
+        "effective_state": evaluation.effective_state,
+        "consistency_issues": evaluation.consistency_issues,
+    }
+
+
+def _empty_profile_state() -> dict:
+    """Same zero-observation contract as push: every field UNKNOWN, no issues."""
+    return {"field_states": empty_field_states(), "effective_state": {"consistent": None}}
+
+
+def _profile_state(observations: list[RawObservation]) -> dict:
+    evaluation = evaluate_profile_state(observations)
+    return {
+        "field_states": evaluation.field_states,
+        "effective_state": evaluation.effective_state,
+        "consistency_issues": evaluation.consistency_issues,
+    }
+
+
+@dataclass(frozen=True)
+class DomainSpec:
+    subject_type: str
+    evaluate: Callable[[list[RawObservation]], dict]
+    empty: Callable[[], dict]
+
+
+# Each domain is scoped to exactly one subject type. Two entries, not a rules DSL.
+DOMAINS: dict[str, DomainSpec] = {
+    "push": DomainSpec("installation", _push_state, _empty_push_state),
+    "profile": DomainSpec("account", _profile_state, _empty_profile_state),
+}
+VALID_SUBJECT_TYPES = {spec.subject_type for spec in DOMAINS.values()}
 
 
 @router.get("/{subject_type}/{subject_id}")
@@ -84,22 +123,25 @@ def get_state(
 ) -> dict:
     if subject_type not in VALID_SUBJECT_TYPES:
         raise HTTPException(status_code=400, detail=f"Unsupported subject_type: {subject_type!r}")
-    if domain not in VALID_DOMAINS:
+    spec = DOMAINS.get(domain)
+    if spec is None:
         raise HTTPException(status_code=400, detail=f"Unsupported domain: {domain!r}")
+    if spec.subject_type != subject_type:
+        raise HTTPException(
+            status_code=400,
+            detail=f"Domain {domain!r} requires subject_type {spec.subject_type!r}, got {subject_type!r}",
+        )
 
     raw_observations = _load_latest_raw_observations(session, subject_type, subject_id, domain)
 
-    if not raw_observations:
-        return _empty_observation_response(subject_type, subject_id, domain)
-
-    evaluation = evaluate_push_state(raw_observations)
+    if raw_observations:
+        state = spec.evaluate(raw_observations)
+    else:
+        state = spec.empty() | {"consistency_issues": []}
 
     return {
         "subject": {"type": subject_type, "id": subject_id},
-        "domain": evaluation.domain,
-        "desired_state": evaluation.desired_state,
-        "capability_state": evaluation.capability_state,
-        "registration_state": evaluation.registration_state,
-        "effective_state": evaluation.effective_state,
-        "consistency_issues": [issue.model_dump(mode="json") for issue in evaluation.consistency_issues],
+        "domain": domain,
+        **state,
+        "consistency_issues": [issue.model_dump(mode="json") for issue in state["consistency_issues"]],
     }

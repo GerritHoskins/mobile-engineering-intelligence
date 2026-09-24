@@ -67,26 +67,85 @@ SCENARIOS: dict[str, list[ObservationSpec]] = {
 }
 
 
+# Profile domain (account-scoped). Mirrors the P1-P10 table in
+# tests/test_profile_state_reconciliation.py. Only the *ordering* of copy vs
+# authoritative observed_at matters here, so unlike push there is no
+# wall-clock drift.
+PROFILE_SUBJECT_PREFIX = "account-case-"
+BEFORE = SEED_REFERENCE_TIME - timedelta(days=3)
+AUTHORITY_AT = SEED_REFERENCE_TIME - timedelta(days=2)
+AFTER = SEED_REFERENCE_TIME - timedelta(days=1)
+
+EMAIL = "anna@example.de"
+OTHER_EMAIL = "anna.old@example.de"
+POSTAL = "01067"
+OTHER_POSTAL = "10115"
+
+
+def _auth_email(value: object = EMAIL) -> ObservationSpec:
+    return ObservationSpec("auth", "email", value, AUTHORITY_AT)
+
+
+def _backend_field(key: str, value: object, observed_at: datetime) -> ObservationSpec:
+    return ObservationSpec("backend", key, value, observed_at)
+
+
+def _job_profile(key: str, value: object) -> ObservationSpec:
+    return ObservationSpec("job_profile", key, value, AFTER)
+
+
+_BACKEND_POSTAL = _backend_field("postal_code", POSTAL, AUTHORITY_AT)
+
+PROFILE_SCENARIOS: dict[str, list[ObservationSpec]] = {
+    "p1": [_auth_email(), _backend_field("email", EMAIL, AFTER), _BACKEND_POSTAL,
+           _job_profile("email", EMAIL), _job_profile("postal_code", POSTAL)],
+    "p2": [_auth_email("Anna@Example.DE"), _backend_field("email", "  anna@example.de ", AFTER),
+           _BACKEND_POSTAL, _job_profile("email", "ANNA@example.de"), _job_profile("postal_code", f" {POSTAL}")],
+    "p3": [_auth_email(), _backend_field("email", EMAIL, AFTER), _BACKEND_POSTAL,
+           _job_profile("email", OTHER_EMAIL), _job_profile("postal_code", POSTAL)],
+    "p4": [_auth_email(), _backend_field("email", OTHER_EMAIL, BEFORE), _BACKEND_POSTAL,
+           _job_profile("email", EMAIL), _job_profile("postal_code", POSTAL)],
+    "p5": [_auth_email(), _backend_field("email", EMAIL, AFTER), _BACKEND_POSTAL],  # no job profile
+    "p6": [_auth_email(), _backend_field("email", EMAIL, AFTER), _BACKEND_POSTAL,
+           _job_profile("email", EMAIL)],  # job profile has no postal_code
+    "p7": [_backend_field("email", EMAIL, AFTER), _BACKEND_POSTAL,
+           _job_profile("email", OTHER_EMAIL), _job_profile("postal_code", POSTAL)],  # no auth
+    "p8": [_backend_field("email", EMAIL, AFTER), _BACKEND_POSTAL,
+           _job_profile("email", EMAIL), _job_profile("postal_code", OTHER_POSTAL)],
+    "p9": [_auth_email(), _backend_field("email", EMAIL, AFTER), _BACKEND_POSTAL,
+           _job_profile("email", OTHER_EMAIL)],
+    "p10": [_auth_email(), _backend_field("email", OTHER_EMAIL, BEFORE), _BACKEND_POSTAL,
+            _job_profile("email", "anna.new@example.de"), _job_profile("postal_code", POSTAL)],
+}
+
+# (subject_type, domain, subject_id prefix, scenarios)
+SEED_SETS = [
+    ("installation", "push", SUBJECT_PREFIX, SCENARIOS),
+    ("account", "profile", PROFILE_SUBJECT_PREFIX, PROFILE_SCENARIOS),
+]
+
+
 def seed() -> None:
     session = SessionLocal()
     try:
-        for case, specs in SCENARIOS.items():
-            subject_id = f"{SUBJECT_PREFIX}{case}"
-            session.query(StateObservation).filter_by(
-                subject_type="installation", subject_id=subject_id, domain="push"
-            ).delete()
-            for spec in specs:
-                session.add(
-                    StateObservation(
-                        subject_type="installation",
-                        subject_id=subject_id,
-                        domain="push",
-                        source=spec.source,
-                        key=spec.key,
-                        value=spec.value,
-                        observed_at=spec.observed_at,
+        for subject_type, domain, prefix, scenarios in SEED_SETS:
+            for case, specs in scenarios.items():
+                subject_id = f"{prefix}{case}"
+                session.query(StateObservation).filter_by(
+                    subject_type=subject_type, subject_id=subject_id, domain=domain
+                ).delete()
+                for spec in specs:
+                    session.add(
+                        StateObservation(
+                            subject_type=subject_type,
+                            subject_id=subject_id,
+                            domain=domain,
+                            source=spec.source,
+                            key=spec.key,
+                            value=spec.value,
+                            observed_at=spec.observed_at,
+                        )
                     )
-                )
         session.commit()
     finally:
         session.close()
@@ -95,3 +154,7 @@ def seed() -> None:
 if __name__ == "__main__":
     seed()
     print(f"Seeded {len(SCENARIOS)} installations ({SUBJECT_PREFIX}a .. {SUBJECT_PREFIX}m).")
+    print(
+        f"Seeded {len(PROFILE_SCENARIOS)} accounts "
+        f"({PROFILE_SUBJECT_PREFIX}p1 .. {PROFILE_SUBJECT_PREFIX}p10)."
+    )
