@@ -2,8 +2,12 @@ variable "name" {
   type = string
 }
 
-variable "repository" {
-  description = "GitHub repository as owner/name."
+variable "subject_prefix" {
+  description = <<-EOT
+    Prefix of the GitHub OIDC `sub` claim, before ":ref:...". Repositories with
+    immutable subject claims use "repo:<owner>@<owner_id>/<repo>@<repo_id>";
+    check with: gh api repos/<owner>/<repo>/actions/oidc/customization/sub
+  EOT
   type        = string
 }
 

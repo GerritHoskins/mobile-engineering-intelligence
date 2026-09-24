@@ -70,7 +70,7 @@ module "github_oidc" {
   source = "../../modules/github_oidc"
 
   name                  = local.name
-  repository            = var.github_repository
+  subject_prefix        = var.github_oidc_subject_prefix
   ecr_repository_arn    = module.service.ecr_repository_arn
   existing_provider_arn = var.existing_github_oidc_provider_arn
 }
