@@ -1,4 +1,4 @@
-from datetime import datetime, timezone
+from datetime import datetime, timedelta, timezone
 
 import pytest
 from fastapi.testclient import TestClient
@@ -13,14 +13,24 @@ def client() -> TestClient:
     return TestClient(app)
 
 
-def _add_observation(session, subject_id: str, source: str, key: str, value, observed_at) -> None:
+def _add_observation(
+    session,
+    subject_id: str,
+    source: str,
+    key: str,
+    value,
+    observed_at,
+    *,
+    subject_type: str = "installation",
+    domain: str = "push",
+) -> None:
     from app.models import StateObservation
 
     session.add(
         StateObservation(
-            subject_type="installation",
+            subject_type=subject_type,
             subject_id=subject_id,
-            domain="push",
+            domain=domain,
             source=source,
             key=key,
             value=value,
@@ -109,3 +119,70 @@ def test_scenario_c_style_subject_returns_expected_issue(client: TestClient, db_
     body = response.json()
     assert body["effective_state"] == {"deliverable": False}
     assert [issue["code"] for issue in body["consistency_issues"]] == ["OS_PERMISSION_BLOCKS_PUSH"]
+
+
+def _add_profile_observation(session, subject_id: str, source: str, key: str, value, observed_at) -> None:
+    _add_observation(
+        session, subject_id, source, key, value, observed_at, subject_type="account", domain="profile"
+    )
+
+
+def test_profile_p3_style_subject_returns_profile_shape(client: TestClient, db_session) -> None:
+    now = datetime.now(timezone.utc)
+    earlier = now - timedelta(hours=1)
+    _add_profile_observation(db_session, "account-case-p3", "auth", "email", "anna@example.de", earlier)
+    _add_profile_observation(db_session, "account-case-p3", "backend", "email", "anna@example.de", now)
+    _add_profile_observation(db_session, "account-case-p3", "backend", "postal_code", "01067", earlier)
+    _add_profile_observation(db_session, "account-case-p3", "job_profile", "email", "old@example.de", now)
+    _add_profile_observation(db_session, "account-case-p3", "job_profile", "postal_code", "01067", now)
+
+    response = client.get("/v1/state/account/account-case-p3?domain=profile")
+    assert response.status_code == 200
+    body = response.json()
+    assert body["subject"] == {"type": "account", "id": "account-case-p3"}
+    assert body["domain"] == "profile"
+    assert body["field_states"] == {
+        "email": {"authority": "auth", "status": "DIVERGED"},
+        "postal_code": {"authority": "backend", "status": "CONSISTENT"},
+    }
+    assert body["effective_state"] == {"consistent": False}
+    (issue,) = body["consistency_issues"]
+    assert (issue["code"], issue["severity"], issue["remediation"]) == (
+        "PROFILE_FIELD_DIVERGED",
+        "ERROR",
+        "BACKEND_SYNC_NEEDED",
+    )
+    assert [e["source"] for e in issue["evidence"]] == ["auth", "job_profile"]
+
+
+def test_profile_empty_observation_subject_returns_200_with_unknown_contract(client: TestClient) -> None:
+    response = client.get("/v1/state/account/account-case-nonexistent?domain=profile")
+    assert response.status_code == 200
+    body = response.json()
+    assert body["field_states"] == {
+        "email": {"authority": "auth", "status": "UNKNOWN"},
+        "postal_code": {"authority": "backend", "status": "UNKNOWN"},
+    }
+    assert body["effective_state"] == {"consistent": None}
+    assert body["consistency_issues"] == []
+
+
+def test_account_with_omitted_domain_returns_400(client: TestClient) -> None:
+    # Omitted domain still defaults to push, which is installation-scoped.
+    response = client.get("/v1/state/account/account-case-p1")
+    assert response.status_code == 400
+
+
+def test_account_with_push_domain_returns_400(client: TestClient) -> None:
+    response = client.get("/v1/state/account/account-case-p1?domain=push")
+    assert response.status_code == 400
+
+
+def test_push_observations_do_not_leak_into_profile_domain(client: TestClient, db_session) -> None:
+    now = datetime.now(timezone.utc)
+    _add_observation(db_session, "shared-id", "backend", "enabled", True, now)
+
+    response = client.get("/v1/state/account/shared-id?domain=profile")
+    assert response.status_code == 200
+    assert response.json()["effective_state"] == {"consistent": None}
+
