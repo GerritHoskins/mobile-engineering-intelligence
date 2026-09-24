@@ -24,9 +24,10 @@ variable "image_tag" {
   default     = ""
 }
 
-variable "github_repository" {
-  type    = string
-  default = "GerritHoskins/mobile-engineering-intelligence"
+variable "github_oidc_subject_prefix" {
+  description = "GitHub OIDC sub prefix (immutable subject claims: owner/repo names plus IDs)."
+  type        = string
+  default     = "repo:GerritHoskins@39583066/mobile-engineering-intelligence@1368764452"
 }
 
 variable "existing_github_oidc_provider_arn" {

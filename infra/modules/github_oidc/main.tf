@@ -25,11 +25,13 @@ data "aws_iam_policy_document" "assume" {
       values   = ["sts.amazonaws.com"]
     }
 
-    # Only workflows running on this repository's main branch.
+    # Only workflows running on this repository's main branch. The immutable
+    # subject embeds owner/repo IDs, so a renamed or re-created repository with
+    # the same name cannot assume this role.
     condition {
       test     = "StringEquals"
       variable = "token.actions.githubusercontent.com:sub"
-      values   = ["repo:${var.repository}:ref:refs/heads/main"]
+      values   = ["${var.subject_prefix}:ref:refs/heads/main"]
     }
   }
 }
