@@ -1,0 +1,63 @@
+{
+ "json": [
+  {
+   "commit": {
+    "sha": "a674e2814eeeb695b03679eaa43ef30a03129b76",
+    "url": "https://api.github.com/repos/GerritHoskins/mei-demo-app/commits/a674e2814eeeb695b03679eaa43ef30a03129b76"
+   },
+   "name": "v1.4.0",
+   "node_id": "REF_kwDOUq1Ik7ByZWZzL3RhZ3MvdjEuNC4w",
+   "tarball_url": "https://api.github.com/repos/GerritHoskins/mei-demo-app/tarball/refs/tags/v1.4.0",
+   "zipball_url": "https://api.github.com/repos/GerritHoskins/mei-demo-app/zipball/refs/tags/v1.4.0"
+  },
+  {
+   "commit": {
+    "sha": "4febc227468971d9f5e74d1c078e7299a8980ca0",
+    "url": "https://api.github.com/repos/GerritHoskins/mei-demo-app/commits/4febc227468971d9f5e74d1c078e7299a8980ca0"
+   },
+   "name": "v1.3.0",
+   "node_id": "REF_kwDOUq1Ik7ByZWZzL3RhZ3MvdjEuMy4w",
+   "tarball_url": "https://api.github.com/repos/GerritHoskins/mei-demo-app/tarball/refs/tags/v1.3.0",
+   "zipball_url": "https://api.github.com/repos/GerritHoskins/mei-demo-app/zipball/refs/tags/v1.3.0"
+  },
+  {
+   "commit": {
+    "sha": "a6af0bd4368b821ed1204844183b77d66f52ad02",
+    "url": "https://api.github.com/repos/GerritHoskins/mei-demo-app/commits/a6af0bd4368b821ed1204844183b77d66f52ad02"
+   },
+   "name": "v1.2.0",
+   "node_id": "REF_kwDOUq1Ik7ByZWZzL3RhZ3MvdjEuMi4w",
+   "tarball_url": "https://api.github.com/repos/GerritHoskins/mei-demo-app/tarball/refs/tags/v1.2.0",
+   "zipball_url": "https://api.github.com/repos/GerritHoskins/mei-demo-app/zipball/refs/tags/v1.2.0"
+  },
+  {
+   "commit": {
+    "sha": "dd0bd23c79a67ea7474c0444fe05d8b1465dcf4b",
+    "url": "https://api.github.com/repos/GerritHoskins/mei-demo-app/commits/dd0bd23c79a67ea7474c0444fe05d8b1465dcf4b"
+   },
+   "name": "v1.1.0",
+   "node_id": "REF_kwDOUq1Ik7ByZWZzL3RhZ3MvdjEuMS4w",
+   "tarball_url": "https://api.github.com/repos/GerritHoskins/mei-demo-app/tarball/refs/tags/v1.1.0",
+   "zipball_url": "https://api.github.com/repos/GerritHoskins/mei-demo-app/zipball/refs/tags/v1.1.0"
+  },
+  {
+   "commit": {
+    "sha": "366b0447271e330802981f93fbc67f9d7d910d9c",
+    "url": "https://api.github.com/repos/GerritHoskins/mei-demo-app/commits/366b0447271e330802981f93fbc67f9d7d910d9c"
+   },
+   "name": "v1.0.0",
+   "node_id": "REF_kwDOUq1Ik7ByZWZzL3RhZ3MvdjEuMC4w",
+   "tarball_url": "https://api.github.com/repos/GerritHoskins/mei-demo-app/tarball/refs/tags/v1.0.0",
+   "zipball_url": "https://api.github.com/repos/GerritHoskins/mei-demo-app/zipball/refs/tags/v1.0.0"
+  }
+ ],
+ "link": null,
+ "params": [
+  [
+   "per_page",
+   "100"
+  ]
+ ],
+ "request": "GET /repos/GerritHoskins/mei-demo-app/tags",
+ "status": 200
+}

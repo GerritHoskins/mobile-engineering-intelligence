@@ -1,0 +1,1093 @@
+{
+ "json": [
+  {
+   "_meta": {
+    "context": null,
+    "contexts": null,
+    "entries": {},
+    "message": null,
+    "packages": null,
+    "sdk": null,
+    "tags": {},
+    "user": null
+   },
+   "context": {},
+   "contexts": {
+    "app": {
+     "app_version": "1.2.0",
+     "type": "app"
+    },
+    "device": {
+     "family": "iOS",
+     "model": "iPhone15,2",
+     "type": "device"
+    },
+    "os": {
+     "name": "iOS",
+     "os": "iOS 18.4",
+     "type": "os",
+     "version": "18.4"
+    },
+    "trace": {
+     "span_id": "e8d416f3ea2c485f",
+     "status": "unknown",
+     "trace_id": "e8d416f3ea2c485f83f1054454b2151e",
+     "type": "trace"
+    }
+   },
+   "crashFile": null,
+   "culprit": "refreshToken(src/modules/push/registration)",
+   "dateCreated": "2026-09-23T21:58:43Z",
+   "dateReceived": "2026-09-25T09:48:44.103613Z",
+   "dist": null,
+   "entries": [
+    {
+     "data": {
+      "excOmitted": null,
+      "hasSystemFrames": true,
+      "values": [
+       {
+        "mechanism": null,
+        "module": null,
+        "rawModule": null,
+        "rawStacktrace": {
+         "frames": [
+          {
+           "absPath": "app:///src/app/main.ts",
+           "colNo": null,
+           "context": [],
+           "errors": null,
+           "filename": "app:///src/app/main.ts",
+           "function": "bootstrap",
+           "inApp": true,
+           "instructionAddr": null,
+           "lineNo": 12,
+           "lock": null,
+           "module": null,
+           "package": null,
+           "parentIndex": null,
+           "platform": null,
+           "rawFunction": null,
+           "sampleCount": null,
+           "sourceLink": null,
+           "symbol": null,
+           "symbolAddr": null,
+           "trust": null,
+           "vars": null
+          },
+          {
+           "absPath": "app:///src/modules/push/registration.ts",
+           "colNo": null,
+           "context": [],
+           "errors": null,
+           "filename": "app:///src/modules/push/registration.ts",
+           "function": "refreshToken",
+           "inApp": true,
+           "instructionAddr": null,
+           "lineNo": 42,
+           "lock": null,
+           "module": null,
+           "package": null,
+           "parentIndex": null,
+           "platform": null,
+           "rawFunction": null,
+           "sampleCount": null,
+           "sourceLink": null,
+           "symbol": null,
+           "symbolAddr": null,
+           "trust": null,
+           "vars": null
+          }
+         ],
+         "framesOmitted": null,
+         "hasSystemFrames": true,
+         "registers": null
+        },
+        "rawType": null,
+        "rawValue": null,
+        "stacktrace": {
+         "frames": [
+          {
+           "absPath": "app:///src/app/main.ts",
+           "colNo": null,
+           "context": [],
+           "errors": null,
+           "filename": "app:///src/app/main.ts",
+           "function": "bootstrap",
+           "inApp": true,
+           "instructionAddr": null,
+           "lineNo": 12,
+           "lock": null,
+           "module": "src/app/main",
+           "package": null,
+           "parentIndex": null,
+           "platform": null,
+           "rawFunction": null,
+           "sampleCount": null,
+           "sourceLink": null,
+           "symbol": null,
+           "symbolAddr": null,
+           "trust": null,
+           "vars": null
+          },
+          {
+           "absPath": "app:///src/modules/push/registration.ts",
+           "colNo": null,
+           "context": [],
+           "errors": null,
+           "filename": "app:///src/modules/push/registration.ts",
+           "function": "refreshToken",
+           "inApp": true,
+           "instructionAddr": null,
+           "lineNo": 42,
+           "lock": null,
+           "module": "src/modules/push/registration",
+           "package": null,
+           "parentIndex": null,
+           "platform": null,
+           "rawFunction": null,
+           "sampleCount": null,
+           "sourceLink": null,
+           "symbol": null,
+           "symbolAddr": null,
+           "trust": null,
+           "vars": null
+          }
+         ],
+         "framesOmitted": null,
+         "hasSystemFrames": true,
+         "registers": null
+        },
+        "threadId": null,
+        "type": "TypeError",
+        "value": "Cannot read properties of undefined (reading 'token')"
+       }
+      ]
+     },
+     "type": "exception"
+    },
+    {
+     "data": {
+      "values": [
+       {
+        "category": "app.lifecycle",
+        "data": {
+         "state": "background"
+        },
+        "event_id": null,
+        "level": "info",
+        "message": null,
+        "timestamp": "2026-09-23T21:58:37.717773Z",
+        "type": "navigation"
+       },
+       {
+        "category": "app.lifecycle",
+        "data": {
+         "state": "foreground"
+        },
+        "event_id": null,
+        "level": "info",
+        "message": null,
+        "timestamp": "2026-09-23T21:58:38.717773Z",
+        "type": "navigation"
+       },
+       {
+        "category": "navigation",
+        "data": {
+         "from": "/",
+         "to": "/home"
+        },
+        "event_id": null,
+        "level": "info",
+        "message": null,
+        "timestamp": "2026-09-23T21:58:39.717773Z",
+        "type": "navigation"
+       },
+       {
+        "category": "navigation",
+        "data": {
+         "from": "/home",
+         "to": "/settings/notifications"
+        },
+        "event_id": null,
+        "level": "info",
+        "message": null,
+        "timestamp": "2026-09-23T21:58:40.717773Z",
+        "type": "navigation"
+       },
+       {
+        "category": "ui.click",
+        "data": null,
+        "event_id": null,
+        "level": "info",
+        "message": "button#enable-push",
+        "timestamp": "2026-09-23T21:58:41.717773Z",
+        "type": "user"
+       },
+       {
+        "category": "xhr",
+        "data": {
+         "method": "POST",
+         "status_code": 401,
+         "url": "/api/push/register"
+        },
+        "event_id": null,
+        "level": "info",
+        "message": null,
+        "timestamp": "2026-09-23T21:58:42.717773Z",
+        "type": "http"
+       }
+      ]
+     },
+     "type": "breadcrumbs"
+    }
+   ],
+   "errors": [
+    {
+     "data": {
+      "symbolicator_type": "missing_source",
+      "url": "app:///src/app/main.ts"
+     },
+     "message": "Source code was not found",
+     "type": "js_no_source"
+    },
+    {
+     "data": {
+      "symbolicator_type": "missing_source",
+      "url": "app:///src/modules/push/registration.ts"
+     },
+     "message": "Source code was not found",
+     "type": "js_no_source"
+    }
+   ],
+   "eventID": "e8d416f3ea2c485f83f1054454b2151e",
+   "fingerprints": [
+    "1155b8b0bbd94a455f84f9ba057b8138"
+   ],
+   "groupID": "7754274111",
+   "groupingConfig": {
+    "enhancements": "KLUv_SAd6QAAkwORuGFsbC1wbGF0Zm9ybXM6MjAyNi0wMS0yMJA#KLUv_SAd6QAAkwORuGFsbC1wbGF0Zm9ybXM6MjAyNi0wMS0yMJA#KLUv_SAd6QAAkwORuGFsbC1wbGF0Zm9ybXM6MjAyNi0wMS0yMJA",
+    "id": "newstyle:2026-01-20"
+   },
+   "id": "e8d416f3ea2c485f83f1054454b2151e",
+   "location": "app:///src/modules/push/registration.ts",
+   "message": "",
+   "metadata": {
+    "filename": "app:///src/modules/push/registration.ts",
+    "function": "refreshToken",
+    "in_app_frame_mix": "in-app-only",
+    "synthetic": false,
+    "type": "TypeError",
+    "value": "Cannot read properties of undefined (reading 'token')"
+   },
+   "occurrence": null,
+   "packages": {},
+   "platform": "javascript",
+   "projectID": "4512146161270784",
+   "sdk": {
+    "name": "mei-demo-generator",
+    "version": "0.1"
+   },
+   "size": 5811,
+   "tags": [
+    {
+     "key": "demo_case",
+     "value": "F1"
+    },
+    {
+     "key": "device",
+     "value": "iPhone15,2"
+    },
+    {
+     "key": "device.class",
+     "value": "high"
+    },
+    {
+     "key": "device.family",
+     "value": "iOS"
+    },
+    {
+     "key": "environment",
+     "value": "production"
+    },
+    {
+     "key": "flag.new_push_flow",
+     "value": "on"
+    },
+    {
+     "key": "installation_id",
+     "value": "install-case-i"
+    },
+    {
+     "key": "interface_type",
+     "value": "exception"
+    },
+    {
+     "key": "level",
+     "value": "error"
+    },
+    {
+     "key": "os",
+     "value": "iOS 18.4"
+    },
+    {
+     "key": "os.name",
+     "value": "iOS"
+    },
+    {
+     "key": "release",
+     "value": "mei-demo-app@1.2.0"
+    },
+    {
+     "key": "user",
+     "query": "user.id:\"account-case-p6\"",
+     "value": "id:account-case-p6"
+    }
+   ],
+   "title": "TypeError: Cannot read properties of undefined (reading 'token')",
+   "type": "error",
+   "user": {
+    "data": null,
+    "email": "<scrubbed>",
+    "geo": {
+     "city": "Nuremberg",
+     "country_code": "DE",
+     "region": "Germany"
+    },
+    "id": "account-case-p6",
+    "ip_address": "<scrubbed>",
+    "name": null,
+    "username": "<scrubbed>"
+   }
+  },
+  {
+   "_meta": {
+    "context": null,
+    "contexts": null,
+    "entries": {},
+    "message": null,
+    "packages": null,
+    "sdk": null,
+    "tags": {},
+    "user": null
+   },
+   "context": {},
+   "contexts": {
+    "app": {
+     "app_version": "1.2.0",
+     "type": "app"
+    },
+    "device": {
+     "family": "iOS",
+     "model": "iPhone15,2",
+     "type": "device"
+    },
+    "os": {
+     "name": "iOS",
+     "os": "iOS 18.4",
+     "type": "os",
+     "version": "18.4"
+    },
+    "trace": {
+     "span_id": "0ee072e745754876",
+     "status": "unknown",
+     "trace_id": "0ee072e745754876aa3cb62faac2dee7",
+     "type": "trace"
+    }
+   },
+   "crashFile": null,
+   "culprit": "refreshToken(src/modules/push/registration)",
+   "dateCreated": "2026-09-23T21:53:43Z",
+   "dateReceived": "2026-09-25T09:48:43.987927Z",
+   "dist": null,
+   "entries": [
+    {
+     "data": {
+      "excOmitted": null,
+      "hasSystemFrames": true,
+      "values": [
+       {
+        "mechanism": null,
+        "module": null,
+        "rawModule": null,
+        "rawStacktrace": {
+         "frames": [
+          {
+           "absPath": "app:///src/app/main.ts",
+           "colNo": null,
+           "context": [],
+           "errors": null,
+           "filename": "app:///src/app/main.ts",
+           "function": "bootstrap",
+           "inApp": true,
+           "instructionAddr": null,
+           "lineNo": 12,
+           "lock": null,
+           "module": null,
+           "package": null,
+           "parentIndex": null,
+           "platform": null,
+           "rawFunction": null,
+           "sampleCount": null,
+           "sourceLink": null,
+           "symbol": null,
+           "symbolAddr": null,
+           "trust": null,
+           "vars": null
+          },
+          {
+           "absPath": "app:///src/modules/push/registration.ts",
+           "colNo": null,
+           "context": [],
+           "errors": null,
+           "filename": "app:///src/modules/push/registration.ts",
+           "function": "refreshToken",
+           "inApp": true,
+           "instructionAddr": null,
+           "lineNo": 42,
+           "lock": null,
+           "module": null,
+           "package": null,
+           "parentIndex": null,
+           "platform": null,
+           "rawFunction": null,
+           "sampleCount": null,
+           "sourceLink": null,
+           "symbol": null,
+           "symbolAddr": null,
+           "trust": null,
+           "vars": null
+          }
+         ],
+         "framesOmitted": null,
+         "hasSystemFrames": true,
+         "registers": null
+        },
+        "rawType": null,
+        "rawValue": null,
+        "stacktrace": {
+         "frames": [
+          {
+           "absPath": "app:///src/app/main.ts",
+           "colNo": null,
+           "context": [],
+           "errors": null,
+           "filename": "app:///src/app/main.ts",
+           "function": "bootstrap",
+           "inApp": true,
+           "instructionAddr": null,
+           "lineNo": 12,
+           "lock": null,
+           "module": "src/app/main",
+           "package": null,
+           "parentIndex": null,
+           "platform": null,
+           "rawFunction": null,
+           "sampleCount": null,
+           "sourceLink": null,
+           "symbol": null,
+           "symbolAddr": null,
+           "trust": null,
+           "vars": null
+          },
+          {
+           "absPath": "app:///src/modules/push/registration.ts",
+           "colNo": null,
+           "context": [],
+           "errors": null,
+           "filename": "app:///src/modules/push/registration.ts",
+           "function": "refreshToken",
+           "inApp": true,
+           "instructionAddr": null,
+           "lineNo": 42,
+           "lock": null,
+           "module": "src/modules/push/registration",
+           "package": null,
+           "parentIndex": null,
+           "platform": null,
+           "rawFunction": null,
+           "sampleCount": null,
+           "sourceLink": null,
+           "symbol": null,
+           "symbolAddr": null,
+           "trust": null,
+           "vars": null
+          }
+         ],
+         "framesOmitted": null,
+         "hasSystemFrames": true,
+         "registers": null
+        },
+        "threadId": null,
+        "type": "TypeError",
+        "value": "Cannot read properties of undefined (reading 'token')"
+       }
+      ]
+     },
+     "type": "exception"
+    },
+    {
+     "data": {
+      "values": [
+       {
+        "category": "app.lifecycle",
+        "data": {
+         "state": "background"
+        },
+        "event_id": null,
+        "level": "info",
+        "message": null,
+        "timestamp": "2026-09-23T21:53:37.717773Z",
+        "type": "navigation"
+       },
+       {
+        "category": "app.lifecycle",
+        "data": {
+         "state": "foreground"
+        },
+        "event_id": null,
+        "level": "info",
+        "message": null,
+        "timestamp": "2026-09-23T21:53:38.717773Z",
+        "type": "navigation"
+       },
+       {
+        "category": "navigation",
+        "data": {
+         "from": "/",
+         "to": "/home"
+        },
+        "event_id": null,
+        "level": "info",
+        "message": null,
+        "timestamp": "2026-09-23T21:53:39.717773Z",
+        "type": "navigation"
+       },
+       {
+        "category": "navigation",
+        "data": {
+         "from": "/home",
+         "to": "/settings/notifications"
+        },
+        "event_id": null,
+        "level": "info",
+        "message": null,
+        "timestamp": "2026-09-23T21:53:40.717773Z",
+        "type": "navigation"
+       },
+       {
+        "category": "ui.click",
+        "data": null,
+        "event_id": null,
+        "level": "info",
+        "message": "button#enable-push",
+        "timestamp": "2026-09-23T21:53:41.717773Z",
+        "type": "user"
+       },
+       {
+        "category": "xhr",
+        "data": {
+         "method": "POST",
+         "status_code": 401,
+         "url": "/api/push/register"
+        },
+        "event_id": null,
+        "level": "info",
+        "message": null,
+        "timestamp": "2026-09-23T21:53:42.717773Z",
+        "type": "http"
+       }
+      ]
+     },
+     "type": "breadcrumbs"
+    }
+   ],
+   "errors": [
+    {
+     "data": {
+      "symbolicator_type": "missing_source",
+      "url": "app:///src/app/main.ts"
+     },
+     "message": "Source code was not found",
+     "type": "js_no_source"
+    },
+    {
+     "data": {
+      "symbolicator_type": "missing_source",
+      "url": "app:///src/modules/push/registration.ts"
+     },
+     "message": "Source code was not found",
+     "type": "js_no_source"
+    }
+   ],
+   "eventID": "0ee072e745754876aa3cb62faac2dee7",
+   "fingerprints": [
+    "1155b8b0bbd94a455f84f9ba057b8138"
+   ],
+   "groupID": "7754274111",
+   "groupingConfig": {
+    "enhancements": "KLUv_SAd6QAAkwORuGFsbC1wbGF0Zm9ybXM6MjAyNi0wMS0yMJA#KLUv_SAd6QAAkwORuGFsbC1wbGF0Zm9ybXM6MjAyNi0wMS0yMJA#KLUv_SAd6QAAkwORuGFsbC1wbGF0Zm9ybXM6MjAyNi0wMS0yMJA",
+    "id": "newstyle:2026-01-20"
+   },
+   "id": "0ee072e745754876aa3cb62faac2dee7",
+   "location": "app:///src/modules/push/registration.ts",
+   "message": "",
+   "metadata": {
+    "filename": "app:///src/modules/push/registration.ts",
+    "function": "refreshToken",
+    "in_app_frame_mix": "in-app-only",
+    "synthetic": false,
+    "type": "TypeError",
+    "value": "Cannot read properties of undefined (reading 'token')"
+   },
+   "occurrence": null,
+   "packages": {},
+   "platform": "javascript",
+   "projectID": "4512146161270784",
+   "sdk": {
+    "name": "mei-demo-generator",
+    "version": "0.1"
+   },
+   "size": 5811,
+   "tags": [
+    {
+     "key": "demo_case",
+     "value": "F1"
+    },
+    {
+     "key": "device",
+     "value": "iPhone15,2"
+    },
+    {
+     "key": "device.class",
+     "value": "high"
+    },
+    {
+     "key": "device.family",
+     "value": "iOS"
+    },
+    {
+     "key": "environment",
+     "value": "production"
+    },
+    {
+     "key": "flag.new_push_flow",
+     "value": "on"
+    },
+    {
+     "key": "installation_id",
+     "value": "install-case-c"
+    },
+    {
+     "key": "interface_type",
+     "value": "exception"
+    },
+    {
+     "key": "level",
+     "value": "error"
+    },
+    {
+     "key": "os",
+     "value": "iOS 18.4"
+    },
+    {
+     "key": "os.name",
+     "value": "iOS"
+    },
+    {
+     "key": "release",
+     "value": "mei-demo-app@1.2.0"
+    },
+    {
+     "key": "user",
+     "query": "user.id:\"account-case-p3\"",
+     "value": "id:account-case-p3"
+    }
+   ],
+   "title": "TypeError: Cannot read properties of undefined (reading 'token')",
+   "type": "error",
+   "user": {
+    "data": null,
+    "email": "<scrubbed>",
+    "geo": {
+     "city": "Nuremberg",
+     "country_code": "DE",
+     "region": "Germany"
+    },
+    "id": "account-case-p3",
+    "ip_address": "<scrubbed>",
+    "name": null,
+    "username": "<scrubbed>"
+   }
+  },
+  {
+   "_meta": {
+    "context": null,
+    "contexts": null,
+    "entries": {},
+    "message": null,
+    "packages": null,
+    "sdk": null,
+    "tags": {},
+    "user": null
+   },
+   "context": {},
+   "contexts": {
+    "app": {
+     "app_version": "1.2.0",
+     "type": "app"
+    },
+    "device": {
+     "family": "iOS",
+     "model": "iPhone15,2",
+     "type": "device"
+    },
+    "os": {
+     "name": "iOS",
+     "os": "iOS 18.4",
+     "type": "os",
+     "version": "18.4"
+    },
+    "trace": {
+     "span_id": "ec7d5faa93564bfa",
+     "status": "unknown",
+     "trace_id": "ec7d5faa93564bfa8a1cd6ebb202edfe",
+     "type": "trace"
+    }
+   },
+   "crashFile": null,
+   "culprit": "refreshToken(src/modules/push/registration)",
+   "dateCreated": "2026-09-23T21:48:43Z",
+   "dateReceived": "2026-09-25T09:48:43.879897Z",
+   "dist": null,
+   "entries": [
+    {
+     "data": {
+      "excOmitted": null,
+      "hasSystemFrames": true,
+      "values": [
+       {
+        "mechanism": null,
+        "module": null,
+        "rawModule": null,
+        "rawStacktrace": {
+         "frames": [
+          {
+           "absPath": "app:///src/app/main.ts",
+           "colNo": null,
+           "context": [],
+           "errors": null,
+           "filename": "app:///src/app/main.ts",
+           "function": "bootstrap",
+           "inApp": true,
+           "instructionAddr": null,
+           "lineNo": 12,
+           "lock": null,
+           "module": null,
+           "package": null,
+           "parentIndex": null,
+           "platform": null,
+           "rawFunction": null,
+           "sampleCount": null,
+           "sourceLink": null,
+           "symbol": null,
+           "symbolAddr": null,
+           "trust": null,
+           "vars": null
+          },
+          {
+           "absPath": "app:///src/modules/push/registration.ts",
+           "colNo": null,
+           "context": [],
+           "errors": null,
+           "filename": "app:///src/modules/push/registration.ts",
+           "function": "refreshToken",
+           "inApp": true,
+           "instructionAddr": null,
+           "lineNo": 42,
+           "lock": null,
+           "module": null,
+           "package": null,
+           "parentIndex": null,
+           "platform": null,
+           "rawFunction": null,
+           "sampleCount": null,
+           "sourceLink": null,
+           "symbol": null,
+           "symbolAddr": null,
+           "trust": null,
+           "vars": null
+          }
+         ],
+         "framesOmitted": null,
+         "hasSystemFrames": true,
+         "registers": null
+        },
+        "rawType": null,
+        "rawValue": null,
+        "stacktrace": {
+         "frames": [
+          {
+           "absPath": "app:///src/app/main.ts",
+           "colNo": null,
+           "context": [],
+           "errors": null,
+           "filename": "app:///src/app/main.ts",
+           "function": "bootstrap",
+           "inApp": true,
+           "instructionAddr": null,
+           "lineNo": 12,
+           "lock": null,
+           "module": "src/app/main",
+           "package": null,
+           "parentIndex": null,
+           "platform": null,
+           "rawFunction": null,
+           "sampleCount": null,
+           "sourceLink": null,
+           "symbol": null,
+           "symbolAddr": null,
+           "trust": null,
+           "vars": null
+          },
+          {
+           "absPath": "app:///src/modules/push/registration.ts",
+           "colNo": null,
+           "context": [],
+           "errors": null,
+           "filename": "app:///src/modules/push/registration.ts",
+           "function": "refreshToken",
+           "inApp": true,
+           "instructionAddr": null,
+           "lineNo": 42,
+           "lock": null,
+           "module": "src/modules/push/registration",
+           "package": null,
+           "parentIndex": null,
+           "platform": null,
+           "rawFunction": null,
+           "sampleCount": null,
+           "sourceLink": null,
+           "symbol": null,
+           "symbolAddr": null,
+           "trust": null,
+           "vars": null
+          }
+         ],
+         "framesOmitted": null,
+         "hasSystemFrames": true,
+         "registers": null
+        },
+        "threadId": null,
+        "type": "TypeError",
+        "value": "Cannot read properties of undefined (reading 'token')"
+       }
+      ]
+     },
+     "type": "exception"
+    },
+    {
+     "data": {
+      "values": [
+       {
+        "category": "app.lifecycle",
+        "data": {
+         "state": "background"
+        },
+        "event_id": null,
+        "level": "info",
+        "message": null,
+        "timestamp": "2026-09-23T21:48:37.717773Z",
+        "type": "navigation"
+       },
+       {
+        "category": "app.lifecycle",
+        "data": {
+         "state": "foreground"
+        },
+        "event_id": null,
+        "level": "info",
+        "message": null,
+        "timestamp": "2026-09-23T21:48:38.717773Z",
+        "type": "navigation"
+       },
+       {
+        "category": "navigation",
+        "data": {
+         "from": "/",
+         "to": "/home"
+        },
+        "event_id": null,
+        "level": "info",
+        "message": null,
+        "timestamp": "2026-09-23T21:48:39.717773Z",
+        "type": "navigation"
+       },
+       {
+        "category": "navigation",
+        "data": {
+         "from": "/home",
+         "to": "/settings/notifications"
+        },
+        "event_id": null,
+        "level": "info",
+        "message": null,
+        "timestamp": "2026-09-23T21:48:40.717773Z",
+        "type": "navigation"
+       },
+       {
+        "category": "ui.click",
+        "data": null,
+        "event_id": null,
+        "level": "info",
+        "message": "button#enable-push",
+        "timestamp": "2026-09-23T21:48:41.717773Z",
+        "type": "user"
+       },
+       {
+        "category": "xhr",
+        "data": {
+         "method": "POST",
+         "status_code": 401,
+         "url": "/api/push/register"
+        },
+        "event_id": null,
+        "level": "info",
+        "message": null,
+        "timestamp": "2026-09-23T21:48:42.717773Z",
+        "type": "http"
+       }
+      ]
+     },
+     "type": "breadcrumbs"
+    }
+   ],
+   "errors": [
+    {
+     "data": {
+      "symbolicator_type": "missing_source",
+      "url": "app:///src/app/main.ts"
+     },
+     "message": "Source code was not found",
+     "type": "js_no_source"
+    },
+    {
+     "data": {
+      "symbolicator_type": "missing_source",
+      "url": "app:///src/modules/push/registration.ts"
+     },
+     "message": "Source code was not found",
+     "type": "js_no_source"
+    }
+   ],
+   "eventID": "ec7d5faa93564bfa8a1cd6ebb202edfe",
+   "fingerprints": [
+    "1155b8b0bbd94a455f84f9ba057b8138"
+   ],
+   "groupID": "7754274111",
+   "groupingConfig": {
+    "enhancements": "KLUv_SAd6QAAkwORuGFsbC1wbGF0Zm9ybXM6MjAyNi0wMS0yMJA#KLUv_SAd6QAAkwORuGFsbC1wbGF0Zm9ybXM6MjAyNi0wMS0yMJA#KLUv_SAd6QAAkwORuGFsbC1wbGF0Zm9ybXM6MjAyNi0wMS0yMJA",
+    "id": "newstyle:2026-01-20"
+   },
+   "id": "ec7d5faa93564bfa8a1cd6ebb202edfe",
+   "location": "app:///src/modules/push/registration.ts",
+   "message": "",
+   "metadata": {
+    "filename": "app:///src/modules/push/registration.ts",
+    "function": "refreshToken",
+    "in_app_frame_mix": "in-app-only",
+    "synthetic": false,
+    "type": "TypeError",
+    "value": "Cannot read properties of undefined (reading 'token')"
+   },
+   "occurrence": null,
+   "packages": {},
+   "platform": "javascript",
+   "projectID": "4512146161270784",
+   "sdk": {
+    "name": "mei-demo-generator",
+    "version": "0.1"
+   },
+   "size": 5811,
+   "tags": [
+    {
+     "key": "demo_case",
+     "value": "F1"
+    },
+    {
+     "key": "device",
+     "value": "iPhone15,2"
+    },
+    {
+     "key": "device.class",
+     "value": "high"
+    },
+    {
+     "key": "device.family",
+     "value": "iOS"
+    },
+    {
+     "key": "environment",
+     "value": "production"
+    },
+    {
+     "key": "flag.new_push_flow",
+     "value": "on"
+    },
+    {
+     "key": "installation_id",
+     "value": "install-case-a"
+    },
+    {
+     "key": "interface_type",
+     "value": "exception"
+    },
+    {
+     "key": "level",
+     "value": "error"
+    },
+    {
+     "key": "os",
+     "value": "iOS 18.4"
+    },
+    {
+     "key": "os.name",
+     "value": "iOS"
+    },
+    {
+     "key": "release",
+     "value": "mei-demo-app@1.2.0"
+    },
+    {
+     "key": "user",
+     "query": "user.id:\"account-case-p1\"",
+     "value": "id:account-case-p1"
+    }
+   ],
+   "title": "TypeError: Cannot read properties of undefined (reading 'token')",
+   "type": "error",
+   "user": {
+    "data": null,
+    "email": "<scrubbed>",
+    "geo": {
+     "city": "Nuremberg",
+     "country_code": "DE",
+     "region": "Germany"
+    },
+    "id": "account-case-p1",
+    "ip_address": "<scrubbed>",
+    "name": null,
+    "username": "<scrubbed>"
+   }
+  }
+ ],
+ "link": "<https://us.sentry.io/api/0/organizations/mei-demo-app/issues/7754274111/events/?full=true&cursor=0:0:1>; rel=\"previous\"; results=\"false\"; cursor=\"0:0:1\", <https://us.sentry.io/api/0/organizations/mei-demo-app/issues/7754274111/events/?full=true&cursor=0:10:0>; rel=\"next\"; results=\"false\"; cursor=\"0:10:0\"",
+ "params": [
+  [
+   "full",
+   "true"
+  ]
+ ],
+ "request": "GET /api/0/organizations/mei-demo-app/issues/7754274111/events/",
+ "status": 200
+}

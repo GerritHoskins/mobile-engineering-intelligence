@@ -1,0 +1,213 @@
+{
+ "json": {
+  "ahead_by": 2,
+  "base_commit": {
+   "author": null,
+   "comments_url": "https://api.github.com/repos/GerritHoskins/mei-demo-app/commits/366b0447271e330802981f93fbc67f9d7d910d9c/comments",
+   "commit": {
+    "author": {
+     "date": "2026-09-01T10:00:00Z",
+     "email": "<scrubbed>",
+     "name": "MEI Demo"
+    },
+    "comment_count": 0,
+    "committer": {
+     "date": "2026-09-01T10:00:00Z",
+     "email": "<scrubbed>",
+     "name": "MEI Demo"
+    },
+    "message": "Scaffold app",
+    "tree": {
+     "sha": "dc8c34011b115777ba65b8ea426966af0a05e8bd",
+     "url": "https://api.github.com/repos/GerritHoskins/mei-demo-app/git/trees/dc8c34011b115777ba65b8ea426966af0a05e8bd"
+    },
+    "url": "https://api.github.com/repos/GerritHoskins/mei-demo-app/git/commits/366b0447271e330802981f93fbc67f9d7d910d9c",
+    "verification": {
+     "payload": null,
+     "reason": "unsigned",
+     "signature": null,
+     "verified": false,
+     "verified_at": null
+    }
+   },
+   "committer": null,
+   "html_url": "https://github.com/GerritHoskins/mei-demo-app/commit/366b0447271e330802981f93fbc67f9d7d910d9c",
+   "node_id": "C_kwDOUq1Ik9oAKDM2NmIwNDQ3MjcxZTMzMDgwMjk4MWY5M2ZiYzY3ZjlkN2Q5MTBkOWM",
+   "parents": [
+    {
+     "html_url": "https://github.com/GerritHoskins/mei-demo-app/commit/66796e586a720eb66cc19a5c9610cb3c6523432a",
+     "sha": "66796e586a720eb66cc19a5c9610cb3c6523432a",
+     "url": "https://api.github.com/repos/GerritHoskins/mei-demo-app/commits/66796e586a720eb66cc19a5c9610cb3c6523432a"
+    }
+   ],
+   "sha": "366b0447271e330802981f93fbc67f9d7d910d9c",
+   "url": "https://api.github.com/repos/GerritHoskins/mei-demo-app/commits/366b0447271e330802981f93fbc67f9d7d910d9c"
+  },
+  "behind_by": 0,
+  "commits": [
+   {
+    "author": null,
+    "comments_url": "https://api.github.com/repos/GerritHoskins/mei-demo-app/commits/033a404ba69d9deb34e863524568d62baca99539/comments",
+    "commit": {
+     "author": {
+      "date": "2026-09-03T10:00:00Z",
+      "email": "<scrubbed>",
+      "name": "MEI Demo"
+     },
+     "comment_count": 0,
+     "committer": {
+      "date": "2026-09-03T10:00:00Z",
+      "email": "<scrubbed>",
+      "name": "MEI Demo"
+     },
+     "message": "MEI-1: Validate email format in profile",
+     "tree": {
+      "sha": "94e93a7ccde8be5b3b74fd624ebfe01374b878ec",
+      "url": "https://api.github.com/repos/GerritHoskins/mei-demo-app/git/trees/94e93a7ccde8be5b3b74fd624ebfe01374b878ec"
+     },
+     "url": "https://api.github.com/repos/GerritHoskins/mei-demo-app/git/commits/033a404ba69d9deb34e863524568d62baca99539",
+     "verification": {
+      "payload": null,
+      "reason": "unsigned",
+      "signature": null,
+      "verified": false,
+      "verified_at": null
+     }
+    },
+    "committer": null,
+    "html_url": "https://github.com/GerritHoskins/mei-demo-app/commit/033a404ba69d9deb34e863524568d62baca99539",
+    "node_id": "C_kwDOUq1Ik9oAKDAzM2E0MDRiYTY5ZDlkZWIzNGU4NjM1MjQ1NjhkNjJiYWNhOTk1Mzk",
+    "parents": [
+     {
+      "html_url": "https://github.com/GerritHoskins/mei-demo-app/commit/366b0447271e330802981f93fbc67f9d7d910d9c",
+      "sha": "366b0447271e330802981f93fbc67f9d7d910d9c",
+      "url": "https://api.github.com/repos/GerritHoskins/mei-demo-app/commits/366b0447271e330802981f93fbc67f9d7d910d9c"
+     }
+    ],
+    "sha": "033a404ba69d9deb34e863524568d62baca99539",
+    "url": "https://api.github.com/repos/GerritHoskins/mei-demo-app/commits/033a404ba69d9deb34e863524568d62baca99539"
+   },
+   {
+    "author": null,
+    "comments_url": "https://api.github.com/repos/GerritHoskins/mei-demo-app/commits/dd0bd23c79a67ea7474c0444fe05d8b1465dcf4b/comments",
+    "commit": {
+     "author": {
+      "date": "2026-09-04T10:00:00Z",
+      "email": "<scrubbed>",
+      "name": "MEI Demo"
+     },
+     "comment_count": 0,
+     "committer": {
+      "date": "2026-09-04T10:00:00Z",
+      "email": "<scrubbed>",
+      "name": "MEI Demo"
+     },
+     "message": "MEI-2: Page search results",
+     "tree": {
+      "sha": "c4c4a2e7f7af2cab7cc746919ed68ce722de8d61",
+      "url": "https://api.github.com/repos/GerritHoskins/mei-demo-app/git/trees/c4c4a2e7f7af2cab7cc746919ed68ce722de8d61"
+     },
+     "url": "https://api.github.com/repos/GerritHoskins/mei-demo-app/git/commits/dd0bd23c79a67ea7474c0444fe05d8b1465dcf4b",
+     "verification": {
+      "payload": null,
+      "reason": "unsigned",
+      "signature": null,
+      "verified": false,
+      "verified_at": null
+     }
+    },
+    "committer": null,
+    "html_url": "https://github.com/GerritHoskins/mei-demo-app/commit/dd0bd23c79a67ea7474c0444fe05d8b1465dcf4b",
+    "node_id": "C_kwDOUq1Ik9oAKGRkMGJkMjNjNzlhNjdlYTc0NzRjMDQ0NGZlMDVkOGIxNDY1ZGNmNGI",
+    "parents": [
+     {
+      "html_url": "https://github.com/GerritHoskins/mei-demo-app/commit/033a404ba69d9deb34e863524568d62baca99539",
+      "sha": "033a404ba69d9deb34e863524568d62baca99539",
+      "url": "https://api.github.com/repos/GerritHoskins/mei-demo-app/commits/033a404ba69d9deb34e863524568d62baca99539"
+     }
+    ],
+    "sha": "dd0bd23c79a67ea7474c0444fe05d8b1465dcf4b",
+    "url": "https://api.github.com/repos/GerritHoskins/mei-demo-app/commits/dd0bd23c79a67ea7474c0444fe05d8b1465dcf4b"
+   }
+  ],
+  "diff_url": "https://github.com/GerritHoskins/mei-demo-app/compare/v1.0.0...v1.1.0.diff",
+  "files": [
+   {
+    "additions": 1,
+    "blob_url": "https://github.com/GerritHoskins/mei-demo-app/blob/dd0bd23c79a67ea7474c0444fe05d8b1465dcf4b/src%2Fmodules%2Fprofile%2Femail.ts",
+    "changes": 1,
+    "contents_url": "https://api.github.com/repos/GerritHoskins/mei-demo-app/contents/src%2Fmodules%2Fprofile%2Femail.ts?ref=dd0bd23c79a67ea7474c0444fe05d8b1465dcf4b",
+    "deletions": 0,
+    "filename": "src/modules/profile/email.ts",
+    "patch": "@@ -1 +1,2 @@\n export function validateEmail() {}\n+// validate format",
+    "raw_url": "https://github.com/GerritHoskins/mei-demo-app/raw/dd0bd23c79a67ea7474c0444fe05d8b1465dcf4b/src%2Fmodules%2Fprofile%2Femail.ts",
+    "sha": "8ac30911e65625a80bcdc8e9cd4fbb0ccf6fe13e",
+    "status": "modified"
+   },
+   {
+    "additions": 1,
+    "blob_url": "https://github.com/GerritHoskins/mei-demo-app/blob/dd0bd23c79a67ea7474c0444fe05d8b1465dcf4b/src%2Fmodules%2Fsearch%2Fresults.vue",
+    "changes": 1,
+    "contents_url": "https://api.github.com/repos/GerritHoskins/mei-demo-app/contents/src%2Fmodules%2Fsearch%2Fresults.vue?ref=dd0bd23c79a67ea7474c0444fe05d8b1465dcf4b",
+    "deletions": 0,
+    "filename": "src/modules/search/results.vue",
+    "patch": "@@ -1 +1,2 @@\n <template><div /></template>\n+<!-- paging -->",
+    "raw_url": "https://github.com/GerritHoskins/mei-demo-app/raw/dd0bd23c79a67ea7474c0444fe05d8b1465dcf4b/src%2Fmodules%2Fsearch%2Fresults.vue",
+    "sha": "84b68c98d88f469d62893b534404b6ba067f2769",
+    "status": "modified"
+   }
+  ],
+  "html_url": "https://github.com/GerritHoskins/mei-demo-app/compare/v1.0.0...v1.1.0",
+  "merge_base_commit": {
+   "author": null,
+   "comments_url": "https://api.github.com/repos/GerritHoskins/mei-demo-app/commits/366b0447271e330802981f93fbc67f9d7d910d9c/comments",
+   "commit": {
+    "author": {
+     "date": "2026-09-01T10:00:00Z",
+     "email": "<scrubbed>",
+     "name": "MEI Demo"
+    },
+    "comment_count": 0,
+    "committer": {
+     "date": "2026-09-01T10:00:00Z",
+     "email": "<scrubbed>",
+     "name": "MEI Demo"
+    },
+    "message": "Scaffold app",
+    "tree": {
+     "sha": "dc8c34011b115777ba65b8ea426966af0a05e8bd",
+     "url": "https://api.github.com/repos/GerritHoskins/mei-demo-app/git/trees/dc8c34011b115777ba65b8ea426966af0a05e8bd"
+    },
+    "url": "https://api.github.com/repos/GerritHoskins/mei-demo-app/git/commits/366b0447271e330802981f93fbc67f9d7d910d9c",
+    "verification": {
+     "payload": null,
+     "reason": "unsigned",
+     "signature": null,
+     "verified": false,
+     "verified_at": null
+    }
+   },
+   "committer": null,
+   "html_url": "https://github.com/GerritHoskins/mei-demo-app/commit/366b0447271e330802981f93fbc67f9d7d910d9c",
+   "node_id": "C_kwDOUq1Ik9oAKDM2NmIwNDQ3MjcxZTMzMDgwMjk4MWY5M2ZiYzY3ZjlkN2Q5MTBkOWM",
+   "parents": [
+    {
+     "html_url": "https://github.com/GerritHoskins/mei-demo-app/commit/66796e586a720eb66cc19a5c9610cb3c6523432a",
+     "sha": "66796e586a720eb66cc19a5c9610cb3c6523432a",
+     "url": "https://api.github.com/repos/GerritHoskins/mei-demo-app/commits/66796e586a720eb66cc19a5c9610cb3c6523432a"
+    }
+   ],
+   "sha": "366b0447271e330802981f93fbc67f9d7d910d9c",
+   "url": "https://api.github.com/repos/GerritHoskins/mei-demo-app/commits/366b0447271e330802981f93fbc67f9d7d910d9c"
+  },
+  "patch_url": "https://github.com/GerritHoskins/mei-demo-app/compare/v1.0.0...v1.1.0.patch",
+  "permalink_url": "https://github.com/GerritHoskins/mei-demo-app/compare/GerritHoskins:366b044...GerritHoskins:dd0bd23",
+  "status": "ahead",
+  "total_commits": 2,
+  "url": "https://api.github.com/repos/GerritHoskins/mei-demo-app/compare/v1.0.0...v1.1.0"
+ },
+ "link": null,
+ "params": [],
+ "request": "GET /repos/GerritHoskins/mei-demo-app/compare/v1.0.0...v1.1.0",
+ "status": 200
+}

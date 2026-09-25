@@ -1,0 +1,597 @@
+{
+ "json": [
+  {
+   "_meta": {
+    "context": null,
+    "contexts": null,
+    "entries": {},
+    "message": null,
+    "packages": null,
+    "sdk": null,
+    "tags": {},
+    "user": null
+   },
+   "context": {},
+   "contexts": {
+    "app": {
+     "app_version": "1.3.0",
+     "type": "app"
+    },
+    "device": {
+     "family": "iOS",
+     "model": "iPhone15,2",
+     "type": "device"
+    },
+    "os": {
+     "name": "iOS",
+     "os": "iOS 18.4",
+     "type": "os",
+     "version": "18.4"
+    },
+    "trace": {
+     "span_id": "a53e8d4cdbed47e7",
+     "status": "unknown",
+     "trace_id": "a53e8d4cdbed47e7b5f436df6d75e055",
+     "type": "trace"
+    }
+   },
+   "crashFile": null,
+   "culprit": "n(main.3f9a1c)",
+   "dateCreated": "2026-09-23T23:53:43Z",
+   "dateReceived": "2026-09-25T09:48:44.994905Z",
+   "dist": null,
+   "entries": [
+    {
+     "data": {
+      "excOmitted": null,
+      "hasSystemFrames": true,
+      "values": [
+       {
+        "mechanism": null,
+        "module": null,
+        "rawModule": null,
+        "rawStacktrace": {
+         "frames": [
+          {
+           "absPath": "app:///main.3f9a1c.js",
+           "colNo": null,
+           "context": [],
+           "errors": null,
+           "filename": "app:///main.3f9a1c.js",
+           "function": "a",
+           "inApp": true,
+           "instructionAddr": null,
+           "lineNo": 1,
+           "lock": null,
+           "module": null,
+           "package": null,
+           "parentIndex": null,
+           "platform": null,
+           "rawFunction": null,
+           "sampleCount": null,
+           "sourceLink": null,
+           "symbol": null,
+           "symbolAddr": null,
+           "trust": null,
+           "vars": null
+          },
+          {
+           "absPath": "app:///main.3f9a1c.js",
+           "colNo": null,
+           "context": [],
+           "errors": null,
+           "filename": "app:///main.3f9a1c.js",
+           "function": "n",
+           "inApp": true,
+           "instructionAddr": null,
+           "lineNo": 1,
+           "lock": null,
+           "module": null,
+           "package": null,
+           "parentIndex": null,
+           "platform": null,
+           "rawFunction": null,
+           "sampleCount": null,
+           "sourceLink": null,
+           "symbol": null,
+           "symbolAddr": null,
+           "trust": null,
+           "vars": null
+          }
+         ],
+         "framesOmitted": null,
+         "hasSystemFrames": true,
+         "registers": null
+        },
+        "rawType": null,
+        "rawValue": null,
+        "stacktrace": {
+         "frames": [
+          {
+           "absPath": "app:///main.3f9a1c.js",
+           "colNo": null,
+           "context": [],
+           "errors": null,
+           "filename": "app:///main.3f9a1c.js",
+           "function": "a",
+           "inApp": true,
+           "instructionAddr": null,
+           "lineNo": 1,
+           "lock": null,
+           "module": "main.3f9a1c",
+           "package": null,
+           "parentIndex": null,
+           "platform": null,
+           "rawFunction": null,
+           "sampleCount": null,
+           "sourceLink": null,
+           "symbol": null,
+           "symbolAddr": null,
+           "trust": null,
+           "vars": null
+          },
+          {
+           "absPath": "app:///main.3f9a1c.js",
+           "colNo": null,
+           "context": [],
+           "errors": null,
+           "filename": "app:///main.3f9a1c.js",
+           "function": "n",
+           "inApp": true,
+           "instructionAddr": null,
+           "lineNo": 1,
+           "lock": null,
+           "module": "main.3f9a1c",
+           "package": null,
+           "parentIndex": null,
+           "platform": null,
+           "rawFunction": null,
+           "sampleCount": null,
+           "sourceLink": null,
+           "symbol": null,
+           "symbolAddr": null,
+           "trust": null,
+           "vars": null
+          }
+         ],
+         "framesOmitted": null,
+         "hasSystemFrames": true,
+         "registers": null
+        },
+        "threadId": null,
+        "type": "TypeError",
+        "value": "e is not a function"
+       }
+      ]
+     },
+     "type": "exception"
+    },
+    {
+     "data": {
+      "values": [
+       {
+        "category": "navigation",
+        "data": {
+         "from": "/",
+         "to": "/home"
+        },
+        "event_id": null,
+        "level": "info",
+        "message": null,
+        "timestamp": "2026-09-23T23:53:42.717773Z",
+        "type": "navigation"
+       }
+      ]
+     },
+     "type": "breadcrumbs"
+    }
+   ],
+   "errors": [
+    {
+     "data": {
+      "symbolicator_type": "missing_source",
+      "url": "app:///main.3f9a1c.js"
+     },
+     "message": "Source code was not found",
+     "type": "js_no_source"
+    }
+   ],
+   "eventID": "a53e8d4cdbed47e7b5f436df6d75e055",
+   "fingerprints": [
+    "28686eb06d9dc94f8a973c9300480d75"
+   ],
+   "groupID": "7754274138",
+   "groupingConfig": {
+    "enhancements": "KLUv_SAd6QAAkwORuGFsbC1wbGF0Zm9ybXM6MjAyNi0wMS0yMJA#KLUv_SAd6QAAkwORuGFsbC1wbGF0Zm9ybXM6MjAyNi0wMS0yMJA#KLUv_SAd6QAAkwORuGFsbC1wbGF0Zm9ybXM6MjAyNi0wMS0yMJA",
+    "id": "newstyle:2026-01-20"
+   },
+   "id": "a53e8d4cdbed47e7b5f436df6d75e055",
+   "location": "app:///main.3f9a1c.js",
+   "message": "",
+   "metadata": {
+    "filename": "app:///main.3f9a1c.js",
+    "function": "n",
+    "in_app_frame_mix": "in-app-only",
+    "synthetic": false,
+    "type": "TypeError",
+    "value": "e is not a function"
+   },
+   "occurrence": null,
+   "packages": {},
+   "platform": "javascript",
+   "projectID": "4512146161270784",
+   "sdk": {
+    "name": "mei-demo-generator",
+    "version": "0.1"
+   },
+   "size": 4556,
+   "tags": [
+    {
+     "key": "demo_case",
+     "value": "F4"
+    },
+    {
+     "key": "device",
+     "value": "iPhone15,2"
+    },
+    {
+     "key": "device.class",
+     "value": "high"
+    },
+    {
+     "key": "device.family",
+     "value": "iOS"
+    },
+    {
+     "key": "environment",
+     "value": "production"
+    },
+    {
+     "key": "installation_id",
+     "value": "install-case-h"
+    },
+    {
+     "key": "interface_type",
+     "value": "exception"
+    },
+    {
+     "key": "level",
+     "value": "error"
+    },
+    {
+     "key": "os",
+     "value": "iOS 18.4"
+    },
+    {
+     "key": "os.name",
+     "value": "iOS"
+    },
+    {
+     "key": "release",
+     "value": "mei-demo-app@1.3.0"
+    },
+    {
+     "key": "user",
+     "query": "user.id:\"account-case-p7\"",
+     "value": "id:account-case-p7"
+    }
+   ],
+   "title": "TypeError: e is not a function",
+   "type": "error",
+   "user": {
+    "data": null,
+    "email": "<scrubbed>",
+    "geo": {
+     "city": "Nuremberg",
+     "country_code": "DE",
+     "region": "Germany"
+    },
+    "id": "account-case-p7",
+    "ip_address": "<scrubbed>",
+    "name": null,
+    "username": "<scrubbed>"
+   }
+  },
+  {
+   "_meta": {
+    "context": null,
+    "contexts": null,
+    "entries": {},
+    "message": null,
+    "packages": null,
+    "sdk": null,
+    "tags": {},
+    "user": null
+   },
+   "context": {},
+   "contexts": {
+    "app": {
+     "app_version": "1.3.0",
+     "type": "app"
+    },
+    "device": {
+     "family": "iOS",
+     "model": "iPhone15,2",
+     "type": "device"
+    },
+    "os": {
+     "name": "iOS",
+     "os": "iOS 18.4",
+     "type": "os",
+     "version": "18.4"
+    },
+    "trace": {
+     "span_id": "2cbdc14582df4e8c",
+     "status": "unknown",
+     "trace_id": "2cbdc14582df4e8cb83f1b6a0be93aac",
+     "type": "trace"
+    }
+   },
+   "crashFile": null,
+   "culprit": "n(main.3f9a1c)",
+   "dateCreated": "2026-09-23T23:48:43Z",
+   "dateReceived": "2026-09-25T09:48:44.885571Z",
+   "dist": null,
+   "entries": [
+    {
+     "data": {
+      "excOmitted": null,
+      "hasSystemFrames": true,
+      "values": [
+       {
+        "mechanism": null,
+        "module": null,
+        "rawModule": null,
+        "rawStacktrace": {
+         "frames": [
+          {
+           "absPath": "app:///main.3f9a1c.js",
+           "colNo": null,
+           "context": [],
+           "errors": null,
+           "filename": "app:///main.3f9a1c.js",
+           "function": "a",
+           "inApp": true,
+           "instructionAddr": null,
+           "lineNo": 1,
+           "lock": null,
+           "module": null,
+           "package": null,
+           "parentIndex": null,
+           "platform": null,
+           "rawFunction": null,
+           "sampleCount": null,
+           "sourceLink": null,
+           "symbol": null,
+           "symbolAddr": null,
+           "trust": null,
+           "vars": null
+          },
+          {
+           "absPath": "app:///main.3f9a1c.js",
+           "colNo": null,
+           "context": [],
+           "errors": null,
+           "filename": "app:///main.3f9a1c.js",
+           "function": "n",
+           "inApp": true,
+           "instructionAddr": null,
+           "lineNo": 1,
+           "lock": null,
+           "module": null,
+           "package": null,
+           "parentIndex": null,
+           "platform": null,
+           "rawFunction": null,
+           "sampleCount": null,
+           "sourceLink": null,
+           "symbol": null,
+           "symbolAddr": null,
+           "trust": null,
+           "vars": null
+          }
+         ],
+         "framesOmitted": null,
+         "hasSystemFrames": true,
+         "registers": null
+        },
+        "rawType": null,
+        "rawValue": null,
+        "stacktrace": {
+         "frames": [
+          {
+           "absPath": "app:///main.3f9a1c.js",
+           "colNo": null,
+           "context": [],
+           "errors": null,
+           "filename": "app:///main.3f9a1c.js",
+           "function": "a",
+           "inApp": true,
+           "instructionAddr": null,
+           "lineNo": 1,
+           "lock": null,
+           "module": "main.3f9a1c",
+           "package": null,
+           "parentIndex": null,
+           "platform": null,
+           "rawFunction": null,
+           "sampleCount": null,
+           "sourceLink": null,
+           "symbol": null,
+           "symbolAddr": null,
+           "trust": null,
+           "vars": null
+          },
+          {
+           "absPath": "app:///main.3f9a1c.js",
+           "colNo": null,
+           "context": [],
+           "errors": null,
+           "filename": "app:///main.3f9a1c.js",
+           "function": "n",
+           "inApp": true,
+           "instructionAddr": null,
+           "lineNo": 1,
+           "lock": null,
+           "module": "main.3f9a1c",
+           "package": null,
+           "parentIndex": null,
+           "platform": null,
+           "rawFunction": null,
+           "sampleCount": null,
+           "sourceLink": null,
+           "symbol": null,
+           "symbolAddr": null,
+           "trust": null,
+           "vars": null
+          }
+         ],
+         "framesOmitted": null,
+         "hasSystemFrames": true,
+         "registers": null
+        },
+        "threadId": null,
+        "type": "TypeError",
+        "value": "e is not a function"
+       }
+      ]
+     },
+     "type": "exception"
+    },
+    {
+     "data": {
+      "values": [
+       {
+        "category": "navigation",
+        "data": {
+         "from": "/",
+         "to": "/home"
+        },
+        "event_id": null,
+        "level": "info",
+        "message": null,
+        "timestamp": "2026-09-23T23:48:42.717773Z",
+        "type": "navigation"
+       }
+      ]
+     },
+     "type": "breadcrumbs"
+    }
+   ],
+   "errors": [
+    {
+     "data": {
+      "symbolicator_type": "missing_source",
+      "url": "app:///main.3f9a1c.js"
+     },
+     "message": "Source code was not found",
+     "type": "js_no_source"
+    }
+   ],
+   "eventID": "2cbdc14582df4e8cb83f1b6a0be93aac",
+   "fingerprints": [
+    "28686eb06d9dc94f8a973c9300480d75"
+   ],
+   "groupID": "7754274138",
+   "groupingConfig": {
+    "enhancements": "KLUv_SAd6QAAkwORuGFsbC1wbGF0Zm9ybXM6MjAyNi0wMS0yMJA#KLUv_SAd6QAAkwORuGFsbC1wbGF0Zm9ybXM6MjAyNi0wMS0yMJA#KLUv_SAd6QAAkwORuGFsbC1wbGF0Zm9ybXM6MjAyNi0wMS0yMJA",
+    "id": "newstyle:2026-01-20"
+   },
+   "id": "2cbdc14582df4e8cb83f1b6a0be93aac",
+   "location": "app:///main.3f9a1c.js",
+   "message": "",
+   "metadata": {
+    "filename": "app:///main.3f9a1c.js",
+    "function": "n",
+    "in_app_frame_mix": "in-app-only",
+    "synthetic": false,
+    "type": "TypeError",
+    "value": "e is not a function"
+   },
+   "occurrence": null,
+   "packages": {},
+   "platform": "javascript",
+   "projectID": "4512146161270784",
+   "sdk": {
+    "name": "mei-demo-generator",
+    "version": "0.1"
+   },
+   "size": 4556,
+   "tags": [
+    {
+     "key": "demo_case",
+     "value": "F4"
+    },
+    {
+     "key": "device",
+     "value": "iPhone15,2"
+    },
+    {
+     "key": "device.class",
+     "value": "high"
+    },
+    {
+     "key": "device.family",
+     "value": "iOS"
+    },
+    {
+     "key": "environment",
+     "value": "production"
+    },
+    {
+     "key": "installation_id",
+     "value": "install-case-g"
+    },
+    {
+     "key": "interface_type",
+     "value": "exception"
+    },
+    {
+     "key": "level",
+     "value": "error"
+    },
+    {
+     "key": "os",
+     "value": "iOS 18.4"
+    },
+    {
+     "key": "os.name",
+     "value": "iOS"
+    },
+    {
+     "key": "release",
+     "value": "mei-demo-app@1.3.0"
+    },
+    {
+     "key": "user",
+     "query": "user.id:\"account-case-p5\"",
+     "value": "id:account-case-p5"
+    }
+   ],
+   "title": "TypeError: e is not a function",
+   "type": "error",
+   "user": {
+    "data": null,
+    "email": "<scrubbed>",
+    "geo": {
+     "city": "Nuremberg",
+     "country_code": "DE",
+     "region": "Germany"
+    },
+    "id": "account-case-p5",
+    "ip_address": "<scrubbed>",
+    "name": null,
+    "username": "<scrubbed>"
+   }
+  }
+ ],
+ "link": "<https://us.sentry.io/api/0/organizations/mei-demo-app/issues/7754274138/events/?full=true&cursor=0:0:1>; rel=\"previous\"; results=\"false\"; cursor=\"0:0:1\", <https://us.sentry.io/api/0/organizations/mei-demo-app/issues/7754274138/events/?full=true&cursor=0:10:0>; rel=\"next\"; results=\"false\"; cursor=\"0:10:0\"",
+ "params": [
+  [
+   "full",
+   "true"
+  ]
+ ],
+ "request": "GET /api/0/organizations/mei-demo-app/issues/7754274138/events/",
+ "status": 200
+}

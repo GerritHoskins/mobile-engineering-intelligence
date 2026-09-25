@@ -13,7 +13,11 @@ import httpx
 RETRY_STATUSES = {429, 500, 502, 503, 504}
 SCRUBBED = "<scrubbed>"
 # Keys whose values identify people or carry auth; replaced when recording.
-SCRUB_KEYS = {"emailAddress", "email", "accountId", "displayName", "avatarUrls", "avatarUrl", "self", "ip_address"}
+SCRUB_KEYS = {
+    "emailAddress", "email", "accountId", "displayName", "avatarUrls", "avatarUrl", "self", "ip_address",
+    # Sentry issue details: who viewed / owns the issue (names and emails).
+    "seenBy", "username", "assignedTo",
+}
 
 
 def get_with_retry(client: httpx.Client, url: str, *, params=None, attempts: int = 4) -> httpx.Response:
@@ -75,8 +79,11 @@ class RecordingTransport(httpx.BaseTransport):
             "json": body,
         }
         (self.directory / f"{fixture_key(request)}.json").write_text(json.dumps(record, indent=1, sort_keys=True))
-        return httpx.Response(response.status_code, headers=response.headers, content=response.content,
-                              request=request)
+        # The body is already decoded, so drop encoding/length headers or httpx
+        # would try to decompress it a second time.
+        headers = [(k, v) for k, v in response.headers.multi_items()
+                   if k.lower() not in ("content-encoding", "content-length", "transfer-encoding")]
+        return httpx.Response(response.status_code, headers=headers, content=response.content, request=request)
 
 
 class ReplayTransport(httpx.BaseTransport):
