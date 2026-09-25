@@ -52,7 +52,7 @@ def _truncate_state_observation(_migrate_test_database: None) -> None:
 
 INCIDENT_TABLES = (
     "release", "commit", "release_commit", "changed_file", "ticket", "commit_ticket",
-    "incident", "incident_event", "release_session_count",
+    "incident", "incident_event", "release_session_count", "llm_output",
 )
 
 
