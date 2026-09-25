@@ -1,0 +1,38 @@
+# Org-specific settings for the personal demo accounts. Holds no secrets:
+# tokens come only from the environment (see .env.example). A meinestadt
+# migration adds config/org.meinestadt.yaml -- no code changes.
+name: demo
+
+github:
+  repo: GerritHoskins/mei-demo-app
+
+jira:
+  base_url: https://mei-demo-app.atlassian.net
+  project_key: MEI
+  ticket_key_pattern: '\bMEI-\d+\b'
+
+sentry:
+  base_url: https://us.sentry.io
+  org: mei-demo-app
+  project: mei-demo-app
+
+releases:
+  # Sentry release name <-> git tag. Semver order of tags defines "previous".
+  sentry_template: 'mei-demo-app@{version}'
+  tag_template: 'v{version}'
+
+# First matching glob wins.
+components:
+  - glob: 'src/modules/push/**'
+    component: push
+  - glob: 'src/modules/profile/**'
+    component: profile
+  - glob: 'src/modules/search/**'
+    component: search
+  - glob: 'src/app/**'
+    component: app
+
+frame_paths:
+  strip_prefixes: ['app:///', 'webpack:///']
+  # Bundled output without source maps: cannot be mapped to repo paths.
+  unmappable: ['^main\.[0-9a-f]+\.js$']
