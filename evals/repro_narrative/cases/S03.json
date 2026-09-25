@@ -1,0 +1,133 @@
+{
+ "covers": [
+  "suspects:NONE_FOUND",
+  "gaps:none",
+  "precondition:push.deliverable",
+  "precondition:push.os_permission",
+  "precondition:push.provider_registration",
+  "precondition:profile.consistent"
+ ],
+ "id": "S03",
+ "note": "Stack is mapped but no commit in 3.3.0 touches it: suspects NONE_FOUND; a feature flag varies.",
+ "packet": {
+  "items": [
+   {
+    "events_considered": 3,
+    "id": "incident",
+    "title": "RangeError: Invalid page index -1"
+   },
+   {
+    "id": "step-1",
+    "kind": "LIFECYCLE",
+    "support": 1.0,
+    "target": "foreground"
+   },
+   {
+    "id": "step-2",
+    "kind": "NAVIGATE",
+    "support": 1.0,
+    "target": "/news"
+   },
+   {
+    "id": "step-3",
+    "kind": "TAP",
+    "support": 1.0,
+    "target": "button#load-more"
+   },
+   {
+    "id": "step-4",
+    "kind": "BACKEND_CALL",
+    "support": 1.0,
+    "target": "GET /api/news 200"
+   },
+   {
+    "id": "precondition-app.version",
+    "key": "app.version",
+    "source": "sentry.contexts",
+    "support": 1.0,
+    "value": "3.3.0"
+   },
+   {
+    "id": "precondition-os.name",
+    "key": "os.name",
+    "source": "sentry.contexts",
+    "support": 1.0,
+    "value": "iOS"
+   },
+   {
+    "id": "precondition-os.version",
+    "key": "os.version",
+    "source": "sentry.contexts",
+    "support": 1.0,
+    "value": "18.4"
+   },
+   {
+    "id": "precondition-device.model",
+    "key": "device.model",
+    "source": "sentry.contexts",
+    "support": 1.0,
+    "value": "iPhone15,2"
+   },
+   {
+    "id": "precondition-push.deliverable",
+    "key": "push.deliverable",
+    "source": "module1.push",
+    "support": 1.0,
+    "value": true
+   },
+   {
+    "id": "precondition-push.os_permission",
+    "key": "push.os_permission",
+    "source": "module1.push",
+    "support": 1.0,
+    "value": "ALLOWED"
+   },
+   {
+    "id": "precondition-push.provider_registration",
+    "key": "push.provider_registration",
+    "source": "module1.push",
+    "support": 1.0,
+    "value": "REGISTERED"
+   },
+   {
+    "id": "precondition-profile.consistent",
+    "key": "profile.consistent",
+    "source": "module1.profile",
+    "support": 1.0,
+    "value": true
+   },
+   {
+    "id": "varies-flag.news_v2",
+    "key": "flag.news_v2",
+    "values": [
+     {
+      "events": 2,
+      "value": "on"
+     },
+     {
+      "events": 1,
+      "value": "off"
+     }
+    ]
+   },
+   {
+    "culprit_frame": {
+     "function": "loadPage",
+     "lineno": 88,
+     "path": "src/modules/news/feed.ts"
+    },
+    "exception": {
+     "type": "RangeError",
+     "value": "Invalid page index -1"
+    },
+    "id": "failure"
+   },
+   {
+    "id": "suspects",
+    "value": "NONE_FOUND"
+   }
+  ],
+  "kind": "repro_narrative"
+ },
+ "source": "synthetic"
+}

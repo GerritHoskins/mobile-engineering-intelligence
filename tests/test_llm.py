@@ -11,7 +11,7 @@ import pytest
 
 from app.llm import config
 from app.llm.citations import NothingGrounded, enforce
-from app.llm.client import AnthropicLLM, LLMError, LLMRefused, LLMResult, LLMUnavailable
+from app.llm.client import AnthropicLLM, LLMError, LLMRefused, LLMResult, LLMTruncated, LLMUnavailable
 from app.llm.packet import canonical, ids, release_packet, repro_packet
 from app.llm.schemas import RELEASE_SUMMARY_SCHEMA, REPRO_NARRATIVE_SCHEMA
 from scripts.demo import scenario as sc
@@ -143,6 +143,13 @@ def test_incomplete_or_invalid_output_is_an_error(response) -> None:
     sdk, _ = _sdk(response)
     with pytest.raises(LLMError):
         AnthropicLLM(sdk).generate(system="s", user="u", schema={})
+
+
+def test_billed_failures_carry_usage_and_served_model() -> None:
+    sdk, _ = _sdk(_response(stop_reason="max_tokens", content=[_text({})]))
+    with pytest.raises(LLMTruncated) as caught:
+        AnthropicLLM(sdk).generate(system="s", user="u", schema={})
+    assert caught.value.usage and caught.value.served_model
 
 
 def test_rate_limit_maps_to_unavailable() -> None:

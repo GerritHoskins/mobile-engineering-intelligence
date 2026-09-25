@@ -1,0 +1,139 @@
+{
+ "covers": [
+  "suspects:many",
+  "exception:VARIES",
+  "gaps:none",
+  "precondition:push.deliverable",
+  "precondition:push.os_permission",
+  "precondition:push.provider_registration",
+  "precondition:profile.consistent"
+ ],
+ "id": "S06",
+ "note": "One issue, two different exception messages: exception is VARIES.",
+ "packet": {
+  "items": [
+   {
+    "events_considered": 3,
+    "id": "incident",
+    "title": "TypeError: Cannot read properties of null (reading 'title')"
+   },
+   {
+    "id": "step-1",
+    "kind": "NAVIGATE",
+    "support": 1.0,
+    "target": "/jobs"
+   },
+   {
+    "id": "step-2",
+    "kind": "TAP",
+    "support": 1.0,
+    "target": "li.job-card"
+   },
+   {
+    "id": "step-3",
+    "kind": "NAVIGATE",
+    "support": 1.0,
+    "target": "/jobs/detail"
+   },
+   {
+    "id": "step-4",
+    "kind": "TAP",
+    "support": 1.0,
+    "target": "button#apply"
+   },
+   {
+    "id": "step-5",
+    "kind": "BACKEND_CALL",
+    "support": 1.0,
+    "target": "POST /api/applications 500"
+   },
+   {
+    "id": "precondition-app.version",
+    "key": "app.version",
+    "source": "sentry.contexts",
+    "support": 1.0,
+    "value": "3.1.0"
+   },
+   {
+    "id": "precondition-os.name",
+    "key": "os.name",
+    "source": "sentry.contexts",
+    "support": 1.0,
+    "value": "iOS"
+   },
+   {
+    "id": "precondition-os.version",
+    "key": "os.version",
+    "source": "sentry.contexts",
+    "support": 1.0,
+    "value": "18.4"
+   },
+   {
+    "id": "precondition-device.model",
+    "key": "device.model",
+    "source": "sentry.contexts",
+    "support": 1.0,
+    "value": "iPhone15,2"
+   },
+   {
+    "id": "precondition-push.deliverable",
+    "key": "push.deliverable",
+    "source": "module1.push",
+    "support": 1.0,
+    "value": true
+   },
+   {
+    "id": "precondition-push.os_permission",
+    "key": "push.os_permission",
+    "source": "module1.push",
+    "support": 1.0,
+    "value": "ALLOWED"
+   },
+   {
+    "id": "precondition-push.provider_registration",
+    "key": "push.provider_registration",
+    "source": "module1.push",
+    "support": 1.0,
+    "value": "REGISTERED"
+   },
+   {
+    "id": "precondition-profile.consistent",
+    "key": "profile.consistent",
+    "source": "module1.profile",
+    "support": 1.0,
+    "value": true
+   },
+   {
+    "culprit_frame": {
+     "function": "submitApplication",
+     "lineno": 57,
+     "path": "src/modules/jobs/apply.ts"
+    },
+    "exception": {
+     "type": "VARIES",
+     "value": [
+      "('TypeError', \"Cannot read properties of null (reading 'company')\")",
+      "('TypeError', \"Cannot read properties of null (reading 'title')\")"
+     ]
+    },
+    "id": "failure"
+   },
+   {
+    "id": "suspect-c31a111",
+    "message": "MEI-40: Apply to jobs from the detail page",
+    "overlapping_files": [
+     "src/modules/jobs/apply.ts"
+    ]
+   },
+   {
+    "id": "suspect-c31b222",
+    "message": "MEI-41: Cache job detail responses",
+    "overlapping_files": [
+     "src/modules/jobs/apply.ts"
+    ]
+   }
+  ],
+  "kind": "repro_narrative"
+ },
+ "source": "synthetic"
+}
