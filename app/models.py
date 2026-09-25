@@ -1,6 +1,6 @@
 import uuid
 
-from sqlalchemy import Boolean, DateTime, Index, Integer, Text
+from sqlalchemy import Boolean, DateTime, Index, Integer, Text, func
 from sqlalchemy.dialects.postgresql import JSONB, UUID
 from sqlalchemy.orm import Mapped, mapped_column
 
@@ -145,3 +145,22 @@ class ReleaseSessionCount(Base):
     bucket_start: Mapped[object] = mapped_column(DateTime(timezone=True), primary_key=True)
     status: Mapped[str] = mapped_column(Text, primary_key=True)
     sessions: Mapped[int] = mapped_column(Integer, nullable=False)
+
+
+class LlmOutput(Base):
+    """Stored LLM explanations, keyed by a hash of exactly what the model saw
+    (packet + model + prompt version): same input -> same stored text, no call."""
+
+    __tablename__ = "llm_output"
+
+    org: Mapped[str] = mapped_column(Text, primary_key=True)
+    kind: Mapped[str] = mapped_column(Text, primary_key=True)
+    subject: Mapped[str] = mapped_column(Text, primary_key=True)
+    input_hash: Mapped[str] = mapped_column(Text, primary_key=True)
+    model: Mapped[str] = mapped_column(Text, nullable=False)
+    served_by: Mapped[str] = mapped_column(Text, nullable=False)
+    prompt_version: Mapped[str] = mapped_column(Text, nullable=False)
+    output: Mapped[dict] = mapped_column(JSONB, nullable=False)
+    rejected: Mapped[list] = mapped_column(JSONB, nullable=False, server_default="[]")
+    usage: Mapped[dict] = mapped_column(JSONB, nullable=False, server_default="{}")
+    created_at: Mapped[object] = mapped_column(DateTime(timezone=True), nullable=False, server_default=func.now())
