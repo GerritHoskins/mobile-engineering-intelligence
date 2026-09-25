@@ -1,9 +1,18 @@
 import os
 from pathlib import Path
 
+from urllib.parse import urlparse
+
+# Tests truncate tables, so they must never run against a real database.
+# DATABASE_URL from the shell is deliberately ignored (a shell exported for the
+# dev DB once made pytest wipe it); tests use TEST_DATABASE_URL, defaulting to
+# mei_test, and refuse any database whose name doesn't end in "_test".
 # Must be set before any `app.db` import happens (its engine is created at
-# import time), so this runs before pytest collects test_state_api.py.
-os.environ.setdefault("DATABASE_URL", "postgresql+psycopg://mei:mei@localhost:5432/mei_test")
+# import time), so this runs before pytest collects the test modules.
+TEST_DATABASE_URL = os.environ.get("TEST_DATABASE_URL", "postgresql+psycopg://mei:mei@localhost:5432/mei_test")
+if not urlparse(TEST_DATABASE_URL).path.rstrip("/").endswith("_test"):
+    raise RuntimeError(f"Refusing to run tests against a non-test database: {TEST_DATABASE_URL}")
+os.environ["DATABASE_URL"] = TEST_DATABASE_URL
 
 import pytest
 from alembic import command

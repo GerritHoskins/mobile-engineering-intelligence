@@ -1,5 +1,8 @@
 """Record/replay transport and scrubbing, without network."""
 
+import gzip
+import json
+
 import httpx
 
 from app.connectors.http import RecordingTransport, ReplayTransport, SCRUBBED, iter_link_pages, scrub
@@ -39,3 +42,14 @@ def test_replay_fails_loudly_for_unrecorded_request(tmp_path) -> None:
         assert "No recorded fixture" in str(error)
     else:
         raise AssertionError("expected FileNotFoundError")
+
+
+def test_recording_passes_through_compressed_responses(tmp_path) -> None:
+    """Real vendors gzip their responses; the recorder must not double-decode."""
+    def upstream(request: httpx.Request) -> httpx.Response:
+        return httpx.Response(200, content=gzip.compress(json.dumps({"ok": True}).encode()),
+                              headers={"content-type": "application/json", "content-encoding": "gzip"})
+
+    client = httpx.Client(base_url="https://api.example", transport=RecordingTransport(tmp_path, httpx.MockTransport(upstream)))
+    assert client.get("/x").json() == {"ok": True}
+    assert ReplayTransport(tmp_path).handle_request(httpx.Request("GET", "https://api.example/x")).json() == {"ok": True}

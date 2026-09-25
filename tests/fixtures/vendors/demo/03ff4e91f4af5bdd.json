@@ -1,0 +1,800 @@
+{
+ "json": [
+  {
+   "annotations": [],
+   "assignedTo": "<scrubbed>",
+   "count": "2",
+   "culprit": "n(main.3f9a1c)",
+   "firstSeen": "2026-09-23T23:48:43.717773Z",
+   "hasSeen": true,
+   "id": "7754274138",
+   "isBookmarked": false,
+   "isPublic": false,
+   "isSubscribed": false,
+   "isUnhandled": false,
+   "issueCategory": "error",
+   "issueType": "error",
+   "lastSeen": "2026-09-23T23:53:43.717773Z",
+   "level": "error",
+   "logger": null,
+   "metadata": {
+    "filename": "app:///main.3f9a1c.js",
+    "function": "n",
+    "in_app_frame_mix": "in-app-only",
+    "initial_priority": 75,
+    "sdk": {
+     "name": "mei-demo-generator",
+     "name_normalized": "other"
+    },
+    "synthetic": false,
+    "title": null,
+    "type": "TypeError",
+    "value": "e is not a function"
+   },
+   "numComments": 0,
+   "permalink": "https://mei-demo-app.sentry.io/issues/7754274138/",
+   "platform": "javascript",
+   "priority": "high",
+   "priorityLockedAt": null,
+   "project": {
+    "id": "4512146161270784",
+    "name": "mei-demo-app",
+    "platform": "capacitor",
+    "slug": "mei-demo-app"
+   },
+   "seerAutofixLastTriggered": null,
+   "seerExplorerAutofixLastTriggered": null,
+   "seerFixabilityScore": null,
+   "shareId": null,
+   "shortId": "MEI-DEMO-APP-4",
+   "stats": {
+    "24h": [
+     [
+      1790244000,
+      0
+     ],
+     [
+      1790247600,
+      0
+     ],
+     [
+      1790251200,
+      0
+     ],
+     [
+      1790254800,
+      0
+     ],
+     [
+      1790258400,
+      0
+     ],
+     [
+      1790262000,
+      0
+     ],
+     [
+      1790265600,
+      0
+     ],
+     [
+      1790269200,
+      0
+     ],
+     [
+      1790272800,
+      0
+     ],
+     [
+      1790276400,
+      0
+     ],
+     [
+      1790280000,
+      0
+     ],
+     [
+      1790283600,
+      0
+     ],
+     [
+      1790287200,
+      0
+     ],
+     [
+      1790290800,
+      0
+     ],
+     [
+      1790294400,
+      0
+     ],
+     [
+      1790298000,
+      0
+     ],
+     [
+      1790301600,
+      0
+     ],
+     [
+      1790305200,
+      0
+     ],
+     [
+      1790308800,
+      0
+     ],
+     [
+      1790312400,
+      0
+     ],
+     [
+      1790316000,
+      0
+     ],
+     [
+      1790319600,
+      0
+     ],
+     [
+      1790323200,
+      0
+     ],
+     [
+      1790326800,
+      0
+     ]
+    ]
+   },
+   "status": "unresolved",
+   "statusDetails": {},
+   "subscriptionDetails": null,
+   "substatus": "new",
+   "title": "TypeError: e is not a function",
+   "type": "error",
+   "userCount": 2
+  },
+  {
+   "annotations": [],
+   "assignedTo": "<scrubbed>",
+   "count": "2",
+   "culprit": "validateEmail(src/modules/profile/email)",
+   "firstSeen": "2026-09-23T23:18:43.717773Z",
+   "hasSeen": false,
+   "id": "7754274105",
+   "isBookmarked": false,
+   "isPublic": false,
+   "isSubscribed": false,
+   "isUnhandled": false,
+   "issueCategory": "error",
+   "issueType": "error",
+   "lastSeen": "2026-09-23T23:23:43.717773Z",
+   "level": "error",
+   "logger": null,
+   "metadata": {
+    "filename": "app:///src/modules/profile/email.ts",
+    "function": "validateEmail",
+    "in_app_frame_mix": "in-app-only",
+    "initial_priority": 75,
+    "sdk": {
+     "name": "mei-demo-generator",
+     "name_normalized": "other"
+    },
+    "synthetic": false,
+    "title": null,
+    "type": "Error",
+    "value": "Profile email mismatch after hotfix"
+   },
+   "numComments": 0,
+   "permalink": "https://mei-demo-app.sentry.io/issues/7754274105/",
+   "platform": "javascript",
+   "priority": "high",
+   "priorityLockedAt": null,
+   "project": {
+    "id": "4512146161270784",
+    "name": "mei-demo-app",
+    "platform": "capacitor",
+    "slug": "mei-demo-app"
+   },
+   "seerAutofixLastTriggered": null,
+   "seerExplorerAutofixLastTriggered": null,
+   "seerFixabilityScore": null,
+   "shareId": null,
+   "shortId": "MEI-DEMO-APP-1",
+   "stats": {
+    "24h": [
+     [
+      1790244000,
+      0
+     ],
+     [
+      1790247600,
+      0
+     ],
+     [
+      1790251200,
+      0
+     ],
+     [
+      1790254800,
+      0
+     ],
+     [
+      1790258400,
+      0
+     ],
+     [
+      1790262000,
+      0
+     ],
+     [
+      1790265600,
+      0
+     ],
+     [
+      1790269200,
+      0
+     ],
+     [
+      1790272800,
+      0
+     ],
+     [
+      1790276400,
+      0
+     ],
+     [
+      1790280000,
+      0
+     ],
+     [
+      1790283600,
+      0
+     ],
+     [
+      1790287200,
+      0
+     ],
+     [
+      1790290800,
+      0
+     ],
+     [
+      1790294400,
+      0
+     ],
+     [
+      1790298000,
+      0
+     ],
+     [
+      1790301600,
+      0
+     ],
+     [
+      1790305200,
+      0
+     ],
+     [
+      1790308800,
+      0
+     ],
+     [
+      1790312400,
+      0
+     ],
+     [
+      1790316000,
+      0
+     ],
+     [
+      1790319600,
+      0
+     ],
+     [
+      1790323200,
+      0
+     ],
+     [
+      1790326800,
+      0
+     ]
+    ]
+   },
+   "status": "unresolved",
+   "statusDetails": {},
+   "subscriptionDetails": null,
+   "substatus": "new",
+   "title": "Error: Profile email mismatch after hotfix",
+   "type": "error",
+   "userCount": 2
+  },
+  {
+   "annotations": [],
+   "assignedTo": "<scrubbed>",
+   "count": "2",
+   "culprit": "resolveRoute(src/app/router)",
+   "firstSeen": "2026-09-23T22:48:43.717773Z",
+   "hasSeen": false,
+   "id": "7754274130",
+   "isBookmarked": false,
+   "isPublic": false,
+   "isSubscribed": false,
+   "isUnhandled": false,
+   "issueCategory": "error",
+   "issueType": "error",
+   "lastSeen": "2026-09-23T22:53:43.717773Z",
+   "level": "error",
+   "logger": null,
+   "metadata": {
+    "filename": "app:///src/app/router.ts",
+    "function": "resolveRoute",
+    "in_app_frame_mix": "in-app-only",
+    "initial_priority": 75,
+    "sdk": {
+     "name": "mei-demo-generator",
+     "name_normalized": "other"
+    },
+    "synthetic": false,
+    "title": null,
+    "type": "Error",
+    "value": "No route matches /legacy/inbox"
+   },
+   "numComments": 0,
+   "permalink": "https://mei-demo-app.sentry.io/issues/7754274130/",
+   "platform": "javascript",
+   "priority": "high",
+   "priorityLockedAt": null,
+   "project": {
+    "id": "4512146161270784",
+    "name": "mei-demo-app",
+    "platform": "capacitor",
+    "slug": "mei-demo-app"
+   },
+   "seerAutofixLastTriggered": null,
+   "seerExplorerAutofixLastTriggered": null,
+   "seerFixabilityScore": null,
+   "shareId": null,
+   "shortId": "MEI-DEMO-APP-3",
+   "stats": {
+    "24h": [
+     [
+      1790244000,
+      0
+     ],
+     [
+      1790247600,
+      0
+     ],
+     [
+      1790251200,
+      0
+     ],
+     [
+      1790254800,
+      0
+     ],
+     [
+      1790258400,
+      0
+     ],
+     [
+      1790262000,
+      0
+     ],
+     [
+      1790265600,
+      0
+     ],
+     [
+      1790269200,
+      0
+     ],
+     [
+      1790272800,
+      0
+     ],
+     [
+      1790276400,
+      0
+     ],
+     [
+      1790280000,
+      0
+     ],
+     [
+      1790283600,
+      0
+     ],
+     [
+      1790287200,
+      0
+     ],
+     [
+      1790290800,
+      0
+     ],
+     [
+      1790294400,
+      0
+     ],
+     [
+      1790298000,
+      0
+     ],
+     [
+      1790301600,
+      0
+     ],
+     [
+      1790305200,
+      0
+     ],
+     [
+      1790308800,
+      0
+     ],
+     [
+      1790312400,
+      0
+     ],
+     [
+      1790316000,
+      0
+     ],
+     [
+      1790319600,
+      0
+     ],
+     [
+      1790323200,
+      0
+     ],
+     [
+      1790326800,
+      0
+     ]
+    ]
+   },
+   "status": "unresolved",
+   "statusDetails": {},
+   "subscriptionDetails": null,
+   "substatus": "new",
+   "title": "Error: No route matches /legacy/inbox",
+   "type": "error",
+   "userCount": 2
+  },
+  {
+   "annotations": [],
+   "assignedTo": "<scrubbed>",
+   "count": "2",
+   "culprit": "loadSavedSearches(src/modules/search/saved-search)",
+   "firstSeen": "2026-09-23T22:18:43.717773Z",
+   "hasSeen": false,
+   "id": "7754274150",
+   "isBookmarked": false,
+   "isPublic": false,
+   "isSubscribed": false,
+   "isUnhandled": false,
+   "issueCategory": "error",
+   "issueType": "error",
+   "lastSeen": "2026-09-23T22:23:43.717773Z",
+   "level": "error",
+   "logger": null,
+   "metadata": {
+    "filename": "app:///src/modules/search/saved-search.ts",
+    "function": "loadSavedSearches",
+    "in_app_frame_mix": "in-app-only",
+    "initial_priority": 75,
+    "sdk": {
+     "name": "mei-demo-generator",
+     "name_normalized": "other"
+    },
+    "synthetic": false,
+    "title": null,
+    "type": "RangeError",
+    "value": "Invalid saved-search index"
+   },
+   "numComments": 0,
+   "permalink": "https://mei-demo-app.sentry.io/issues/7754274150/",
+   "platform": "javascript",
+   "priority": "high",
+   "priorityLockedAt": null,
+   "project": {
+    "id": "4512146161270784",
+    "name": "mei-demo-app",
+    "platform": "capacitor",
+    "slug": "mei-demo-app"
+   },
+   "seerAutofixLastTriggered": null,
+   "seerExplorerAutofixLastTriggered": null,
+   "seerFixabilityScore": null,
+   "shareId": null,
+   "shortId": "MEI-DEMO-APP-5",
+   "stats": {
+    "24h": [
+     [
+      1790244000,
+      0
+     ],
+     [
+      1790247600,
+      0
+     ],
+     [
+      1790251200,
+      0
+     ],
+     [
+      1790254800,
+      0
+     ],
+     [
+      1790258400,
+      0
+     ],
+     [
+      1790262000,
+      0
+     ],
+     [
+      1790265600,
+      0
+     ],
+     [
+      1790269200,
+      0
+     ],
+     [
+      1790272800,
+      0
+     ],
+     [
+      1790276400,
+      0
+     ],
+     [
+      1790280000,
+      0
+     ],
+     [
+      1790283600,
+      0
+     ],
+     [
+      1790287200,
+      0
+     ],
+     [
+      1790290800,
+      0
+     ],
+     [
+      1790294400,
+      0
+     ],
+     [
+      1790298000,
+      0
+     ],
+     [
+      1790301600,
+      0
+     ],
+     [
+      1790305200,
+      0
+     ],
+     [
+      1790308800,
+      0
+     ],
+     [
+      1790312400,
+      0
+     ],
+     [
+      1790316000,
+      0
+     ],
+     [
+      1790319600,
+      0
+     ],
+     [
+      1790323200,
+      0
+     ],
+     [
+      1790326800,
+      0
+     ]
+    ]
+   },
+   "status": "unresolved",
+   "statusDetails": {},
+   "subscriptionDetails": null,
+   "substatus": "new",
+   "title": "RangeError: Invalid saved-search index",
+   "type": "error",
+   "userCount": 2
+  },
+  {
+   "annotations": [],
+   "assignedTo": "<scrubbed>",
+   "count": "3",
+   "culprit": "refreshToken(src/modules/push/registration)",
+   "firstSeen": "2026-09-23T21:48:43.717773Z",
+   "hasSeen": false,
+   "id": "7754274111",
+   "isBookmarked": false,
+   "isPublic": false,
+   "isSubscribed": false,
+   "isUnhandled": false,
+   "issueCategory": "error",
+   "issueType": "error",
+   "lastSeen": "2026-09-23T21:53:43.717773Z",
+   "level": "error",
+   "logger": null,
+   "metadata": {
+    "filename": "app:///src/modules/push/registration.ts",
+    "function": "refreshToken",
+    "in_app_frame_mix": "in-app-only",
+    "initial_priority": 75,
+    "sdk": {
+     "name": "mei-demo-generator",
+     "name_normalized": "other"
+    },
+    "synthetic": false,
+    "title": null,
+    "type": "TypeError",
+    "value": "Cannot read properties of undefined (reading 'token')"
+   },
+   "numComments": 0,
+   "permalink": "https://mei-demo-app.sentry.io/issues/7754274111/",
+   "platform": "javascript",
+   "priority": "high",
+   "priorityLockedAt": null,
+   "project": {
+    "id": "4512146161270784",
+    "name": "mei-demo-app",
+    "platform": "capacitor",
+    "slug": "mei-demo-app"
+   },
+   "seerAutofixLastTriggered": null,
+   "seerExplorerAutofixLastTriggered": null,
+   "seerFixabilityScore": null,
+   "shareId": null,
+   "shortId": "MEI-DEMO-APP-2",
+   "stats": {
+    "24h": [
+     [
+      1790244000,
+      0
+     ],
+     [
+      1790247600,
+      0
+     ],
+     [
+      1790251200,
+      0
+     ],
+     [
+      1790254800,
+      0
+     ],
+     [
+      1790258400,
+      0
+     ],
+     [
+      1790262000,
+      0
+     ],
+     [
+      1790265600,
+      0
+     ],
+     [
+      1790269200,
+      0
+     ],
+     [
+      1790272800,
+      0
+     ],
+     [
+      1790276400,
+      0
+     ],
+     [
+      1790280000,
+      0
+     ],
+     [
+      1790283600,
+      0
+     ],
+     [
+      1790287200,
+      0
+     ],
+     [
+      1790290800,
+      0
+     ],
+     [
+      1790294400,
+      0
+     ],
+     [
+      1790298000,
+      0
+     ],
+     [
+      1790301600,
+      0
+     ],
+     [
+      1790305200,
+      0
+     ],
+     [
+      1790308800,
+      0
+     ],
+     [
+      1790312400,
+      0
+     ],
+     [
+      1790316000,
+      0
+     ],
+     [
+      1790319600,
+      0
+     ],
+     [
+      1790323200,
+      0
+     ],
+     [
+      1790326800,
+      0
+     ]
+    ]
+   },
+   "status": "unresolved",
+   "statusDetails": {},
+   "subscriptionDetails": null,
+   "substatus": "new",
+   "title": "TypeError: Cannot read properties of undefined (reading 'token')",
+   "type": "error",
+   "userCount": 3
+  }
+ ],
+ "link": "<https://us.sentry.io/api/0/projects/mei-demo-app/mei-demo-app/issues/?query=&start=2026-09-11T09%3A59%3A32&end=2026-09-25T09%3A59%3A32&limit=100&cursor=1790207623717:0:1>; rel=\"previous\"; results=\"false\"; cursor=\"1790207623717:0:1\", <https://us.sentry.io/api/0/projects/mei-demo-app/mei-demo-app/issues/?query=&start=2026-09-11T09%3A59%3A32&end=2026-09-25T09%3A59%3A32&limit=100&cursor=1790200423718:1:0>; rel=\"next\"; results=\"false\"; cursor=\"1790200423718:1:0\"",
+ "params": [
+  [
+   "end",
+   "2026-09-25T09:59:32"
+  ],
+  [
+   "limit",
+   "100"
+  ],
+  [
+   "query",
+   ""
+  ],
+  [
+   "start",
+   "2026-09-11T09:59:32"
+  ]
+ ],
+ "request": "GET /api/0/projects/mei-demo-app/mei-demo-app/issues/",
+ "status": 200
+}

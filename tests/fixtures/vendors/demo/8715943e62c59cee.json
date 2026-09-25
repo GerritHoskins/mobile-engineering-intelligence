@@ -1,0 +1,60 @@
+{
+ "json": {
+  "expand": "renderedFields,names,schema,operations,editmeta,changelog,versionedRepresentations",
+  "fields": {
+   "components": [
+    {
+     "id": "10002",
+     "name": "search",
+     "self": "<scrubbed>"
+    }
+   ],
+   "fixVersions": [
+    {
+     "archived": false,
+     "id": "10000",
+     "name": "v1.1.0",
+     "released": false,
+     "self": "<scrubbed>"
+    }
+   ],
+   "issuetype": {
+    "avatarId": 10300,
+    "description": "Eine Funktionalit\u00e4t oder Funktion, ausgedr\u00fcckt als Benutzerziel.",
+    "hierarchyLevel": 0,
+    "iconUrl": "https://mei-demo-app.atlassian.net/rest/api/2/universal_avatar/view/type/issuetype/avatar/10300?size=medium",
+    "id": "10005",
+    "name": "Story",
+    "self": "<scrubbed>",
+    "subtask": false
+   },
+   "status": {
+    "description": "",
+    "iconUrl": "https://mei-demo-app.atlassian.net/images/icons/statuses/generic.png",
+    "id": "10004",
+    "name": "Zu erledigen",
+    "self": "<scrubbed>",
+    "statusCategory": {
+     "colorName": "blue-gray",
+     "id": 2,
+     "key": "new",
+     "name": "Zu erledigen",
+     "self": "<scrubbed>"
+    }
+   },
+   "summary": "[demo:search-results-paging] Page search results"
+  },
+  "id": "10037",
+  "key": "MEI-2",
+  "self": "<scrubbed>"
+ },
+ "link": null,
+ "params": [
+  [
+   "fields",
+   "summary,issuetype,status,components,fixVersions"
+  ]
+ ],
+ "request": "GET /rest/api/3/issue/MEI-2",
+ "status": 200
+}

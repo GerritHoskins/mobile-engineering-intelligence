@@ -1,4 +1,4 @@
-from datetime import datetime, timezone
+from datetime import datetime, timedelta, timezone
 
 import httpx
 
@@ -44,18 +44,27 @@ class SentryClient:
             releases.extend(page.json())
         return releases
 
+    # Sentry's sessions API returned nothing for a short (4h) start/end window
+    # while the same buckets came back for every window of 12h or more
+    # (observed 2026-09-25). Always query at least this much, then keep only
+    # the requested buckets client-side.
+    MIN_SESSION_QUERY = timedelta(hours=24)
+
     def session_counts(self, project_id: str, start: datetime, end: datetime) -> list[dict]:
-        """Raw hourly session counts per (release, session.status). Deliberately
-        not crash_free_rate: the probe showed it can be wrong for some windows."""
+        """Raw hourly session counts per (release, session.status) for buckets
+        in [start, end). Deliberately not crash_free_rate: the probe showed it
+        can be wrong for some windows."""
+        query_start = min(start, end - self.MIN_SESSION_QUERY).replace(minute=0, second=0, microsecond=0)
         params = [
             ("field", "sum(session)"), ("groupBy", "release"), ("groupBy", "session.status"),
-            ("interval", "1h"), ("start", _iso(start)), ("end", _iso(end)), ("project", project_id),
+            ("interval", "1h"), ("start", _iso(query_start)), ("end", _iso(end)), ("project", project_id),
         ]
         data = get_with_retry(self.client, f"/api/0/organizations/{self.org}/sessions/", params=params).json()
         rows = []
         for group in data.get("groups", []):
             for bucket_start, count in zip(data["intervals"], group["series"]["sum(session)"]):
-                if count:
+                bucket = datetime.fromisoformat(bucket_start.replace("Z", "+00:00"))
+                if count and start <= bucket < end:
                     rows.append({"release": group["by"]["release"], "status": group["by"]["session.status"],
                                  "bucket_start": bucket_start, "sessions": count})
         return rows

@@ -1,0 +1,60 @@
+{
+ "json": {
+  "expand": "renderedFields,names,schema,operations,editmeta,changelog,versionedRepresentations",
+  "fields": {
+   "components": [
+    {
+     "id": "10000",
+     "name": "push",
+     "self": "<scrubbed>"
+    }
+   ],
+   "fixVersions": [
+    {
+     "archived": false,
+     "id": "10001",
+     "name": "v1.2.0",
+     "released": false,
+     "self": "<scrubbed>"
+    }
+   ],
+   "issuetype": {
+    "avatarId": 10303,
+    "description": "Ein Problem oder Fehler.",
+    "hierarchyLevel": 0,
+    "iconUrl": "https://mei-demo-app.atlassian.net/rest/api/2/universal_avatar/view/type/issuetype/avatar/10303?size=medium",
+    "id": "10008",
+    "name": "Bug",
+    "self": "<scrubbed>",
+    "subtask": false
+   },
+   "status": {
+    "description": "",
+    "iconUrl": "https://mei-demo-app.atlassian.net/images/icons/statuses/generic.png",
+    "id": "10004",
+    "name": "Zu erledigen",
+    "self": "<scrubbed>",
+    "statusCategory": {
+     "colorName": "blue-gray",
+     "id": 2,
+     "key": "new",
+     "name": "Zu erledigen",
+     "self": "<scrubbed>"
+    }
+   },
+   "summary": "[demo:push-token-refresh] Refresh push token when the app resumes"
+  },
+  "id": "10038",
+  "key": "MEI-3",
+  "self": "<scrubbed>"
+ },
+ "link": null,
+ "params": [
+  [
+   "fields",
+   "summary,issuetype,status,components,fixVersions"
+  ]
+ ],
+ "request": "GET /rest/api/3/issue/MEI-3",
+ "status": 200
+}

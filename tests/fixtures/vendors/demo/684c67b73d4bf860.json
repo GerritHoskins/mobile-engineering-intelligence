@@ -1,0 +1,631 @@
+{
+ "json": [
+  {
+   "_meta": {
+    "context": null,
+    "contexts": null,
+    "entries": {},
+    "message": null,
+    "packages": null,
+    "sdk": null,
+    "tags": {},
+    "user": null
+   },
+   "context": {},
+   "contexts": {
+    "app": {
+     "app_version": "1.2.1",
+     "type": "app"
+    },
+    "device": {
+     "family": "iOS",
+     "model": "iPhone15,2",
+     "type": "device"
+    },
+    "os": {
+     "name": "iOS",
+     "os": "iOS 18.4",
+     "type": "os",
+     "version": "18.4"
+    },
+    "trace": {
+     "span_id": "31c4c1fc2fbe497e",
+     "status": "unknown",
+     "trace_id": "31c4c1fc2fbe497e8612ed8a50a8d45a",
+     "type": "trace"
+    }
+   },
+   "crashFile": null,
+   "culprit": "validateEmail(src/modules/profile/email)",
+   "dateCreated": "2026-09-23T23:23:43Z",
+   "dateReceived": "2026-09-25T09:48:44.773502Z",
+   "dist": null,
+   "entries": [
+    {
+     "data": {
+      "excOmitted": null,
+      "hasSystemFrames": true,
+      "values": [
+       {
+        "mechanism": null,
+        "module": null,
+        "rawModule": null,
+        "rawStacktrace": {
+         "frames": [
+          {
+           "absPath": "app:///src/app/main.ts",
+           "colNo": null,
+           "context": [],
+           "errors": null,
+           "filename": "app:///src/app/main.ts",
+           "function": "bootstrap",
+           "inApp": true,
+           "instructionAddr": null,
+           "lineNo": 12,
+           "lock": null,
+           "module": null,
+           "package": null,
+           "parentIndex": null,
+           "platform": null,
+           "rawFunction": null,
+           "sampleCount": null,
+           "sourceLink": null,
+           "symbol": null,
+           "symbolAddr": null,
+           "trust": null,
+           "vars": null
+          },
+          {
+           "absPath": "app:///src/modules/profile/email.ts",
+           "colNo": null,
+           "context": [],
+           "errors": null,
+           "filename": "app:///src/modules/profile/email.ts",
+           "function": "validateEmail",
+           "inApp": true,
+           "instructionAddr": null,
+           "lineNo": 9,
+           "lock": null,
+           "module": null,
+           "package": null,
+           "parentIndex": null,
+           "platform": null,
+           "rawFunction": null,
+           "sampleCount": null,
+           "sourceLink": null,
+           "symbol": null,
+           "symbolAddr": null,
+           "trust": null,
+           "vars": null
+          }
+         ],
+         "framesOmitted": null,
+         "hasSystemFrames": true,
+         "registers": null
+        },
+        "rawType": null,
+        "rawValue": null,
+        "stacktrace": {
+         "frames": [
+          {
+           "absPath": "app:///src/app/main.ts",
+           "colNo": null,
+           "context": [],
+           "errors": null,
+           "filename": "app:///src/app/main.ts",
+           "function": "bootstrap",
+           "inApp": true,
+           "instructionAddr": null,
+           "lineNo": 12,
+           "lock": null,
+           "module": "src/app/main",
+           "package": null,
+           "parentIndex": null,
+           "platform": null,
+           "rawFunction": null,
+           "sampleCount": null,
+           "sourceLink": null,
+           "symbol": null,
+           "symbolAddr": null,
+           "trust": null,
+           "vars": null
+          },
+          {
+           "absPath": "app:///src/modules/profile/email.ts",
+           "colNo": null,
+           "context": [],
+           "errors": null,
+           "filename": "app:///src/modules/profile/email.ts",
+           "function": "validateEmail",
+           "inApp": true,
+           "instructionAddr": null,
+           "lineNo": 9,
+           "lock": null,
+           "module": "src/modules/profile/email",
+           "package": null,
+           "parentIndex": null,
+           "platform": null,
+           "rawFunction": null,
+           "sampleCount": null,
+           "sourceLink": null,
+           "symbol": null,
+           "symbolAddr": null,
+           "trust": null,
+           "vars": null
+          }
+         ],
+         "framesOmitted": null,
+         "hasSystemFrames": true,
+         "registers": null
+        },
+        "threadId": null,
+        "type": "Error",
+        "value": "Profile email mismatch after hotfix"
+       }
+      ]
+     },
+     "type": "exception"
+    },
+    {
+     "data": {
+      "values": [
+       {
+        "category": "navigation",
+        "data": {
+         "from": "/home",
+         "to": "/profile"
+        },
+        "event_id": null,
+        "level": "info",
+        "message": null,
+        "timestamp": "2026-09-23T23:23:41.717773Z",
+        "type": "navigation"
+       },
+       {
+        "category": "ui.click",
+        "data": null,
+        "event_id": null,
+        "level": "info",
+        "message": "button#save-profile",
+        "timestamp": "2026-09-23T23:23:42.717773Z",
+        "type": "user"
+       }
+      ]
+     },
+     "type": "breadcrumbs"
+    }
+   ],
+   "errors": [
+    {
+     "data": {
+      "symbolicator_type": "missing_source",
+      "url": "app:///src/app/main.ts"
+     },
+     "message": "Source code was not found",
+     "type": "js_no_source"
+    },
+    {
+     "data": {
+      "symbolicator_type": "missing_source",
+      "url": "app:///src/modules/profile/email.ts"
+     },
+     "message": "Source code was not found",
+     "type": "js_no_source"
+    }
+   ],
+   "eventID": "31c4c1fc2fbe497e8612ed8a50a8d45a",
+   "fingerprints": [
+    "fd3ee4913c1f54e69a0d482f51efdbce"
+   ],
+   "groupID": "7754274105",
+   "groupingConfig": {
+    "enhancements": "KLUv_SAd6QAAkwORuGFsbC1wbGF0Zm9ybXM6MjAyNi0wMS0yMJA#KLUv_SAd6QAAkwORuGFsbC1wbGF0Zm9ybXM6MjAyNi0wMS0yMJA#KLUv_SAd6QAAkwORuGFsbC1wbGF0Zm9ybXM6MjAyNi0wMS0yMJA",
+    "id": "newstyle:2026-01-20"
+   },
+   "id": "31c4c1fc2fbe497e8612ed8a50a8d45a",
+   "location": "app:///src/modules/profile/email.ts",
+   "message": "",
+   "metadata": {
+    "filename": "app:///src/modules/profile/email.ts",
+    "function": "validateEmail",
+    "in_app_frame_mix": "in-app-only",
+    "synthetic": false,
+    "type": "Error",
+    "value": "Profile email mismatch after hotfix"
+   },
+   "occurrence": null,
+   "packages": {},
+   "platform": "javascript",
+   "projectID": "4512146161270784",
+   "sdk": {
+    "name": "mei-demo-generator",
+    "version": "0.1"
+   },
+   "size": 5145,
+   "tags": [
+    {
+     "key": "demo_case",
+     "value": "F3"
+    },
+    {
+     "key": "device",
+     "value": "iPhone15,2"
+    },
+    {
+     "key": "device.class",
+     "value": "high"
+    },
+    {
+     "key": "device.family",
+     "value": "iOS"
+    },
+    {
+     "key": "environment",
+     "value": "production"
+    },
+    {
+     "key": "installation_id",
+     "value": "install-case-f"
+    },
+    {
+     "key": "interface_type",
+     "value": "exception"
+    },
+    {
+     "key": "level",
+     "value": "error"
+    },
+    {
+     "key": "os",
+     "value": "iOS 18.4"
+    },
+    {
+     "key": "os.name",
+     "value": "iOS"
+    },
+    {
+     "key": "release",
+     "value": "mei-demo-app@1.2.1"
+    },
+    {
+     "key": "user",
+     "query": "user.id:\"account-case-p9\"",
+     "value": "id:account-case-p9"
+    }
+   ],
+   "title": "Error: Profile email mismatch after hotfix",
+   "type": "error",
+   "user": {
+    "data": null,
+    "email": "<scrubbed>",
+    "geo": {
+     "city": "Nuremberg",
+     "country_code": "DE",
+     "region": "Germany"
+    },
+    "id": "account-case-p9",
+    "ip_address": "<scrubbed>",
+    "name": null,
+    "username": "<scrubbed>"
+   }
+  },
+  {
+   "_meta": {
+    "context": null,
+    "contexts": null,
+    "entries": {},
+    "message": null,
+    "packages": null,
+    "sdk": null,
+    "tags": {},
+    "user": null
+   },
+   "context": {},
+   "contexts": {
+    "app": {
+     "app_version": "1.2.1",
+     "type": "app"
+    },
+    "device": {
+     "family": "iOS",
+     "model": "iPhone15,2",
+     "type": "device"
+    },
+    "os": {
+     "name": "iOS",
+     "os": "iOS 18.4",
+     "type": "os",
+     "version": "18.4"
+    },
+    "trace": {
+     "span_id": "c5085bc28b0848cc",
+     "status": "unknown",
+     "trace_id": "c5085bc28b0848cc81a74873fbd2cc60",
+     "type": "trace"
+    }
+   },
+   "crashFile": null,
+   "culprit": "validateEmail(src/modules/profile/email)",
+   "dateCreated": "2026-09-23T23:18:43Z",
+   "dateReceived": "2026-09-25T09:48:44.664514Z",
+   "dist": null,
+   "entries": [
+    {
+     "data": {
+      "excOmitted": null,
+      "hasSystemFrames": true,
+      "values": [
+       {
+        "mechanism": null,
+        "module": null,
+        "rawModule": null,
+        "rawStacktrace": {
+         "frames": [
+          {
+           "absPath": "app:///src/app/main.ts",
+           "colNo": null,
+           "context": [],
+           "errors": null,
+           "filename": "app:///src/app/main.ts",
+           "function": "bootstrap",
+           "inApp": true,
+           "instructionAddr": null,
+           "lineNo": 12,
+           "lock": null,
+           "module": null,
+           "package": null,
+           "parentIndex": null,
+           "platform": null,
+           "rawFunction": null,
+           "sampleCount": null,
+           "sourceLink": null,
+           "symbol": null,
+           "symbolAddr": null,
+           "trust": null,
+           "vars": null
+          },
+          {
+           "absPath": "app:///src/modules/profile/email.ts",
+           "colNo": null,
+           "context": [],
+           "errors": null,
+           "filename": "app:///src/modules/profile/email.ts",
+           "function": "validateEmail",
+           "inApp": true,
+           "instructionAddr": null,
+           "lineNo": 9,
+           "lock": null,
+           "module": null,
+           "package": null,
+           "parentIndex": null,
+           "platform": null,
+           "rawFunction": null,
+           "sampleCount": null,
+           "sourceLink": null,
+           "symbol": null,
+           "symbolAddr": null,
+           "trust": null,
+           "vars": null
+          }
+         ],
+         "framesOmitted": null,
+         "hasSystemFrames": true,
+         "registers": null
+        },
+        "rawType": null,
+        "rawValue": null,
+        "stacktrace": {
+         "frames": [
+          {
+           "absPath": "app:///src/app/main.ts",
+           "colNo": null,
+           "context": [],
+           "errors": null,
+           "filename": "app:///src/app/main.ts",
+           "function": "bootstrap",
+           "inApp": true,
+           "instructionAddr": null,
+           "lineNo": 12,
+           "lock": null,
+           "module": "src/app/main",
+           "package": null,
+           "parentIndex": null,
+           "platform": null,
+           "rawFunction": null,
+           "sampleCount": null,
+           "sourceLink": null,
+           "symbol": null,
+           "symbolAddr": null,
+           "trust": null,
+           "vars": null
+          },
+          {
+           "absPath": "app:///src/modules/profile/email.ts",
+           "colNo": null,
+           "context": [],
+           "errors": null,
+           "filename": "app:///src/modules/profile/email.ts",
+           "function": "validateEmail",
+           "inApp": true,
+           "instructionAddr": null,
+           "lineNo": 9,
+           "lock": null,
+           "module": "src/modules/profile/email",
+           "package": null,
+           "parentIndex": null,
+           "platform": null,
+           "rawFunction": null,
+           "sampleCount": null,
+           "sourceLink": null,
+           "symbol": null,
+           "symbolAddr": null,
+           "trust": null,
+           "vars": null
+          }
+         ],
+         "framesOmitted": null,
+         "hasSystemFrames": true,
+         "registers": null
+        },
+        "threadId": null,
+        "type": "Error",
+        "value": "Profile email mismatch after hotfix"
+       }
+      ]
+     },
+     "type": "exception"
+    },
+    {
+     "data": {
+      "values": [
+       {
+        "category": "navigation",
+        "data": {
+         "from": "/home",
+         "to": "/profile"
+        },
+        "event_id": null,
+        "level": "info",
+        "message": null,
+        "timestamp": "2026-09-23T23:18:41.717773Z",
+        "type": "navigation"
+       },
+       {
+        "category": "ui.click",
+        "data": null,
+        "event_id": null,
+        "level": "info",
+        "message": "button#save-profile",
+        "timestamp": "2026-09-23T23:18:42.717773Z",
+        "type": "user"
+       }
+      ]
+     },
+     "type": "breadcrumbs"
+    }
+   ],
+   "errors": [
+    {
+     "data": {
+      "symbolicator_type": "missing_source",
+      "url": "app:///src/app/main.ts"
+     },
+     "message": "Source code was not found",
+     "type": "js_no_source"
+    },
+    {
+     "data": {
+      "symbolicator_type": "missing_source",
+      "url": "app:///src/modules/profile/email.ts"
+     },
+     "message": "Source code was not found",
+     "type": "js_no_source"
+    }
+   ],
+   "eventID": "c5085bc28b0848cc81a74873fbd2cc60",
+   "fingerprints": [
+    "fd3ee4913c1f54e69a0d482f51efdbce"
+   ],
+   "groupID": "7754274105",
+   "groupingConfig": {
+    "enhancements": "KLUv_SAd6QAAkwORuGFsbC1wbGF0Zm9ybXM6MjAyNi0wMS0yMJA#KLUv_SAd6QAAkwORuGFsbC1wbGF0Zm9ybXM6MjAyNi0wMS0yMJA#KLUv_SAd6QAAkwORuGFsbC1wbGF0Zm9ybXM6MjAyNi0wMS0yMJA",
+    "id": "newstyle:2026-01-20"
+   },
+   "id": "c5085bc28b0848cc81a74873fbd2cc60",
+   "location": "app:///src/modules/profile/email.ts",
+   "message": "",
+   "metadata": {
+    "filename": "app:///src/modules/profile/email.ts",
+    "function": "validateEmail",
+    "in_app_frame_mix": "in-app-only",
+    "synthetic": false,
+    "type": "Error",
+    "value": "Profile email mismatch after hotfix"
+   },
+   "occurrence": null,
+   "packages": {},
+   "platform": "javascript",
+   "projectID": "4512146161270784",
+   "sdk": {
+    "name": "mei-demo-generator",
+    "version": "0.1"
+   },
+   "size": 5145,
+   "tags": [
+    {
+     "key": "demo_case",
+     "value": "F3"
+    },
+    {
+     "key": "device",
+     "value": "iPhone15,2"
+    },
+    {
+     "key": "device.class",
+     "value": "high"
+    },
+    {
+     "key": "device.family",
+     "value": "iOS"
+    },
+    {
+     "key": "environment",
+     "value": "production"
+    },
+    {
+     "key": "installation_id",
+     "value": "install-case-e"
+    },
+    {
+     "key": "interface_type",
+     "value": "exception"
+    },
+    {
+     "key": "level",
+     "value": "error"
+    },
+    {
+     "key": "os",
+     "value": "iOS 18.4"
+    },
+    {
+     "key": "os.name",
+     "value": "iOS"
+    },
+    {
+     "key": "release",
+     "value": "mei-demo-app@1.2.1"
+    },
+    {
+     "key": "user",
+     "query": "user.id:\"account-case-p3\"",
+     "value": "id:account-case-p3"
+    }
+   ],
+   "title": "Error: Profile email mismatch after hotfix",
+   "type": "error",
+   "user": {
+    "data": null,
+    "email": "<scrubbed>",
+    "geo": {
+     "city": "Nuremberg",
+     "country_code": "DE",
+     "region": "Germany"
+    },
+    "id": "account-case-p3",
+    "ip_address": "<scrubbed>",
+    "name": null,
+    "username": "<scrubbed>"
+   }
+  }
+ ],
+ "link": "<https://us.sentry.io/api/0/organizations/mei-demo-app/issues/7754274105/events/?full=true&cursor=0:0:1>; rel=\"previous\"; results=\"false\"; cursor=\"0:0:1\", <https://us.sentry.io/api/0/organizations/mei-demo-app/issues/7754274105/events/?full=true&cursor=0:10:0>; rel=\"next\"; results=\"false\"; cursor=\"0:10:0\"",
+ "params": [
+  [
+   "full",
+   "true"
+  ]
+ ],
+ "request": "GET /api/0/organizations/mei-demo-app/issues/7754274105/events/",
+ "status": 200
+}

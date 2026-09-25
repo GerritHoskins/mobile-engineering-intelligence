@@ -23,7 +23,7 @@ from pathlib import Path
 from urllib.parse import urlparse
 
 import httpx
-from dotenv import load_dotenv
+from dotenv import find_dotenv, load_dotenv
 
 from app.orgs import load_org
 from scripts.demo import scenario as sc
@@ -298,7 +298,7 @@ COMMANDS = {
 
 
 def main() -> None:
-    load_dotenv()
+    load_dotenv(find_dotenv(usecwd=True))
     parser = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     parser.add_argument("command", choices=COMMANDS)
     parser.add_argument("--dry-run", action="store_true", help="print planned writes, write nothing")

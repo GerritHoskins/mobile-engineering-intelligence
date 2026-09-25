@@ -1,0 +1,67 @@
+{
+ "json": {
+  "author": null,
+  "comments_url": "https://api.github.com/repos/GerritHoskins/mei-demo-app/commits/4febc227468971d9f5e74d1c078e7299a8980ca0/comments",
+  "commit": {
+   "author": {
+    "date": "2026-09-14T10:00:00Z",
+    "email": "<scrubbed>",
+    "name": "MEI Demo"
+   },
+   "comment_count": 0,
+   "committer": {
+    "date": "2026-09-14T10:00:00Z",
+    "email": "<scrubbed>",
+    "name": "MEI Demo"
+   },
+   "message": "MEI-4: Refactor profile store",
+   "tree": {
+    "sha": "87a7af7826f13f9a9e66265090c7490a1583b1a2",
+    "url": "https://api.github.com/repos/GerritHoskins/mei-demo-app/git/trees/87a7af7826f13f9a9e66265090c7490a1583b1a2"
+   },
+   "url": "https://api.github.com/repos/GerritHoskins/mei-demo-app/git/commits/4febc227468971d9f5e74d1c078e7299a8980ca0",
+   "verification": {
+    "payload": null,
+    "reason": "unsigned",
+    "signature": null,
+    "verified": false,
+    "verified_at": null
+   }
+  },
+  "committer": null,
+  "files": [
+   {
+    "additions": 1,
+    "blob_url": "https://github.com/GerritHoskins/mei-demo-app/blob/4febc227468971d9f5e74d1c078e7299a8980ca0/src%2Fmodules%2Fprofile%2Fprofile.store.ts",
+    "changes": 1,
+    "contents_url": "https://api.github.com/repos/GerritHoskins/mei-demo-app/contents/src%2Fmodules%2Fprofile%2Fprofile.store.ts?ref=4febc227468971d9f5e74d1c078e7299a8980ca0",
+    "deletions": 0,
+    "filename": "src/modules/profile/profile.store.ts",
+    "patch": "@@ -1 +1,2 @@\n export const profileStore = {}\n+// refactor",
+    "raw_url": "https://github.com/GerritHoskins/mei-demo-app/raw/4febc227468971d9f5e74d1c078e7299a8980ca0/src%2Fmodules%2Fprofile%2Fprofile.store.ts",
+    "sha": "cc16846449c8e0508306148d0b106182d0568f5c",
+    "status": "modified"
+   }
+  ],
+  "html_url": "https://github.com/GerritHoskins/mei-demo-app/commit/4febc227468971d9f5e74d1c078e7299a8980ca0",
+  "node_id": "C_kwDOUq1Ik9oAKDRmZWJjMjI3NDY4OTcxZDlmNWU3NGQxYzA3OGU3Mjk5YTg5ODBjYTA",
+  "parents": [
+   {
+    "html_url": "https://github.com/GerritHoskins/mei-demo-app/commit/a6af0bd4368b821ed1204844183b77d66f52ad02",
+    "sha": "a6af0bd4368b821ed1204844183b77d66f52ad02",
+    "url": "https://api.github.com/repos/GerritHoskins/mei-demo-app/commits/a6af0bd4368b821ed1204844183b77d66f52ad02"
+   }
+  ],
+  "sha": "4febc227468971d9f5e74d1c078e7299a8980ca0",
+  "stats": {
+   "additions": 1,
+   "deletions": 0,
+   "total": 1
+  },
+  "url": "https://api.github.com/repos/GerritHoskins/mei-demo-app/commits/4febc227468971d9f5e74d1c078e7299a8980ca0"
+ },
+ "link": null,
+ "params": [],
+ "request": "GET /repos/GerritHoskins/mei-demo-app/commits/4febc227468971d9f5e74d1c078e7299a8980ca0",
+ "status": 200
+}

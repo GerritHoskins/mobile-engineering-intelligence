@@ -1,0 +1,463 @@
+{
+ "json": {
+  "activity": [
+   {
+    "commentId": null,
+    "data": {
+     "priority": "high"
+    },
+    "dateCreated": "2026-09-23T23:48:43.717773Z",
+    "id": "0",
+    "sentry_app": null,
+    "type": "first_seen",
+    "user": null
+   }
+  ],
+  "annotations": [],
+  "assignedTo": "<scrubbed>",
+  "count": "2",
+  "culprit": "n(main.3f9a1c)",
+  "firstRelease": {
+   "authors": [],
+   "commitCount": 0,
+   "currentProjectMeta": {},
+   "data": {},
+   "dateCreated": "2026-09-23T23:53:43.717773Z",
+   "dateReleased": null,
+   "deployCount": 0,
+   "firstEvent": "2026-09-23T23:53:43Z",
+   "id": 1992579352,
+   "lastCommit": null,
+   "lastDeploy": null,
+   "lastEvent": "2026-09-23T23:53:43Z",
+   "newGroups": 1,
+   "owner": null,
+   "projects": [
+    {
+     "hasHealthData": false,
+     "id": 4512146161270784,
+     "name": "mei-demo-app",
+     "newGroups": 1,
+     "platform": "capacitor",
+     "platforms": [],
+     "slug": "mei-demo-app"
+    }
+   ],
+   "ref": null,
+   "shortVersion": "mei-demo-app@1.3.0",
+   "status": "open",
+   "url": null,
+   "userAgent": null,
+   "version": "mei-demo-app@1.3.0",
+   "versionInfo": {
+    "buildHash": null,
+    "description": "1.3.0",
+    "package": "mei-demo-app",
+    "version": {
+     "buildCode": null,
+     "components": 3,
+     "major": 1,
+     "minor": 3,
+     "patch": 0,
+     "pre": null,
+     "raw": "1.3.0"
+    }
+   }
+  },
+  "firstSeen": "2026-09-23T23:48:43.717773Z",
+  "hasSeen": true,
+  "id": "7754274138",
+  "isBookmarked": false,
+  "isPublic": false,
+  "isSubscribed": false,
+  "isUnhandled": false,
+  "issueCategory": "error",
+  "issueType": "error",
+  "lastRelease": {
+   "authors": [],
+   "commitCount": 0,
+   "currentProjectMeta": {},
+   "data": {},
+   "dateCreated": "2026-09-23T23:53:43.717773Z",
+   "dateReleased": null,
+   "deployCount": 0,
+   "firstEvent": "2026-09-23T23:53:43Z",
+   "id": 1992579352,
+   "lastCommit": null,
+   "lastDeploy": null,
+   "lastEvent": "2026-09-23T23:53:43Z",
+   "newGroups": 1,
+   "owner": null,
+   "projects": [
+    {
+     "hasHealthData": false,
+     "id": 4512146161270784,
+     "name": "mei-demo-app",
+     "newGroups": 1,
+     "platform": "capacitor",
+     "platforms": [],
+     "slug": "mei-demo-app"
+    }
+   ],
+   "ref": null,
+   "shortVersion": "mei-demo-app@1.3.0",
+   "status": "open",
+   "url": null,
+   "userAgent": null,
+   "version": "mei-demo-app@1.3.0",
+   "versionInfo": {
+    "buildHash": null,
+    "description": "1.3.0",
+    "package": "mei-demo-app",
+    "version": {
+     "buildCode": null,
+     "components": 3,
+     "major": 1,
+     "minor": 3,
+     "patch": 0,
+     "pre": null,
+     "raw": "1.3.0"
+    }
+   }
+  },
+  "lastSeen": "2026-09-23T23:53:43Z",
+  "level": "error",
+  "logger": null,
+  "metadata": {
+   "filename": "app:///main.3f9a1c.js",
+   "function": "n",
+   "in_app_frame_mix": "in-app-only",
+   "initial_priority": 75,
+   "sdk": {
+    "name": "mei-demo-generator",
+    "name_normalized": "other"
+   },
+   "synthetic": false,
+   "title": null,
+   "type": "TypeError",
+   "value": "e is not a function"
+  },
+  "numComments": 0,
+  "participants": [],
+  "permalink": "https://mei-demo-app.sentry.io/issues/7754274138/",
+  "platform": "javascript",
+  "priority": "high",
+  "priorityLockedAt": null,
+  "project": {
+   "id": "4512146161270784",
+   "name": "mei-demo-app",
+   "platform": "capacitor",
+   "slug": "mei-demo-app"
+  },
+  "seenBy": "<scrubbed>",
+  "seerAutofixLastTriggered": null,
+  "seerExplorerAutofixLastTriggered": null,
+  "seerFixabilityScore": null,
+  "shareId": null,
+  "shortId": "MEI-DEMO-APP-4",
+  "stats": {
+   "24h": [
+    [
+     1790240400,
+     0
+    ],
+    [
+     1790244000,
+     0
+    ],
+    [
+     1790247600,
+     0
+    ],
+    [
+     1790251200,
+     0
+    ],
+    [
+     1790254800,
+     0
+    ],
+    [
+     1790258400,
+     0
+    ],
+    [
+     1790262000,
+     0
+    ],
+    [
+     1790265600,
+     0
+    ],
+    [
+     1790269200,
+     0
+    ],
+    [
+     1790272800,
+     0
+    ],
+    [
+     1790276400,
+     0
+    ],
+    [
+     1790280000,
+     0
+    ],
+    [
+     1790283600,
+     0
+    ],
+    [
+     1790287200,
+     0
+    ],
+    [
+     1790290800,
+     0
+    ],
+    [
+     1790294400,
+     0
+    ],
+    [
+     1790298000,
+     0
+    ],
+    [
+     1790301600,
+     0
+    ],
+    [
+     1790305200,
+     0
+    ],
+    [
+     1790308800,
+     0
+    ],
+    [
+     1790312400,
+     0
+    ],
+    [
+     1790316000,
+     0
+    ],
+    [
+     1790319600,
+     0
+    ],
+    [
+     1790323200,
+     0
+    ],
+    [
+     1790326800,
+     0
+    ]
+   ],
+   "30d": [
+    [
+     1787702400,
+     0
+    ],
+    [
+     1787788800,
+     0
+    ],
+    [
+     1787875200,
+     0
+    ],
+    [
+     1787961600,
+     0
+    ],
+    [
+     1788048000,
+     0
+    ],
+    [
+     1788134400,
+     0
+    ],
+    [
+     1788220800,
+     0
+    ],
+    [
+     1788307200,
+     0
+    ],
+    [
+     1788393600,
+     0
+    ],
+    [
+     1788480000,
+     0
+    ],
+    [
+     1788566400,
+     0
+    ],
+    [
+     1788652800,
+     0
+    ],
+    [
+     1788739200,
+     0
+    ],
+    [
+     1788825600,
+     0
+    ],
+    [
+     1788912000,
+     0
+    ],
+    [
+     1788998400,
+     0
+    ],
+    [
+     1789084800,
+     0
+    ],
+    [
+     1789171200,
+     0
+    ],
+    [
+     1789257600,
+     0
+    ],
+    [
+     1789344000,
+     0
+    ],
+    [
+     1789430400,
+     0
+    ],
+    [
+     1789516800,
+     0
+    ],
+    [
+     1789603200,
+     0
+    ],
+    [
+     1789689600,
+     0
+    ],
+    [
+     1789776000,
+     0
+    ],
+    [
+     1789862400,
+     0
+    ],
+    [
+     1789948800,
+     0
+    ],
+    [
+     1790035200,
+     0
+    ],
+    [
+     1790121600,
+     2
+    ],
+    [
+     1790208000,
+     0
+    ],
+    [
+     1790294400,
+     0
+    ]
+   ]
+  },
+  "status": "unresolved",
+  "statusDetails": {},
+  "subscriptionDetails": null,
+  "substatus": "new",
+  "tags": [
+   {
+    "key": "demo_case",
+    "name": "Demo Case",
+    "totalValues": 2
+   },
+   {
+    "key": "device",
+    "name": "Device",
+    "totalValues": 2
+   },
+   {
+    "key": "device.class",
+    "name": "Device.Class",
+    "totalValues": 2
+   },
+   {
+    "key": "device.family",
+    "name": "Device.Family",
+    "totalValues": 2
+   },
+   {
+    "key": "environment",
+    "name": "Environment",
+    "totalValues": 2
+   },
+   {
+    "key": "installation_id",
+    "name": "Installation Id",
+    "totalValues": 2
+   },
+   {
+    "key": "interface_type",
+    "name": "Interface Type",
+    "totalValues": 2
+   },
+   {
+    "key": "level",
+    "name": "Level",
+    "totalValues": 2
+   },
+   {
+    "key": "os",
+    "name": "OS",
+    "totalValues": 2
+   },
+   {
+    "key": "os.name",
+    "name": "Os.Name",
+    "totalValues": 2
+   },
+   {
+    "key": "release",
+    "name": "Release",
+    "totalValues": 2
+   },
+   {
+    "key": "user",
+    "name": "User",
+    "totalValues": 2
+   }
+  ],
+  "title": "TypeError: e is not a function",
+  "type": "error",
+  "userCount": 2,
+  "userReportCount": 0
+ },
+ "link": null,
+ "params": [],
+ "request": "GET /api/0/organizations/mei-demo-app/issues/7754274138/",
+ "status": 200
+}
