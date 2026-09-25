@@ -58,12 +58,31 @@ class FakeSentry:
 
     def get_issue(self, issue_id):
         spec = self.issues[issue_id]
+        activity = [{"type": "first_seen", "data": {}, "dateCreated": (NOW - timedelta(days=1)).isoformat()}]
+        if issue_id == sc.REGRESSION_CASE:  # resolved in the UI, then seen again in a later release
+            activity += [
+                {"type": "set_resolved", "data": {}, "dateCreated": (NOW - timedelta(hours=3)).isoformat()},
+                {"type": "set_regression", "data": {"version": ORG.sentry_release_for(sc.REGRESSION_RELEASE)},
+                 "dateCreated": (NOW - timedelta(hours=2)).isoformat()},
+            ]
         return {"id": issue_id, "title": f"{spec.exception_type}: {spec.exception_value}", "culprit": None,
                 "level": "error", "firstRelease": {"version": ORG.sentry_release_for(spec.release)},
-                "firstSeen": NOW.isoformat(), "lastSeen": NOW.isoformat()}
+                "firstSeen": (NOW - timedelta(days=1, minutes=-int(issue_id[1:]))).isoformat(),
+                "lastSeen": NOW.isoformat(), "status": "unresolved",
+                "substatus": "regressed" if issue_id == sc.REGRESSION_CASE else "new", "activity": activity}
 
     def list_issue_events(self, issue_id):
         spec = self.issues[issue_id]
+        events = self._events(spec)
+        if issue_id == sc.REGRESSION_CASE:
+            regressed = sc.IncidentSpec(**{**spec.__dict__, "release": sc.REGRESSION_RELEASE,
+                                           "subjects": (sc.REGRESSION_SUBJECT,)})
+            events += [{**e, "eventID": f"{issue_id}-regression", "dateCreated": (NOW - timedelta(hours=1)).isoformat()}
+                       for e in self._events(regressed)]
+        return events
+
+    def _events(self, spec):
+        issue_id = spec.case
         return [{
             "eventID": f"{issue_id}-{n}", "groupID": issue_id, "dateCreated": (NOW - timedelta(minutes=n)).isoformat(),
             "user": {"id": s.user_id},
@@ -81,9 +100,14 @@ class FakeSentry:
         return {"id": "1"}
 
     def session_counts(self, project_id, start, end):
-        rows = [{"release": ORG.sentry_release_for(v), "status": "crashed", "bucket_start": NOW.replace(
-            minute=0, second=0, microsecond=0).isoformat(), "sessions": crashed} for v, (_, crashed) in sc.SESSIONS.items()]
-        return rows + [{"release": "probe-now", "status": "healthy", "bucket_start": NOW.isoformat(), "sessions": 18}]
+        settled = (NOW - timedelta(days=1)).replace(minute=0, second=0, microsecond=0).isoformat()
+        rows = []
+        for version, (total, crashed) in sc.SESSIONS.items():
+            for status, count in (("healthy", total - crashed), ("crashed", crashed)):
+                if count:
+                    rows.append({"release": ORG.sentry_release_for(version), "status": status,
+                                 "bucket_start": settled, "sessions": count})
+        return rows + [{"release": "probe-now", "status": "healthy", "bucket_start": settled, "sessions": 18}]
 
 
 def _ingest() -> None:
@@ -117,8 +141,8 @@ def test_ingestion_is_idempotent() -> None:
     first = _row_counts()
     _ingest()
     assert _row_counts() == first
-    assert first["incident"] == 5 and first["incident_event"] == 11
-    assert first["release_session_count"] == len(sc.SESSIONS)  # probe release skipped
+    assert first["incident"] == 5 and first["incident_event"] == 12  # 11 + the regression event
+    assert first["release_session_count"] == 7  # healthy + non-zero crashed per release; probe skipped
 
 
 def test_releases_include_untagged_sentry_release_but_not_probes() -> None:

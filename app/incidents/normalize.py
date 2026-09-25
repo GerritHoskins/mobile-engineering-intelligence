@@ -58,3 +58,27 @@ def normalize_event(org: OrgConfig, event: dict) -> dict:
         "contexts": event.get("contexts") or {},
         "tags": tags,
     }
+
+
+def regression_release(issue: dict, events: list[dict]) -> str | None:
+    """Sentry release in which the issue last regressed (was resolved, then
+    seen again), or None if it never did.
+
+    Prefers the release recorded on the latest `set_regression` activity. If
+    Sentry didn't record one there, falls back to the release of the first
+    event after the latest resolution (`events` are normalized event rows).
+    """
+    activity = issue.get("activity") or []
+    for entry in activity:
+        if "type" not in entry or "dateCreated" not in entry:
+            raise UnrecognizedPayload(f"Sentry activity entry without type/dateCreated: keys={sorted(entry)}")
+    regressions = sorted((a for a in activity if a["type"] == "set_regression"), key=lambda a: a["dateCreated"])
+    if not regressions:
+        return None
+    version = (regressions[-1].get("data") or {}).get("version")
+    if version:
+        return version
+    resolutions = [a["dateCreated"] for a in activity if a["type"] == "set_resolved"]
+    after = max(resolutions) if resolutions else regressions[-1]["dateCreated"]
+    later = sorted((e for e in events if str(e["occurred_at"]) > after), key=lambda e: str(e["occurred_at"]))
+    return later[0]["release"] if later else None

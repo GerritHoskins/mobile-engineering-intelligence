@@ -36,3 +36,9 @@ frame_paths:
   strip_prefixes: ['app:///', 'webpack:///']
   # Bundled output without source maps: cannot be mapped to repo paths.
   unmappable: ['^main\.[0-9a-f]+\.js$']
+
+# Release Impact Analyzer thresholds.
+impact:
+  min_sessions: 100  # below this, health is UNKNOWN (INSUFFICIENT_ADOPTION)
+  crash_regression_pp: 2.0  # crash-free drop/rise that counts as a change
+  settle_minutes: 60  # newer buckets may still lack late-arriving crash counts

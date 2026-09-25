@@ -231,3 +231,41 @@ SESSIONS: dict[str, tuple[int, int]] = {
     "1.4.0": (15, 0),  # too few sessions to judge
 }
 SESSION_BUCKETS = 4  # spread each release's sessions over this many hours
+
+
+# ---------------------------------------------------------------- Slice R
+
+# One more F2 event, on 1.3.0, sent after the user resolved F2 in Sentry's UI:
+# Sentry then marks the issue regressed in 1.3.0 (first release stays 1.2.0).
+REGRESSION_CASE = "F2"
+REGRESSION_RELEASE = "1.3.0"
+REGRESSION_SUBJECT = Subject("account-case-p2", "install-case-l")
+
+
+@dataclass(frozen=True)
+class ImpactSpec:
+    case: str  # RI1..RI6
+    release: str
+    expected_status: int = 200
+    expected_release_state: str = "KNOWN"
+    expected_crash_free: float | str | None = None  # rate, "UNKNOWN", or None when not asserted
+    expected_findings: tuple[str, ...] = ()  # release-level + per-issue codes, in response order
+    expected_new_issues: tuple[str, ...] = ()  # incident cases (F1..F5)
+    expected_regressed_issues: tuple[str, ...] = ()
+
+
+IMPACTS = (
+    ImpactSpec("RI1", "1.1.0", expected_crash_free=0.99, expected_findings=("NO_BASELINE_HEALTH",)),
+    ImpactSpec("RI2", "1.2.0", expected_crash_free=0.90,
+               expected_findings=("CRASH_RATE_REGRESSION", "NEW_ISSUE_ATTRIBUTED", "NEW_ISSUE_UNATTRIBUTED",
+                                  "NEW_ISSUE_ATTRIBUTED"),
+               expected_new_issues=("F1", "F2", "F5")),
+    ImpactSpec("RI3", "1.3.0", expected_crash_free=0.9925,
+               expected_findings=("CRASH_RATE_IMPROVED", "NEW_ISSUE_ATTRIBUTION_UNKNOWN", "ISSUE_REGRESSED"),
+               expected_new_issues=("F4",), expected_regressed_issues=("F2",)),
+    ImpactSpec("RI4", "1.4.0", expected_crash_free="UNKNOWN", expected_findings=("INSUFFICIENT_ADOPTION",)),
+    ImpactSpec("RI5", "1.2.1", expected_release_state="UNKNOWN", expected_crash_free="UNKNOWN",
+               expected_findings=("RELEASE_NOT_FOUND", "NO_SESSION_DATA", "NEW_ISSUE_ATTRIBUTION_UNKNOWN"),
+               expected_new_issues=("F3",)),
+    ImpactSpec("RI6", "9.9.9", expected_status=404),
+)

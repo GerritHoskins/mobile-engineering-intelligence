@@ -145,3 +145,33 @@ def test_normalize_event_maps_api_shape() -> None:
 def test_normalize_event_rejects_unknown_shape() -> None:
     with pytest.raises(UnrecognizedPayload):
         normalize_event(ORG, {"id": "x"})
+
+
+# ------------------------------------------------------------- regressions
+
+from app.incidents.normalize import regression_release  # noqa: E402
+
+RESOLVED = {"type": "set_resolved", "data": {}, "dateCreated": "2026-09-25T10:00:00Z"}
+
+
+def test_no_regression_activity_means_no_regression() -> None:
+    issue = {"activity": [{"type": "first_seen", "data": {}, "dateCreated": "2026-09-23T22:00:00Z"}]}
+    assert regression_release(issue, []) is None
+
+
+def test_regression_release_read_from_activity() -> None:
+    issue = {"activity": [RESOLVED, {"type": "set_regression", "data": {"version": "mei-demo-app@1.3.0"},
+                                     "dateCreated": "2026-09-25T11:00:00Z"}]}
+    assert regression_release(issue, []) == "mei-demo-app@1.3.0"
+
+
+def test_regression_release_falls_back_to_first_event_after_resolution() -> None:
+    issue = {"activity": [RESOLVED, {"type": "set_regression", "data": {}, "dateCreated": "2026-09-25T11:00:00Z"}]}
+    events = [{"occurred_at": "2026-09-24T09:00:00Z", "release": "mei-demo-app@1.2.0"},
+              {"occurred_at": "2026-09-25T10:30:00Z", "release": "mei-demo-app@1.3.0"}]
+    assert regression_release(issue, events) == "mei-demo-app@1.3.0"
+
+
+def test_malformed_activity_raises() -> None:
+    with pytest.raises(UnrecognizedPayload):
+        regression_release({"activity": [{"data": {}}]}, [])

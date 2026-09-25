@@ -7,6 +7,7 @@ the user's go-ahead. `--dry-run` prints what would be written, writes nothing.
     uv run python -m scripts.demo.generate git [--dry-run]
     uv run python -m scripts.demo.generate sentry-events [--dry-run]
     uv run python -m scripts.demo.generate sentry-sessions [--dry-run]
+    uv run python -m scripts.demo.generate sentry-regression [--dry-run]
 
 Credentials come from .env (see .env.example) and are never printed.
 """
@@ -289,11 +290,32 @@ def cmd_sentry_sessions(dry_run: bool) -> None:
         save_state(state)
 
 
+def cmd_sentry_regression(dry_run: bool) -> None:
+    """One more event for the regression case, on a later release. Run only
+    after the user resolved that issue in Sentry's UI (plain "Resolve")."""
+    state = load_state()
+    spec = next(s for s in sc.INCIDENTS if s.case == sc.REGRESSION_CASE)
+    regressed = sc.IncidentSpec(**{**spec.__dict__, "release": sc.REGRESSION_RELEASE})
+    event = build_event(regressed, sc.REGRESSION_SUBJECT, datetime.now(timezone.utc))
+    label = (f"{spec.case} {event['release']} {spec.exception_type} "
+             f"user={sc.REGRESSION_SUBJECT.user_id} install={sc.REGRESSION_SUBJECT.installation_id}")
+    if dry_run:
+        print(f"WOULD SEND {label} (same fingerprint -> same issue)")
+        return
+    _send_envelope({"event_id": event["event_id"], "sent_at": _iso(datetime.now(timezone.utc))}, "event", event)
+    state.setdefault("sentry_events", []).append(
+        {"case": spec.case, "event_id": event["event_id"], "sent_at": _iso(datetime.now(timezone.utc)),
+         "purpose": "regression"})
+    save_state(state)
+    print(f"sent {label}")
+
+
 COMMANDS = {
     "jira": cmd_jira,
     "git": cmd_git,
     "sentry-events": cmd_sentry_events,
     "sentry-sessions": cmd_sentry_sessions,
+    "sentry-regression": cmd_sentry_regression,
 }
 
 

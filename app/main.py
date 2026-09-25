@@ -1,7 +1,8 @@
 from fastapi import FastAPI
 
-from app.api import incidents, state
+from app.api import incidents, releases, state
 
 app = FastAPI(title="Mobile Engineering Intelligence")
 app.include_router(state.router)
 app.include_router(incidents.router)
+app.include_router(releases.router)

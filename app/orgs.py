@@ -61,6 +61,12 @@ class FramePathConfig(_Strict):
     unmappable: tuple[str, ...] = ()
 
 
+class ImpactConfig(_Strict):
+    min_sessions: int = 100
+    crash_regression_pp: float = 2.0
+    settle_minutes: int = 60
+
+
 class OrgConfig(_Strict):
     name: str
     github: GithubConfig
@@ -69,6 +75,7 @@ class OrgConfig(_Strict):
     releases: ReleaseConfig
     components: tuple[ComponentRule, ...]
     frame_paths: FramePathConfig
+    impact: ImpactConfig = ImpactConfig()
 
     # ---- releases ----
 

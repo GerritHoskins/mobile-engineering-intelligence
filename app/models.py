@@ -110,6 +110,9 @@ class Incident(Base):
     first_release: Mapped[str | None] = mapped_column(Text)  # Sentry release name
     first_seen: Mapped[object] = mapped_column(DateTime(timezone=True), nullable=True)
     last_seen: Mapped[object] = mapped_column(DateTime(timezone=True), nullable=True)
+    status: Mapped[str | None] = mapped_column(Text)
+    substatus: Mapped[str | None] = mapped_column(Text)
+    regressed_release: Mapped[str | None] = mapped_column(Text)  # Sentry release of the latest regression
 
 
 class IncidentEvent(Base):
