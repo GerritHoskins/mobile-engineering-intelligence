@@ -1,20 +1,91 @@
 {
  "flow": "repro_narrative",
  "metrics": [
-  {"id": "win", "label": "win vs base", "kind": "float", "scale": 1},
-  {"id": "faults", "label": "judge faults", "kind": "float", "scale": 6, "better": "lower"},
-  {"id": "grounded", "label": "grounded", "kind": "float", "scale": 1},
-  {"id": "coverage", "label": "coverage", "kind": "float", "scale": 1},
-  {"id": "steps_in_order", "label": "steps order", "kind": "float", "scale": 1},
-  {"id": "gaps_questioned", "label": "gaps asked", "kind": "float", "scale": 1}
+  {
+   "id": "win",
+   "label": "win vs base",
+   "kind": "float",
+   "scale": 1
+  },
+  {
+   "id": "faults",
+   "label": "judge faults",
+   "kind": "float",
+   "scale": 6,
+   "better": "lower"
+  },
+  {
+   "id": "both_bad",
+   "label": "both bad",
+   "kind": "float",
+   "scale": 1,
+   "better": "lower"
+  },
+  {
+   "id": "grounded",
+   "label": "grounded",
+   "kind": "float",
+   "scale": 1
+  },
+  {
+   "id": "coverage",
+   "label": "coverage",
+   "kind": "float",
+   "scale": 1
+  },
+  {
+   "id": "steps_in_order",
+   "label": "steps order",
+   "kind": "float",
+   "scale": 1
+  },
+  {
+   "id": "gaps_questioned",
+   "label": "gaps asked",
+   "kind": "float",
+   "scale": 1
+  }
  ],
  "perf_fields": [
-  {"id": "cost_usd", "label": "cost", "unit": "$"},
-  {"id": "latency_s", "label": "latency", "unit": "s"},
-  {"id": "out_tokens", "label": "out tokens"}
+  {
+   "id": "cost_usd",
+   "label": "cost",
+   "unit": "$"
+  },
+  {
+   "id": "latency_s",
+   "label": "latency",
+   "unit": "s"
+  },
+  {
+   "id": "out_tokens",
+   "label": "out tokens"
+  }
  ],
- "prices": {"claude-opus-5": {"in": 5, "out": 25}, "claude-sonnet-5": {"in": 2, "out": 10},
-            "claude-opus-5-5": {"in": 4, "out": 20}, "claude-fable-5-1": {"in": 10, "out": 50}},
- "harness_paths": ["evals/repro_narrative/grade.py", "app/llm/client.py", "app/llm/service.py",
-                   "app/llm/prompts.py", "app/llm/citations.py"]
+ "prices": {
+  "claude-opus-5": {
+   "in": 5,
+   "out": 25
+  },
+  "claude-sonnet-5": {
+   "in": 2,
+   "out": 10
+  },
+  "claude-opus-5-5": {
+   "in": 4,
+   "out": 20
+  },
+  "claude-fable-5-1": {
+   "in": 10,
+   "out": 50
+  }
+ },
+ "harness_paths": [
+  "evals/repro_narrative/grade.py",
+  "app/llm/client.py",
+  "app/llm/service.py",
+  "app/llm/prompts.py",
+  "app/llm/citations.py"
+ ],
+ "harness_sha": "682fa81c00e8abc4fe248730603c6c3c4e4b0fb322a1263bbe0a4de36ffbec20"
 }
