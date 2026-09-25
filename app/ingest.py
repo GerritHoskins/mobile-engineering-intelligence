@@ -16,7 +16,7 @@ from sqlalchemy.orm import Session
 from app.connectors.clients import build_clients
 from app.db import SessionLocal
 from app.incidents.context import semver_key
-from app.incidents.normalize import normalize_event
+from app.incidents.normalize import normalize_event, regression_release
 from app.models import (
     ChangedFile, Commit, CommitTicket, Incident, IncidentEvent, Release, ReleaseCommit, ReleaseSessionCount, Ticket,
 )
@@ -107,12 +107,14 @@ def ingest_sentry(session: Session, org: OrgConfig, sentry, start: datetime, end
         issue = sentry.get_issue(listed["id"])
         first_release = (issue.get("firstRelease") or {}).get("version")
         note_release(first_release)
+        rows = [{"org": org.name, **normalize_event(org, event)} for event in sentry.list_issue_events(issue["id"])]
         upsert(session, Incident, [{
             "org": org.name, "sentry_issue_id": str(issue["id"]), "title": issue["title"],
             "culprit": issue.get("culprit"), "level": issue.get("level"), "first_release": first_release,
             "first_seen": issue.get("firstSeen"), "last_seen": issue.get("lastSeen"),
+            "status": issue.get("status"), "substatus": issue.get("substatus"),
+            "regressed_release": regression_release(issue, rows),
         }])
-        rows = [{"org": org.name, **normalize_event(org, event)} for event in sentry.list_issue_events(issue["id"])]
         for row in rows:
             note_release(row["release"])
         upsert(session, IncidentEvent, rows)
