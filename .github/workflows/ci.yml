@@ -1,0 +1,52 @@
+name: ci
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  tests:
+    runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres:16
+        env:
+          POSTGRES_USER: mei
+          POSTGRES_PASSWORD: mei
+          POSTGRES_DB: mei_test
+        ports: ["5432:5432"]
+        options: >-
+          --health-cmd "pg_isready -U mei -d mei_test"
+          --health-interval 5s --health-timeout 5s --health-retries 10
+    env:
+      # conftest.py only accepts databases whose name ends in _test.
+      TEST_DATABASE_URL: postgresql+psycopg://mei:mei@localhost:5432/mei_test
+    steps:
+      - uses: actions/checkout@v7
+      - uses: astral-sh/setup-uv@v10.2.0  # no moving major tag for v10
+        with:
+          version: "0.11.3"  # the uv that produced uv.lock
+          enable-cache: true
+      - run: uv sync --frozen
+      - run: uv run pytest -q
+      - name: Models match migrations
+        env:
+          DATABASE_URL: ${{ env.TEST_DATABASE_URL }}
+        run: uv run alembic check
+
+  terraform:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: hashicorp/setup-terraform@v4
+      - run: terraform fmt -check -recursive infra
+      - name: Validate root modules (no backend, no credentials)
+        run: |
+          for root in infra/bootstrap infra/envs/dev; do
+            terraform -chdir="$root" init -backend=false -input=false
+            terraform -chdir="$root" validate
+          done
