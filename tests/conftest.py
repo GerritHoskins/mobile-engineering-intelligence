@@ -39,3 +39,23 @@ def _truncate_state_observation(_migrate_test_database: None) -> None:
     finally:
         session.close()
     yield
+
+
+INCIDENT_TABLES = (
+    "release", "commit", "release_commit", "changed_file", "ticket", "commit_ticket",
+    "incident", "incident_event", "release_session_count",
+)
+
+
+@pytest.fixture()
+def _truncate_incident_tables(_migrate_test_database: None) -> None:
+    """Same isolation as above, for the Slice F tables."""
+    from app.db import SessionLocal
+
+    session = SessionLocal()
+    try:
+        session.execute(text(f"TRUNCATE TABLE {', '.join(INCIDENT_TABLES)}"))
+        session.commit()
+    finally:
+        session.close()
+    yield

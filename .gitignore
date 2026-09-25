@@ -9,3 +9,5 @@ __pycache__/
 terraform.tfvars
 backend.hcl
 *.tfplan
+.env
+scripts/demo/.state.json
