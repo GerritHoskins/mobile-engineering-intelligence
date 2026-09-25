@@ -50,7 +50,7 @@ class FakeJira:
 
 
 class FakeSentry:
-    def __init__(self, incidents=sc.INCIDENTS):
+    def __init__(self, incidents=sc.ALL_INCIDENTS):
         self.issues = {spec.case: spec for spec in incidents}
 
     def list_issues(self, start, end):
@@ -113,7 +113,7 @@ class FakeSentry:
         return rows + [{"release": "probe-now", "status": "healthy", "bucket_start": settled, "sessions": 18}]
 
 
-def _ingest(incidents=sc.INCIDENTS) -> None:
+def _ingest(incidents=sc.ALL_INCIDENTS) -> None:
     from app.db import SessionLocal
 
     with SessionLocal() as session, session.begin():
@@ -144,7 +144,7 @@ def test_ingestion_is_idempotent() -> None:
     first = _row_counts()
     _ingest()
     assert _row_counts() == first
-    assert first["incident"] == 5 and first["incident_event"] == 12  # 11 + the regression event
+    assert first["incident"] == 6 and first["incident_event"] == 15  # F1-F5 11 + regression 1 + F6 3
     assert first["release_session_count"] == 7  # healthy + non-zero crashed per release; probe skipped
 
 
@@ -167,7 +167,7 @@ def test_unknown_jira_key_is_kept_as_missing() -> None:
         assert session.get(Ticket, ("demo", "MEI-999")).missing_in_jira is True
 
 
-@pytest.mark.parametrize("spec", sc.INCIDENTS, ids=lambda s: s.case)
+@pytest.mark.parametrize("spec", sc.ALL_INCIDENTS, ids=lambda s: s.case)
 def test_context_api_matches_scenario(client: TestClient, spec: sc.IncidentSpec) -> None:
     _ingest()
     body = client.get(f"/v1/incidents/{spec.case}/context").json()

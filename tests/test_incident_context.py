@@ -50,12 +50,12 @@ def _incident(spec: sc.IncidentSpec) -> IncidentInfo:
     )
 
 
-CASES = {spec.case: spec for spec in sc.INCIDENTS}
+CASES = {spec.case: spec for spec in sc.ALL_INCIDENTS}
 SUBJECT_TO_SHA = {spec.subject: _sha(spec) for specs in sc.RELEASE_COMMITS.values() for spec in specs}
 
 
 def test_all_cases_covered() -> None:
-    assert set(CASES) == {"F1", "F2", "F3", "F4", "F5"}
+    assert set(CASES) == {"F1", "F2", "F3", "F4", "F5", "F6"}
 
 
 @pytest.mark.parametrize("case", sorted(CASES))

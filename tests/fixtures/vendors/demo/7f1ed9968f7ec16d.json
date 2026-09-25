@@ -1,0 +1,2190 @@
+{
+ "json": [
+  {
+   "_meta": {
+    "context": null,
+    "contexts": null,
+    "entries": {},
+    "message": null,
+    "packages": null,
+    "sdk": null,
+    "tags": {},
+    "user": null
+   },
+   "context": {},
+   "contexts": {
+    "app": {
+     "app_version": "1.4.0",
+     "type": "app"
+    },
+    "device": {
+     "family": "iOS",
+     "model": "iPhone15,2",
+     "type": "device"
+    },
+    "os": {
+     "name": "iOS",
+     "os": "iOS 18.4",
+     "type": "os",
+     "version": "18.4"
+    },
+    "trace": {
+     "span_id": "76078eaf25ed4188",
+     "status": "unknown",
+     "trace_id": "76078eaf25ed4188a3e7538158bb9f26",
+     "type": "trace"
+    }
+   },
+   "crashFile": null,
+   "culprit": "requestPermission(src/modules/push/permission)",
+   "dateCreated": "2026-09-25T13:15:58Z",
+   "dateReceived": "2026-09-25T13:21:59.336467Z",
+   "dist": null,
+   "entries": [
+    {
+     "data": {
+      "excOmitted": null,
+      "hasSystemFrames": true,
+      "values": [
+       {
+        "mechanism": null,
+        "module": null,
+        "rawModule": null,
+        "rawStacktrace": {
+         "frames": [
+          {
+           "absPath": "app:///src/app/main.ts",
+           "colNo": null,
+           "context": [],
+           "errors": null,
+           "filename": "app:///src/app/main.ts",
+           "function": "bootstrap",
+           "inApp": true,
+           "instructionAddr": null,
+           "lineNo": 12,
+           "lock": null,
+           "module": null,
+           "package": null,
+           "parentIndex": null,
+           "platform": null,
+           "rawFunction": null,
+           "sampleCount": null,
+           "sourceLink": null,
+           "symbol": null,
+           "symbolAddr": null,
+           "trust": null,
+           "vars": null
+          },
+          {
+           "absPath": "app:///src/modules/push/permission.ts",
+           "colNo": null,
+           "context": [],
+           "errors": null,
+           "filename": "app:///src/modules/push/permission.ts",
+           "function": "requestPermission",
+           "inApp": true,
+           "instructionAddr": null,
+           "lineNo": 27,
+           "lock": null,
+           "module": null,
+           "package": null,
+           "parentIndex": null,
+           "platform": null,
+           "rawFunction": null,
+           "sampleCount": null,
+           "sourceLink": null,
+           "symbol": null,
+           "symbolAddr": null,
+           "trust": null,
+           "vars": null
+          }
+         ],
+         "framesOmitted": null,
+         "hasSystemFrames": true,
+         "registers": null
+        },
+        "rawType": null,
+        "rawValue": null,
+        "stacktrace": {
+         "frames": [
+          {
+           "absPath": "app:///src/app/main.ts",
+           "colNo": null,
+           "context": [],
+           "errors": null,
+           "filename": "app:///src/app/main.ts",
+           "function": "bootstrap",
+           "inApp": true,
+           "instructionAddr": null,
+           "lineNo": 12,
+           "lock": null,
+           "module": "src/app/main",
+           "package": null,
+           "parentIndex": null,
+           "platform": null,
+           "rawFunction": null,
+           "sampleCount": null,
+           "sourceLink": null,
+           "symbol": null,
+           "symbolAddr": null,
+           "trust": null,
+           "vars": null
+          },
+          {
+           "absPath": "app:///src/modules/push/permission.ts",
+           "colNo": null,
+           "context": [],
+           "errors": null,
+           "filename": "app:///src/modules/push/permission.ts",
+           "function": "requestPermission",
+           "inApp": true,
+           "instructionAddr": null,
+           "lineNo": 27,
+           "lock": null,
+           "module": "src/modules/push/permission",
+           "package": null,
+           "parentIndex": null,
+           "platform": null,
+           "rawFunction": null,
+           "sampleCount": null,
+           "sourceLink": null,
+           "symbol": null,
+           "symbolAddr": null,
+           "trust": null,
+           "vars": null
+          }
+         ],
+         "framesOmitted": null,
+         "hasSystemFrames": true,
+         "registers": null
+        },
+        "threadId": null,
+        "type": "TypeError",
+        "value": "Cannot read properties of null (reading 'status')"
+       }
+      ]
+     },
+     "type": "exception"
+    },
+    {
+     "data": {
+      "values": [
+       {
+        "category": "navigation",
+        "data": {
+         "from": "/search/results?page=0",
+         "to": "/search/results?page=1"
+        },
+        "event_id": null,
+        "level": "info",
+        "message": null,
+        "timestamp": "2026-09-25T13:14:18.913698Z",
+        "type": "navigation"
+       },
+       {
+        "category": "navigation",
+        "data": {
+         "from": "/search/results?page=1",
+         "to": "/search/results?page=2"
+        },
+        "event_id": null,
+        "level": "info",
+        "message": null,
+        "timestamp": "2026-09-25T13:14:19.913698Z",
+        "type": "navigation"
+       },
+       {
+        "category": "navigation",
+        "data": {
+         "from": "/search/results?page=2",
+         "to": "/search/results?page=3"
+        },
+        "event_id": null,
+        "level": "info",
+        "message": null,
+        "timestamp": "2026-09-25T13:14:20.913698Z",
+        "type": "navigation"
+       },
+       {
+        "category": "navigation",
+        "data": {
+         "from": "/search/results?page=3",
+         "to": "/search/results?page=4"
+        },
+        "event_id": null,
+        "level": "info",
+        "message": null,
+        "timestamp": "2026-09-25T13:14:21.913698Z",
+        "type": "navigation"
+       },
+       {
+        "category": "navigation",
+        "data": {
+         "from": "/search/results?page=4",
+         "to": "/search/results?page=5"
+        },
+        "event_id": null,
+        "level": "info",
+        "message": null,
+        "timestamp": "2026-09-25T13:14:22.913698Z",
+        "type": "navigation"
+       },
+       {
+        "category": "navigation",
+        "data": {
+         "from": "/search/results?page=5",
+         "to": "/search/results?page=6"
+        },
+        "event_id": null,
+        "level": "info",
+        "message": null,
+        "timestamp": "2026-09-25T13:14:23.913698Z",
+        "type": "navigation"
+       },
+       {
+        "category": "navigation",
+        "data": {
+         "from": "/search/results?page=6",
+         "to": "/search/results?page=7"
+        },
+        "event_id": null,
+        "level": "info",
+        "message": null,
+        "timestamp": "2026-09-25T13:14:24.913698Z",
+        "type": "navigation"
+       },
+       {
+        "category": "navigation",
+        "data": {
+         "from": "/search/results?page=7",
+         "to": "/search/results?page=8"
+        },
+        "event_id": null,
+        "level": "info",
+        "message": null,
+        "timestamp": "2026-09-25T13:14:25.913698Z",
+        "type": "navigation"
+       },
+       {
+        "category": "navigation",
+        "data": {
+         "from": "/search/results?page=8",
+         "to": "/search/results?page=9"
+        },
+        "event_id": null,
+        "level": "info",
+        "message": null,
+        "timestamp": "2026-09-25T13:14:26.913698Z",
+        "type": "navigation"
+       },
+       {
+        "category": "navigation",
+        "data": {
+         "from": "/search/results?page=9",
+         "to": "/search/results?page=10"
+        },
+        "event_id": null,
+        "level": "info",
+        "message": null,
+        "timestamp": "2026-09-25T13:14:27.913698Z",
+        "type": "navigation"
+       },
+       {
+        "category": "navigation",
+        "data": {
+         "from": "/search/results?page=10",
+         "to": "/search/results?page=11"
+        },
+        "event_id": null,
+        "level": "info",
+        "message": null,
+        "timestamp": "2026-09-25T13:14:28.913698Z",
+        "type": "navigation"
+       },
+       {
+        "category": "navigation",
+        "data": {
+         "from": "/search/results?page=11",
+         "to": "/search/results?page=12"
+        },
+        "event_id": null,
+        "level": "info",
+        "message": null,
+        "timestamp": "2026-09-25T13:14:29.913698Z",
+        "type": "navigation"
+       },
+       {
+        "category": "navigation",
+        "data": {
+         "from": "/search/results?page=12",
+         "to": "/search/results?page=13"
+        },
+        "event_id": null,
+        "level": "info",
+        "message": null,
+        "timestamp": "2026-09-25T13:14:30.913698Z",
+        "type": "navigation"
+       },
+       {
+        "category": "navigation",
+        "data": {
+         "from": "/search/results?page=13",
+         "to": "/search/results?page=14"
+        },
+        "event_id": null,
+        "level": "info",
+        "message": null,
+        "timestamp": "2026-09-25T13:14:31.913698Z",
+        "type": "navigation"
+       },
+       {
+        "category": "navigation",
+        "data": {
+         "from": "/search/results?page=14",
+         "to": "/search/results?page=15"
+        },
+        "event_id": null,
+        "level": "info",
+        "message": null,
+        "timestamp": "2026-09-25T13:14:32.913698Z",
+        "type": "navigation"
+       },
+       {
+        "category": "navigation",
+        "data": {
+         "from": "/search/results?page=15",
+         "to": "/search/results?page=16"
+        },
+        "event_id": null,
+        "level": "info",
+        "message": null,
+        "timestamp": "2026-09-25T13:14:33.913698Z",
+        "type": "navigation"
+       },
+       {
+        "category": "navigation",
+        "data": {
+         "from": "/search/results?page=16",
+         "to": "/search/results?page=17"
+        },
+        "event_id": null,
+        "level": "info",
+        "message": null,
+        "timestamp": "2026-09-25T13:14:34.913698Z",
+        "type": "navigation"
+       },
+       {
+        "category": "navigation",
+        "data": {
+         "from": "/search/results?page=17",
+         "to": "/search/results?page=18"
+        },
+        "event_id": null,
+        "level": "info",
+        "message": null,
+        "timestamp": "2026-09-25T13:14:35.913698Z",
+        "type": "navigation"
+       },
+       {
+        "category": "navigation",
+        "data": {
+         "from": "/search/results?page=18",
+         "to": "/search/results?page=19"
+        },
+        "event_id": null,
+        "level": "info",
+        "message": null,
+        "timestamp": "2026-09-25T13:14:36.913698Z",
+        "type": "navigation"
+       },
+       {
+        "category": "navigation",
+        "data": {
+         "from": "/search/results?page=19",
+         "to": "/search/results?page=20"
+        },
+        "event_id": null,
+        "level": "info",
+        "message": null,
+        "timestamp": "2026-09-25T13:14:37.913698Z",
+        "type": "navigation"
+       },
+       {
+        "category": "navigation",
+        "data": {
+         "from": "/search/results?page=20",
+         "to": "/search/results?page=21"
+        },
+        "event_id": null,
+        "level": "info",
+        "message": null,
+        "timestamp": "2026-09-25T13:14:38.913698Z",
+        "type": "navigation"
+       },
+       {
+        "category": "navigation",
+        "data": {
+         "from": "/search/results?page=21",
+         "to": "/search/results?page=22"
+        },
+        "event_id": null,
+        "level": "info",
+        "message": null,
+        "timestamp": "2026-09-25T13:14:39.913698Z",
+        "type": "navigation"
+       },
+       {
+        "category": "navigation",
+        "data": {
+         "from": "/search/results?page=22",
+         "to": "/search/results?page=23"
+        },
+        "event_id": null,
+        "level": "info",
+        "message": null,
+        "timestamp": "2026-09-25T13:14:40.913698Z",
+        "type": "navigation"
+       },
+       {
+        "category": "navigation",
+        "data": {
+         "from": "/search/results?page=23",
+         "to": "/search/results?page=24"
+        },
+        "event_id": null,
+        "level": "info",
+        "message": null,
+        "timestamp": "2026-09-25T13:14:41.913698Z",
+        "type": "navigation"
+       },
+       {
+        "category": "navigation",
+        "data": {
+         "from": "/search/results?page=24",
+         "to": "/search/results?page=25"
+        },
+        "event_id": null,
+        "level": "info",
+        "message": null,
+        "timestamp": "2026-09-25T13:14:42.913698Z",
+        "type": "navigation"
+       },
+       {
+        "category": "navigation",
+        "data": {
+         "from": "/search/results?page=25",
+         "to": "/search/results?page=26"
+        },
+        "event_id": null,
+        "level": "info",
+        "message": null,
+        "timestamp": "2026-09-25T13:14:43.913698Z",
+        "type": "navigation"
+       },
+       {
+        "category": "navigation",
+        "data": {
+         "from": "/search/results?page=26",
+         "to": "/search/results?page=27"
+        },
+        "event_id": null,
+        "level": "info",
+        "message": null,
+        "timestamp": "2026-09-25T13:14:44.913698Z",
+        "type": "navigation"
+       },
+       {
+        "category": "navigation",
+        "data": {
+         "from": "/search/results?page=27",
+         "to": "/search/results?page=28"
+        },
+        "event_id": null,
+        "level": "info",
+        "message": null,
+        "timestamp": "2026-09-25T13:14:45.913698Z",
+        "type": "navigation"
+       },
+       {
+        "category": "navigation",
+        "data": {
+         "from": "/search/results?page=28",
+         "to": "/search/results?page=29"
+        },
+        "event_id": null,
+        "level": "info",
+        "message": null,
+        "timestamp": "2026-09-25T13:14:46.913698Z",
+        "type": "navigation"
+       },
+       {
+        "category": "navigation",
+        "data": {
+         "from": "/search/results?page=29",
+         "to": "/search/results?page=30"
+        },
+        "event_id": null,
+        "level": "info",
+        "message": null,
+        "timestamp": "2026-09-25T13:14:47.913698Z",
+        "type": "navigation"
+       },
+       {
+        "category": "navigation",
+        "data": {
+         "from": "/search/results?page=30",
+         "to": "/search/results?page=31"
+        },
+        "event_id": null,
+        "level": "info",
+        "message": null,
+        "timestamp": "2026-09-25T13:14:48.913698Z",
+        "type": "navigation"
+       },
+       {
+        "category": "navigation",
+        "data": {
+         "from": "/search/results?page=31",
+         "to": "/search/results?page=32"
+        },
+        "event_id": null,
+        "level": "info",
+        "message": null,
+        "timestamp": "2026-09-25T13:14:49.913698Z",
+        "type": "navigation"
+       },
+       {
+        "category": "navigation",
+        "data": {
+         "from": "/search/results?page=32",
+         "to": "/search/results?page=33"
+        },
+        "event_id": null,
+        "level": "info",
+        "message": null,
+        "timestamp": "2026-09-25T13:14:50.913698Z",
+        "type": "navigation"
+       },
+       {
+        "category": "navigation",
+        "data": {
+         "from": "/search/results?page=33",
+         "to": "/search/results?page=34"
+        },
+        "event_id": null,
+        "level": "info",
+        "message": null,
+        "timestamp": "2026-09-25T13:14:51.913698Z",
+        "type": "navigation"
+       },
+       {
+        "category": "navigation",
+        "data": {
+         "from": "/search/results?page=34",
+         "to": "/search/results?page=35"
+        },
+        "event_id": null,
+        "level": "info",
+        "message": null,
+        "timestamp": "2026-09-25T13:14:52.913698Z",
+        "type": "navigation"
+       },
+       {
+        "category": "navigation",
+        "data": {
+         "from": "/search/results?page=35",
+         "to": "/search/results?page=36"
+        },
+        "event_id": null,
+        "level": "info",
+        "message": null,
+        "timestamp": "2026-09-25T13:14:53.913698Z",
+        "type": "navigation"
+       },
+       {
+        "category": "navigation",
+        "data": {
+         "from": "/search/results?page=36",
+         "to": "/search/results?page=37"
+        },
+        "event_id": null,
+        "level": "info",
+        "message": null,
+        "timestamp": "2026-09-25T13:14:54.913698Z",
+        "type": "navigation"
+       },
+       {
+        "category": "navigation",
+        "data": {
+         "from": "/search/results?page=37",
+         "to": "/search/results?page=38"
+        },
+        "event_id": null,
+        "level": "info",
+        "message": null,
+        "timestamp": "2026-09-25T13:14:55.913698Z",
+        "type": "navigation"
+       },
+       {
+        "category": "navigation",
+        "data": {
+         "from": "/search/results?page=38",
+         "to": "/search/results?page=39"
+        },
+        "event_id": null,
+        "level": "info",
+        "message": null,
+        "timestamp": "2026-09-25T13:14:56.913698Z",
+        "type": "navigation"
+       },
+       {
+        "category": "navigation",
+        "data": {
+         "from": "/search/results?page=39",
+         "to": "/search/results?page=40"
+        },
+        "event_id": null,
+        "level": "info",
+        "message": null,
+        "timestamp": "2026-09-25T13:14:57.913698Z",
+        "type": "navigation"
+       },
+       {
+        "category": "navigation",
+        "data": {
+         "from": "/search/results?page=40",
+         "to": "/search/results?page=41"
+        },
+        "event_id": null,
+        "level": "info",
+        "message": null,
+        "timestamp": "2026-09-25T13:14:58.913698Z",
+        "type": "navigation"
+       },
+       {
+        "category": "navigation",
+        "data": {
+         "from": "/search/results?page=41",
+         "to": "/search/results?page=42"
+        },
+        "event_id": null,
+        "level": "info",
+        "message": null,
+        "timestamp": "2026-09-25T13:14:59.913698Z",
+        "type": "navigation"
+       },
+       {
+        "category": "navigation",
+        "data": {
+         "from": "/search/results?page=42",
+         "to": "/search/results?page=43"
+        },
+        "event_id": null,
+        "level": "info",
+        "message": null,
+        "timestamp": "2026-09-25T13:15:00.913698Z",
+        "type": "navigation"
+       },
+       {
+        "category": "navigation",
+        "data": {
+         "from": "/search/results?page=43",
+         "to": "/search/results?page=44"
+        },
+        "event_id": null,
+        "level": "info",
+        "message": null,
+        "timestamp": "2026-09-25T13:15:01.913698Z",
+        "type": "navigation"
+       },
+       {
+        "category": "navigation",
+        "data": {
+         "from": "/search/results?page=44",
+         "to": "/search/results?page=45"
+        },
+        "event_id": null,
+        "level": "info",
+        "message": null,
+        "timestamp": "2026-09-25T13:15:02.913698Z",
+        "type": "navigation"
+       },
+       {
+        "category": "navigation",
+        "data": {
+         "from": "/search/results?page=45",
+         "to": "/search/results?page=46"
+        },
+        "event_id": null,
+        "level": "info",
+        "message": null,
+        "timestamp": "2026-09-25T13:15:03.913698Z",
+        "type": "navigation"
+       },
+       {
+        "category": "navigation",
+        "data": {
+         "from": "/search/results?page=46",
+         "to": "/search/results?page=47"
+        },
+        "event_id": null,
+        "level": "info",
+        "message": null,
+        "timestamp": "2026-09-25T13:15:04.913698Z",
+        "type": "navigation"
+       },
+       {
+        "category": "navigation",
+        "data": {
+         "from": "/search/results?page=47",
+         "to": "/search/results?page=48"
+        },
+        "event_id": null,
+        "level": "info",
+        "message": null,
+        "timestamp": "2026-09-25T13:15:05.913698Z",
+        "type": "navigation"
+       },
+       {
+        "category": "navigation",
+        "data": {
+         "from": "/search/results?page=48",
+         "to": "/search/results?page=49"
+        },
+        "event_id": null,
+        "level": "info",
+        "message": null,
+        "timestamp": "2026-09-25T13:15:06.913698Z",
+        "type": "navigation"
+       },
+       {
+        "category": "navigation",
+        "data": {
+         "from": "/search/results?page=49",
+         "to": "/search/results?page=50"
+        },
+        "event_id": null,
+        "level": "info",
+        "message": null,
+        "timestamp": "2026-09-25T13:15:07.913698Z",
+        "type": "navigation"
+       },
+       {
+        "category": "navigation",
+        "data": {
+         "from": "/search/results?page=50",
+         "to": "/search/results?page=51"
+        },
+        "event_id": null,
+        "level": "info",
+        "message": null,
+        "timestamp": "2026-09-25T13:15:08.913698Z",
+        "type": "navigation"
+       },
+       {
+        "category": "navigation",
+        "data": {
+         "from": "/search/results?page=51",
+         "to": "/search/results?page=52"
+        },
+        "event_id": null,
+        "level": "info",
+        "message": null,
+        "timestamp": "2026-09-25T13:15:09.913698Z",
+        "type": "navigation"
+       },
+       {
+        "category": "navigation",
+        "data": {
+         "from": "/search/results?page=52",
+         "to": "/search/results?page=53"
+        },
+        "event_id": null,
+        "level": "info",
+        "message": null,
+        "timestamp": "2026-09-25T13:15:10.913698Z",
+        "type": "navigation"
+       },
+       {
+        "category": "navigation",
+        "data": {
+         "from": "/search/results?page=53",
+         "to": "/search/results?page=54"
+        },
+        "event_id": null,
+        "level": "info",
+        "message": null,
+        "timestamp": "2026-09-25T13:15:11.913698Z",
+        "type": "navigation"
+       },
+       {
+        "category": "navigation",
+        "data": {
+         "from": "/search/results?page=54",
+         "to": "/search/results?page=55"
+        },
+        "event_id": null,
+        "level": "info",
+        "message": null,
+        "timestamp": "2026-09-25T13:15:12.913698Z",
+        "type": "navigation"
+       },
+       {
+        "category": "navigation",
+        "data": {
+         "from": "/search/results?page=55",
+         "to": "/search/results?page=56"
+        },
+        "event_id": null,
+        "level": "info",
+        "message": null,
+        "timestamp": "2026-09-25T13:15:13.913698Z",
+        "type": "navigation"
+       },
+       {
+        "category": "navigation",
+        "data": {
+         "from": "/search/results?page=56",
+         "to": "/search/results?page=57"
+        },
+        "event_id": null,
+        "level": "info",
+        "message": null,
+        "timestamp": "2026-09-25T13:15:14.913698Z",
+        "type": "navigation"
+       },
+       {
+        "category": "navigation",
+        "data": {
+         "from": "/search/results?page=57",
+         "to": "/search/results?page=58"
+        },
+        "event_id": null,
+        "level": "info",
+        "message": null,
+        "timestamp": "2026-09-25T13:15:15.913698Z",
+        "type": "navigation"
+       },
+       {
+        "category": "navigation",
+        "data": {
+         "from": "/search/results?page=58",
+         "to": "/search/results?page=59"
+        },
+        "event_id": null,
+        "level": "info",
+        "message": null,
+        "timestamp": "2026-09-25T13:15:16.913698Z",
+        "type": "navigation"
+       },
+       {
+        "category": "navigation",
+        "data": {
+         "from": "/search/results?page=59",
+         "to": "/search/results?page=60"
+        },
+        "event_id": null,
+        "level": "info",
+        "message": null,
+        "timestamp": "2026-09-25T13:15:17.913698Z",
+        "type": "navigation"
+       },
+       {
+        "category": "navigation",
+        "data": {
+         "from": "/search/results?page=60",
+         "to": "/search/results?page=61"
+        },
+        "event_id": null,
+        "level": "info",
+        "message": null,
+        "timestamp": "2026-09-25T13:15:18.913698Z",
+        "type": "navigation"
+       },
+       {
+        "category": "navigation",
+        "data": {
+         "from": "/search/results?page=61",
+         "to": "/search/results?page=62"
+        },
+        "event_id": null,
+        "level": "info",
+        "message": null,
+        "timestamp": "2026-09-25T13:15:19.913698Z",
+        "type": "navigation"
+       },
+       {
+        "category": "navigation",
+        "data": {
+         "from": "/search/results?page=62",
+         "to": "/search/results?page=63"
+        },
+        "event_id": null,
+        "level": "info",
+        "message": null,
+        "timestamp": "2026-09-25T13:15:20.913698Z",
+        "type": "navigation"
+       },
+       {
+        "category": "navigation",
+        "data": {
+         "from": "/search/results?page=63",
+         "to": "/search/results?page=64"
+        },
+        "event_id": null,
+        "level": "info",
+        "message": null,
+        "timestamp": "2026-09-25T13:15:21.913698Z",
+        "type": "navigation"
+       },
+       {
+        "category": "navigation",
+        "data": {
+         "from": "/search/results?page=64",
+         "to": "/search/results?page=65"
+        },
+        "event_id": null,
+        "level": "info",
+        "message": null,
+        "timestamp": "2026-09-25T13:15:22.913698Z",
+        "type": "navigation"
+       },
+       {
+        "category": "navigation",
+        "data": {
+         "from": "/search/results?page=65",
+         "to": "/search/results?page=66"
+        },
+        "event_id": null,
+        "level": "info",
+        "message": null,
+        "timestamp": "2026-09-25T13:15:23.913698Z",
+        "type": "navigation"
+       },
+       {
+        "category": "navigation",
+        "data": {
+         "from": "/search/results?page=66",
+         "to": "/search/results?page=67"
+        },
+        "event_id": null,
+        "level": "info",
+        "message": null,
+        "timestamp": "2026-09-25T13:15:24.913698Z",
+        "type": "navigation"
+       },
+       {
+        "category": "navigation",
+        "data": {
+         "from": "/search/results?page=67",
+         "to": "/search/results?page=68"
+        },
+        "event_id": null,
+        "level": "info",
+        "message": null,
+        "timestamp": "2026-09-25T13:15:25.913698Z",
+        "type": "navigation"
+       },
+       {
+        "category": "navigation",
+        "data": {
+         "from": "/search/results?page=68",
+         "to": "/search/results?page=69"
+        },
+        "event_id": null,
+        "level": "info",
+        "message": null,
+        "timestamp": "2026-09-25T13:15:26.913698Z",
+        "type": "navigation"
+       },
+       {
+        "category": "navigation",
+        "data": {
+         "from": "/search/results?page=69",
+         "to": "/search/results?page=70"
+        },
+        "event_id": null,
+        "level": "info",
+        "message": null,
+        "timestamp": "2026-09-25T13:15:27.913698Z",
+        "type": "navigation"
+       },
+       {
+        "category": "navigation",
+        "data": {
+         "from": "/search/results?page=70",
+         "to": "/search/results?page=71"
+        },
+        "event_id": null,
+        "level": "info",
+        "message": null,
+        "timestamp": "2026-09-25T13:15:28.913698Z",
+        "type": "navigation"
+       },
+       {
+        "category": "navigation",
+        "data": {
+         "from": "/search/results?page=71",
+         "to": "/search/results?page=72"
+        },
+        "event_id": null,
+        "level": "info",
+        "message": null,
+        "timestamp": "2026-09-25T13:15:29.913698Z",
+        "type": "navigation"
+       },
+       {
+        "category": "navigation",
+        "data": {
+         "from": "/search/results?page=72",
+         "to": "/search/results?page=73"
+        },
+        "event_id": null,
+        "level": "info",
+        "message": null,
+        "timestamp": "2026-09-25T13:15:30.913698Z",
+        "type": "navigation"
+       },
+       {
+        "category": "navigation",
+        "data": {
+         "from": "/search/results?page=73",
+         "to": "/search/results?page=74"
+        },
+        "event_id": null,
+        "level": "info",
+        "message": null,
+        "timestamp": "2026-09-25T13:15:31.913698Z",
+        "type": "navigation"
+       },
+       {
+        "category": "navigation",
+        "data": {
+         "from": "/search/results?page=74",
+         "to": "/search/results?page=75"
+        },
+        "event_id": null,
+        "level": "info",
+        "message": null,
+        "timestamp": "2026-09-25T13:15:32.913698Z",
+        "type": "navigation"
+       },
+       {
+        "category": "navigation",
+        "data": {
+         "from": "/search/results?page=75",
+         "to": "/search/results?page=76"
+        },
+        "event_id": null,
+        "level": "info",
+        "message": null,
+        "timestamp": "2026-09-25T13:15:33.913698Z",
+        "type": "navigation"
+       },
+       {
+        "category": "navigation",
+        "data": {
+         "from": "/search/results?page=76",
+         "to": "/search/results?page=77"
+        },
+        "event_id": null,
+        "level": "info",
+        "message": null,
+        "timestamp": "2026-09-25T13:15:34.913698Z",
+        "type": "navigation"
+       },
+       {
+        "category": "navigation",
+        "data": {
+         "from": "/search/results?page=77",
+         "to": "/search/results?page=78"
+        },
+        "event_id": null,
+        "level": "info",
+        "message": null,
+        "timestamp": "2026-09-25T13:15:35.913698Z",
+        "type": "navigation"
+       },
+       {
+        "category": "navigation",
+        "data": {
+         "from": "/search/results?page=78",
+         "to": "/search/results?page=79"
+        },
+        "event_id": null,
+        "level": "info",
+        "message": null,
+        "timestamp": "2026-09-25T13:15:36.913698Z",
+        "type": "navigation"
+       },
+       {
+        "category": "navigation",
+        "data": {
+         "from": "/search/results?page=79",
+         "to": "/search/results?page=80"
+        },
+        "event_id": null,
+        "level": "info",
+        "message": null,
+        "timestamp": "2026-09-25T13:15:37.913698Z",
+        "type": "navigation"
+       },
+       {
+        "category": "navigation",
+        "data": {
+         "from": "/search/results?page=80",
+         "to": "/search/results?page=81"
+        },
+        "event_id": null,
+        "level": "info",
+        "message": null,
+        "timestamp": "2026-09-25T13:15:38.913698Z",
+        "type": "navigation"
+       },
+       {
+        "category": "navigation",
+        "data": {
+         "from": "/search/results?page=81",
+         "to": "/search/results?page=82"
+        },
+        "event_id": null,
+        "level": "info",
+        "message": null,
+        "timestamp": "2026-09-25T13:15:39.913698Z",
+        "type": "navigation"
+       },
+       {
+        "category": "navigation",
+        "data": {
+         "from": "/search/results?page=82",
+         "to": "/search/results?page=83"
+        },
+        "event_id": null,
+        "level": "info",
+        "message": null,
+        "timestamp": "2026-09-25T13:15:40.913698Z",
+        "type": "navigation"
+       },
+       {
+        "category": "navigation",
+        "data": {
+         "from": "/search/results?page=83",
+         "to": "/search/results?page=84"
+        },
+        "event_id": null,
+        "level": "info",
+        "message": null,
+        "timestamp": "2026-09-25T13:15:41.913698Z",
+        "type": "navigation"
+       },
+       {
+        "category": "navigation",
+        "data": {
+         "from": "/search/results?page=84",
+         "to": "/search/results?page=85"
+        },
+        "event_id": null,
+        "level": "info",
+        "message": null,
+        "timestamp": "2026-09-25T13:15:42.913698Z",
+        "type": "navigation"
+       },
+       {
+        "category": "navigation",
+        "data": {
+         "from": "/search/results?page=85",
+         "to": "/search/results?page=86"
+        },
+        "event_id": null,
+        "level": "info",
+        "message": null,
+        "timestamp": "2026-09-25T13:15:43.913698Z",
+        "type": "navigation"
+       },
+       {
+        "category": "navigation",
+        "data": {
+         "from": "/search/results?page=86",
+         "to": "/search/results?page=87"
+        },
+        "event_id": null,
+        "level": "info",
+        "message": null,
+        "timestamp": "2026-09-25T13:15:44.913698Z",
+        "type": "navigation"
+       },
+       {
+        "category": "navigation",
+        "data": {
+         "from": "/search/results?page=87",
+         "to": "/search/results?page=88"
+        },
+        "event_id": null,
+        "level": "info",
+        "message": null,
+        "timestamp": "2026-09-25T13:15:45.913698Z",
+        "type": "navigation"
+       },
+       {
+        "category": "navigation",
+        "data": {
+         "from": "/search/results?page=88",
+         "to": "/search/results?page=89"
+        },
+        "event_id": null,
+        "level": "info",
+        "message": null,
+        "timestamp": "2026-09-25T13:15:46.913698Z",
+        "type": "navigation"
+       },
+       {
+        "category": "navigation",
+        "data": {
+         "from": "/search/results?page=89",
+         "to": "/search/results?page=90"
+        },
+        "event_id": null,
+        "level": "info",
+        "message": null,
+        "timestamp": "2026-09-25T13:15:47.913698Z",
+        "type": "navigation"
+       },
+       {
+        "category": "navigation",
+        "data": {
+         "from": "/search/results?page=90",
+         "to": "/search/results?page=91"
+        },
+        "event_id": null,
+        "level": "info",
+        "message": null,
+        "timestamp": "2026-09-25T13:15:48.913698Z",
+        "type": "navigation"
+       },
+       {
+        "category": "navigation",
+        "data": {
+         "from": "/search/results?page=91",
+         "to": "/search/results?page=92"
+        },
+        "event_id": null,
+        "level": "info",
+        "message": null,
+        "timestamp": "2026-09-25T13:15:49.913698Z",
+        "type": "navigation"
+       },
+       {
+        "category": "navigation",
+        "data": {
+         "from": "/search/results?page=92",
+         "to": "/search/results?page=93"
+        },
+        "event_id": null,
+        "level": "info",
+        "message": null,
+        "timestamp": "2026-09-25T13:15:50.913698Z",
+        "type": "navigation"
+       },
+       {
+        "category": "navigation",
+        "data": {
+         "from": "/search/results?page=93",
+         "to": "/search/results?page=94"
+        },
+        "event_id": null,
+        "level": "info",
+        "message": null,
+        "timestamp": "2026-09-25T13:15:51.913698Z",
+        "type": "navigation"
+       },
+       {
+        "category": "navigation",
+        "data": {
+         "from": "/search/results?page=94",
+         "to": "/search/results?page=95"
+        },
+        "event_id": null,
+        "level": "info",
+        "message": null,
+        "timestamp": "2026-09-25T13:15:52.913698Z",
+        "type": "navigation"
+       },
+       {
+        "category": "navigation",
+        "data": {
+         "from": "/search/results?page=95",
+         "to": "/search/results?page=96"
+        },
+        "event_id": null,
+        "level": "info",
+        "message": null,
+        "timestamp": "2026-09-25T13:15:53.913698Z",
+        "type": "navigation"
+       },
+       {
+        "category": "navigation",
+        "data": {
+         "from": "/search/results?page=96",
+         "to": "/search/results?page=97"
+        },
+        "event_id": null,
+        "level": "info",
+        "message": null,
+        "timestamp": "2026-09-25T13:15:54.913698Z",
+        "type": "navigation"
+       },
+       {
+        "category": "navigation",
+        "data": {
+         "from": "/settings",
+         "to": "/settings/notifications"
+        },
+        "event_id": null,
+        "level": "info",
+        "message": null,
+        "timestamp": "2026-09-25T13:15:55.913698Z",
+        "type": "navigation"
+       },
+       {
+        "category": "ui.click",
+        "data": null,
+        "event_id": null,
+        "level": "info",
+        "message": "button#enable-push",
+        "timestamp": "2026-09-25T13:15:56.913698Z",
+        "type": "user"
+       },
+       {
+        "category": "xhr",
+        "data": {
+         "method": "POST",
+         "status_code": 403,
+         "url": "/api/push/permission"
+        },
+        "event_id": null,
+        "level": "info",
+        "message": null,
+        "timestamp": "2026-09-25T13:15:57.913698Z",
+        "type": "http"
+       }
+      ]
+     },
+     "type": "breadcrumbs"
+    }
+   ],
+   "errors": [
+    {
+     "data": {
+      "symbolicator_type": "missing_source",
+      "url": "app:///src/app/main.ts"
+     },
+     "message": "Source code was not found",
+     "type": "js_no_source"
+    },
+    {
+     "data": {
+      "symbolicator_type": "missing_source",
+      "url": "app:///src/modules/push/permission.ts"
+     },
+     "message": "Source code was not found",
+     "type": "js_no_source"
+    }
+   ],
+   "eventID": "76078eaf25ed4188a3e7538158bb9f26",
+   "fingerprints": [
+    "4d41776be07a59f9519474ff7251a49b"
+   ],
+   "groupID": "7754565187",
+   "groupingConfig": {
+    "enhancements": "KLUv_SAd6QAAkwORuGFsbC1wbGF0Zm9ybXM6MjAyNi0wMS0yMJA#KLUv_SAd6QAAkwORuGFsbC1wbGF0Zm9ybXM6MjAyNi0wMS0yMJA#KLUv_SAd6QAAkwORuGFsbC1wbGF0Zm9ybXM6MjAyNi0wMS0yMJA",
+    "id": "newstyle:2026-01-20"
+   },
+   "id": "76078eaf25ed4188a3e7538158bb9f26",
+   "location": "app:///src/modules/push/permission.ts",
+   "message": "",
+   "metadata": {
+    "filename": "app:///src/modules/push/permission.ts",
+    "function": "requestPermission",
+    "in_app_frame_mix": "in-app-only",
+    "synthetic": false,
+    "type": "TypeError",
+    "value": "Cannot read properties of null (reading 'status')"
+   },
+   "occurrence": null,
+   "packages": {},
+   "platform": "javascript",
+   "projectID": "4512146161270784",
+   "sdk": {
+    "name": "mei-demo-generator",
+    "version": "0.1"
+   },
+   "size": 21296,
+   "tags": [
+    {
+     "key": "demo_case",
+     "value": "F6"
+    },
+    {
+     "key": "device",
+     "value": "iPhone15,2"
+    },
+    {
+     "key": "device.class",
+     "value": "high"
+    },
+    {
+     "key": "device.family",
+     "value": "iOS"
+    },
+    {
+     "key": "environment",
+     "value": "production"
+    },
+    {
+     "key": "installation_id",
+     "value": "install-case-m"
+    },
+    {
+     "key": "interface_type",
+     "value": "exception"
+    },
+    {
+     "key": "level",
+     "value": "error"
+    },
+    {
+     "key": "os",
+     "value": "iOS 18.4"
+    },
+    {
+     "key": "os.name",
+     "value": "iOS"
+    },
+    {
+     "key": "release",
+     "value": "mei-demo-app@1.4.0"
+    },
+    {
+     "key": "user",
+     "query": "user.id:\"account-case-p7\"",
+     "value": "id:account-case-p7"
+    }
+   ],
+   "title": "TypeError: Cannot read properties of null (reading 'status')",
+   "type": "error",
+   "user": {
+    "data": null,
+    "email": "<scrubbed>",
+    "geo": {
+     "city": "Nuremberg",
+     "country_code": "DE",
+     "region": "Germany"
+    },
+    "id": "account-case-p7",
+    "ip_address": "<scrubbed>",
+    "name": null,
+    "username": "<scrubbed>"
+   }
+  },
+  {
+   "_meta": {
+    "context": null,
+    "contexts": null,
+    "entries": {},
+    "message": null,
+    "packages": null,
+    "sdk": null,
+    "tags": {},
+    "user": null
+   },
+   "context": {},
+   "contexts": {
+    "app": {
+     "app_version": "1.4.0",
+     "type": "app"
+    },
+    "device": {
+     "family": "iOS",
+     "model": "iPhone15,2",
+     "type": "device"
+    },
+    "os": {
+     "name": "iOS",
+     "os": "iOS 18.4",
+     "type": "os",
+     "version": "18.4"
+    },
+    "trace": {
+     "span_id": "07f75efe0b1c4ed9",
+     "status": "unknown",
+     "trace_id": "07f75efe0b1c4ed9912d67636bb3972a",
+     "type": "trace"
+    }
+   },
+   "crashFile": null,
+   "culprit": "requestPermission(src/modules/push/permission)",
+   "dateCreated": "2026-09-25T13:13:58Z",
+   "dateReceived": "2026-09-25T13:21:59.220002Z",
+   "dist": null,
+   "entries": [
+    {
+     "data": {
+      "excOmitted": null,
+      "hasSystemFrames": true,
+      "values": [
+       {
+        "mechanism": null,
+        "module": null,
+        "rawModule": null,
+        "rawStacktrace": {
+         "frames": [
+          {
+           "absPath": "app:///src/app/main.ts",
+           "colNo": null,
+           "context": [],
+           "errors": null,
+           "filename": "app:///src/app/main.ts",
+           "function": "bootstrap",
+           "inApp": true,
+           "instructionAddr": null,
+           "lineNo": 12,
+           "lock": null,
+           "module": null,
+           "package": null,
+           "parentIndex": null,
+           "platform": null,
+           "rawFunction": null,
+           "sampleCount": null,
+           "sourceLink": null,
+           "symbol": null,
+           "symbolAddr": null,
+           "trust": null,
+           "vars": null
+          },
+          {
+           "absPath": "app:///src/modules/push/permission.ts",
+           "colNo": null,
+           "context": [],
+           "errors": null,
+           "filename": "app:///src/modules/push/permission.ts",
+           "function": "requestPermission",
+           "inApp": true,
+           "instructionAddr": null,
+           "lineNo": 27,
+           "lock": null,
+           "module": null,
+           "package": null,
+           "parentIndex": null,
+           "platform": null,
+           "rawFunction": null,
+           "sampleCount": null,
+           "sourceLink": null,
+           "symbol": null,
+           "symbolAddr": null,
+           "trust": null,
+           "vars": null
+          }
+         ],
+         "framesOmitted": null,
+         "hasSystemFrames": true,
+         "registers": null
+        },
+        "rawType": null,
+        "rawValue": null,
+        "stacktrace": {
+         "frames": [
+          {
+           "absPath": "app:///src/app/main.ts",
+           "colNo": null,
+           "context": [],
+           "errors": null,
+           "filename": "app:///src/app/main.ts",
+           "function": "bootstrap",
+           "inApp": true,
+           "instructionAddr": null,
+           "lineNo": 12,
+           "lock": null,
+           "module": "src/app/main",
+           "package": null,
+           "parentIndex": null,
+           "platform": null,
+           "rawFunction": null,
+           "sampleCount": null,
+           "sourceLink": null,
+           "symbol": null,
+           "symbolAddr": null,
+           "trust": null,
+           "vars": null
+          },
+          {
+           "absPath": "app:///src/modules/push/permission.ts",
+           "colNo": null,
+           "context": [],
+           "errors": null,
+           "filename": "app:///src/modules/push/permission.ts",
+           "function": "requestPermission",
+           "inApp": true,
+           "instructionAddr": null,
+           "lineNo": 27,
+           "lock": null,
+           "module": "src/modules/push/permission",
+           "package": null,
+           "parentIndex": null,
+           "platform": null,
+           "rawFunction": null,
+           "sampleCount": null,
+           "sourceLink": null,
+           "symbol": null,
+           "symbolAddr": null,
+           "trust": null,
+           "vars": null
+          }
+         ],
+         "framesOmitted": null,
+         "hasSystemFrames": true,
+         "registers": null
+        },
+        "threadId": null,
+        "type": "TypeError",
+        "value": "Cannot read properties of null (reading 'status')"
+       }
+      ]
+     },
+     "type": "exception"
+    },
+    {
+     "data": {
+      "values": [
+       {
+        "category": "app.lifecycle",
+        "data": {
+         "state": "foreground"
+        },
+        "event_id": null,
+        "level": "info",
+        "message": null,
+        "timestamp": "2026-09-25T13:13:53.913698Z",
+        "type": "navigation"
+       },
+       {
+        "category": "navigation",
+        "data": {
+         "from": "/",
+         "to": "/inbox"
+        },
+        "event_id": null,
+        "level": "info",
+        "message": null,
+        "timestamp": "2026-09-25T13:13:54.913698Z",
+        "type": "navigation"
+       },
+       {
+        "category": "navigation",
+        "data": {
+         "from": "/settings",
+         "to": "/settings/notifications"
+        },
+        "event_id": null,
+        "level": "info",
+        "message": null,
+        "timestamp": "2026-09-25T13:13:55.913698Z",
+        "type": "navigation"
+       },
+       {
+        "category": "ui.click",
+        "data": null,
+        "event_id": null,
+        "level": "info",
+        "message": "button#enable-push",
+        "timestamp": "2026-09-25T13:13:56.913698Z",
+        "type": "user"
+       },
+       {
+        "category": "xhr",
+        "data": {
+         "method": "POST",
+         "status_code": 403,
+         "url": "/api/push/permission"
+        },
+        "event_id": null,
+        "level": "info",
+        "message": null,
+        "timestamp": "2026-09-25T13:13:57.913698Z",
+        "type": "http"
+       }
+      ]
+     },
+     "type": "breadcrumbs"
+    }
+   ],
+   "errors": [
+    {
+     "data": {
+      "symbolicator_type": "missing_source",
+      "url": "app:///src/app/main.ts"
+     },
+     "message": "Source code was not found",
+     "type": "js_no_source"
+    },
+    {
+     "data": {
+      "symbolicator_type": "missing_source",
+      "url": "app:///src/modules/push/permission.ts"
+     },
+     "message": "Source code was not found",
+     "type": "js_no_source"
+    }
+   ],
+   "eventID": "07f75efe0b1c4ed9912d67636bb3972a",
+   "fingerprints": [
+    "4d41776be07a59f9519474ff7251a49b"
+   ],
+   "groupID": "7754565187",
+   "groupingConfig": {
+    "enhancements": "KLUv_SAd6QAAkwORuGFsbC1wbGF0Zm9ybXM6MjAyNi0wMS0yMJA#KLUv_SAd6QAAkwORuGFsbC1wbGF0Zm9ybXM6MjAyNi0wMS0yMJA#KLUv_SAd6QAAkwORuGFsbC1wbGF0Zm9ybXM6MjAyNi0wMS0yMJA",
+    "id": "newstyle:2026-01-20"
+   },
+   "id": "07f75efe0b1c4ed9912d67636bb3972a",
+   "location": "app:///src/modules/push/permission.ts",
+   "message": "",
+   "metadata": {
+    "filename": "app:///src/modules/push/permission.ts",
+    "function": "requestPermission",
+    "in_app_frame_mix": "in-app-only",
+    "synthetic": false,
+    "type": "TypeError",
+    "value": "Cannot read properties of null (reading 'status')"
+   },
+   "occurrence": null,
+   "packages": {},
+   "platform": "javascript",
+   "projectID": "4512146161270784",
+   "sdk": {
+    "name": "mei-demo-generator",
+    "version": "0.1"
+   },
+   "size": 5654,
+   "tags": [
+    {
+     "key": "demo_case",
+     "value": "F6"
+    },
+    {
+     "key": "device",
+     "value": "iPhone15,2"
+    },
+    {
+     "key": "device.class",
+     "value": "high"
+    },
+    {
+     "key": "device.family",
+     "value": "iOS"
+    },
+    {
+     "key": "environment",
+     "value": "production"
+    },
+    {
+     "key": "installation_id",
+     "value": "install-case-h"
+    },
+    {
+     "key": "interface_type",
+     "value": "exception"
+    },
+    {
+     "key": "level",
+     "value": "error"
+    },
+    {
+     "key": "os",
+     "value": "iOS 18.4"
+    },
+    {
+     "key": "os.name",
+     "value": "iOS"
+    },
+    {
+     "key": "release",
+     "value": "mei-demo-app@1.4.0"
+    },
+    {
+     "key": "user",
+     "query": "user.id:\"account-case-p3\"",
+     "value": "id:account-case-p3"
+    }
+   ],
+   "title": "TypeError: Cannot read properties of null (reading 'status')",
+   "type": "error",
+   "user": {
+    "data": null,
+    "email": "<scrubbed>",
+    "geo": {
+     "city": "Nuremberg",
+     "country_code": "DE",
+     "region": "Germany"
+    },
+    "id": "account-case-p3",
+    "ip_address": "<scrubbed>",
+    "name": null,
+    "username": "<scrubbed>"
+   }
+  },
+  {
+   "_meta": {
+    "context": null,
+    "contexts": null,
+    "entries": {},
+    "message": null,
+    "packages": null,
+    "sdk": null,
+    "tags": {},
+    "user": null
+   },
+   "context": {},
+   "contexts": {
+    "app": {
+     "app_version": "1.4.0",
+     "type": "app"
+    },
+    "device": {
+     "family": "iOS",
+     "model": "iPhone15,2",
+     "type": "device"
+    },
+    "os": {
+     "name": "iOS",
+     "os": "iOS 18.4",
+     "type": "os",
+     "version": "18.4"
+    },
+    "trace": {
+     "span_id": "975faed9b9324c18",
+     "status": "unknown",
+     "trace_id": "975faed9b9324c188580f4c983ad9cda",
+     "type": "trace"
+    }
+   },
+   "crashFile": null,
+   "culprit": "requestPermission(src/modules/push/permission)",
+   "dateCreated": "2026-09-25T13:11:58Z",
+   "dateReceived": "2026-09-25T13:21:59.105251Z",
+   "dist": null,
+   "entries": [
+    {
+     "data": {
+      "excOmitted": null,
+      "hasSystemFrames": true,
+      "values": [
+       {
+        "mechanism": null,
+        "module": null,
+        "rawModule": null,
+        "rawStacktrace": {
+         "frames": [
+          {
+           "absPath": "app:///src/app/main.ts",
+           "colNo": null,
+           "context": [],
+           "errors": null,
+           "filename": "app:///src/app/main.ts",
+           "function": "bootstrap",
+           "inApp": true,
+           "instructionAddr": null,
+           "lineNo": 12,
+           "lock": null,
+           "module": null,
+           "package": null,
+           "parentIndex": null,
+           "platform": null,
+           "rawFunction": null,
+           "sampleCount": null,
+           "sourceLink": null,
+           "symbol": null,
+           "symbolAddr": null,
+           "trust": null,
+           "vars": null
+          },
+          {
+           "absPath": "app:///src/modules/push/permission.ts",
+           "colNo": null,
+           "context": [],
+           "errors": null,
+           "filename": "app:///src/modules/push/permission.ts",
+           "function": "requestPermission",
+           "inApp": true,
+           "instructionAddr": null,
+           "lineNo": 27,
+           "lock": null,
+           "module": null,
+           "package": null,
+           "parentIndex": null,
+           "platform": null,
+           "rawFunction": null,
+           "sampleCount": null,
+           "sourceLink": null,
+           "symbol": null,
+           "symbolAddr": null,
+           "trust": null,
+           "vars": null
+          }
+         ],
+         "framesOmitted": null,
+         "hasSystemFrames": true,
+         "registers": null
+        },
+        "rawType": null,
+        "rawValue": null,
+        "stacktrace": {
+         "frames": [
+          {
+           "absPath": "app:///src/app/main.ts",
+           "colNo": null,
+           "context": [],
+           "errors": null,
+           "filename": "app:///src/app/main.ts",
+           "function": "bootstrap",
+           "inApp": true,
+           "instructionAddr": null,
+           "lineNo": 12,
+           "lock": null,
+           "module": "src/app/main",
+           "package": null,
+           "parentIndex": null,
+           "platform": null,
+           "rawFunction": null,
+           "sampleCount": null,
+           "sourceLink": null,
+           "symbol": null,
+           "symbolAddr": null,
+           "trust": null,
+           "vars": null
+          },
+          {
+           "absPath": "app:///src/modules/push/permission.ts",
+           "colNo": null,
+           "context": [],
+           "errors": null,
+           "filename": "app:///src/modules/push/permission.ts",
+           "function": "requestPermission",
+           "inApp": true,
+           "instructionAddr": null,
+           "lineNo": 27,
+           "lock": null,
+           "module": "src/modules/push/permission",
+           "package": null,
+           "parentIndex": null,
+           "platform": null,
+           "rawFunction": null,
+           "sampleCount": null,
+           "sourceLink": null,
+           "symbol": null,
+           "symbolAddr": null,
+           "trust": null,
+           "vars": null
+          }
+         ],
+         "framesOmitted": null,
+         "hasSystemFrames": true,
+         "registers": null
+        },
+        "threadId": null,
+        "type": "TypeError",
+        "value": "Cannot read properties of null (reading 'status')"
+       }
+      ]
+     },
+     "type": "exception"
+    },
+    {
+     "data": {
+      "values": [
+       {
+        "category": "navigation",
+        "data": {
+         "from": "/",
+         "to": "/home"
+        },
+        "event_id": null,
+        "level": "info",
+        "message": null,
+        "timestamp": "2026-09-25T13:11:53.913698Z",
+        "type": "navigation"
+       },
+       {
+        "category": "navigation",
+        "data": {
+         "from": "/home",
+         "to": "/settings"
+        },
+        "event_id": null,
+        "level": "info",
+        "message": null,
+        "timestamp": "2026-09-25T13:11:54.913698Z",
+        "type": "navigation"
+       },
+       {
+        "category": "navigation",
+        "data": {
+         "from": "/settings",
+         "to": "/settings/notifications"
+        },
+        "event_id": null,
+        "level": "info",
+        "message": null,
+        "timestamp": "2026-09-25T13:11:55.913698Z",
+        "type": "navigation"
+       },
+       {
+        "category": "ui.click",
+        "data": null,
+        "event_id": null,
+        "level": "info",
+        "message": "button#enable-push",
+        "timestamp": "2026-09-25T13:11:56.913698Z",
+        "type": "user"
+       },
+       {
+        "category": "xhr",
+        "data": {
+         "method": "POST",
+         "status_code": 403,
+         "url": "/api/push/permission"
+        },
+        "event_id": null,
+        "level": "info",
+        "message": null,
+        "timestamp": "2026-09-25T13:11:57.913698Z",
+        "type": "http"
+       }
+      ]
+     },
+     "type": "breadcrumbs"
+    }
+   ],
+   "errors": [
+    {
+     "data": {
+      "symbolicator_type": "missing_source",
+      "url": "app:///src/app/main.ts"
+     },
+     "message": "Source code was not found",
+     "type": "js_no_source"
+    },
+    {
+     "data": {
+      "symbolicator_type": "missing_source",
+      "url": "app:///src/modules/push/permission.ts"
+     },
+     "message": "Source code was not found",
+     "type": "js_no_source"
+    }
+   ],
+   "eventID": "975faed9b9324c188580f4c983ad9cda",
+   "fingerprints": [
+    "4d41776be07a59f9519474ff7251a49b"
+   ],
+   "groupID": "7754565187",
+   "groupingConfig": {
+    "enhancements": "KLUv_SAd6QAAkwORuGFsbC1wbGF0Zm9ybXM6MjAyNi0wMS0yMJA#KLUv_SAd6QAAkwORuGFsbC1wbGF0Zm9ybXM6MjAyNi0wMS0yMJA#KLUv_SAd6QAAkwORuGFsbC1wbGF0Zm9ybXM6MjAyNi0wMS0yMJA",
+    "id": "newstyle:2026-01-20"
+   },
+   "id": "975faed9b9324c188580f4c983ad9cda",
+   "location": "app:///src/modules/push/permission.ts",
+   "message": "",
+   "metadata": {
+    "filename": "app:///src/modules/push/permission.ts",
+    "function": "requestPermission",
+    "in_app_frame_mix": "in-app-only",
+    "synthetic": false,
+    "type": "TypeError",
+    "value": "Cannot read properties of null (reading 'status')"
+   },
+   "occurrence": null,
+   "packages": {},
+   "platform": "javascript",
+   "projectID": "4512146161270784",
+   "sdk": {
+    "name": "mei-demo-generator",
+    "version": "0.1"
+   },
+   "size": 5661,
+   "tags": [
+    {
+     "key": "demo_case",
+     "value": "F6"
+    },
+    {
+     "key": "device",
+     "value": "iPhone15,2"
+    },
+    {
+     "key": "device.class",
+     "value": "high"
+    },
+    {
+     "key": "device.family",
+     "value": "iOS"
+    },
+    {
+     "key": "environment",
+     "value": "production"
+    },
+    {
+     "key": "installation_id",
+     "value": "install-case-c"
+    },
+    {
+     "key": "interface_type",
+     "value": "exception"
+    },
+    {
+     "key": "level",
+     "value": "error"
+    },
+    {
+     "key": "os",
+     "value": "iOS 18.4"
+    },
+    {
+     "key": "os.name",
+     "value": "iOS"
+    },
+    {
+     "key": "release",
+     "value": "mei-demo-app@1.4.0"
+    },
+    {
+     "key": "user",
+     "query": "user.id:\"account-case-p1\"",
+     "value": "id:account-case-p1"
+    }
+   ],
+   "title": "TypeError: Cannot read properties of null (reading 'status')",
+   "type": "error",
+   "user": {
+    "data": null,
+    "email": "<scrubbed>",
+    "geo": {
+     "city": "Nuremberg",
+     "country_code": "DE",
+     "region": "Germany"
+    },
+    "id": "account-case-p1",
+    "ip_address": "<scrubbed>",
+    "name": null,
+    "username": "<scrubbed>"
+   }
+  }
+ ],
+ "link": "<https://us.sentry.io/api/0/organizations/mei-demo-app/issues/7754565187/events/?full=true&cursor=0:0:1>; rel=\"previous\"; results=\"false\"; cursor=\"0:0:1\", <https://us.sentry.io/api/0/organizations/mei-demo-app/issues/7754565187/events/?full=true&cursor=0:10:0>; rel=\"next\"; results=\"false\"; cursor=\"0:10:0\"",
+ "params": [
+  [
+   "full",
+   "true"
+  ]
+ ],
+ "request": "GET /api/0/organizations/mei-demo-app/issues/7754565187/events/",
+ "status": 200
+}

@@ -4,9 +4,164 @@
    "annotations": [],
    "assignedTo": "<scrubbed>",
    "count": "3",
+   "culprit": "requestPermission(src/modules/push/permission)",
+   "firstSeen": "2026-09-25T13:11:58.913698Z",
+   "hasSeen": true,
+   "id": "7754565187",
+   "isBookmarked": false,
+   "isPublic": false,
+   "isSubscribed": false,
+   "isUnhandled": false,
+   "issueCategory": "error",
+   "issueType": "error",
+   "lastSeen": "2026-09-25T13:15:58.913698Z",
+   "level": "error",
+   "logger": null,
+   "metadata": {
+    "filename": "app:///src/modules/push/permission.ts",
+    "function": "requestPermission",
+    "in_app_frame_mix": "in-app-only",
+    "initial_priority": 75,
+    "sdk": {
+     "name": "mei-demo-generator",
+     "name_normalized": "other"
+    },
+    "synthetic": false,
+    "title": null,
+    "type": "TypeError",
+    "value": "Cannot read properties of null (reading 'status')"
+   },
+   "numComments": 0,
+   "permalink": "https://mei-demo-app.sentry.io/issues/7754565187/",
+   "platform": "javascript",
+   "priority": "high",
+   "priorityLockedAt": null,
+   "project": {
+    "id": "4512146161270784",
+    "name": "mei-demo-app",
+    "platform": "capacitor",
+    "slug": "mei-demo-app"
+   },
+   "seerAutofixLastTriggered": null,
+   "seerExplorerAutofixLastTriggered": null,
+   "seerFixabilityScore": null,
+   "shareId": null,
+   "shortId": "MEI-DEMO-APP-6",
+   "stats": {
+    "24h": [
+     [
+      1790258400,
+      0
+     ],
+     [
+      1790262000,
+      0
+     ],
+     [
+      1790265600,
+      0
+     ],
+     [
+      1790269200,
+      0
+     ],
+     [
+      1790272800,
+      0
+     ],
+     [
+      1790276400,
+      0
+     ],
+     [
+      1790280000,
+      0
+     ],
+     [
+      1790283600,
+      0
+     ],
+     [
+      1790287200,
+      0
+     ],
+     [
+      1790290800,
+      0
+     ],
+     [
+      1790294400,
+      0
+     ],
+     [
+      1790298000,
+      0
+     ],
+     [
+      1790301600,
+      0
+     ],
+     [
+      1790305200,
+      0
+     ],
+     [
+      1790308800,
+      0
+     ],
+     [
+      1790312400,
+      0
+     ],
+     [
+      1790316000,
+      0
+     ],
+     [
+      1790319600,
+      0
+     ],
+     [
+      1790323200,
+      0
+     ],
+     [
+      1790326800,
+      0
+     ],
+     [
+      1790330400,
+      0
+     ],
+     [
+      1790334000,
+      0
+     ],
+     [
+      1790337600,
+      0
+     ],
+     [
+      1790341200,
+      3
+     ]
+    ]
+   },
+   "status": "unresolved",
+   "statusDetails": {},
+   "subscriptionDetails": null,
+   "substatus": "new",
+   "title": "TypeError: Cannot read properties of null (reading 'status')",
+   "type": "error",
+   "userCount": 3
+  },
+  {
+   "annotations": [],
+   "assignedTo": "<scrubbed>",
+   "count": "3",
    "culprit": "loadSavedSearches(src/modules/search/saved-search)",
    "firstSeen": "2026-09-23T22:18:43.717773Z",
-   "hasSeen": false,
+   "hasSeen": true,
    "id": "7754274150",
    "isBookmarked": false,
    "isPublic": false,
@@ -49,14 +204,6 @@
    "shortId": "MEI-DEMO-APP-5",
    "stats": {
     "24h": [
-     [
-      1790251200,
-      0
-     ],
-     [
-      1790254800,
-      0
-     ],
      [
       1790258400,
       0
@@ -144,6 +291,14 @@
      [
       1790334000,
       1
+     ],
+     [
+      1790337600,
+      0
+     ],
+     [
+      1790341200,
+      0
      ]
     ]
    },
@@ -207,14 +362,6 @@
    "stats": {
     "24h": [
      [
-      1790251200,
-      0
-     ],
-     [
-      1790254800,
-      0
-     ],
-     [
       1790258400,
       0
      ],
@@ -301,6 +448,14 @@
      [
       1790334000,
       0
+     ],
+     [
+      1790337600,
+      0
+     ],
+     [
+      1790341200,
+      0
      ]
     ]
    },
@@ -318,7 +473,7 @@
    "count": "2",
    "culprit": "validateEmail(src/modules/profile/email)",
    "firstSeen": "2026-09-23T23:18:43.717773Z",
-   "hasSeen": false,
+   "hasSeen": true,
    "id": "7754274105",
    "isBookmarked": false,
    "isPublic": false,
@@ -362,14 +517,6 @@
    "stats": {
     "24h": [
      [
-      1790251200,
-      0
-     ],
-     [
-      1790254800,
-      0
-     ],
-     [
       1790258400,
       0
      ],
@@ -455,6 +602,14 @@
      ],
      [
       1790334000,
+      0
+     ],
+     [
+      1790337600,
+      0
+     ],
+     [
+      1790341200,
       0
      ]
     ]
@@ -517,14 +672,6 @@
    "stats": {
     "24h": [
      [
-      1790251200,
-      0
-     ],
-     [
-      1790254800,
-      0
-     ],
-     [
       1790258400,
       0
      ],
@@ -610,6 +757,14 @@
      ],
      [
       1790334000,
+      0
+     ],
+     [
+      1790337600,
+      0
+     ],
+     [
+      1790341200,
       0
      ]
     ]
@@ -672,14 +827,6 @@
    "stats": {
     "24h": [
      [
-      1790251200,
-      0
-     ],
-     [
-      1790254800,
-      0
-     ],
-     [
       1790258400,
       0
      ],
@@ -766,6 +913,14 @@
      [
       1790334000,
       0
+     ],
+     [
+      1790337600,
+      0
+     ],
+     [
+      1790341200,
+      0
      ]
     ]
    },
@@ -778,11 +933,11 @@
    "userCount": 3
   }
  ],
- "link": "<https://us.sentry.io/api/0/projects/mei-demo-app/mei-demo-app/issues/?query=&start=2026-09-11T11%3A55%3A53&end=2026-09-25T11%3A55%3A53&limit=100&cursor=1790336992256:0:1>; rel=\"previous\"; results=\"false\"; cursor=\"1790336992256:0:1\", <https://us.sentry.io/api/0/projects/mei-demo-app/mei-demo-app/issues/?query=&start=2026-09-11T11%3A55%3A53&end=2026-09-25T11%3A55%3A53&limit=100&cursor=1790200423718:1:0>; rel=\"next\"; results=\"false\"; cursor=\"1790200423718:1:0\"",
+ "link": "<https://us.sentry.io/api/0/projects/mei-demo-app/mei-demo-app/issues/?query=&start=2026-09-11T13%3A25%3A24&end=2026-09-25T13%3A25%3A24&limit=100&cursor=1790342158913:0:1>; rel=\"previous\"; results=\"false\"; cursor=\"1790342158913:0:1\", <https://us.sentry.io/api/0/projects/mei-demo-app/mei-demo-app/issues/?query=&start=2026-09-11T13%3A25%3A24&end=2026-09-25T13%3A25%3A24&limit=100&cursor=1790200423718:1:0>; rel=\"next\"; results=\"false\"; cursor=\"1790200423718:1:0\"",
  "params": [
   [
    "end",
-   "2026-09-25T11:55:53"
+   "2026-09-25T13:25:24"
   ],
   [
    "limit",
@@ -794,7 +949,7 @@
   ],
   [
    "start",
-   "2026-09-11T11:55:53"
+   "2026-09-11T13:25:24"
   ]
  ],
  "request": "GET /api/0/projects/mei-demo-app/mei-demo-app/issues/",
