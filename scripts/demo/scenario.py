@@ -130,6 +130,9 @@ class IncidentSpec:
     breadcrumbs: tuple[dict, ...]
     subjects: tuple[Subject, ...]  # one event per subject
     flags: dict[str, str] = field(default_factory=dict)
+    # Per-event breadcrumbs (aligned with `subjects`) when the paths differ;
+    # otherwise every event uses `breadcrumbs`.
+    event_breadcrumbs: tuple[tuple[dict, ...], ...] | None = None
     # Expected incident context (asserted by tests and the live sweep)
     expected_release_state: str = "KNOWN"
     expected_suspects: tuple[str, ...] | str = ()  # commit subjects, or "UNKNOWN"
@@ -150,6 +153,10 @@ def _http(method: str, url: str, status: int) -> dict:
 
 def _lifecycle(state: str) -> dict:
     return {"type": "navigation", "category": "app.lifecycle", "data": {"state": state}}
+
+
+def breadcrumbs_for(spec: "IncidentSpec", index: int) -> tuple[dict, ...]:
+    return spec.event_breadcrumbs[index] if spec.event_breadcrumbs else spec.breadcrumbs
 
 
 _MAIN = Frame("app:///src/app/main.ts", "bootstrap", 12)
@@ -268,4 +275,87 @@ IMPACTS = (
                expected_findings=("RELEASE_NOT_FOUND", "NO_SESSION_DATA", "NEW_ISSUE_ATTRIBUTION_UNKNOWN"),
                expected_new_issues=("F3",)),
     ImpactSpec("RI6", "9.9.9", expected_status=404),
+)
+
+
+# ---------------------------------------------------------------- Slice P
+
+# F6: sent separately (`sentry-repro`) so earlier Sentry steps are never
+# re-sent. Three different paths into the same crash; all three installs have
+# push OS permission DENIED in Module 1 (a real precondition), while the three
+# accounts' profile states differ (consistent / inconsistent / unknown).
+_F6_ENDING = (
+    _nav("/settings/notifications", "/settings"),
+    _tap("button#enable-push"),
+    _http("POST", "/api/push/permission", 403),
+)
+MAX_BREADCRUMBS = 100
+
+REPRO_INCIDENTS = (
+    IncidentSpec(
+        case="F6",
+        release="1.4.0",
+        exception_type="TypeError",
+        exception_value="Cannot read properties of null (reading 'status')",
+        frames=(_MAIN, Frame("app:///src/modules/push/permission.ts", "requestPermission", 27)),
+        breadcrumbs=(),
+        subjects=(
+            Subject("account-case-p1", "install-case-c"),
+            Subject("account-case-p3", "install-case-h"),
+            Subject("account-case-p7", "install-case-m"),
+        ),
+        event_breadcrumbs=(
+            (_nav("/home", "/"), _nav("/settings", "/home"), *_F6_ENDING),
+            (_lifecycle("foreground"), _nav("/inbox", "/"), *_F6_ENDING),
+            # A full trail: the start of this user's path is lost to the limit.
+            tuple(_nav(f"/search/results?page={n + 1}", f"/search/results?page={n}")
+                  for n in range(MAX_BREADCRUMBS - len(_F6_ENDING))) + _F6_ENDING,
+        ),
+        expected_suspects=(),  # 1.4.0 only touched saved-search
+        expected_findings=("NO_SUSPECT_COMMIT",),
+    ),
+)
+ALL_INCIDENTS = INCIDENTS + REPRO_INCIDENTS
+
+
+@dataclass(frozen=True)
+class ReproSpec:
+    case: str  # RP1..RP7
+    incident: str  # F1..F6, or an id that was never ingested
+    expected_status: int = 200
+    expected_steps: tuple[str, ...] = ()  # "KIND target"
+    expected_variants: int = 0
+    expected_preconditions: dict = field(default_factory=dict)  # subset: key -> value
+    expected_varies: tuple[str, ...] = ()  # subset of keys
+    expected_gaps: tuple[str, ...] = ()  # exact codes, in response order
+    expected_suspects: tuple[str, ...] | str = ()  # commit subjects, or "UNKNOWN"
+
+
+REPROS = (
+    ReproSpec("RP1", "F1",
+              expected_steps=("LIFECYCLE background", "LIFECYCLE foreground", "NAVIGATE /home",
+                              "NAVIGATE /settings/notifications", "TAP button#enable-push",
+                              "BACKEND_CALL POST /api/push/register 401"),
+              expected_preconditions={"flag.new_push_flow": "on", "app.version": "1.2.0", "os.name": "iOS",
+                                      "device.model": "iPhone15,2"},
+              # Not push.deliverable: it depends on wall-clock registration freshness,
+              # which would make this expectation change on a date instead of a code change.
+              expected_varies=("push.os_permission", "push.provider_registration", "profile.consistent"),
+              expected_suspects=("Refresh push token on resume",)),
+    ReproSpec("RP2", "F6",
+              expected_steps=("NAVIGATE /settings/notifications", "TAP button#enable-push",
+                              "BACKEND_CALL POST /api/push/permission 403"),
+              expected_variants=3,
+              expected_preconditions={"push.os_permission": "DENIED", "push.deliverable": False,
+                                      "app.version": "1.4.0"},
+              expected_varies=("profile.consistent",),
+              expected_gaps=("BREADCRUMBS_TRUNCATED",)),
+    ReproSpec("RP3", "F4", expected_steps=("NAVIGATE /home",), expected_gaps=("CULPRIT_UNMAPPABLE",),
+              expected_suspects="UNKNOWN"),
+    ReproSpec("RP4", "F3", expected_steps=("NAVIGATE /profile", "TAP button#save-profile"),
+              expected_preconditions={"app.version": "1.2.1"}, expected_suspects="UNKNOWN"),
+    ReproSpec("RP5", "F2", expected_steps=("NAVIGATE /search", "TAP button#saved-searches"),
+              expected_varies=("app.version",)),
+    ReproSpec("RP6", "F5", expected_steps=("NAVIGATE /legacy/inbox",), expected_suspects=("Clean up router",)),
+    ReproSpec("RP7", "never-ingested", expected_status=404),
 )

@@ -67,6 +67,11 @@ class ImpactConfig(_Strict):
     settle_minutes: int = 60
 
 
+class ReproConfig(_Strict):
+    max_breadcrumbs: int = 100
+    min_support: float = 1.0
+
+
 class OrgConfig(_Strict):
     name: str
     github: GithubConfig
@@ -76,6 +81,7 @@ class OrgConfig(_Strict):
     components: tuple[ComponentRule, ...]
     frame_paths: FramePathConfig
     impact: ImpactConfig = ImpactConfig()
+    repro: ReproConfig = ReproConfig()
 
     # ---- releases ----
 

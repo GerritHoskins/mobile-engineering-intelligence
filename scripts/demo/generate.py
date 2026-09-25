@@ -8,6 +8,7 @@ the user's go-ahead. `--dry-run` prints what would be written, writes nothing.
     uv run python -m scripts.demo.generate sentry-events [--dry-run]
     uv run python -m scripts.demo.generate sentry-sessions [--dry-run]
     uv run python -m scripts.demo.generate sentry-regression [--dry-run]
+    uv run python -m scripts.demo.generate sentry-repro [--dry-run]
 
 Credentials come from .env (see .env.example) and are never printed.
 """
@@ -213,7 +214,9 @@ def _send_envelope(header: dict, item_type: str, payload: dict) -> None:
                headers={"X-Sentry-Auth": auth, "Content-Type": "application/x-sentry-envelope"}).raise_for_status()
 
 
-def build_event(spec: sc.IncidentSpec, subject: sc.Subject, occurred_at: datetime) -> dict:
+def build_event(spec: sc.IncidentSpec, subject: sc.Subject, occurred_at: datetime,
+                crumbs: tuple[dict, ...] | None = None) -> dict:
+    crumbs = spec.breadcrumbs if crumbs is None else crumbs
     return {
         "event_id": uuid.uuid4().hex,
         "timestamp": _iso(occurred_at),
@@ -230,8 +233,8 @@ def build_event(spec: sc.IncidentSpec, subject: sc.Subject, occurred_at: datetim
             "app": {"app_version": spec.release},
         },
         "breadcrumbs": {"values": [
-            {"timestamp": _iso(occurred_at - timedelta(seconds=len(spec.breadcrumbs) - i)), **crumb}
-            for i, crumb in enumerate(spec.breadcrumbs)
+            {"timestamp": _iso(occurred_at - timedelta(seconds=len(crumbs) - i)), **crumb}
+            for i, crumb in enumerate(crumbs)
         ]},
         "exception": {"values": [{
             "type": spec.exception_type,
@@ -310,12 +313,33 @@ def cmd_sentry_regression(dry_run: bool) -> None:
     print(f"sent {label}")
 
 
+def cmd_sentry_repro(dry_run: bool) -> None:
+    """The Slice P case(s) only (F6): different paths into the same crash."""
+    state = load_state()
+    now = datetime.now(timezone.utc)
+    for spec in sc.REPRO_INCIDENTS:
+        for m, subject in enumerate(spec.subjects):
+            crumbs = sc.breadcrumbs_for(spec, m)
+            event = build_event(spec, subject, now - timedelta(minutes=10 - 2 * m), crumbs)
+            label = (f"{spec.case} {event['release']} {spec.exception_type} user={subject.user_id} "
+                     f"install={subject.installation_id} breadcrumbs={len(crumbs)}")
+            if dry_run:
+                print(f"WOULD SEND {label}")
+                continue
+            _send_envelope({"event_id": event["event_id"], "sent_at": _iso(now)}, "event", event)
+            state.setdefault("sentry_events", []).append(
+                {"case": spec.case, "event_id": event["event_id"], "sent_at": _iso(now), "purpose": "repro"})
+            save_state(state)
+            print(f"sent {label}")
+
+
 COMMANDS = {
     "jira": cmd_jira,
     "git": cmd_git,
     "sentry-events": cmd_sentry_events,
     "sentry-sessions": cmd_sentry_sessions,
     "sentry-regression": cmd_sentry_regression,
+    "sentry-repro": cmd_sentry_repro,
 }
 
 
