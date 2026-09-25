@@ -42,3 +42,8 @@ impact:
   min_sessions: 100  # below this, health is UNKNOWN (INSUFFICIENT_ADOPTION)
   crash_regression_pp: 2.0  # crash-free drop/rise that counts as a change
   settle_minutes: 60  # newer buckets may still lack late-arriving crash counts
+
+# Reproduction Assistant.
+repro:
+  max_breadcrumbs: 100  # a trail this long was likely cut off at its start
+  min_support: 1.0  # share of events that must agree before a value is a precondition

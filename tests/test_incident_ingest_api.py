@@ -50,8 +50,8 @@ class FakeJira:
 
 
 class FakeSentry:
-    def __init__(self):
-        self.issues = {spec.case: spec for spec in sc.INCIDENTS}
+    def __init__(self, incidents=sc.INCIDENTS):
+        self.issues = {spec.case: spec for spec in incidents}
 
     def list_issues(self, start, end):
         return [{"id": case} for case in self.issues]
@@ -87,13 +87,16 @@ class FakeSentry:
             "eventID": f"{issue_id}-{n}", "groupID": issue_id, "dateCreated": (NOW - timedelta(minutes=n)).isoformat(),
             "user": {"id": s.user_id},
             "tags": [{"key": "release", "value": ORG.sentry_release_for(spec.release)},
-                     {"key": "installation_id", "value": s.installation_id}, {"key": "demo_case", "value": spec.case}],
-            "contexts": {},
+                     {"key": "installation_id", "value": s.installation_id}, {"key": "demo_case", "value": spec.case},
+                     *({"key": k, "value": v} for k, v in spec.flags.items())],
+            # Same shape as scripts/demo/generate.py build_event.
+            "contexts": {"device": {"family": "iOS", "model": "iPhone15,2"}, "os": {"name": "iOS", "version": "18.4"},
+                         "app": {"app_version": spec.release}},
             "entries": [{"type": "exception", "data": {"values": [{
                 "type": spec.exception_type, "value": spec.exception_value,
                 "stacktrace": {"frames": [{"filename": f.filename, "function": f.function, "lineNo": f.lineno,
                                            "inApp": True} for f in spec.frames]}}]}},
-                {"type": "breadcrumbs", "data": {"values": list(spec.breadcrumbs)}}],
+                {"type": "breadcrumbs", "data": {"values": list(sc.breadcrumbs_for(spec, n))}}],
         } for n, s in enumerate(spec.subjects)]
 
     def get_project(self):
@@ -110,13 +113,13 @@ class FakeSentry:
         return rows + [{"release": "probe-now", "status": "healthy", "bucket_start": settled, "sessions": 18}]
 
 
-def _ingest() -> None:
+def _ingest(incidents=sc.INCIDENTS) -> None:
     from app.db import SessionLocal
 
     with SessionLocal() as session, session.begin():
         keys = ingest_git(session, ORG, FakeGitHub())
         ingest_jira(session, ORG, FakeJira(), keys + ["MEI-999"])  # one key Jira doesn't know
-        ingest_sentry(session, ORG, FakeSentry(), NOW - timedelta(days=14), NOW)
+        ingest_sentry(session, ORG, FakeSentry(incidents), NOW - timedelta(days=14), NOW)
 
 
 def _row_counts() -> dict[str, int]:

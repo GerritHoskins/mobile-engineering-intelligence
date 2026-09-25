@@ -1,0 +1,274 @@
+{
+  "$defs": {
+    "ExpectedFailure": {
+      "properties": {
+        "culprit_frame": {
+          "anyOf": [
+            {
+              "additionalProperties": true,
+              "type": "object"
+            },
+            {
+              "const": "UNKNOWN",
+              "type": "string"
+            }
+          ],
+          "title": "Culprit Frame"
+        },
+        "exception": {
+          "additionalProperties": true,
+          "title": "Exception",
+          "type": "object"
+        },
+        "suspects": {
+          "anyOf": [
+            {
+              "items": {
+                "additionalProperties": true,
+                "type": "object"
+              },
+              "type": "array"
+            },
+            {
+              "const": "UNKNOWN",
+              "type": "string"
+            }
+          ],
+          "title": "Suspects"
+        }
+      },
+      "required": [
+        "exception",
+        "culprit_frame",
+        "suspects"
+      ],
+      "title": "ExpectedFailure",
+      "type": "object"
+    },
+    "Gap": {
+      "properties": {
+        "code": {
+          "title": "Code",
+          "type": "string"
+        },
+        "event_ids": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Event Ids",
+          "type": "array"
+        },
+        "keys": {
+          "default": [],
+          "items": {
+            "type": "string"
+          },
+          "title": "Keys",
+          "type": "array"
+        }
+      },
+      "required": [
+        "code",
+        "event_ids"
+      ],
+      "title": "Gap",
+      "type": "object"
+    },
+    "Precondition": {
+      "properties": {
+        "key": {
+          "title": "Key",
+          "type": "string"
+        },
+        "source": {
+          "title": "Source",
+          "type": "string"
+        },
+        "support": {
+          "title": "Support",
+          "type": "number"
+        },
+        "value": {
+          "title": "Value"
+        }
+      },
+      "required": [
+        "key",
+        "value",
+        "support",
+        "source"
+      ],
+      "title": "Precondition",
+      "type": "object"
+    },
+    "Step": {
+      "properties": {
+        "kind": {
+          "enum": [
+            "LIFECYCLE",
+            "NAVIGATE",
+            "TAP",
+            "BACKEND_CALL",
+            "UNMAPPED"
+          ],
+          "title": "Kind",
+          "type": "string"
+        },
+        "support": {
+          "default": 1.0,
+          "title": "Support",
+          "type": "number"
+        },
+        "target": {
+          "title": "Target",
+          "type": "string"
+        }
+      },
+      "required": [
+        "kind",
+        "target"
+      ],
+      "title": "Step",
+      "type": "object"
+    },
+    "ValueCount": {
+      "properties": {
+        "count": {
+          "title": "Count",
+          "type": "integer"
+        },
+        "value": {
+          "title": "Value"
+        }
+      },
+      "required": [
+        "value",
+        "count"
+      ],
+      "title": "ValueCount",
+      "type": "object"
+    },
+    "Variant": {
+      "properties": {
+        "events": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Events",
+          "type": "array"
+        },
+        "prefix": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Prefix",
+          "type": "array"
+        }
+      },
+      "required": [
+        "prefix",
+        "events"
+      ],
+      "title": "Variant",
+      "type": "object"
+    },
+    "Varies": {
+      "properties": {
+        "key": {
+          "title": "Key",
+          "type": "string"
+        },
+        "values": {
+          "items": {
+            "$ref": "#/$defs/ValueCount"
+          },
+          "title": "Values",
+          "type": "array"
+        }
+      },
+      "required": [
+        "key",
+        "values"
+      ],
+      "title": "Varies",
+      "type": "object"
+    }
+  },
+  "$id": "reproduction.v1",
+  "properties": {
+    "events_considered": {
+      "title": "Events Considered",
+      "type": "integer"
+    },
+    "evidence": {
+      "items": {
+        "additionalProperties": true,
+        "type": "object"
+      },
+      "title": "Evidence",
+      "type": "array"
+    },
+    "expected_failure": {
+      "$ref": "#/$defs/ExpectedFailure"
+    },
+    "gaps": {
+      "items": {
+        "$ref": "#/$defs/Gap"
+      },
+      "title": "Gaps",
+      "type": "array"
+    },
+    "incident": {
+      "additionalProperties": true,
+      "title": "Incident",
+      "type": "object"
+    },
+    "preconditions": {
+      "items": {
+        "$ref": "#/$defs/Precondition"
+      },
+      "title": "Preconditions",
+      "type": "array"
+    },
+    "schema_version": {
+      "const": "reproduction.v1",
+      "default": "reproduction.v1",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "steps": {
+      "items": {
+        "$ref": "#/$defs/Step"
+      },
+      "title": "Steps",
+      "type": "array"
+    },
+    "variants": {
+      "items": {
+        "$ref": "#/$defs/Variant"
+      },
+      "title": "Variants",
+      "type": "array"
+    },
+    "varies": {
+      "items": {
+        "$ref": "#/$defs/Varies"
+      },
+      "title": "Varies",
+      "type": "array"
+    }
+  },
+  "required": [
+    "incident",
+    "events_considered",
+    "preconditions",
+    "varies",
+    "steps",
+    "variants",
+    "expected_failure",
+    "gaps",
+    "evidence"
+  ],
+  "title": "Reproduction",
+  "type": "object"
+}
