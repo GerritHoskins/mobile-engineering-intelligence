@@ -102,10 +102,17 @@ def test_every_finding_has_evidence(case: str) -> None:
         assert finding.code and finding.severity and finding.evidence
 
 
-def test_first_release_has_no_previous() -> None:
+def test_first_release_suspects_are_unknown_not_empty() -> None:
+    """Ingestion stores no change set for the first tag (nothing to diff
+    against), so the graph has no 1.0.0 commits -- as in production."""
     spec = sc.IncidentSpec(case="X", release="1.0.0", exception_type="E", exception_value="v",
                            frames=(sc.Frame("app:///src/app/main.ts", "bootstrap", 1),), breadcrumbs=(), subjects=())
-    assert build_incident_context(_incident(spec), _graph()).release["previous"] is None
+    graph = _graph()
+    graph.commits.pop("1.0.0")
+    context = build_incident_context(_incident(spec), graph)
+    assert context.release == {"version": "1.0.0", "state": "KNOWN", "previous": None}
+    assert context.suspects == "UNKNOWN"
+    assert [f.code for f in context.findings] == ["NO_PREVIOUS_RELEASE"]
 
 
 # ------------------------------------------------------------ normalization

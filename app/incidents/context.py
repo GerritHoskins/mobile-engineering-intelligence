@@ -111,13 +111,21 @@ def build_incident_context(incident: IncidentInfo, graph: ReleaseGraph) -> Incid
     # Step 2 - map the stack to repo paths. No mappable frame at all means
     # suspects are UNKNOWN (e.g. a minified bundle without source maps).
     mapped = [f for f in incident.frames if f.get("path")]
-    if not mapped:
+    if previous is None:
+        # The first tagged release has no earlier tag to diff against, so its
+        # change set -- and therefore any suspect -- is unknown, not empty.
+        findings.append(Finding(
+            code="NO_PREVIOUS_RELEASE", severity="INFO",
+            evidence=[{"source": "git", "key": "tag", "value": version}],
+        ))
+        suspects: list[Suspect] | Literal["UNKNOWN"] = "UNKNOWN"
+    elif not mapped:
         findings.append(Finding(
             code="FRAMES_UNMAPPABLE", severity="WARNING",
             evidence=[{"source": "sentry", "key": "frame", "value": f.get("raw_filename")}
                       for f in incident.frames] or [{"source": "sentry", "key": "frames", "value": None}],
         ))
-        suspects: list[Suspect] | Literal["UNKNOWN"] = "UNKNOWN"
+        suspects = "UNKNOWN"
     else:
         # Step 3 - suspects: commits in this release touching a file in the
         # stack, ranked by how close to the crash the matching frame is

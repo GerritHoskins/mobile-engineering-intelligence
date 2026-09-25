@@ -6,6 +6,7 @@ on:
     branches: [main]
     paths:
       - app/**
+      - config/**
       - alembic/**
       - alembic.ini
       - scripts/start.sh
