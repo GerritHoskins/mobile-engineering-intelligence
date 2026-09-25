@@ -44,11 +44,11 @@ def client() -> TestClient:
 
 
 def test_recording_holds_every_planted_case(replayed: dict[str, str]) -> None:
-    assert set(replayed) == {spec.case for spec in sc.INCIDENTS}
-    assert len(set(replayed.values())) == 5  # the fingerprints kept each case its own issue
+    assert set(replayed) == {spec.case for spec in sc.ALL_INCIDENTS}
+    assert len(set(replayed.values())) == 6  # the fingerprints kept each case its own issue
 
 
-@pytest.mark.parametrize("spec", sc.INCIDENTS, ids=lambda s: s.case)
+@pytest.mark.parametrize("spec", sc.ALL_INCIDENTS, ids=lambda s: s.case)
 def test_context_on_real_payloads(client: TestClient, replayed: dict[str, str], spec: sc.IncidentSpec) -> None:
     body = client.get(f"/v1/incidents/{replayed[spec.case]}/context").json()
 
@@ -116,3 +116,32 @@ def test_real_regression_keeps_first_release(client: TestClient, replayed: dict[
         f2 = session.get(Incident, ("demo", replayed[sc.REGRESSION_CASE]))
     assert (f2.first_release, f2.regressed_release, f2.substatus) == (
         "mei-demo-app@1.2.0", "mei-demo-app@1.3.0", "regressed")
+
+
+# ----------------------------------------------------- Slice P on real data
+
+
+@pytest.mark.usefixtures("_truncate_state_observation")
+@pytest.mark.parametrize("spec", sc.REPROS, ids=lambda s: s.case)
+def test_reproduction_on_real_payloads(client: TestClient, replayed: dict[str, str], spec: sc.ReproSpec) -> None:
+    from app.seed import seed
+
+    seed()  # Module 1 subjects the real events point at
+    issue_id = replayed.get(spec.incident, spec.incident)  # RP7's id was never ingested
+    response = client.get(f"/v1/incidents/{issue_id}/reproduction")
+    assert response.status_code == spec.expected_status
+    if spec.expected_status != 200:
+        return
+    body = response.json()
+    assert [f"{s['kind']} {s['target']}" for s in body["steps"]] == list(spec.expected_steps)
+    assert len(body["variants"]) == spec.expected_variants
+    preconditions = {p["key"]: p["value"] for p in body["preconditions"]}
+    for key, value in spec.expected_preconditions.items():
+        assert preconditions.get(key) == value, key
+    assert set(spec.expected_varies) <= {v["key"] for v in body["varies"]}
+    assert [g["code"] for g in body["gaps"]] == list(spec.expected_gaps)
+    suspects = body["expected_failure"]["suspects"]
+    if spec.expected_suspects == "UNKNOWN":
+        assert suspects == "UNKNOWN"
+    else:
+        assert [s["message"].split(": ", 1)[-1] for s in suspects] == list(spec.expected_suspects)

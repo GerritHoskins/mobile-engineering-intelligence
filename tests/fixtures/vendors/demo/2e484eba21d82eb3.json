@@ -1,21 +1,21 @@
 {
  "json": {
   "access": [
-   "project:write",
+   "org:integrations",
+   "team:write",
    "team:admin",
+   "event:read",
+   "alerts:read",
+   "event:write",
+   "alerts:write",
+   "project:read",
+   "project:write",
+   "project:releases",
    "team:read",
    "org:read",
-   "event:read",
-   "project:read",
-   "event:admin",
-   "alerts:write",
-   "event:write",
-   "alerts:read",
-   "project:admin",
    "member:read",
-   "team:write",
-   "org:integrations",
-   "project:releases"
+   "project:admin",
+   "event:admin"
   ],
   "allowedDomains": [
    "*"
@@ -44,12 +44,12 @@
   "enableAutoReleaseCreation": true,
   "features": [
    "similarity-embeddings",
-   "discard-transaction",
-   "profile-functions-metrics-eap-ingestion",
-   "issue-action-log-write-to-db",
-   "similarity-grouping-model-next",
-   "similarity-grouping-skip-fallback",
    "defer-attachment-storage",
+   "similarity-grouping-model-next",
+   "issue-action-log-write-to-db",
+   "similarity-grouping-skip-fallback",
+   "profile-functions-metrics-eap-ingestion",
+   "discard-transaction",
    "similarity-indexing",
    "similarity-view",
    "releases"

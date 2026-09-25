@@ -28,7 +28,7 @@ def main() -> None:
                for e in session.scalars(select(IncidentEvent).where(IncidentEvent.org == args.org))}
 
     failures = 0
-    for spec in sc.INCIDENTS:
+    for spec in sc.ALL_INCIDENTS:
         issue_id = ids.get(spec.case)
         if issue_id is None:
             print(f"FAIL [{spec.case}] not ingested")
@@ -50,7 +50,7 @@ def main() -> None:
             print(f"OK   [{spec.case}] issue {issue_id}: release {body['release']['version']} "
                   f"{body['release']['state']}, suspects {suspects}, findings {checks['findings'][0]}")
     print("---")
-    print(f"{len(sc.INCIDENTS) - failures}/{len(sc.INCIDENTS)} incident scenarios matched.")
+    print(f"{len(sc.ALL_INCIDENTS) - failures}/{len(sc.ALL_INCIDENTS)} incident scenarios matched.")
     sys.exit(1 if failures else 0)
 
 

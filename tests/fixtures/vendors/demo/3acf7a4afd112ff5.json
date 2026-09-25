@@ -4,82 +4,9 @@
    {
     "commentId": null,
     "data": {
-     "event_id": "5a0a184c68c64e6297dc50520ea39199",
-     "event_metadata": {
-      "filename": "app:///src/modules/search/saved-search.ts",
-      "function": "loadSavedSearches",
-      "in_app_frame_mix": "in-app-only",
-      "synthetic": false,
-      "type": "RangeError",
-      "value": "Invalid saved-search index"
-     },
-     "event_title": "RangeError: Invalid saved-search index",
-     "event_type": "error",
-     "version": "mei-demo-app@1.3.0"
-    },
-    "dateCreated": "2026-09-25T11:49:58.897171Z",
-    "id": "6613340240",
-    "sentry_app": null,
-    "type": "set_regression",
-    "user": null
-   },
-   {
-    "commentId": null,
-    "data": {},
-    "dateCreated": "2026-09-25T11:49:19.721087Z",
-    "id": "6613339605",
-    "sentry_app": null,
-    "type": "set_resolved",
-    "user": {
-     "avatar": {
-      "avatarType": "letter_avatar",
-      "avatarUrl": "<scrubbed>",
-      "avatarUuid": null
-     },
-     "avatarUrl": "<scrubbed>",
-     "dateJoined": "2020-04-26T13:52:54.796113Z",
-     "email": "<scrubbed>",
-     "emails": [
-      {
-       "email": "<scrubbed>",
-       "id": "754733",
-       "is_verified": true
-      }
-     ],
-     "experiments": {},
-     "flags": {
-      "newsletter_consent_prompt": false
-     },
-     "has2fa": false,
-     "hasPasswordAuth": false,
-     "id": "660851",
-     "identities": [],
-     "isActive": true,
-     "isManaged": false,
-     "isStaff": false,
-     "isSuperuser": false,
-     "isSuspended": false,
-     "lastActive": "2026-09-25T13:20:03.520654Z",
-     "lastLogin": "2026-09-25T08:14:27.776319Z",
-     "name": "GerritHoskins",
-     "options": {
-      "clock24Hours": false,
-      "defaultIssueEvent": "recommended",
-      "language": "en",
-      "prefersIssueDetailsStreamlinedUI": null,
-      "stacktraceOrder": -1,
-      "theme": "system",
-      "timezone": "Europe/Berlin"
-     },
-     "username": "<scrubbed>"
-    }
-   },
-   {
-    "commentId": null,
-    "data": {
      "priority": "high"
     },
-    "dateCreated": "2026-09-23T22:18:43.717773Z",
+    "dateCreated": "2026-09-25T13:11:58.913698Z",
     "id": "0",
     "sentry_app": null,
     "type": "first_seen",
@@ -89,76 +16,20 @@
   "annotations": [],
   "assignedTo": "<scrubbed>",
   "count": "3",
-  "culprit": "loadSavedSearches(src/modules/search/saved-search)",
+  "culprit": "requestPermission(src/modules/push/permission)",
   "firstRelease": {
    "authors": [],
    "commitCount": 0,
    "currentProjectMeta": {},
    "data": {},
-   "dateCreated": "2026-09-23T21:48:43.717773Z",
+   "dateCreated": "2026-09-24T03:00:00Z",
    "dateReleased": null,
    "deployCount": 0,
-   "firstEvent": "2026-09-23T21:48:43Z",
-   "id": 1992579324,
+   "firstEvent": "2026-09-25T13:15:58Z",
+   "id": 1992618469,
    "lastCommit": null,
    "lastDeploy": null,
-   "lastEvent": "2026-09-23T22:53:43Z",
-   "newGroups": 3,
-   "owner": null,
-   "projects": [
-    {
-     "hasHealthData": false,
-     "id": 4512146161270784,
-     "name": "mei-demo-app",
-     "newGroups": 3,
-     "platform": "capacitor",
-     "platforms": [],
-     "slug": "mei-demo-app"
-    }
-   ],
-   "ref": null,
-   "shortVersion": "mei-demo-app@1.2.0",
-   "status": "open",
-   "url": null,
-   "userAgent": null,
-   "version": "mei-demo-app@1.2.0",
-   "versionInfo": {
-    "buildHash": null,
-    "description": "1.2.0",
-    "package": "mei-demo-app",
-    "version": {
-     "buildCode": null,
-     "components": 3,
-     "major": 1,
-     "minor": 2,
-     "patch": 0,
-     "pre": null,
-     "raw": "1.2.0"
-    }
-   }
-  },
-  "firstSeen": "2026-09-23T22:18:43.717773Z",
-  "hasSeen": true,
-  "id": "7754274150",
-  "isBookmarked": false,
-  "isPublic": false,
-  "isSubscribed": true,
-  "isUnhandled": false,
-  "issueCategory": "error",
-  "issueType": "error",
-  "lastRelease": {
-   "authors": [],
-   "commitCount": 0,
-   "currentProjectMeta": {},
-   "data": {},
-   "dateCreated": "2026-09-23T23:53:43.717773Z",
-   "dateReleased": null,
-   "deployCount": 0,
-   "firstEvent": "2026-09-23T23:48:43Z",
-   "id": 1992579352,
-   "lastCommit": null,
-   "lastDeploy": null,
-   "lastEvent": "2026-09-25T11:49:52Z",
+   "lastEvent": "2026-09-25T13:15:58Z",
    "newGroups": 1,
    "owner": null,
    "projects": [
@@ -173,32 +44,88 @@
     }
    ],
    "ref": null,
-   "shortVersion": "mei-demo-app@1.3.0",
+   "shortVersion": "mei-demo-app@1.4.0",
    "status": "open",
    "url": null,
    "userAgent": null,
-   "version": "mei-demo-app@1.3.0",
+   "version": "mei-demo-app@1.4.0",
    "versionInfo": {
     "buildHash": null,
-    "description": "1.3.0",
+    "description": "1.4.0",
     "package": "mei-demo-app",
     "version": {
      "buildCode": null,
      "components": 3,
      "major": 1,
-     "minor": 3,
+     "minor": 4,
      "patch": 0,
      "pre": null,
-     "raw": "1.3.0"
+     "raw": "1.4.0"
     }
    }
   },
-  "lastSeen": "2026-09-25T11:49:52Z",
+  "firstSeen": "2026-09-25T13:11:58.913698Z",
+  "hasSeen": true,
+  "id": "7754565187",
+  "isBookmarked": false,
+  "isPublic": false,
+  "isSubscribed": false,
+  "isUnhandled": false,
+  "issueCategory": "error",
+  "issueType": "error",
+  "lastRelease": {
+   "authors": [],
+   "commitCount": 0,
+   "currentProjectMeta": {},
+   "data": {},
+   "dateCreated": "2026-09-24T03:00:00Z",
+   "dateReleased": null,
+   "deployCount": 0,
+   "firstEvent": "2026-09-25T13:15:58Z",
+   "id": 1992618469,
+   "lastCommit": null,
+   "lastDeploy": null,
+   "lastEvent": "2026-09-25T13:15:58Z",
+   "newGroups": 1,
+   "owner": null,
+   "projects": [
+    {
+     "hasHealthData": false,
+     "id": 4512146161270784,
+     "name": "mei-demo-app",
+     "newGroups": 1,
+     "platform": "capacitor",
+     "platforms": [],
+     "slug": "mei-demo-app"
+    }
+   ],
+   "ref": null,
+   "shortVersion": "mei-demo-app@1.4.0",
+   "status": "open",
+   "url": null,
+   "userAgent": null,
+   "version": "mei-demo-app@1.4.0",
+   "versionInfo": {
+    "buildHash": null,
+    "description": "1.4.0",
+    "package": "mei-demo-app",
+    "version": {
+     "buildCode": null,
+     "components": 3,
+     "major": 1,
+     "minor": 4,
+     "patch": 0,
+     "pre": null,
+     "raw": "1.4.0"
+    }
+   }
+  },
+  "lastSeen": "2026-09-25T13:15:58Z",
   "level": "error",
   "logger": null,
   "metadata": {
-   "filename": "app:///src/modules/search/saved-search.ts",
-   "function": "loadSavedSearches",
+   "filename": "app:///src/modules/push/permission.ts",
+   "function": "requestPermission",
    "in_app_frame_mix": "in-app-only",
    "initial_priority": 75,
    "sdk": {
@@ -207,57 +134,12 @@
    },
    "synthetic": false,
    "title": null,
-   "type": "RangeError",
-   "value": "Invalid saved-search index"
+   "type": "TypeError",
+   "value": "Cannot read properties of null (reading 'status')"
   },
   "numComments": 0,
-  "participants": [
-   {
-    "avatar": {
-     "avatarType": "letter_avatar",
-     "avatarUrl": "<scrubbed>",
-     "avatarUuid": null
-    },
-    "avatarUrl": "<scrubbed>",
-    "dateJoined": "2020-04-26T13:52:54.796113Z",
-    "email": "<scrubbed>",
-    "emails": [
-     {
-      "email": "<scrubbed>",
-      "id": "754733",
-      "is_verified": true
-     }
-    ],
-    "experiments": {},
-    "flags": {
-     "newsletter_consent_prompt": false
-    },
-    "has2fa": false,
-    "hasPasswordAuth": false,
-    "id": "660851",
-    "identities": [],
-    "isActive": true,
-    "isManaged": false,
-    "isStaff": false,
-    "isSuperuser": false,
-    "isSuspended": false,
-    "lastActive": "2026-09-25T13:20:03.520654Z",
-    "lastLogin": "2026-09-25T08:14:27.776319Z",
-    "name": "GerritHoskins",
-    "options": {
-     "clock24Hours": false,
-     "defaultIssueEvent": "recommended",
-     "language": "en",
-     "prefersIssueDetailsStreamlinedUI": null,
-     "stacktraceOrder": -1,
-     "theme": "system",
-     "timezone": "Europe/Berlin"
-    },
-    "type": "user",
-    "username": "<scrubbed>"
-   }
-  ],
-  "permalink": "https://mei-demo-app.sentry.io/issues/7754274150/",
+  "participants": [],
+  "permalink": "https://mei-demo-app.sentry.io/issues/7754565187/",
   "platform": "javascript",
   "priority": "high",
   "priorityLockedAt": null,
@@ -272,7 +154,7 @@
   "seerExplorerAutofixLastTriggered": null,
   "seerFixabilityScore": null,
   "shareId": null,
-  "shortId": "MEI-DEMO-APP-5",
+  "shortId": "MEI-DEMO-APP-6",
   "stats": {
    "24h": [
     [
@@ -365,7 +247,7 @@
     ],
     [
      1790334000,
-     1
+     0
     ],
     [
      1790337600,
@@ -373,7 +255,7 @@
     ],
     [
      1790341200,
-     0
+     3
     ]
    ],
    "30d": [
@@ -491,7 +373,7 @@
     ],
     [
      1790121600,
-     2
+     0
     ],
     [
      1790208000,
@@ -499,16 +381,14 @@
     ],
     [
      1790294400,
-     1
+     3
     ]
    ]
   },
   "status": "unresolved",
   "statusDetails": {},
-  "subscriptionDetails": {
-   "reason": "changed_status"
-  },
-  "substatus": "regressed",
+  "subscriptionDetails": null,
+  "substatus": "new",
   "tags": [
    {
     "key": "demo_case",
@@ -571,13 +451,13 @@
     "totalValues": 3
    }
   ],
-  "title": "RangeError: Invalid saved-search index",
+  "title": "TypeError: Cannot read properties of null (reading 'status')",
   "type": "error",
-  "userCount": 2,
+  "userCount": 3,
   "userReportCount": 0
  },
  "link": null,
  "params": [],
- "request": "GET /api/0/organizations/mei-demo-app/issues/7754274150/",
+ "request": "GET /api/0/organizations/mei-demo-app/issues/7754565187/",
  "status": 200
 }

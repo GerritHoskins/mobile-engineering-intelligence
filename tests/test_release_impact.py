@@ -10,12 +10,12 @@ from scripts.demo import scenario as sc
 from tests.test_incident_context import _graph, _incident
 
 ORG = load_org("demo")
-CASES = {spec.case: spec for spec in sc.INCIDENTS}
+CASES = {spec.case: spec for spec in sc.ALL_INCIDENTS}
 TOTALS = {v: SessionTotals(sessions=t, crashed=c) for v, (t, c) in sc.SESSIONS.items()}
 
 
 def _issues(version: str) -> tuple[list[IssueInput], list[IssueInput]]:
-    new = [IssueInput(_incident(s), len(s.subjects)) for s in sc.INCIDENTS if s.release == version]
+    new = [IssueInput(_incident(s), len(s.subjects)) for s in sc.ALL_INCIDENTS if s.release == version]
     regressed = ([IssueInput(_incident(CASES[sc.REGRESSION_CASE]), 1)]
                  if version == sc.REGRESSION_RELEASE else [])
     return new, regressed

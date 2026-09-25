@@ -17,7 +17,7 @@ def client() -> TestClient:
     from app.seed import seed
 
     seed()  # Module 1 subjects the events point at
-    _ingest(sc.ALL_INCIDENTS)
+    _ingest()
     return TestClient(app)
 
 
