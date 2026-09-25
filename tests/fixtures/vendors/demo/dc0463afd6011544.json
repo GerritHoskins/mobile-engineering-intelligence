@@ -4,6 +4,79 @@
    {
     "commentId": null,
     "data": {
+     "event_id": "5a0a184c68c64e6297dc50520ea39199",
+     "event_metadata": {
+      "filename": "app:///src/modules/search/saved-search.ts",
+      "function": "loadSavedSearches",
+      "in_app_frame_mix": "in-app-only",
+      "synthetic": false,
+      "type": "RangeError",
+      "value": "Invalid saved-search index"
+     },
+     "event_title": "RangeError: Invalid saved-search index",
+     "event_type": "error",
+     "version": "mei-demo-app@1.3.0"
+    },
+    "dateCreated": "2026-09-25T11:49:58.897171Z",
+    "id": "6613340240",
+    "sentry_app": null,
+    "type": "set_regression",
+    "user": null
+   },
+   {
+    "commentId": null,
+    "data": {},
+    "dateCreated": "2026-09-25T11:49:19.721087Z",
+    "id": "6613339605",
+    "sentry_app": null,
+    "type": "set_resolved",
+    "user": {
+     "avatar": {
+      "avatarType": "letter_avatar",
+      "avatarUrl": "<scrubbed>",
+      "avatarUuid": null
+     },
+     "avatarUrl": "<scrubbed>",
+     "dateJoined": "2020-04-26T13:52:54.796113Z",
+     "email": "<scrubbed>",
+     "emails": [
+      {
+       "email": "<scrubbed>",
+       "id": "754733",
+       "is_verified": true
+      }
+     ],
+     "experiments": {},
+     "flags": {
+      "newsletter_consent_prompt": false
+     },
+     "has2fa": false,
+     "hasPasswordAuth": false,
+     "id": "660851",
+     "identities": [],
+     "isActive": true,
+     "isManaged": false,
+     "isStaff": false,
+     "isSuperuser": false,
+     "isSuspended": false,
+     "lastActive": "2026-09-25T11:48:53.005163Z",
+     "lastLogin": "2026-09-25T08:14:27.776319Z",
+     "name": "GerritHoskins",
+     "options": {
+      "clock24Hours": false,
+      "defaultIssueEvent": "recommended",
+      "language": "en",
+      "prefersIssueDetailsStreamlinedUI": null,
+      "stacktraceOrder": -1,
+      "theme": "system",
+      "timezone": "Europe/Berlin"
+     },
+     "username": "<scrubbed>"
+    }
+   },
+   {
+    "commentId": null,
+    "data": {
      "priority": "high"
     },
     "dateCreated": "2026-09-23T22:18:43.717773Z",
@@ -15,7 +88,7 @@
   ],
   "annotations": [],
   "assignedTo": "<scrubbed>",
-  "count": "2",
+  "count": "3",
   "culprit": "loadSavedSearches(src/modules/search/saved-search)",
   "firstRelease": {
    "authors": [],
@@ -69,7 +142,7 @@
   "id": "7754274150",
   "isBookmarked": false,
   "isPublic": false,
-  "isSubscribed": false,
+  "isSubscribed": true,
   "isUnhandled": false,
   "issueCategory": "error",
   "issueType": "error",
@@ -120,7 +193,7 @@
     }
    }
   },
-  "lastSeen": "2026-09-23T22:23:43Z",
+  "lastSeen": "2026-09-25T11:49:52Z",
   "level": "error",
   "logger": null,
   "metadata": {
@@ -138,7 +211,52 @@
    "value": "Invalid saved-search index"
   },
   "numComments": 0,
-  "participants": [],
+  "participants": [
+   {
+    "avatar": {
+     "avatarType": "letter_avatar",
+     "avatarUrl": "<scrubbed>",
+     "avatarUuid": null
+    },
+    "avatarUrl": "<scrubbed>",
+    "dateJoined": "2020-04-26T13:52:54.796113Z",
+    "email": "<scrubbed>",
+    "emails": [
+     {
+      "email": "<scrubbed>",
+      "id": "754733",
+      "is_verified": true
+     }
+    ],
+    "experiments": {},
+    "flags": {
+     "newsletter_consent_prompt": false
+    },
+    "has2fa": false,
+    "hasPasswordAuth": false,
+    "id": "660851",
+    "identities": [],
+    "isActive": true,
+    "isManaged": false,
+    "isStaff": false,
+    "isSuperuser": false,
+    "isSuspended": false,
+    "lastActive": "2026-09-25T11:48:53.005163Z",
+    "lastLogin": "2026-09-25T08:14:27.776319Z",
+    "name": "GerritHoskins",
+    "options": {
+     "clock24Hours": false,
+     "defaultIssueEvent": "recommended",
+     "language": "en",
+     "prefersIssueDetailsStreamlinedUI": null,
+     "stacktraceOrder": -1,
+     "theme": "system",
+     "timezone": "Europe/Berlin"
+    },
+    "type": "user",
+    "username": "<scrubbed>"
+   }
+  ],
   "permalink": "https://mei-demo-app.sentry.io/issues/7754274150/",
   "platform": "javascript",
   "priority": "high",
@@ -157,14 +275,6 @@
   "shortId": "MEI-DEMO-APP-5",
   "stats": {
    "24h": [
-    [
-     1790240400,
-     0
-    ],
-    [
-     1790244000,
-     0
-    ],
     [
      1790247600,
      0
@@ -256,6 +366,14 @@
     [
      1790326800,
      0
+    ],
+    [
+     1790330400,
+     0
+    ],
+    [
+     1790334000,
+     1
     ]
    ],
    "30d": [
@@ -381,74 +499,76 @@
     ],
     [
      1790294400,
-     0
+     1
     ]
    ]
   },
   "status": "unresolved",
   "statusDetails": {},
-  "subscriptionDetails": null,
-  "substatus": "new",
+  "subscriptionDetails": {
+   "reason": "changed_status"
+  },
+  "substatus": "regressed",
   "tags": [
    {
     "key": "demo_case",
     "name": "Demo Case",
-    "totalValues": 2
+    "totalValues": 3
    },
    {
     "key": "device",
     "name": "Device",
-    "totalValues": 2
+    "totalValues": 3
    },
    {
     "key": "device.class",
     "name": "Device.Class",
-    "totalValues": 2
+    "totalValues": 3
    },
    {
     "key": "device.family",
     "name": "Device.Family",
-    "totalValues": 2
+    "totalValues": 3
    },
    {
     "key": "environment",
     "name": "Environment",
-    "totalValues": 2
+    "totalValues": 3
    },
    {
     "key": "installation_id",
     "name": "Installation Id",
-    "totalValues": 2
+    "totalValues": 3
    },
    {
     "key": "interface_type",
     "name": "Interface Type",
-    "totalValues": 2
+    "totalValues": 3
    },
    {
     "key": "level",
     "name": "Level",
-    "totalValues": 2
+    "totalValues": 3
    },
    {
     "key": "os",
     "name": "OS",
-    "totalValues": 2
+    "totalValues": 3
    },
    {
     "key": "os.name",
     "name": "Os.Name",
-    "totalValues": 2
+    "totalValues": 3
    },
    {
     "key": "release",
     "name": "Release",
-    "totalValues": 2
+    "totalValues": 3
    },
    {
     "key": "user",
     "name": "User",
-    "totalValues": 2
+    "totalValues": 3
    }
   ],
   "title": "RangeError: Invalid saved-search index",

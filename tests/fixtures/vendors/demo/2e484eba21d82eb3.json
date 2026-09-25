@@ -1,21 +1,21 @@
 {
  "json": {
   "access": [
-   "project:read",
-   "event:read",
-   "org:integrations",
-   "event:write",
-   "project:admin",
-   "project:releases",
-   "team:write",
-   "org:read",
-   "team:admin",
-   "member:read",
-   "alerts:write",
-   "event:admin",
-   "alerts:read",
    "project:write",
-   "team:read"
+   "team:admin",
+   "team:read",
+   "org:read",
+   "event:read",
+   "project:read",
+   "event:admin",
+   "alerts:write",
+   "event:write",
+   "alerts:read",
+   "project:admin",
+   "member:read",
+   "team:write",
+   "org:integrations",
+   "project:releases"
   ],
   "allowedDomains": [
    "*"
@@ -44,12 +44,12 @@
   "enableAutoReleaseCreation": true,
   "features": [
    "similarity-embeddings",
-   "profile-functions-metrics-eap-ingestion",
    "discard-transaction",
-   "defer-attachment-storage",
-   "similarity-grouping-skip-fallback",
+   "profile-functions-metrics-eap-ingestion",
    "issue-action-log-write-to-db",
    "similarity-grouping-model-next",
+   "similarity-grouping-skip-fallback",
+   "defer-attachment-storage",
    "similarity-indexing",
    "similarity-view",
    "releases"
@@ -78,7 +78,7 @@
   "hasNewFeedbacks": false,
   "hasProfiles": false,
   "hasReplays": false,
-  "hasSessions": false,
+  "hasSessions": true,
   "hasTraceMetrics": false,
   "highlightContext": {
    "app": [

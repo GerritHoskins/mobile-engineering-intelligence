@@ -85,3 +85,34 @@ def test_session_counts_match_planted_totals(replayed: dict[str, str]) -> None:
             total[0] += row.sessions
             total[1] += row.sessions if row.status == "crashed" else 0
     assert totals == {f"mei-demo-app@{v}": list(tc) for v, tc in sc.SESSIONS.items()}
+
+
+# ----------------------------------------------------- Slice R on real data
+
+
+@pytest.mark.parametrize("spec", sc.IMPACTS, ids=lambda s: s.case)
+def test_release_impact_on_real_payloads(client: TestClient, replayed: dict[str, str], spec: sc.ImpactSpec) -> None:
+    response = client.get(f"/v1/releases/{spec.release}/impact")
+    assert response.status_code == spec.expected_status
+    if spec.expected_status != 200:
+        return
+    body = response.json()
+    case_of = {issue_id: case for case, issue_id in replayed.items()}
+    assert body["release"]["state"] == spec.expected_release_state
+    if spec.expected_crash_free == "UNKNOWN":
+        assert body["health"]["crash_free"] == "UNKNOWN"
+    else:
+        assert body["health"]["crash_free"] == pytest.approx(spec.expected_crash_free)
+    assert [f["code"] for f in body["findings"]] == list(spec.expected_findings)
+    assert [case_of[i["id"]] for i in body["new_issues"]] == list(spec.expected_new_issues)
+    assert [case_of[i["id"]] for i in body["regressed_issues"]] == list(spec.expected_regressed_issues)
+
+
+def test_real_regression_keeps_first_release(client: TestClient, replayed: dict[str, str]) -> None:
+    from app.db import SessionLocal
+    from app.models import Incident
+
+    with SessionLocal() as session:
+        f2 = session.get(Incident, ("demo", replayed[sc.REGRESSION_CASE]))
+    assert (f2.first_release, f2.regressed_release, f2.substatus) == (
+        "mei-demo-app@1.2.0", "mei-demo-app@1.3.0", "regressed")
