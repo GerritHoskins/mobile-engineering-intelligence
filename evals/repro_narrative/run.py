@@ -212,6 +212,7 @@ def run_one(case: dict, rep: int, args, llm: AnthropicLLM, judge_client: anthrop
         verdict = judge_with_retries(judge_client, packet, output, reference, rng)
         scores["win"] = verdict["win"]
         scores["faults"] = float(len(verdict["candidate_faults"]))
+        scores["both_bad"] = float(verdict["verdict"] == "both_bad")
         explanation["win"] = verdict["reasoning"]
         row.update(judge_model=verdict["judge_model"], judge_usage=verdict["judge_usage"])
         row["meta"].update(verdict=verdict["verdict"], candidate_position=verdict["candidate_position"],
@@ -257,7 +258,7 @@ def summarize(out_dir: Path, wall: float) -> None:
     ok = [r for r in rows if r["status"] == "ok"]
     print(f"\n{out_dir.name}: {len(ok)} scored, {len(rows) - len(ok)} not ok "
           f"({', '.join(sorted({r['status'] for r in rows if r['status'] != 'ok'})) or '-'}), {len(errors)} errors")
-    for metric in ("win", "faults", "grounded", "coverage", "steps_in_order", "gaps_questioned"):
+    for metric in ("win", "faults", "both_bad", "grounded", "coverage", "steps_in_order", "gaps_questioned"):
         per_case: dict[str, list[float]] = {}
         for r in ok:
             if metric in r["grade"]:

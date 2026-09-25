@@ -2,13 +2,16 @@
 
 Inputs: 20 frozen evidence packets (evals/repro_narrative/cases): RP1-RP6 real, S01-S14 synthetic.
 
-- **win** (headline): blind pairwise judge (claude-fable-5-1) vs the frozen baseline rep-0 narrative.
+- **win** (headline): blind pairwise judge (claude-fable-5-1, effort medium) vs the frozen baseline rep-0 narrative.
   1 = variant better, 0 = baseline better, 0.5 = tie or both_bad. Baseline rows are 0.5 by definition.
   A/B order randomized per (case, rep, variant); both narratives are untrusted data to the judge.
 - **faults** (lower is better; non-baseline rows only): faults the judge found in the variant's narrative.
   F1 fact misattributed to a cited item; F2 a varying condition presented as required; F3 suspect stated
   as cause; F4 an UNKNOWN/gap filled in; F5 invented step or narrated "... N more steps ..." placeholder;
-  F6 a missing-evidence question that closes no gap/unknown.
+  F6 a missing-evidence question the packet already answers or that is unrelated to the incident
+  (narrowed after the pilot: investigative questions beyond the listed gaps are fine).
+- **both_bad** (lower is better; non-baseline rows only): 1 when the judge found neither narrative usable
+  (also scored 0.5 in win, so this column keeps it visible).
 - **grounded**: share of sentences surviving the citation check (rejected claims count against).
 - **coverage**: share of critical packet items (preconditions, gaps, failure, suspects) cited anywhere.
 - **steps_in_order**: 1 if every step-* is cited in steps_prose in packet order. Vacuously 1 with no steps.

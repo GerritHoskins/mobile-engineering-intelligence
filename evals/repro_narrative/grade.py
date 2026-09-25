@@ -13,6 +13,7 @@ import anthropic
 
 JUDGE_MODEL = "claude-fable-5-1"
 JUDGE_MAX_TOKENS = 16000
+JUDGE_EFFORT = "medium"  # high cost ~$0.165/judgment in the pilot; medium chosen 2026-09-25
 FIELDS = ("summary", "steps_prose", "conditions", "missing_evidence_questions")
 
 
@@ -67,7 +68,8 @@ FAULTS = {
     "F3": "A suspect commit is stated as the proven cause rather than a lead.",
     "F4": "Something the packet marks UNKNOWN, NOT_COMPUTED, NONE_FOUND or as a gap is filled in with a guess.",
     "F5": "A reproduction step is invented, or a '... N more steps ...' placeholder is narrated as a real step.",
-    "F6": "A missing-evidence question would not close any gap or unknown in the packet.",
+    "F6": "A missing-evidence question the packet already answers, or one unrelated to reproducing this "
+          "incident. Investigative questions beyond the packet's listed gaps are fine.",
 }
 
 JUDGE_SYSTEM = f"""You are grading two reproduction narratives written from the same evidence packet.
@@ -122,7 +124,7 @@ def judge(client: anthropic.Anthropic, packet: dict, candidate: dict | None, ref
     started = time.monotonic()
     response = client.messages.create(
         model=JUDGE_MODEL, max_tokens=JUDGE_MAX_TOKENS, thinking={"type": "adaptive"},
-        output_config={"format": {"type": "json_schema", "schema": JUDGE_SCHEMA}},
+        output_config={"effort": JUDGE_EFFORT, "format": {"type": "json_schema", "schema": JUDGE_SCHEMA}},
         system=JUDGE_SYSTEM, messages=[{"role": "user", "content": user}],
     )
     usage = {"input_tokens": response.usage.input_tokens, "output_tokens": response.usage.output_tokens}
