@@ -14,6 +14,315 @@
    "context": {},
    "contexts": {
     "app": {
+     "app_version": "1.3.0",
+     "type": "app"
+    },
+    "device": {
+     "family": "iOS",
+     "model": "iPhone15,2",
+     "type": "device"
+    },
+    "os": {
+     "name": "iOS",
+     "os": "iOS 18.4",
+     "type": "os",
+     "version": "18.4"
+    },
+    "trace": {
+     "span_id": "5a0a184c68c64e62",
+     "status": "unknown",
+     "trace_id": "5a0a184c68c64e6297dc50520ea39199",
+     "type": "trace"
+    }
+   },
+   "crashFile": null,
+   "culprit": "loadSavedSearches(src/modules/search/saved-search)",
+   "dateCreated": "2026-09-25T11:49:52Z",
+   "dateReceived": "2026-09-25T11:49:52.441761Z",
+   "dist": null,
+   "entries": [
+    {
+     "data": {
+      "excOmitted": null,
+      "hasSystemFrames": true,
+      "values": [
+       {
+        "mechanism": null,
+        "module": null,
+        "rawModule": null,
+        "rawStacktrace": {
+         "frames": [
+          {
+           "absPath": "app:///src/app/main.ts",
+           "colNo": null,
+           "context": [],
+           "errors": null,
+           "filename": "app:///src/app/main.ts",
+           "function": "bootstrap",
+           "inApp": true,
+           "instructionAddr": null,
+           "lineNo": 12,
+           "lock": null,
+           "module": null,
+           "package": null,
+           "parentIndex": null,
+           "platform": null,
+           "rawFunction": null,
+           "sampleCount": null,
+           "sourceLink": null,
+           "symbol": null,
+           "symbolAddr": null,
+           "trust": null,
+           "vars": null
+          },
+          {
+           "absPath": "app:///src/modules/search/saved-search.ts",
+           "colNo": null,
+           "context": [],
+           "errors": null,
+           "filename": "app:///src/modules/search/saved-search.ts",
+           "function": "loadSavedSearches",
+           "inApp": true,
+           "instructionAddr": null,
+           "lineNo": 18,
+           "lock": null,
+           "module": null,
+           "package": null,
+           "parentIndex": null,
+           "platform": null,
+           "rawFunction": null,
+           "sampleCount": null,
+           "sourceLink": null,
+           "symbol": null,
+           "symbolAddr": null,
+           "trust": null,
+           "vars": null
+          }
+         ],
+         "framesOmitted": null,
+         "hasSystemFrames": true,
+         "registers": null
+        },
+        "rawType": null,
+        "rawValue": null,
+        "stacktrace": {
+         "frames": [
+          {
+           "absPath": "app:///src/app/main.ts",
+           "colNo": null,
+           "context": [],
+           "errors": null,
+           "filename": "app:///src/app/main.ts",
+           "function": "bootstrap",
+           "inApp": true,
+           "instructionAddr": null,
+           "lineNo": 12,
+           "lock": null,
+           "module": "src/app/main",
+           "package": null,
+           "parentIndex": null,
+           "platform": null,
+           "rawFunction": null,
+           "sampleCount": null,
+           "sourceLink": null,
+           "symbol": null,
+           "symbolAddr": null,
+           "trust": null,
+           "vars": null
+          },
+          {
+           "absPath": "app:///src/modules/search/saved-search.ts",
+           "colNo": null,
+           "context": [],
+           "errors": null,
+           "filename": "app:///src/modules/search/saved-search.ts",
+           "function": "loadSavedSearches",
+           "inApp": true,
+           "instructionAddr": null,
+           "lineNo": 18,
+           "lock": null,
+           "module": "src/modules/search/saved-search",
+           "package": null,
+           "parentIndex": null,
+           "platform": null,
+           "rawFunction": null,
+           "sampleCount": null,
+           "sourceLink": null,
+           "symbol": null,
+           "symbolAddr": null,
+           "trust": null,
+           "vars": null
+          }
+         ],
+         "framesOmitted": null,
+         "hasSystemFrames": true,
+         "registers": null
+        },
+        "threadId": null,
+        "type": "RangeError",
+        "value": "Invalid saved-search index"
+       }
+      ]
+     },
+     "type": "exception"
+    },
+    {
+     "data": {
+      "values": [
+       {
+        "category": "navigation",
+        "data": {
+         "from": "/home",
+         "to": "/search"
+        },
+        "event_id": null,
+        "level": "info",
+        "message": null,
+        "timestamp": "2026-09-25T11:49:50.256876Z",
+        "type": "navigation"
+       },
+       {
+        "category": "ui.click",
+        "data": null,
+        "event_id": null,
+        "level": "info",
+        "message": "button#saved-searches",
+        "timestamp": "2026-09-25T11:49:51.256876Z",
+        "type": "user"
+       }
+      ]
+     },
+     "type": "breadcrumbs"
+    }
+   ],
+   "errors": [
+    {
+     "data": {
+      "symbolicator_type": "missing_source",
+      "url": "app:///src/app/main.ts"
+     },
+     "message": "Source code was not found",
+     "type": "js_no_source"
+    },
+    {
+     "data": {
+      "symbolicator_type": "missing_source",
+      "url": "app:///src/modules/search/saved-search.ts"
+     },
+     "message": "Source code was not found",
+     "type": "js_no_source"
+    }
+   ],
+   "eventID": "5a0a184c68c64e6297dc50520ea39199",
+   "fingerprints": [
+    "07b3a8c12fa7e25e9f38cc2562bfa29d"
+   ],
+   "groupID": "7754274150",
+   "groupingConfig": {
+    "enhancements": "KLUv_SAd6QAAkwORuGFsbC1wbGF0Zm9ybXM6MjAyNi0wMS0yMJA#KLUv_SAd6QAAkwORuGFsbC1wbGF0Zm9ybXM6MjAyNi0wMS0yMJA#KLUv_SAd6QAAkwORuGFsbC1wbGF0Zm9ybXM6MjAyNi0wMS0yMJA",
+    "id": "newstyle:2026-01-20"
+   },
+   "id": "5a0a184c68c64e6297dc50520ea39199",
+   "location": "app:///src/modules/search/saved-search.ts",
+   "message": "",
+   "metadata": {
+    "filename": "app:///src/modules/search/saved-search.ts",
+    "function": "loadSavedSearches",
+    "in_app_frame_mix": "in-app-only",
+    "synthetic": false,
+    "type": "RangeError",
+    "value": "Invalid saved-search index"
+   },
+   "occurrence": null,
+   "packages": {},
+   "platform": "javascript",
+   "projectID": "4512146161270784",
+   "sdk": {
+    "name": "mei-demo-generator",
+    "version": "0.1"
+   },
+   "size": 5212,
+   "tags": [
+    {
+     "key": "demo_case",
+     "value": "F2"
+    },
+    {
+     "key": "device",
+     "value": "iPhone15,2"
+    },
+    {
+     "key": "device.class",
+     "value": "high"
+    },
+    {
+     "key": "device.family",
+     "value": "iOS"
+    },
+    {
+     "key": "environment",
+     "value": "production"
+    },
+    {
+     "key": "installation_id",
+     "value": "install-case-l"
+    },
+    {
+     "key": "interface_type",
+     "value": "exception"
+    },
+    {
+     "key": "level",
+     "value": "error"
+    },
+    {
+     "key": "os",
+     "value": "iOS 18.4"
+    },
+    {
+     "key": "os.name",
+     "value": "iOS"
+    },
+    {
+     "key": "release",
+     "value": "mei-demo-app@1.3.0"
+    },
+    {
+     "key": "user",
+     "query": "user.id:\"account-case-p2\"",
+     "value": "id:account-case-p2"
+    }
+   ],
+   "title": "RangeError: Invalid saved-search index",
+   "type": "error",
+   "user": {
+    "data": null,
+    "email": "<scrubbed>",
+    "geo": {
+     "city": "Nuremberg",
+     "country_code": "DE",
+     "region": "Germany"
+    },
+    "id": "account-case-p2",
+    "ip_address": "<scrubbed>",
+    "name": null,
+    "username": "<scrubbed>"
+   }
+  },
+  {
+   "_meta": {
+    "context": null,
+    "contexts": null,
+    "entries": {},
+    "message": null,
+    "packages": null,
+    "sdk": null,
+    "tags": {},
+    "user": null
+   },
+   "context": {},
+   "contexts": {
+    "app": {
      "app_version": "1.2.0",
      "type": "app"
     },
