@@ -1,0 +1,89 @@
+{
+ "covers": [
+  "suspects:one",
+  "gap:ACCOUNT_STATE_UNKNOWN"
+ ],
+ "id": "S12",
+ "note": "Crashing users have no Module 1 observations: push/profile state is a gap, not a guess.",
+ "packet": {
+  "items": [
+   {
+    "events_considered": 3,
+    "id": "incident",
+    "title": "Error: Weather widget: location undefined"
+   },
+   {
+    "id": "step-1",
+    "kind": "LIFECYCLE",
+    "support": 1.0,
+    "target": "foreground"
+   },
+   {
+    "id": "step-2",
+    "kind": "NAVIGATE",
+    "support": 1.0,
+    "target": "/home"
+   },
+   {
+    "id": "precondition-app.version",
+    "key": "app.version",
+    "source": "sentry.contexts",
+    "support": 1.0,
+    "value": "3.3.0"
+   },
+   {
+    "id": "precondition-os.name",
+    "key": "os.name",
+    "source": "sentry.contexts",
+    "support": 1.0,
+    "value": "iOS"
+   },
+   {
+    "id": "precondition-os.version",
+    "key": "os.version",
+    "source": "sentry.contexts",
+    "support": 1.0,
+    "value": "18.4"
+   },
+   {
+    "id": "precondition-device.model",
+    "key": "device.model",
+    "source": "sentry.contexts",
+    "support": 1.0,
+    "value": "iPhone15,2"
+   },
+   {
+    "code": "ACCOUNT_STATE_UNKNOWN",
+    "events_affected": 3,
+    "id": "gap-1",
+    "keys": [
+     "push.deliverable",
+     "push.os_permission",
+     "push.provider_registration",
+     "profile.consistent"
+    ]
+   },
+   {
+    "culprit_frame": {
+     "function": "render",
+     "lineno": 19,
+     "path": "src/modules/weather/widget.vue"
+    },
+    "exception": {
+     "type": "Error",
+     "value": "Weather widget: location undefined"
+    },
+    "id": "failure"
+   },
+   {
+    "id": "suspect-c33a666",
+    "message": "MEI-60: Weather widget on home",
+    "overlapping_files": [
+     "src/modules/weather/widget.vue"
+    ]
+   }
+  ],
+  "kind": "repro_narrative"
+ },
+ "source": "synthetic"
+}

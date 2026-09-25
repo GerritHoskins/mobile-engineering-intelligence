@@ -1,0 +1,101 @@
+{
+ "covers": [
+  "suspects:UNKNOWN",
+  "gaps:none",
+  "precondition:push.deliverable",
+  "precondition:push.os_permission",
+  "precondition:push.provider_registration",
+  "precondition:profile.consistent"
+ ],
+ "id": "S04",
+ "note": "First tagged release (3.0.0): no earlier tag to diff, so suspects are UNKNOWN, not none.",
+ "packet": {
+  "items": [
+   {
+    "events_considered": 2,
+    "id": "incident",
+    "title": "Error: Bootstrap failed: config missing"
+   },
+   {
+    "id": "step-1",
+    "kind": "LIFECYCLE",
+    "support": 1.0,
+    "target": "launch"
+   },
+   {
+    "id": "precondition-app.version",
+    "key": "app.version",
+    "source": "sentry.contexts",
+    "support": 1.0,
+    "value": "3.0.0"
+   },
+   {
+    "id": "precondition-os.name",
+    "key": "os.name",
+    "source": "sentry.contexts",
+    "support": 1.0,
+    "value": "iOS"
+   },
+   {
+    "id": "precondition-os.version",
+    "key": "os.version",
+    "source": "sentry.contexts",
+    "support": 1.0,
+    "value": "18.4"
+   },
+   {
+    "id": "precondition-device.model",
+    "key": "device.model",
+    "source": "sentry.contexts",
+    "support": 1.0,
+    "value": "iPhone15,2"
+   },
+   {
+    "id": "precondition-push.deliverable",
+    "key": "push.deliverable",
+    "source": "module1.push",
+    "support": 1.0,
+    "value": true
+   },
+   {
+    "id": "precondition-push.os_permission",
+    "key": "push.os_permission",
+    "source": "module1.push",
+    "support": 1.0,
+    "value": "ALLOWED"
+   },
+   {
+    "id": "precondition-push.provider_registration",
+    "key": "push.provider_registration",
+    "source": "module1.push",
+    "support": 1.0,
+    "value": "REGISTERED"
+   },
+   {
+    "id": "precondition-profile.consistent",
+    "key": "profile.consistent",
+    "source": "module1.profile",
+    "support": 1.0,
+    "value": true
+   },
+   {
+    "culprit_frame": {
+     "function": "bootstrap",
+     "lineno": 12,
+     "path": "src/app/main.ts"
+    },
+    "exception": {
+     "type": "Error",
+     "value": "Bootstrap failed: config missing"
+    },
+    "id": "failure"
+   },
+   {
+    "id": "suspects",
+    "value": "UNKNOWN"
+   }
+  ],
+  "kind": "repro_narrative"
+ },
+ "source": "synthetic"
+}

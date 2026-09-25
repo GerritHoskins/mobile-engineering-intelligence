@@ -1,0 +1,152 @@
+{
+ "covers": [
+  "suspects:one",
+  "variant:long_prefix",
+  "gap:BREADCRUMBS_TRUNCATED",
+  "precondition:push.deliverable",
+  "precondition:push.os_permission",
+  "precondition:push.provider_registration",
+  "precondition:profile.consistent"
+ ],
+ "id": "S11",
+ "note": "Long path (prefix > 6, packet shows a '... N more steps ...' placeholder) plus a trail at the 100-crumb limit.",
+ "packet": {
+  "items": [
+   {
+    "events_considered": 3,
+    "id": "incident",
+    "title": "Error: Article body parse failed"
+   },
+   {
+    "id": "step-1",
+    "kind": "TAP",
+    "support": 1.0,
+    "target": "a.article-link"
+   },
+   {
+    "id": "step-2",
+    "kind": "NAVIGATE",
+    "support": 1.0,
+    "target": "/news/article"
+   },
+   {
+    "events": 1,
+    "id": "variant-1",
+    "prefix": [
+     "NAVIGATE /news/0",
+     "NAVIGATE /news/1",
+     "NAVIGATE /news/2",
+     "... 6 more steps ...",
+     "NAVIGATE /news/9",
+     "NAVIGATE /news/10",
+     "NAVIGATE /news/11"
+    ],
+    "prefix_length": 12
+   },
+   {
+    "events": 1,
+    "id": "variant-2",
+    "prefix": [
+     "NAVIGATE /search/0",
+     "NAVIGATE /search/1",
+     "NAVIGATE /search/2",
+     "... 92 more steps ...",
+     "NAVIGATE /search/95",
+     "NAVIGATE /search/96",
+     "NAVIGATE /search/97"
+    ],
+    "prefix_length": 98
+   },
+   {
+    "events": 1,
+    "id": "variant-3",
+    "prefix": [
+     "NAVIGATE /home"
+    ],
+    "prefix_length": 1
+   },
+   {
+    "id": "precondition-app.version",
+    "key": "app.version",
+    "source": "sentry.contexts",
+    "support": 1.0,
+    "value": "3.2.0"
+   },
+   {
+    "id": "precondition-os.name",
+    "key": "os.name",
+    "source": "sentry.contexts",
+    "support": 1.0,
+    "value": "iOS"
+   },
+   {
+    "id": "precondition-os.version",
+    "key": "os.version",
+    "source": "sentry.contexts",
+    "support": 1.0,
+    "value": "18.4"
+   },
+   {
+    "id": "precondition-device.model",
+    "key": "device.model",
+    "source": "sentry.contexts",
+    "support": 1.0,
+    "value": "iPhone15,2"
+   },
+   {
+    "id": "precondition-push.deliverable",
+    "key": "push.deliverable",
+    "source": "module1.push",
+    "support": 1.0,
+    "value": true
+   },
+   {
+    "id": "precondition-push.os_permission",
+    "key": "push.os_permission",
+    "source": "module1.push",
+    "support": 1.0,
+    "value": "ALLOWED"
+   },
+   {
+    "id": "precondition-push.provider_registration",
+    "key": "push.provider_registration",
+    "source": "module1.push",
+    "support": 1.0,
+    "value": "REGISTERED"
+   },
+   {
+    "id": "precondition-profile.consistent",
+    "key": "profile.consistent",
+    "source": "module1.profile",
+    "support": 1.0,
+    "value": true
+   },
+   {
+    "code": "BREADCRUMBS_TRUNCATED",
+    "events_affected": 1,
+    "id": "gap-1"
+   },
+   {
+    "culprit_frame": {
+     "function": "loadPage",
+     "lineno": 88,
+     "path": "src/modules/news/feed.ts"
+    },
+    "exception": {
+     "type": "Error",
+     "value": "Article body parse failed"
+    },
+    "id": "failure"
+   },
+   {
+    "id": "suspect-c32a444",
+    "message": "MEI-52: Local news feed paging",
+    "overlapping_files": [
+     "src/modules/news/feed.ts"
+    ]
+   }
+  ],
+  "kind": "repro_narrative"
+ },
+ "source": "synthetic"
+}

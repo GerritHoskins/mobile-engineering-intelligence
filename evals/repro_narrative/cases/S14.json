@@ -1,0 +1,214 @@
+{
+ "covers": [
+  "suspects:NONE_FOUND",
+  "gaps:none",
+  "precondition:profile.consistent",
+  "varies:push.deliverable",
+  "varies:push.os_permission",
+  "varies:push.provider_registration"
+ ],
+ "id": "S14",
+ "note": "Long 8-step core, few preconditions: OS, device, release, push permission and a flag all vary; one device model unknown.",
+ "packet": {
+  "items": [
+   {
+    "events_considered": 4,
+    "id": "incident",
+    "title": "Error: Topic toggle failed"
+   },
+   {
+    "id": "step-1",
+    "kind": "LIFECYCLE",
+    "support": 1.0,
+    "target": "foreground"
+   },
+   {
+    "id": "step-2",
+    "kind": "NAVIGATE",
+    "support": 1.0,
+    "target": "/home"
+   },
+   {
+    "id": "step-3",
+    "kind": "NAVIGATE",
+    "support": 1.0,
+    "target": "/settings"
+   },
+   {
+    "id": "step-4",
+    "kind": "NAVIGATE",
+    "support": 1.0,
+    "target": "/settings/notifications"
+   },
+   {
+    "id": "step-5",
+    "kind": "TAP",
+    "support": 1.0,
+    "target": "switch#topic-jobs"
+   },
+   {
+    "id": "step-6",
+    "kind": "BACKEND_CALL",
+    "support": 1.0,
+    "target": "PUT /api/topics 200"
+   },
+   {
+    "id": "step-7",
+    "kind": "TAP",
+    "support": 1.0,
+    "target": "switch#topic-news"
+   },
+   {
+    "id": "step-8",
+    "kind": "BACKEND_CALL",
+    "support": 1.0,
+    "target": "PUT /api/topics 500"
+   },
+   {
+    "id": "precondition-profile.consistent",
+    "key": "profile.consistent",
+    "source": "module1.profile",
+    "support": 1.0,
+    "value": true
+   },
+   {
+    "id": "varies-app.version",
+    "key": "app.version",
+    "values": [
+     {
+      "events": 2,
+      "value": "3.1.0"
+     },
+     {
+      "events": 2,
+      "value": "3.2.0"
+     }
+    ]
+   },
+   {
+    "id": "varies-os.name",
+    "key": "os.name",
+    "values": [
+     {
+      "events": 2,
+      "value": "iOS"
+     },
+     {
+      "events": 2,
+      "value": "Android"
+     }
+    ]
+   },
+   {
+    "id": "varies-os.version",
+    "key": "os.version",
+    "values": [
+     {
+      "events": 2,
+      "value": "15"
+     },
+     {
+      "events": 1,
+      "value": "18.4"
+     },
+     {
+      "events": 1,
+      "value": "17.6"
+     }
+    ]
+   },
+   {
+    "id": "varies-device.model",
+    "key": "device.model",
+    "values": [
+     {
+      "events": 2,
+      "value": "Pixel 8"
+     },
+     {
+      "events": 1,
+      "value": "iPhone15,2"
+     },
+     {
+      "events": 1,
+      "value": "UNKNOWN"
+     }
+    ]
+   },
+   {
+    "id": "varies-flag.topics_v2",
+    "key": "flag.topics_v2",
+    "values": [
+     {
+      "events": 3,
+      "value": "on"
+     },
+     {
+      "events": 1,
+      "value": "off"
+     }
+    ]
+   },
+   {
+    "id": "varies-push.deliverable",
+    "key": "push.deliverable",
+    "values": [
+     {
+      "events": 3,
+      "value": false
+     },
+     {
+      "events": 1,
+      "value": true
+     }
+    ]
+   },
+   {
+    "id": "varies-push.os_permission",
+    "key": "push.os_permission",
+    "values": [
+     {
+      "events": 2,
+      "value": "ALLOWED"
+     },
+     {
+      "events": 2,
+      "value": "DENIED"
+     }
+    ]
+   },
+   {
+    "id": "varies-push.provider_registration",
+    "key": "push.provider_registration",
+    "values": [
+     {
+      "events": 3,
+      "value": "REGISTERED"
+     },
+     {
+      "events": 1,
+      "value": "NOT_REGISTERED"
+     }
+    ]
+   },
+   {
+    "culprit_frame": {
+     "function": "toggleTopic",
+     "lineno": 64,
+     "path": "src/modules/settings/notifications.ts"
+    },
+    "exception": {
+     "type": "Error",
+     "value": "Topic toggle failed"
+    },
+    "id": "failure"
+   },
+   {
+    "id": "suspects",
+    "value": "NONE_FOUND"
+   }
+  ],
+  "kind": "repro_narrative"
+ },
+ "source": "synthetic"
+}

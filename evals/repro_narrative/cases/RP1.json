@@ -1,0 +1,169 @@
+{
+ "covers": [
+  "suspects:one",
+  "gaps:none",
+  "varies:push.deliverable",
+  "varies:push.os_permission",
+  "varies:push.provider_registration",
+  "varies:profile.consistent"
+ ],
+ "id": "RP1",
+ "note": "Push token refresh crash; one suspect; Module 1 push/profile state varies between events.",
+ "packet": {
+  "items": [
+   {
+    "events_considered": 3,
+    "id": "incident",
+    "title": "TypeError: Cannot read properties of undefined (reading 'token')"
+   },
+   {
+    "id": "step-1",
+    "kind": "LIFECYCLE",
+    "support": 1.0,
+    "target": "background"
+   },
+   {
+    "id": "step-2",
+    "kind": "LIFECYCLE",
+    "support": 1.0,
+    "target": "foreground"
+   },
+   {
+    "id": "step-3",
+    "kind": "NAVIGATE",
+    "support": 1.0,
+    "target": "/home"
+   },
+   {
+    "id": "step-4",
+    "kind": "NAVIGATE",
+    "support": 1.0,
+    "target": "/settings/notifications"
+   },
+   {
+    "id": "step-5",
+    "kind": "TAP",
+    "support": 1.0,
+    "target": "button#enable-push"
+   },
+   {
+    "id": "step-6",
+    "kind": "BACKEND_CALL",
+    "support": 1.0,
+    "target": "POST /api/push/register 401"
+   },
+   {
+    "id": "precondition-app.version",
+    "key": "app.version",
+    "source": "sentry.contexts",
+    "support": 1.0,
+    "value": "1.2.0"
+   },
+   {
+    "id": "precondition-os.name",
+    "key": "os.name",
+    "source": "sentry.contexts",
+    "support": 1.0,
+    "value": "iOS"
+   },
+   {
+    "id": "precondition-os.version",
+    "key": "os.version",
+    "source": "sentry.contexts",
+    "support": 1.0,
+    "value": "18.4"
+   },
+   {
+    "id": "precondition-device.model",
+    "key": "device.model",
+    "source": "sentry.contexts",
+    "support": 1.0,
+    "value": "iPhone15,2"
+   },
+   {
+    "id": "precondition-flag.new_push_flow",
+    "key": "flag.new_push_flow",
+    "source": "sentry.tags",
+    "support": 1.0,
+    "value": "on"
+   },
+   {
+    "id": "varies-push.deliverable",
+    "key": "push.deliverable",
+    "values": [
+     {
+      "events": 2,
+      "value": false
+     },
+     {
+      "events": 1,
+      "value": true
+     }
+    ]
+   },
+   {
+    "id": "varies-push.os_permission",
+    "key": "push.os_permission",
+    "values": [
+     {
+      "events": 2,
+      "value": "ALLOWED"
+     },
+     {
+      "events": 1,
+      "value": "DENIED"
+     }
+    ]
+   },
+   {
+    "id": "varies-push.provider_registration",
+    "key": "push.provider_registration",
+    "values": [
+     {
+      "events": 2,
+      "value": "REGISTERED"
+     },
+     {
+      "events": 1,
+      "value": "STALE"
+     }
+    ]
+   },
+   {
+    "id": "varies-profile.consistent",
+    "key": "profile.consistent",
+    "values": [
+     {
+      "events": 2,
+      "value": false
+     },
+     {
+      "events": 1,
+      "value": true
+     }
+    ]
+   },
+   {
+    "culprit_frame": {
+     "function": "refreshToken",
+     "lineno": 42,
+     "path": "src/modules/push/registration.ts"
+    },
+    "exception": {
+     "type": "TypeError",
+     "value": "Cannot read properties of undefined (reading 'token')"
+    },
+    "id": "failure"
+   },
+   {
+    "id": "suspect-ce50197",
+    "message": "MEI-3: Refresh push token on resume",
+    "overlapping_files": [
+     "src/modules/push/registration.ts"
+    ]
+   }
+  ],
+  "kind": "repro_narrative"
+ },
+ "source": "real"
+}

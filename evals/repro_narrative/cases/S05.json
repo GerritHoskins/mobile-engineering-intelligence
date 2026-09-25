@@ -1,0 +1,109 @@
+{
+ "covers": [
+  "suspects:UNKNOWN",
+  "culprit:UNKNOWN",
+  "gap:CULPRIT_UNMAPPABLE",
+  "precondition:push.deliverable",
+  "precondition:push.os_permission",
+  "precondition:push.provider_registration",
+  "precondition:profile.consistent"
+ ],
+ "id": "S05",
+ "note": "Minified bundle frames: culprit UNKNOWN and suspects UNKNOWN.",
+ "packet": {
+  "items": [
+   {
+    "events_considered": 3,
+    "id": "incident",
+    "title": "TypeError: t is undefined"
+   },
+   {
+    "id": "step-1",
+    "kind": "NAVIGATE",
+    "support": 1.0,
+    "target": "/news"
+   },
+   {
+    "id": "step-2",
+    "kind": "TAP",
+    "support": 1.0,
+    "target": "button#share"
+   },
+   {
+    "id": "precondition-app.version",
+    "key": "app.version",
+    "source": "sentry.contexts",
+    "support": 1.0,
+    "value": "3.2.0"
+   },
+   {
+    "id": "precondition-os.name",
+    "key": "os.name",
+    "source": "sentry.contexts",
+    "support": 1.0,
+    "value": "iOS"
+   },
+   {
+    "id": "precondition-os.version",
+    "key": "os.version",
+    "source": "sentry.contexts",
+    "support": 1.0,
+    "value": "18.4"
+   },
+   {
+    "id": "precondition-device.model",
+    "key": "device.model",
+    "source": "sentry.contexts",
+    "support": 1.0,
+    "value": "iPhone15,2"
+   },
+   {
+    "id": "precondition-push.deliverable",
+    "key": "push.deliverable",
+    "source": "module1.push",
+    "support": 1.0,
+    "value": true
+   },
+   {
+    "id": "precondition-push.os_permission",
+    "key": "push.os_permission",
+    "source": "module1.push",
+    "support": 1.0,
+    "value": "ALLOWED"
+   },
+   {
+    "id": "precondition-push.provider_registration",
+    "key": "push.provider_registration",
+    "source": "module1.push",
+    "support": 1.0,
+    "value": "REGISTERED"
+   },
+   {
+    "id": "precondition-profile.consistent",
+    "key": "profile.consistent",
+    "source": "module1.profile",
+    "support": 1.0,
+    "value": true
+   },
+   {
+    "code": "CULPRIT_UNMAPPABLE",
+    "events_affected": 3,
+    "id": "gap-1"
+   },
+   {
+    "culprit_frame": "UNKNOWN",
+    "exception": {
+     "type": "TypeError",
+     "value": "t is undefined"
+    },
+    "id": "failure"
+   },
+   {
+    "id": "suspects",
+    "value": "UNKNOWN"
+   }
+  ],
+  "kind": "repro_narrative"
+ },
+ "source": "synthetic"
+}

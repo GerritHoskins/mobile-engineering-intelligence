@@ -18,6 +18,10 @@ from app.llm import config
 
 class LLMError(Exception):
     status = 502
+    # Set when the call completed (and was billed) but its output is unusable,
+    # so callers such as the eval runner can still account for it.
+    served_model: str | None = None
+    usage: dict | None = None
 
 
 class LLMUnavailable(LLMError):
@@ -36,6 +40,15 @@ class LLMRefused(LLMError):
 
 class LLMMisconfigured(LLMError):
     status = 500
+
+
+class LLMTruncated(LLMError):
+    """The output hit max_tokens before completing."""
+
+
+def _billed(error: LLMError, model: str, usage: dict) -> LLMError:
+    error.served_model, error.usage = model, usage
+    return error
 
 
 @dataclass(frozen=True)
@@ -76,22 +89,23 @@ class AnthropicLLM:
                 raise LLMUnavailable(f"Anthropic API error {error.status_code}") from error
             raise LLMError(f"Anthropic API rejected the request ({error.status_code}): {error.message}") from error
 
+        usage = {"input_tokens": response.usage.input_tokens, "output_tokens": response.usage.output_tokens}
         if response.stop_reason == "refusal":
             details = getattr(response, "stop_details", None)
-            raise LLMRefused(getattr(details, "category", None) if details else None)
+            raise _billed(LLMRefused(getattr(details, "category", None) if details else None), response.model, usage)
         if response.stop_reason == "max_tokens":
-            raise LLMError("Output hit max_tokens before completing")
+            raise _billed(LLMTruncated("Output hit max_tokens before completing"), response.model, usage)
         text = next((b.text for b in response.content if b.type == "text"), None)
         if text is None:
-            raise LLMError(f"No text block in response (stop_reason={response.stop_reason})")
+            raise _billed(LLMError(f"No text block in response (stop_reason={response.stop_reason})"),
+                          response.model, usage)
         try:
             data = json.loads(text)
         except json.JSONDecodeError as error:
-            raise LLMError("Response was not valid JSON") from error
-        usage = response.usage
+            raise _billed(LLMError("Response was not valid JSON"), response.model, usage) from error
         return LLMResult(
             data=data,
             model=response.model,
             fallback_used=any(b.type == "fallback" for b in response.content),
-            usage={"input_tokens": usage.input_tokens, "output_tokens": usage.output_tokens},
+            usage=usage,
         )

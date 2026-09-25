@@ -1,0 +1,126 @@
+{
+ "covers": [
+  "suspects:one",
+  "steps:none+variants",
+  "gaps:none",
+  "precondition:push.deliverable",
+  "precondition:push.os_permission",
+  "precondition:push.provider_registration",
+  "precondition:profile.consistent"
+ ],
+ "id": "S07",
+ "note": "No common ending across events: no core steps, only whole-trail variants.",
+ "packet": {
+  "items": [
+   {
+    "events_considered": 3,
+    "id": "incident",
+    "title": "Error: Feed renderer crashed"
+   },
+   {
+    "events": 1,
+    "id": "variant-1",
+    "prefix": [
+     "NAVIGATE /news",
+     "TAP button#load-more"
+    ],
+    "prefix_length": 2
+   },
+   {
+    "events": 1,
+    "id": "variant-2",
+    "prefix": [
+     "NAVIGATE /news",
+     "TAP a.article-link"
+    ],
+    "prefix_length": 2
+   },
+   {
+    "events": 1,
+    "id": "variant-3",
+    "prefix": [
+     "LIFECYCLE foreground",
+     "NAVIGATE /news/saved"
+    ],
+    "prefix_length": 2
+   },
+   {
+    "id": "precondition-app.version",
+    "key": "app.version",
+    "source": "sentry.contexts",
+    "support": 1.0,
+    "value": "3.2.0"
+   },
+   {
+    "id": "precondition-os.name",
+    "key": "os.name",
+    "source": "sentry.contexts",
+    "support": 1.0,
+    "value": "iOS"
+   },
+   {
+    "id": "precondition-os.version",
+    "key": "os.version",
+    "source": "sentry.contexts",
+    "support": 1.0,
+    "value": "18.4"
+   },
+   {
+    "id": "precondition-device.model",
+    "key": "device.model",
+    "source": "sentry.contexts",
+    "support": 1.0,
+    "value": "iPhone15,2"
+   },
+   {
+    "id": "precondition-push.deliverable",
+    "key": "push.deliverable",
+    "source": "module1.push",
+    "support": 1.0,
+    "value": true
+   },
+   {
+    "id": "precondition-push.os_permission",
+    "key": "push.os_permission",
+    "source": "module1.push",
+    "support": 1.0,
+    "value": "ALLOWED"
+   },
+   {
+    "id": "precondition-push.provider_registration",
+    "key": "push.provider_registration",
+    "source": "module1.push",
+    "support": 1.0,
+    "value": "REGISTERED"
+   },
+   {
+    "id": "precondition-profile.consistent",
+    "key": "profile.consistent",
+    "source": "module1.profile",
+    "support": 1.0,
+    "value": true
+   },
+   {
+    "culprit_frame": {
+     "function": "loadPage",
+     "lineno": 88,
+     "path": "src/modules/news/feed.ts"
+    },
+    "exception": {
+     "type": "Error",
+     "value": "Feed renderer crashed"
+    },
+    "id": "failure"
+   },
+   {
+    "id": "suspect-c32a444",
+    "message": "MEI-52: Local news feed paging",
+    "overlapping_files": [
+     "src/modules/news/feed.ts"
+    ]
+   }
+  ],
+  "kind": "repro_narrative"
+ },
+ "source": "synthetic"
+}

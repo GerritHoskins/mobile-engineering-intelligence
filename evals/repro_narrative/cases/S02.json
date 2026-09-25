@@ -1,0 +1,130 @@
+{
+ "covers": [
+  "suspects:many",
+  "gaps:none",
+  "precondition:push.deliverable",
+  "precondition:push.os_permission",
+  "precondition:push.provider_registration",
+  "precondition:profile.consistent"
+ ],
+ "id": "S02",
+ "note": "Clean on Android with two ranked suspects (both touch the stack).",
+ "packet": {
+  "items": [
+   {
+    "events_considered": 3,
+    "id": "incident",
+    "title": "NullPointerException: job.detail is null"
+   },
+   {
+    "id": "step-1",
+    "kind": "NAVIGATE",
+    "support": 1.0,
+    "target": "/jobs"
+   },
+   {
+    "id": "step-2",
+    "kind": "TAP",
+    "support": 1.0,
+    "target": "li.job-card"
+   },
+   {
+    "id": "step-3",
+    "kind": "NAVIGATE",
+    "support": 1.0,
+    "target": "/jobs/detail"
+   },
+   {
+    "id": "step-4",
+    "kind": "BACKEND_CALL",
+    "support": 1.0,
+    "target": "GET /api/jobs/42 200"
+   },
+   {
+    "id": "precondition-app.version",
+    "key": "app.version",
+    "source": "sentry.contexts",
+    "support": 1.0,
+    "value": "3.1.0"
+   },
+   {
+    "id": "precondition-os.name",
+    "key": "os.name",
+    "source": "sentry.contexts",
+    "support": 1.0,
+    "value": "Android"
+   },
+   {
+    "id": "precondition-os.version",
+    "key": "os.version",
+    "source": "sentry.contexts",
+    "support": 1.0,
+    "value": "15"
+   },
+   {
+    "id": "precondition-device.model",
+    "key": "device.model",
+    "source": "sentry.contexts",
+    "support": 1.0,
+    "value": "Pixel 8"
+   },
+   {
+    "id": "precondition-push.deliverable",
+    "key": "push.deliverable",
+    "source": "module1.push",
+    "support": 1.0,
+    "value": true
+   },
+   {
+    "id": "precondition-push.os_permission",
+    "key": "push.os_permission",
+    "source": "module1.push",
+    "support": 1.0,
+    "value": "ALLOWED"
+   },
+   {
+    "id": "precondition-push.provider_registration",
+    "key": "push.provider_registration",
+    "source": "module1.push",
+    "support": 1.0,
+    "value": "REGISTERED"
+   },
+   {
+    "id": "precondition-profile.consistent",
+    "key": "profile.consistent",
+    "source": "module1.profile",
+    "support": 1.0,
+    "value": true
+   },
+   {
+    "culprit_frame": {
+     "function": "fetchJob",
+     "lineno": 23,
+     "path": "src/modules/jobs/api.ts"
+    },
+    "exception": {
+     "type": "NullPointerException",
+     "value": "job.detail is null"
+    },
+    "id": "failure"
+   },
+   {
+    "id": "suspect-c31b222",
+    "message": "MEI-41: Cache job detail responses",
+    "overlapping_files": [
+     "src/modules/jobs/api.ts",
+     "src/modules/jobs/apply.ts"
+    ]
+   },
+   {
+    "id": "suspect-c31a111",
+    "message": "MEI-40: Apply to jobs from the detail page",
+    "overlapping_files": [
+     "src/modules/jobs/apply.ts"
+    ]
+   }
+  ],
+  "kind": "repro_narrative"
+ },
+ "source": "synthetic"
+}

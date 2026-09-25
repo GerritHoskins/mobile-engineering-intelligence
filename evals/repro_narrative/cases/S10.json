@@ -1,0 +1,121 @@
+{
+ "covers": [
+  "suspects:one",
+  "gap:SINGLE_EVENT",
+  "precondition:push.deliverable",
+  "precondition:push.os_permission",
+  "precondition:push.provider_registration",
+  "precondition:profile.consistent"
+ ],
+ "id": "S10",
+ "note": "A single event: everything is a precondition by construction.",
+ "packet": {
+  "items": [
+   {
+    "events_considered": 1,
+    "id": "incident",
+    "title": "Error: Weather provider returned no data"
+   },
+   {
+    "id": "step-1",
+    "kind": "LIFECYCLE",
+    "support": 1.0,
+    "target": "foreground"
+   },
+   {
+    "id": "step-2",
+    "kind": "NAVIGATE",
+    "support": 1.0,
+    "target": "/home"
+   },
+   {
+    "id": "step-3",
+    "kind": "BACKEND_CALL",
+    "support": 1.0,
+    "target": "GET /api/weather 204"
+   },
+   {
+    "id": "precondition-app.version",
+    "key": "app.version",
+    "source": "sentry.contexts",
+    "support": 1.0,
+    "value": "3.3.0"
+   },
+   {
+    "id": "precondition-os.name",
+    "key": "os.name",
+    "source": "sentry.contexts",
+    "support": 1.0,
+    "value": "iOS"
+   },
+   {
+    "id": "precondition-os.version",
+    "key": "os.version",
+    "source": "sentry.contexts",
+    "support": 1.0,
+    "value": "18.4"
+   },
+   {
+    "id": "precondition-device.model",
+    "key": "device.model",
+    "source": "sentry.contexts",
+    "support": 1.0,
+    "value": "iPhone15,2"
+   },
+   {
+    "id": "precondition-push.deliverable",
+    "key": "push.deliverable",
+    "source": "module1.push",
+    "support": 1.0,
+    "value": true
+   },
+   {
+    "id": "precondition-push.os_permission",
+    "key": "push.os_permission",
+    "source": "module1.push",
+    "support": 1.0,
+    "value": "ALLOWED"
+   },
+   {
+    "id": "precondition-push.provider_registration",
+    "key": "push.provider_registration",
+    "source": "module1.push",
+    "support": 1.0,
+    "value": "REGISTERED"
+   },
+   {
+    "id": "precondition-profile.consistent",
+    "key": "profile.consistent",
+    "source": "module1.profile",
+    "support": 1.0,
+    "value": true
+   },
+   {
+    "code": "SINGLE_EVENT",
+    "events_affected": 1,
+    "id": "gap-1"
+   },
+   {
+    "culprit_frame": {
+     "function": "render",
+     "lineno": 19,
+     "path": "src/modules/weather/widget.vue"
+    },
+    "exception": {
+     "type": "Error",
+     "value": "Weather provider returned no data"
+    },
+    "id": "failure"
+   },
+   {
+    "id": "suspect-c33a666",
+    "message": "MEI-60: Weather widget on home",
+    "overlapping_files": [
+     "src/modules/weather/widget.vue"
+    ]
+   }
+  ],
+  "kind": "repro_narrative"
+ },
+ "source": "synthetic"
+}

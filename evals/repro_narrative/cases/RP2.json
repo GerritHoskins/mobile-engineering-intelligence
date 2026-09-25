@@ -1,0 +1,169 @@
+{
+ "covers": [
+  "suspects:NONE_FOUND",
+  "variant:long_prefix",
+  "gap:BREADCRUMBS_TRUNCATED",
+  "precondition:push.deliverable",
+  "precondition:push.os_permission",
+  "varies:push.provider_registration",
+  "varies:profile.consistent"
+ ],
+ "id": "RP2",
+ "note": "Enable-push 403 with OS permission DENIED on all events; 3 paths in; truncated trail; no suspect.",
+ "packet": {
+  "items": [
+   {
+    "events_considered": 3,
+    "id": "incident",
+    "title": "TypeError: Cannot read properties of null (reading 'status')"
+   },
+   {
+    "id": "step-1",
+    "kind": "NAVIGATE",
+    "support": 1.0,
+    "target": "/settings/notifications"
+   },
+   {
+    "id": "step-2",
+    "kind": "TAP",
+    "support": 1.0,
+    "target": "button#enable-push"
+   },
+   {
+    "id": "step-3",
+    "kind": "BACKEND_CALL",
+    "support": 1.0,
+    "target": "POST /api/push/permission 403"
+   },
+   {
+    "events": 1,
+    "id": "variant-1",
+    "prefix": [
+     "NAVIGATE /home",
+     "NAVIGATE /settings"
+    ],
+    "prefix_length": 2
+   },
+   {
+    "events": 1,
+    "id": "variant-2",
+    "prefix": [
+     "LIFECYCLE foreground",
+     "NAVIGATE /inbox"
+    ],
+    "prefix_length": 2
+   },
+   {
+    "events": 1,
+    "id": "variant-3",
+    "prefix": [
+     "NAVIGATE /search/results?page=1",
+     "NAVIGATE /search/results?page=2",
+     "NAVIGATE /search/results?page=3",
+     "... 91 more steps ...",
+     "NAVIGATE /search/results?page=95",
+     "NAVIGATE /search/results?page=96",
+     "NAVIGATE /search/results?page=97"
+    ],
+    "prefix_length": 97
+   },
+   {
+    "id": "precondition-app.version",
+    "key": "app.version",
+    "source": "sentry.contexts",
+    "support": 1.0,
+    "value": "1.4.0"
+   },
+   {
+    "id": "precondition-os.name",
+    "key": "os.name",
+    "source": "sentry.contexts",
+    "support": 1.0,
+    "value": "iOS"
+   },
+   {
+    "id": "precondition-os.version",
+    "key": "os.version",
+    "source": "sentry.contexts",
+    "support": 1.0,
+    "value": "18.4"
+   },
+   {
+    "id": "precondition-device.model",
+    "key": "device.model",
+    "source": "sentry.contexts",
+    "support": 1.0,
+    "value": "iPhone15,2"
+   },
+   {
+    "id": "precondition-push.deliverable",
+    "key": "push.deliverable",
+    "source": "module1.push",
+    "support": 1.0,
+    "value": false
+   },
+   {
+    "id": "precondition-push.os_permission",
+    "key": "push.os_permission",
+    "source": "module1.push",
+    "support": 1.0,
+    "value": "DENIED"
+   },
+   {
+    "id": "varies-push.provider_registration",
+    "key": "push.provider_registration",
+    "values": [
+     {
+      "events": 2,
+      "value": "REGISTERED"
+     },
+     {
+      "events": 1,
+      "value": "STALE"
+     }
+    ]
+   },
+   {
+    "id": "varies-profile.consistent",
+    "key": "profile.consistent",
+    "values": [
+     {
+      "events": 1,
+      "value": true
+     },
+     {
+      "events": 1,
+      "value": false
+     },
+     {
+      "events": 1,
+      "value": "UNKNOWN"
+     }
+    ]
+   },
+   {
+    "code": "BREADCRUMBS_TRUNCATED",
+    "events_affected": 1,
+    "id": "gap-1"
+   },
+   {
+    "culprit_frame": {
+     "function": "requestPermission",
+     "lineno": 27,
+     "path": "src/modules/push/permission.ts"
+    },
+    "exception": {
+     "type": "TypeError",
+     "value": "Cannot read properties of null (reading 'status')"
+    },
+    "id": "failure"
+   },
+   {
+    "id": "suspects",
+    "value": "NONE_FOUND"
+   }
+  ],
+  "kind": "repro_narrative"
+ },
+ "source": "real"
+}

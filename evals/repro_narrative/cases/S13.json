@@ -1,0 +1,116 @@
+{
+ "covers": [
+  "suspects:one",
+  "gaps:none",
+  "precondition:push.deliverable",
+  "precondition:push.os_permission",
+  "precondition:push.provider_registration",
+  "precondition:profile.consistent"
+ ],
+ "id": "S13",
+ "note": "Push is fine (deliverable, OS permission allowed) but the profile is inconsistent on every event.",
+ "packet": {
+  "items": [
+   {
+    "events_considered": 2,
+    "id": "incident",
+    "title": "Error: Postal code mismatch between backend and job profile"
+   },
+   {
+    "id": "step-1",
+    "kind": "NAVIGATE",
+    "support": 1.0,
+    "target": "/profile"
+   },
+   {
+    "id": "step-2",
+    "kind": "TAP",
+    "support": 1.0,
+    "target": "button#save-profile"
+   },
+   {
+    "id": "step-3",
+    "kind": "BACKEND_CALL",
+    "support": 1.0,
+    "target": "PUT /api/profile 409"
+   },
+   {
+    "id": "precondition-app.version",
+    "key": "app.version",
+    "source": "sentry.contexts",
+    "support": 1.0,
+    "value": "3.2.0"
+   },
+   {
+    "id": "precondition-os.name",
+    "key": "os.name",
+    "source": "sentry.contexts",
+    "support": 1.0,
+    "value": "iOS"
+   },
+   {
+    "id": "precondition-os.version",
+    "key": "os.version",
+    "source": "sentry.contexts",
+    "support": 1.0,
+    "value": "18.4"
+   },
+   {
+    "id": "precondition-device.model",
+    "key": "device.model",
+    "source": "sentry.contexts",
+    "support": 1.0,
+    "value": "iPhone15,2"
+   },
+   {
+    "id": "precondition-push.deliverable",
+    "key": "push.deliverable",
+    "source": "module1.push",
+    "support": 1.0,
+    "value": true
+   },
+   {
+    "id": "precondition-push.os_permission",
+    "key": "push.os_permission",
+    "source": "module1.push",
+    "support": 1.0,
+    "value": "ALLOWED"
+   },
+   {
+    "id": "precondition-push.provider_registration",
+    "key": "push.provider_registration",
+    "source": "module1.push",
+    "support": 1.0,
+    "value": "REGISTERED"
+   },
+   {
+    "id": "precondition-profile.consistent",
+    "key": "profile.consistent",
+    "source": "module1.profile",
+    "support": 1.0,
+    "value": false
+   },
+   {
+    "culprit_frame": {
+     "function": "savePostalCode",
+     "lineno": 140,
+     "path": "src/modules/profile/profile.store.ts"
+    },
+    "exception": {
+     "type": "Error",
+     "value": "Postal code mismatch between backend and job profile"
+    },
+    "id": "failure"
+   },
+   {
+    "id": "suspect-c32b555",
+    "message": "Sync profile postal code on save",
+    "overlapping_files": [
+     "src/modules/profile/profile.store.ts"
+    ]
+   }
+  ],
+  "kind": "repro_narrative"
+ },
+ "source": "synthetic"
+}

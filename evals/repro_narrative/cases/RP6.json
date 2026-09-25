@@ -1,0 +1,125 @@
+{
+ "covers": [
+  "suspects:one",
+  "gaps:none",
+  "precondition:profile.consistent",
+  "varies:push.deliverable",
+  "varies:push.os_permission",
+  "varies:push.provider_registration"
+ ],
+ "id": "RP6",
+ "note": "Legacy route crash; suspect commit without ticket.",
+ "packet": {
+  "items": [
+   {
+    "events_considered": 2,
+    "id": "incident",
+    "title": "Error: No route matches /legacy/inbox"
+   },
+   {
+    "id": "step-1",
+    "kind": "NAVIGATE",
+    "support": 1.0,
+    "target": "/legacy/inbox"
+   },
+   {
+    "id": "precondition-app.version",
+    "key": "app.version",
+    "source": "sentry.contexts",
+    "support": 1.0,
+    "value": "1.2.0"
+   },
+   {
+    "id": "precondition-os.name",
+    "key": "os.name",
+    "source": "sentry.contexts",
+    "support": 1.0,
+    "value": "iOS"
+   },
+   {
+    "id": "precondition-os.version",
+    "key": "os.version",
+    "source": "sentry.contexts",
+    "support": 1.0,
+    "value": "18.4"
+   },
+   {
+    "id": "precondition-device.model",
+    "key": "device.model",
+    "source": "sentry.contexts",
+    "support": 1.0,
+    "value": "iPhone15,2"
+   },
+   {
+    "id": "precondition-profile.consistent",
+    "key": "profile.consistent",
+    "source": "module1.profile",
+    "support": 1.0,
+    "value": false
+   },
+   {
+    "id": "varies-push.deliverable",
+    "key": "push.deliverable",
+    "values": [
+     {
+      "events": 1,
+      "value": true
+     },
+     {
+      "events": 1,
+      "value": false
+     }
+    ]
+   },
+   {
+    "id": "varies-push.os_permission",
+    "key": "push.os_permission",
+    "values": [
+     {
+      "events": 1,
+      "value": "ALLOWED"
+     },
+     {
+      "events": 1,
+      "value": "DENIED"
+     }
+    ]
+   },
+   {
+    "id": "varies-push.provider_registration",
+    "key": "push.provider_registration",
+    "values": [
+     {
+      "events": 1,
+      "value": "REGISTERED"
+     },
+     {
+      "events": 1,
+      "value": "STALE"
+     }
+    ]
+   },
+   {
+    "culprit_frame": {
+     "function": "resolveRoute",
+     "lineno": 31,
+     "path": "src/app/router.ts"
+    },
+    "exception": {
+     "type": "Error",
+     "value": "No route matches /legacy/inbox"
+    },
+    "id": "failure"
+   },
+   {
+    "id": "suspect-a6af0bd",
+    "message": "Clean up router",
+    "overlapping_files": [
+     "src/app/router.ts"
+    ]
+   }
+  ],
+  "kind": "repro_narrative"
+ },
+ "source": "real"
+}

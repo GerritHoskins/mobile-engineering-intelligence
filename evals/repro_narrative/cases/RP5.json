@@ -1,0 +1,135 @@
+{
+ "covers": [
+  "suspects:NONE_FOUND",
+  "gaps:none",
+  "precondition:push.deliverable",
+  "varies:push.os_permission",
+  "varies:push.provider_registration",
+  "varies:profile.consistent"
+ ],
+ "id": "RP5",
+ "note": "Saved-search crash on two releases (app.version varies); no suspect.",
+ "packet": {
+  "items": [
+   {
+    "events_considered": 3,
+    "id": "incident",
+    "title": "RangeError: Invalid saved-search index"
+   },
+   {
+    "id": "step-1",
+    "kind": "NAVIGATE",
+    "support": 1.0,
+    "target": "/search"
+   },
+   {
+    "id": "step-2",
+    "kind": "TAP",
+    "support": 1.0,
+    "target": "button#saved-searches"
+   },
+   {
+    "id": "precondition-os.name",
+    "key": "os.name",
+    "source": "sentry.contexts",
+    "support": 1.0,
+    "value": "iOS"
+   },
+   {
+    "id": "precondition-os.version",
+    "key": "os.version",
+    "source": "sentry.contexts",
+    "support": 1.0,
+    "value": "18.4"
+   },
+   {
+    "id": "precondition-device.model",
+    "key": "device.model",
+    "source": "sentry.contexts",
+    "support": 1.0,
+    "value": "iPhone15,2"
+   },
+   {
+    "id": "precondition-push.deliverable",
+    "key": "push.deliverable",
+    "source": "module1.push",
+    "support": 1.0,
+    "value": false
+   },
+   {
+    "id": "varies-app.version",
+    "key": "app.version",
+    "values": [
+     {
+      "events": 2,
+      "value": "1.2.0"
+     },
+     {
+      "events": 1,
+      "value": "1.3.0"
+     }
+    ]
+   },
+   {
+    "id": "varies-push.os_permission",
+    "key": "push.os_permission",
+    "values": [
+     {
+      "events": 2,
+      "value": "ALLOWED"
+     },
+     {
+      "events": 1,
+      "value": "DENIED"
+     }
+    ]
+   },
+   {
+    "id": "varies-push.provider_registration",
+    "key": "push.provider_registration",
+    "values": [
+     {
+      "events": 2,
+      "value": "REGISTERED"
+     },
+     {
+      "events": 1,
+      "value": "MISSING"
+     }
+    ]
+   },
+   {
+    "id": "varies-profile.consistent",
+    "key": "profile.consistent",
+    "values": [
+     {
+      "events": 2,
+      "value": true
+     },
+     {
+      "events": 1,
+      "value": false
+     }
+    ]
+   },
+   {
+    "culprit_frame": {
+     "function": "loadSavedSearches",
+     "lineno": 18,
+     "path": "src/modules/search/saved-search.ts"
+    },
+    "exception": {
+     "type": "RangeError",
+     "value": "Invalid saved-search index"
+    },
+    "id": "failure"
+   },
+   {
+    "id": "suspects",
+    "value": "NONE_FOUND"
+   }
+  ],
+  "kind": "repro_narrative"
+ },
+ "source": "real"
+}

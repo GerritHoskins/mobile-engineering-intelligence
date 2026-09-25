@@ -11,3 +11,9 @@ backend.hcl
 *.tfplan
 .env
 scripts/demo/.state.json
+# eval output: derived or bulky (runner, inputs, grades and results.jsonl are committed)
+.claude/hillclimb/**/traces/
+.claude/hillclimb/**/report.html
+.claude/hillclimb/**/inputs.html
+.claude/hillclimb/**/state.json
+.claude/hillclimb/**/trajectory/
