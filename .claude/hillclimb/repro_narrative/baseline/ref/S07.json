@@ -1,0 +1,148 @@
+{
+ "conditions": [
+  {
+   "cites": [
+    "precondition-app.version",
+    "precondition-os.name",
+    "precondition-os.version",
+    "precondition-device.model"
+   ],
+   "text": "Required setup, present in all three events: app version 3.2.0 on iOS 18.4, device model iPhone15,2."
+  },
+  {
+   "cites": [
+    "precondition-push.deliverable",
+    "precondition-push.os_permission",
+    "precondition-push.provider_registration",
+    "precondition-profile.consistent"
+   ],
+   "text": "Also present in all three events: push was deliverable, with OS permission ALLOWED and provider registration REGISTERED, and the profile was consistent; the packet does not say whether these matter to the crash, only that they held."
+  },
+  {
+   "cites": [
+    "variant-1",
+    "variant-2",
+    "variant-3"
+   ],
+   "text": "Not required: the specific entry action. The step before the crash varies across events between tapping button#load-more, tapping a.article-link, and foregrounding then navigating to /news/saved."
+  },
+  {
+   "cites": [
+    "incident",
+    "variant-1",
+    "variant-2",
+    "variant-3"
+   ],
+   "text": "All support figures come from only three events, with one event per variant, so the preconditions are consistent but weakly sampled."
+  }
+ ],
+ "missing_evidence_questions": [
+  {
+   "cites": [
+    "variant-1",
+    "variant-2",
+    "variant-3",
+    "failure"
+   ],
+   "text": "Do the three prefixes converge on a shared code path into loadPage, or are there genuinely three independent triggers?"
+  },
+  {
+   "cites": [
+    "precondition-app.version",
+    "precondition-os.version",
+    "precondition-device.model"
+   ],
+   "text": "Does the crash reproduce on app versions other than 3.2.0, on OS versions other than iOS 18.4, or on devices other than iPhone15,2 - or are those genuinely required?"
+  },
+  {
+   "cites": [
+    "precondition-push.deliverable",
+    "precondition-push.os_permission",
+    "precondition-push.provider_registration",
+    "precondition-profile.consistent"
+   ],
+   "text": "Are the push and profile preconditions causally involved at all, or just incidental to these three sessions?"
+  },
+  {
+   "cites": [
+    "failure"
+   ],
+   "text": "What state or input does loadPage see at line 88 when it throws - the packet gives the frame but no variable state or feed data."
+  },
+  {
+   "cites": [
+    "suspect-c32a444",
+    "failure"
+   ],
+   "text": "Did the failure start appearing only after commit c32a444 shipped, which would strengthen or rule out that lead?"
+  },
+  {
+   "cites": [
+    "incident"
+   ],
+   "text": "Are there more than three events for this incident that would show additional prefixes or break the 100% support of the preconditions?"
+  }
+ ],
+ "steps_prose": [
+  {
+   "cites": [
+    "precondition-app.version",
+    "precondition-os.name",
+    "variant-1",
+    "variant-2",
+    "variant-3"
+   ],
+   "text": "Set up a session matching the recorded environment (see conditions) and then follow one of three observed two-step paths, each of which was seen in exactly one event."
+  },
+  {
+   "cites": [
+    "variant-1"
+   ],
+   "text": "Path A: navigate to /news, then tap button#load-more."
+  },
+  {
+   "cites": [
+    "variant-2"
+   ],
+   "text": "Path B: navigate to /news, then tap a.article-link."
+  },
+  {
+   "cites": [
+    "variant-3"
+   ],
+   "text": "Path C: bring the app to the foreground (LIFECYCLE foreground), then navigate to /news/saved."
+  },
+  {
+   "cites": [
+    "failure"
+   ],
+   "text": "In each path the crash is expected at the same place: the Error \"Feed renderer crashed\" thrown from loadPage in src/modules/news/feed.ts at line 88."
+  },
+  {
+   "cites": [
+    "variant-1",
+    "variant-2",
+    "variant-3",
+    "failure"
+   ],
+   "text": "The three paths do not share a common prefix beyond all touching news screens, so the packet does not establish one single reproduction sequence; treat them as alternative routes to the same failure point."
+  },
+  {
+   "cites": [
+    "suspect-c32a444",
+    "failure"
+   ],
+   "text": "As a lead only, commit c32a444 (\"MEI-52: Local news feed paging\") touches the same file as the culprit frame, src/modules/news/feed.ts, so exercising the paging code on that build is worth trying first; it is not established as the cause."
+  }
+ ],
+ "summary": {
+  "cites": [
+   "incident",
+   "failure",
+   "variant-1",
+   "variant-2",
+   "variant-3"
+  ],
+  "text": "Three events were analysed for an incident reported as Error: Feed renderer crashed, which surfaces in loadPage at src/modules/news/feed.ts line 88 after a short two-step interaction in the news section."
+ }
+}

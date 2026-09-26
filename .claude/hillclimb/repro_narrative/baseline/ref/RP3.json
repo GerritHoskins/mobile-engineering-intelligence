@@ -1,0 +1,134 @@
+{
+ "conditions": [
+  {
+   "cites": [
+    "precondition-app.version",
+    "precondition-os.name",
+    "precondition-os.version",
+    "precondition-device.model",
+    "precondition-push.provider_registration",
+    "incident"
+   ],
+   "text": "Required setup: app version 1.3.0, iOS 18.4, device model iPhone15,2, and push.provider_registration = REGISTERED \u2014 all held in every event considered."
+  },
+  {
+   "cites": [
+    "varies-push.deliverable"
+   ],
+   "text": "Push deliverability is not a required condition: one event recorded push.deliverable as false and the other as UNKNOWN."
+  },
+  {
+   "cites": [
+    "varies-push.os_permission"
+   ],
+   "text": "OS push permission is not a required condition either: it was ALLOWED in one event and DENIED in the other."
+  },
+  {
+   "cites": [
+    "varies-profile.consistent"
+   ],
+   "text": "Profile consistency also varies \u2014 true in one event and UNKNOWN in the other \u2014 so it need not be reproduced in a specific state."
+  },
+  {
+   "cites": [
+    "incident"
+   ],
+   "text": "Only 2 events back this reproduction, so conditions that look fixed may simply be untested beyond this small sample."
+  }
+ ],
+ "missing_evidence_questions": [
+  {
+   "cites": [
+    "gap-1",
+    "failure",
+    "precondition-app.version"
+   ],
+   "text": "Why was the culprit unmappable for both events, and can symbolication or source maps for the 1.3.0 iOS build be restored to recover the failing frame?"
+  },
+  {
+   "cites": [
+    "failure",
+    "step-1"
+   ],
+   "text": "Which function is \"e\" at the point of the TypeError, and what call site on /home invokes it?"
+  },
+  {
+   "cites": [
+    "step-1",
+    "incident"
+   ],
+   "text": "Were there user actions between arriving at /home and the crash that were not captured as breadcrumbs, given only one step was recorded?"
+  },
+  {
+   "cites": [
+    "suspects"
+   ],
+   "text": "Is there a candidate change or release diff that could serve as a suspect, since suspects are listed as UNKNOWN?"
+  },
+  {
+   "cites": [
+    "incident",
+    "precondition-os.version",
+    "precondition-device.model",
+    "precondition-push.provider_registration"
+   ],
+   "text": "Do additional events beyond these 2 exist that would confirm whether the iOS 18.4 / iPhone15,2 / REGISTERED-push preconditions are genuinely required or just artifacts of a small sample?"
+  },
+  {
+   "cites": [
+    "varies-push.deliverable",
+    "varies-profile.consistent"
+   ],
+   "text": "What was the true push.deliverable and profile.consistent state in the events where they were recorded as UNKNOWN?"
+  }
+ ],
+ "steps_prose": [
+  {
+   "cites": [
+    "precondition-app.version",
+    "precondition-os.name",
+    "precondition-os.version",
+    "precondition-device.model",
+    "precondition-push.provider_registration"
+   ],
+   "text": "Run app version 1.3.0 on an iPhone15,2 running iOS 18.4, with push provider registration already in the REGISTERED state."
+  },
+  {
+   "cites": [
+    "step-1",
+    "incident"
+   ],
+   "text": "Navigate to /home; this is the only recorded step and it was present in all events considered."
+  },
+  {
+   "cites": [
+    "failure"
+   ],
+   "text": "Observe the crash: TypeError \"e is not a function\"."
+  },
+  {
+   "cites": [
+    "failure",
+    "gap-1",
+    "incident"
+   ],
+   "text": "The packet does not identify the culprit frame; it is UNKNOWN and the culprit could not be mapped for either event, so there is no known code location to watch during the repro."
+  },
+  {
+   "cites": [
+    "suspects"
+   ],
+   "text": "No suspect commit is identified in this packet, so there is no change to bisect against as a lead."
+  }
+ ],
+ "summary": {
+  "cites": [
+   "incident",
+   "failure",
+   "step-1",
+   "precondition-app.version",
+   "precondition-os.name"
+  ],
+  "text": "Across the 2 events analyzed, a TypeError with the message \"e is not a function\" occurs after the user navigates to /home on iOS 1.3.0 builds."
+ }
+}

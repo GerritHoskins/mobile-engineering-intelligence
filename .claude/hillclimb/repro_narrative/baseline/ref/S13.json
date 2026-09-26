@@ -1,0 +1,124 @@
+{
+ "conditions": [
+  {
+   "cites": [
+    "precondition-app.version",
+    "precondition-os.name",
+    "precondition-os.version",
+    "precondition-device.model"
+   ],
+   "text": "Set up the app at version 3.2.0 on iOS 18.4, device model iPhone15,2 \u2014 these values were identical in all events considered."
+  },
+  {
+   "cites": [
+    "precondition-profile.consistent"
+   ],
+   "text": "The profile state must be inconsistent going in: profile.consistent is false in every event."
+  },
+  {
+   "cites": [
+    "precondition-push.deliverable",
+    "precondition-push.os_permission",
+    "precondition-push.provider_registration"
+   ],
+   "text": "Push was fully functional in every event (deliverable true, OS permission ALLOWED, provider registration REGISTERED); the packet does not say whether push state is required for the failure or just incidental."
+  },
+  {
+   "cites": [
+    "incident",
+    "precondition-app.version",
+    "precondition-profile.consistent"
+   ],
+   "text": "No condition in the packet is listed as varying between events, but with only 2 events considered the packet gives no basis for deciding which of these preconditions are actually necessary."
+  },
+  {
+   "cites": [
+    "suspect-c32b555",
+    "failure"
+   ],
+   "text": "Commit c32b555, \"Sync profile postal code on save\", touches the same file as the culprit frame (src/modules/profile/profile.store.ts) and is a lead worth checking when reproducing, not a confirmed cause."
+  }
+ ],
+ "missing_evidence_questions": [
+  {
+   "cites": [
+    "precondition-profile.consistent",
+    "failure"
+   ],
+   "text": "What makes profile.consistent false \u2014 which field or flow puts the local job profile postal code out of step with the backend, so the state can be set up deliberately?"
+  },
+  {
+   "cites": [
+    "step-3",
+    "failure"
+   ],
+   "text": "What does the 409 response body from PUT /api/profile contain, and does the backend need a specific stored postal code for the mismatch to trigger?"
+  },
+  {
+   "cites": [
+    "precondition-app.version",
+    "precondition-os.version",
+    "precondition-device.model"
+   ],
+   "text": "Does the failure reproduce on other app versions, OS versions or devices, or is it specific to 3.2.0 on iOS 18.4 / iPhone15,2?"
+  },
+  {
+   "cites": [
+    "precondition-push.deliverable",
+    "precondition-push.os_permission",
+    "precondition-push.provider_registration"
+   ],
+   "text": "Is the push state (deliverable, ALLOWED, REGISTERED) relevant at all, or can the repro be done with push disabled?"
+  },
+  {
+   "cites": [
+    "suspect-c32b555",
+    "failure"
+   ],
+   "text": "Did occurrences start after commit c32b555 landed, and what did savePostalCode do at line 140 before that change?"
+  },
+  {
+   "cites": [
+    "incident"
+   ],
+   "text": "Are there more than the 2 events behind this packet that could confirm which steps and preconditions are consistently present?"
+  }
+ ],
+ "steps_prose": [
+  {
+   "cites": [
+    "step-1",
+    "incident"
+   ],
+   "text": "Navigate to /profile in the app; this appears in both considered events (support 1.0)."
+  },
+  {
+   "cites": [
+    "step-2"
+   ],
+   "text": "Tap the save control button#save-profile on that screen."
+  },
+  {
+   "cites": [
+    "step-3"
+   ],
+   "text": "The app issues PUT /api/profile, which comes back 409."
+  },
+  {
+   "cites": [
+    "failure",
+    "incident"
+   ],
+   "text": "At that point savePostalCode in src/modules/profile/profile.store.ts (line 140) throws Error: \"Postal code mismatch between backend and job profile\"."
+  }
+ ],
+ "summary": {
+  "cites": [
+   "incident",
+   "failure",
+   "step-3",
+   "incident"
+  ],
+  "text": "The incident is an Error, \"Postal code mismatch between backend and job profile\", raised in savePostalCode at src/modules/profile/profile.store.ts:140 when the profile is saved and the backend responds 409 to PUT /api/profile; the packet is derived from 2 events."
+ }
+}

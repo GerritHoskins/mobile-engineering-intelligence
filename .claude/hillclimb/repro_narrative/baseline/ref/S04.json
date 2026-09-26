@@ -1,0 +1,107 @@
+{
+ "conditions": [
+  {
+   "cites": [
+    "precondition-app.version",
+    "precondition-os.name",
+    "precondition-os.version",
+    "precondition-device.model",
+    "incident"
+   ],
+   "text": "Required setup: app version 3.0.0, iOS 18.4, device model iPhone15,2 - all present in every event considered."
+  },
+  {
+   "cites": [
+    "precondition-push.deliverable",
+    "precondition-push.os_permission",
+    "precondition-push.provider_registration",
+    "precondition-profile.consistent"
+   ],
+   "text": "Push was in a healthy state in all events: deliverable, OS permission ALLOWED, and provider registration REGISTERED; the profile was also consistent. These held in every event but the packet does not establish that they are required to trigger the failure."
+  },
+  {
+   "cites": [
+    "suspects",
+    "incident"
+   ],
+   "text": "No conditions are recorded as varying between the events, and no suspect commit is identified - suspects are UNKNOWN - so there is no code change to point at as a lead."
+  }
+ ],
+ "missing_evidence_questions": [
+  {
+   "cites": [
+    "failure"
+   ],
+   "text": "Which configuration value is missing at src/app/main.ts:12, and where is it expected to come from (bundled file, remote fetch, cached state)?"
+  },
+  {
+   "cites": [
+    "suspects"
+   ],
+   "text": "What change introduced or exposed the missing config - can a suspect commit be identified, given suspects is UNKNOWN in this packet?"
+  },
+  {
+   "cites": [
+    "step-1"
+   ],
+   "text": "Does the failure reproduce only on a cold or first launch after install/upgrade, since the packet records only a generic launch lifecycle step?"
+  },
+  {
+   "cites": [
+    "precondition-app.version",
+    "precondition-os.version",
+    "precondition-device.model",
+    "incident"
+   ],
+   "text": "Is the failure specific to app version 3.0.0, iOS 18.4, or iPhone15,2, or do those values simply reflect the only 2 events analyzed?"
+  },
+  {
+   "cites": [
+    "precondition-push.deliverable",
+    "precondition-push.provider_registration",
+    "precondition-profile.consistent",
+    "failure"
+   ],
+   "text": "Are the push and profile states incidental, or does bootstrap depend on push registration or profile data to obtain its config?"
+  }
+ ],
+ "steps_prose": [
+  {
+   "cites": [
+    "precondition-app.version",
+    "precondition-os.name",
+    "precondition-os.version",
+    "precondition-device.model"
+   ],
+   "text": "Install and run app version 3.0.0 on an iPhone15,2 running iOS 18.4."
+  },
+  {
+   "cites": [
+    "step-1",
+    "incident"
+   ],
+   "text": "Launch the app; the only reproduction step captured in the packet is the launch lifecycle event, present in all events considered."
+  },
+  {
+   "cites": [
+    "failure"
+   ],
+   "text": "At launch, bootstrap fails in src/app/main.ts at line 12 in the function bootstrap, raising Error: Bootstrap failed: config missing."
+  },
+  {
+   "cites": [
+    "step-1",
+    "failure"
+   ],
+   "text": "The packet contains no further user actions or navigation between launch and the failure, so there is nothing more to replay beyond starting the app."
+  }
+ ],
+ "summary": {
+  "cites": [
+   "incident",
+   "step-1",
+   "failure"
+  ],
+  "text": "The incident is an \"Error: Bootstrap failed: config missing\" thrown during app launch, seen across the 2 events analyzed."
+ }
+}

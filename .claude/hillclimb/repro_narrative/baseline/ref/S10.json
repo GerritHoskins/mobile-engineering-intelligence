@@ -1,0 +1,114 @@
+{
+ "conditions": [
+  {
+   "cites": [
+    "precondition-app.version",
+    "precondition-os.name",
+    "precondition-os.version",
+    "precondition-device.model"
+   ],
+   "text": "Recorded environment: app version 3.3.0 on iOS 18.4, device iPhone15,2 (all from Sentry contexts on the single event)."
+  },
+  {
+   "cites": [
+    "precondition-push.deliverable",
+    "precondition-push.os_permission",
+    "precondition-push.provider_registration",
+    "precondition-profile.consistent"
+   ],
+   "text": "Push was in a healthy state on the event: deliverable, OS permission ALLOWED, provider registration REGISTERED; the profile was reported consistent. These are observed state, and the packet does not establish that they are required to reproduce."
+  },
+  {
+   "cites": [
+    "gap-1",
+    "incident"
+   ],
+   "text": "Because only one event was considered, nothing here is known to vary versus be required; treat the whole context set as one observed configuration rather than a minimal repro."
+  },
+  {
+   "cites": [
+    "suspect-c33a666",
+    "failure"
+   ],
+   "text": "Commit c33a666 \"MEI-60: Weather widget on home\" touches the same file as the culprit frame and is a lead worth checking when setting up a build to reproduce, not a confirmed cause."
+  }
+ ],
+ "missing_evidence_questions": [
+  {
+   "cites": [
+    "gap-1",
+    "precondition-app.version",
+    "precondition-os.version",
+    "precondition-device.model"
+   ],
+   "text": "Are there any other events with this signature, so we can tell which of the app version, OS version and device model actually matter rather than inferring from a single event?"
+  },
+  {
+   "cites": [
+    "step-3",
+    "failure"
+   ],
+   "text": "Does the widget fail on every 204 from GET /api/weather, or only under some additional response or state condition not captured in the packet?"
+  },
+  {
+   "cites": [
+    "failure",
+    "suspect-c33a666"
+   ],
+   "text": "What does src/modules/weather/widget.vue line 19 do with an empty payload, and did commit c33a666 introduce or change that path?"
+  },
+  {
+   "cites": [
+    "step-1",
+    "step-2"
+   ],
+   "text": "Is reaching /home from a cold foreground required, or does the error also occur on re-entry or refresh of an already-loaded home screen?"
+  },
+  {
+   "cites": [
+    "precondition-push.deliverable",
+    "precondition-push.os_permission",
+    "precondition-push.provider_registration",
+    "precondition-profile.consistent"
+   ],
+   "text": "Does the push and profile state on the event have any bearing on the weather request, or is it incidental context?"
+  }
+ ],
+ "steps_prose": [
+  {
+   "cites": [
+    "step-1"
+   ],
+   "text": "Bring the app to the foreground."
+  },
+  {
+   "cites": [
+    "step-2"
+   ],
+   "text": "Navigate to /home."
+  },
+  {
+   "cites": [
+    "step-3"
+   ],
+   "text": "Have the backend call GET /api/weather return a 204 (no content) response; in the recorded event this is the call immediately preceding the failure."
+  },
+  {
+   "cites": [
+    "failure",
+    "incident"
+   ],
+   "text": "The weather widget then fails while rendering: Error \"Weather provider returned no data\" from render at src/modules/weather/widget.vue line 19."
+  }
+ ],
+ "summary": {
+  "cites": [
+   "incident",
+   "failure",
+   "step-2",
+   "step-3",
+   "gap-1"
+  ],
+  "text": "A single reported event shows an Error \"Weather provider returned no data\" thrown in the weather widget's render function at src/modules/weather/widget.vue line 19, occurring on the home screen after GET /api/weather returns 204."
+ }
+}

@@ -1,0 +1,147 @@
+{
+ "conditions": [
+  {
+   "cites": [
+    "precondition-profile.consistent"
+   ],
+   "text": "Required precondition: profile.consistent is true in every event (source module1.profile)."
+  },
+  {
+   "cites": [
+    "step-6",
+    "step-8"
+   ],
+   "text": "Required precondition: the backend must answer the second PUT /api/topics with a 500 while the first one returns 200, so you will likely need to force that server response to reproduce it."
+  },
+  {
+   "cites": [
+    "varies-app.version"
+   ],
+   "text": "App version is not a required condition: 2 events on 3.1.0 and 2 on 3.2.0."
+  },
+  {
+   "cites": [
+    "varies-os.name",
+    "varies-os.version"
+   ],
+   "text": "Platform is not a required condition either: 2 events on iOS and 2 on Android, with OS versions 15 (2 events), 18.4 (1) and 17.6 (1)."
+  },
+  {
+   "cites": [
+    "varies-device.model"
+   ],
+   "text": "Device model varies: Pixel 8 in 2 events, iPhone15,2 in 1, and UNKNOWN in 1."
+  },
+  {
+   "cites": [
+    "varies-flag.topics_v2"
+   ],
+   "text": "The topics_v2 flag is not required to be on: 3 events had it on, 1 off."
+  },
+  {
+   "cites": [
+    "varies-push.deliverable",
+    "varies-push.os_permission",
+    "varies-push.provider_registration"
+   ],
+   "text": "Push state varies and so is not part of the repro: push.deliverable was false in 3 events and true in 1, OS permission was ALLOWED in 2 and DENIED in 2, and provider registration was REGISTERED in 3 and NOT_REGISTERED in 1."
+  },
+  {
+   "cites": [
+    "suspects"
+   ],
+   "text": "No suspect commit was identified for this incident, so there is no code change to point at as a lead."
+  }
+ ],
+ "missing_evidence_questions": [
+  {
+   "cites": [
+    "step-6",
+    "step-8"
+   ],
+   "text": "Why did the server return 500 on the second PUT /api/topics when the first identical call returned 200 - are there server-side logs or a response body for that request?"
+  },
+  {
+   "cites": [
+    "failure",
+    "step-8"
+   ],
+   "text": "Does toggleTopic at notifications.ts:64 throw on any non-2xx response, or specifically on 500, and is the error surfaced or retried?"
+  },
+  {
+   "cites": [
+    "step-5",
+    "step-7"
+   ],
+   "text": "Is the failure tied to the second toggle in a session (switch#topic-news specifically), or would any second topic toggle reproduce it?"
+  },
+  {
+   "cites": [
+    "varies-device.model"
+   ],
+   "text": "Which device produced the event with device.model UNKNOWN, and does that gap hide a device-specific pattern?"
+  },
+  {
+   "cites": [
+    "suspects",
+    "incident"
+   ],
+   "text": "Given that no suspect commit was found, when did these 4 events start appearing and is there a release or backend deploy that lines up with them?"
+  }
+ ],
+ "steps_prose": [
+  {
+   "cites": [
+    "step-1"
+   ],
+   "text": "Bring the app to the foreground (all 4 events start with a foreground lifecycle transition)."
+  },
+  {
+   "cites": [
+    "step-2"
+   ],
+   "text": "Land on /home."
+  },
+  {
+   "cites": [
+    "step-3"
+   ],
+   "text": "Navigate to /settings."
+  },
+  {
+   "cites": [
+    "step-4"
+   ],
+   "text": "Navigate to /settings/notifications."
+  },
+  {
+   "cites": [
+    "step-5",
+    "step-6"
+   ],
+   "text": "Tap the switch#topic-jobs toggle; the resulting PUT /api/topics returns 200, so this first toggle succeeds."
+  },
+  {
+   "cites": [
+    "step-7",
+    "step-8"
+   ],
+   "text": "Tap the switch#topic-news toggle; the resulting PUT /api/topics returns 500."
+  },
+  {
+   "cites": [
+    "failure"
+   ],
+   "text": "At that point toggleTopic raises Error: Topic toggle failed at src/modules/settings/notifications.ts line 64."
+  }
+ ],
+ "summary": {
+  "cites": [
+   "incident",
+   "failure",
+   "step-7",
+   "step-8"
+  ],
+  "text": "The incident is an \"Error: Topic toggle failed\" thrown in toggleTopic at src/modules/settings/notifications.ts:64, seen across 4 events, and it happens when a second topic switch is toggled on the notification settings screen and the backend PUT /api/topics returns 500."
+ }
+}

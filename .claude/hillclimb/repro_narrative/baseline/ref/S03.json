@@ -1,0 +1,121 @@
+{
+ "conditions": [
+  {
+   "cites": [
+    "precondition-app.version",
+    "precondition-os.name",
+    "precondition-os.version",
+    "precondition-device.model"
+   ],
+   "text": "Set up app version 3.3.0 on iOS 18.4, device model iPhone15,2 \u2014 these were identical across all analyzed events."
+  },
+  {
+   "cites": [
+    "precondition-push.deliverable",
+    "precondition-push.os_permission",
+    "precondition-push.provider_registration"
+   ],
+   "text": "Push should be in a deliverable state: OS permission ALLOWED and provider registration REGISTERED, as reported for every event."
+  },
+  {
+   "cites": [
+    "precondition-profile.consistent"
+   ],
+   "text": "The user profile was consistent in all events, so reproduce with a normal, consistent profile."
+  },
+  {
+   "cites": [
+    "varies-flag.news_v2"
+   ],
+   "text": "The news_v2 flag is not a required condition: it was on in 2 events and off in 1, so the crash occurred in both states."
+  },
+  {
+   "cites": [
+    "suspects"
+   ],
+   "text": "No suspect commit was identified, so there is no specific code change to check out or revert as part of the setup."
+  }
+ ],
+ "missing_evidence_questions": [
+  {
+   "cites": [
+    "step-4",
+    "failure"
+   ],
+   "text": "What was in the GET /api/news 200 response body (item count, paging cursors, total pages) that could make loadPage compute an index of -1? The packet records only the status code."
+  },
+  {
+   "cites": [
+    "step-1",
+    "step-2",
+    "step-3",
+    "step-4"
+   ],
+   "text": "What page or offset state existed before the load-more tap \u2014 e.g. had the user already paged to the end, or scrolled back? The packet lists only foreground, navigate, tap and the backend call."
+  },
+  {
+   "cites": [
+    "suspects",
+    "failure"
+   ],
+   "text": "Why did no suspect commit surface for feed.ts:88 \u2014 is the file outside the analyzed history, or unchanged recently?"
+  },
+  {
+   "cites": [
+    "incident",
+    "varies-flag.news_v2"
+   ],
+   "text": "Do the 3 events differ in anything besides the news_v2 flag (for example locale, network conditions, or account data) that the packet did not capture?"
+  },
+  {
+   "cites": [
+    "precondition-app.version",
+    "precondition-os.version",
+    "precondition-device.model"
+   ],
+   "text": "Does the crash reproduce on other app versions, OS versions or devices, given all analyzed events share 3.3.0 / iOS 18.4 / iPhone15,2?"
+  }
+ ],
+ "steps_prose": [
+  {
+   "cites": [
+    "step-1",
+    "incident"
+   ],
+   "text": "Bring the app to the foreground (this lifecycle step was present in all 3 events)."
+  },
+  {
+   "cites": [
+    "step-2"
+   ],
+   "text": "Navigate to /news."
+  },
+  {
+   "cites": [
+    "step-3"
+   ],
+   "text": "Tap the load-more button (button#load-more)."
+  },
+  {
+   "cites": [
+    "step-4"
+   ],
+   "text": "Let the feed request complete: GET /api/news returns 200, so the backend call succeeds rather than failing."
+  },
+  {
+   "cites": [
+    "failure"
+   ],
+   "text": "At that point loadPage (src/modules/news/feed.ts line 88) raises RangeError: Invalid page index -1."
+  }
+ ],
+ "summary": {
+  "cites": [
+   "incident",
+   "failure",
+   "step-3",
+   "step-4"
+  ],
+  "text": "Across 3 analyzed events, a RangeError \"Invalid page index -1\" is thrown in loadPage at src/modules/news/feed.ts:88 after the news feed loads more items following a tap on the load-more button."
+ }
+}

@@ -1,0 +1,110 @@
+{
+ "conditions": [
+  {
+   "cites": [
+    "precondition-app.version",
+    "precondition-os.name",
+    "precondition-os.version",
+    "precondition-device.model"
+   ],
+   "text": "Preconditions to set up: app 1.2.0, iOS 18.4, iPhone15,2."
+  },
+  {
+   "cites": [
+    "precondition-profile.consistent"
+   ],
+   "text": "The packet also records profile.consistent = false from module1.profile across both events, so the captured profile is flagged as not internally consistent; the packet does not explain what that inconsistency is."
+  },
+  {
+   "cites": [
+    "varies-push.deliverable",
+    "varies-push.os_permission",
+    "varies-push.provider_registration"
+   ],
+   "text": "Push state is not required to reproduce: across the two events push.deliverable was true in one and false in the other, push.os_permission was ALLOWED in one and DENIED in the other, and push.provider_registration was REGISTERED in one and STALE in the other."
+  },
+  {
+   "cites": [
+    "incident"
+   ],
+   "text": "Note the evidence base is small: only 2 events were considered."
+  },
+  {
+   "cites": [
+    "suspect-a6af0bd",
+    "failure"
+   ],
+   "text": "Commit a6af0bd (\"Clean up router\") touches src/app/router.ts, the same file as the culprit frame, so it is a lead worth checking when setting up the build, not a confirmed cause."
+  }
+ ],
+ "missing_evidence_questions": [
+  {
+   "cites": [
+    "step-1"
+   ],
+   "text": "How was the navigation to /legacy/inbox initiated (deep link, in-app tap, push open)? The packet records only the navigation target, not its trigger."
+  },
+  {
+   "cites": [
+    "precondition-profile.consistent"
+   ],
+   "text": "What does profile.consistent = false mean for this incident, and which attributes disagreed?"
+  },
+  {
+   "cites": [
+    "suspect-a6af0bd",
+    "failure"
+   ],
+   "text": "Did commit a6af0bd remove or rename the /legacy/inbox route in src/app/router.ts, and does the failure disappear on a build before it?"
+  },
+  {
+   "cites": [
+    "precondition-app.version",
+    "precondition-os.version",
+    "precondition-device.model",
+    "incident"
+   ],
+   "text": "Does the error reproduce on other app versions, OS versions or devices, or only on the single configuration seen in these two events?"
+  },
+  {
+   "cites": [
+    "varies-push.deliverable",
+    "varies-push.os_permission",
+    "varies-push.provider_registration"
+   ],
+   "text": "Given push-related fields differ between the two events, is there any path where push state affects routing, or is it purely incidental?"
+  }
+ ],
+ "steps_prose": [
+  {
+   "cites": [
+    "precondition-app.version",
+    "precondition-os.name",
+    "precondition-os.version",
+    "precondition-device.model"
+   ],
+   "text": "Run app version 1.2.0 on iOS 18.4 on an iPhone15,2 (device model iPhone15,2), which is the configuration present in both events."
+  },
+  {
+   "cites": [
+    "step-1"
+   ],
+   "text": "Trigger a navigation to the route /legacy/inbox; this is the only user step captured, and it appears in all events considered."
+  },
+  {
+   "cites": [
+    "failure",
+    "incident"
+   ],
+   "text": "Observe the failure: resolveRoute (src/app/router.ts:31) raises Error \"No route matches /legacy/inbox\"."
+  }
+ ],
+ "summary": {
+  "cites": [
+   "incident",
+   "failure",
+   "step-1"
+  ],
+  "text": "Two Sentry events show an Error \"No route matches /legacy/inbox\" thrown from resolveRoute in src/app/router.ts line 31 when the app navigates to /legacy/inbox."
+ }
+}

@@ -1,0 +1,126 @@
+{
+ "conditions": [
+  {
+   "cites": [
+    "precondition-app.version",
+    "precondition-os.name",
+    "precondition-os.version",
+    "precondition-device.model"
+   ],
+   "text": "Preconditions observed in every event: app version 3.1.0 on iOS 18.4, device iPhone15,2."
+  },
+  {
+   "cites": [
+    "precondition-push.deliverable",
+    "precondition-push.os_permission",
+    "precondition-push.provider_registration",
+    "precondition-profile.consistent"
+   ],
+   "text": "Also consistent across events: push was deliverable with OS permission ALLOWED and provider registration REGISTERED, and the profile was consistent; the packet does not state whether these are required for the crash or merely coincidental."
+  },
+  {
+   "cites": [
+    "failure",
+    "incident"
+   ],
+   "text": "The specific property read varies between events ('title' and 'company'), so reproducing the exact message is not required to hit the same failure point."
+  },
+  {
+   "cites": [
+    "suspect-c31a111",
+    "suspect-c31b222",
+    "failure"
+   ],
+   "text": "Two commits touch the culprit file and are leads only, not confirmed causes: c31a111 'MEI-40: Apply to jobs from the detail page' and c31b222 'MEI-41: Cache job detail responses'; testing on builds with and without them may help, but the packet does not establish either as the cause."
+  }
+ ],
+ "missing_evidence_questions": [
+  {
+   "cites": [
+    "step-5"
+   ],
+   "text": "What makes the backend return 500 for POST /api/applications, and can that 500 be forced deterministically in a test environment?"
+  },
+  {
+   "cites": [
+    "failure"
+   ],
+   "text": "Which object is null at src/modules/jobs/apply.ts:57, and why does the property read differ ('title' vs 'company') between events?"
+  },
+  {
+   "cites": [
+    "step-5",
+    "failure"
+   ],
+   "text": "Does the crash still occur if POST /api/applications succeeds, or is the 500 a required precondition?"
+  },
+  {
+   "cites": [
+    "precondition-app.version",
+    "precondition-os.version",
+    "precondition-device.model",
+    "incident"
+   ],
+   "text": "Is the failure limited to app 3.1.0 / iOS 18.4 / iPhone15,2, or are other versions and devices affected but absent from these 3 events?"
+  },
+  {
+   "cites": [
+    "precondition-push.deliverable",
+    "precondition-push.os_permission",
+    "precondition-push.provider_registration",
+    "precondition-profile.consistent"
+   ],
+   "text": "Do the push and profile preconditions have any bearing on the crash path, or are they unrelated context captured in every event?"
+  },
+  {
+   "cites": [
+    "suspect-c31a111",
+    "suspect-c31b222"
+   ],
+   "text": "Which of c31a111 or c31b222 introduced the null-unsafe read, for example does the job detail cache from MEI-41 leave the detail object null on the apply path?"
+  }
+ ],
+ "steps_prose": [
+  {
+   "cites": [
+    "step-1",
+    "incident"
+   ],
+   "text": "Navigate to /jobs (present in all 3 events)."
+  },
+  {
+   "cites": [
+    "step-2"
+   ],
+   "text": "Tap a job card (li.job-card)."
+  },
+  {
+   "cites": [
+    "step-3"
+   ],
+   "text": "Land on /jobs/detail."
+  },
+  {
+   "cites": [
+    "step-4"
+   ],
+   "text": "Tap the Apply button (button#apply)."
+  },
+  {
+   "cites": [
+    "step-5",
+    "failure"
+   ],
+   "text": "The app issues POST /api/applications, which responds 500, and submitApplication at src/modules/jobs/apply.ts:57 then throws a TypeError reading a property of null."
+  }
+ ],
+ "summary": {
+  "cites": [
+   "incident",
+   "failure",
+   "step-4",
+   "step-5"
+  ],
+  "text": "A TypeError thrown in submitApplication (src/modules/jobs/apply.ts line 57) when reading a property off a null value, occurring after the user taps Apply on the job detail page and the POST /api/applications call returns 500; the packet is based on 3 events."
+ }
+}

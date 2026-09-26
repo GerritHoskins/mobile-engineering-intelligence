@@ -1,0 +1,121 @@
+{
+ "conditions": [
+  {
+   "cites": [
+    "precondition-app.version",
+    "precondition-os.name",
+    "precondition-os.version",
+    "precondition-device.model"
+   ],
+   "text": "Reproduce on app version 3.2.0, iOS 18.4, device iPhone15,2 \u2014 these matched in every event considered."
+  },
+  {
+   "cites": [
+    "precondition-push.deliverable",
+    "precondition-push.os_permission",
+    "precondition-push.provider_registration",
+    "precondition-profile.consistent"
+   ],
+   "text": "Push was deliverable in all events, with OS permission ALLOWED and provider registration REGISTERED, and the profile was consistent; these held in every event, though the packet does not say whether they are causally required."
+  },
+  {
+   "cites": [
+    "variant-1",
+    "variant-2",
+    "variant-3"
+   ],
+   "text": "The pre-tap navigation path is not required to be any particular one: it varies from a single /home navigation to 12 news pages or 98 search pages across the three events."
+  },
+  {
+   "cites": [
+    "gap-1"
+   ],
+   "text": "Breadcrumbs were truncated in 1 of the events, so the recorded prefix for that event may be incomplete."
+  },
+  {
+   "cites": [
+    "suspect-c32a444",
+    "failure"
+   ],
+   "text": "Commit c32a444 (\"MEI-52: Local news feed paging\") touches src/modules/news/feed.ts, the same file as the culprit frame, so it is a lead worth checking rather than a confirmed cause."
+  }
+ ],
+ "missing_evidence_questions": [
+  {
+   "cites": [
+    "gap-1",
+    "variant-2"
+   ],
+   "text": "What did the truncated breadcrumb trail contain for the affected event, and does it change the shared prefix before the tap?"
+  },
+  {
+   "cites": [
+    "step-2",
+    "failure"
+   ],
+   "text": "What article content or response payload was loaded at /news/article in each event, since the packet records no data about what failed to parse?"
+  },
+  {
+   "cites": [
+    "precondition-app.version",
+    "precondition-os.version",
+    "precondition-device.model"
+   ],
+   "text": "Does the failure reproduce on app versions other than 3.2.0, on iOS versions other than 18.4, or on devices other than iPhone15,2, none of which appear in the observed events?"
+  },
+  {
+   "cites": [
+    "suspect-c32a444",
+    "failure"
+   ],
+   "text": "Did commit c32a444 change the loadPage path at src/modules/news/feed.ts:88, and does reverting or bypassing that change stop the error?"
+  },
+  {
+   "cites": [
+    "precondition-push.deliverable",
+    "precondition-profile.consistent",
+    "incident"
+   ],
+   "text": "Are the push and profile preconditions incidental to these 3 events or actually needed to trigger the parse failure?"
+  }
+ ],
+ "steps_prose": [
+  {
+   "cites": [
+    "variant-1",
+    "variant-2",
+    "variant-3"
+   ],
+   "text": "Get the app into the state shown by the events; the browsing that precedes the failure differs per event, so any of the observed prefixes will do: 12 steps of news paging from /news/0 through /news/11, 98 steps of search paging from /search/0 through /search/97, or a single NAVIGATE to /home."
+  },
+  {
+   "cites": [
+    "step-1",
+    "incident"
+   ],
+   "text": "Tap an article link (a.article-link); this step is present in all 3 events."
+  },
+  {
+   "cites": [
+    "step-2",
+    "incident"
+   ],
+   "text": "Let the app navigate to /news/article, which is also present in all 3 events."
+  },
+  {
+   "cites": [
+    "failure"
+   ],
+   "text": "Observe the failure: Error \"Article body parse failed\" surfacing in loadPage at src/modules/news/feed.ts line 88."
+  }
+ ],
+ "summary": {
+  "cites": [
+   "incident",
+   "failure",
+   "step-1",
+   "step-2"
+  ],
+  "text": "Across 3 events, an Error \"Article body parse failed\" is thrown in loadPage at src/modules/news/feed.ts:88 after the user taps an article link and navigates to /news/article."
+ }
+}

@@ -1,0 +1,119 @@
+{
+ "conditions": [
+  {
+   "cites": [
+    "precondition-app.version",
+    "precondition-os.name",
+    "precondition-os.version",
+    "precondition-device.model"
+   ],
+   "text": "Set up app version 3.1.0 on Android 15, device Pixel 8 \u2014 these were the values reported in all events considered."
+  },
+  {
+   "cites": [
+    "precondition-push.deliverable",
+    "precondition-push.os_permission",
+    "precondition-push.provider_registration",
+    "precondition-profile.consistent"
+   ],
+   "text": "The push state in all events was deliverable, with OS permission ALLOWED and provider registration REGISTERED, and the profile was consistent; these were present every time but the packet does not establish that they are required for the crash."
+  },
+  {
+   "cites": [
+    "incident",
+    "step-1",
+    "step-2",
+    "step-3",
+    "step-4",
+    "precondition-app.version",
+    "precondition-push.deliverable"
+   ],
+   "text": "Only 3 events were considered and every step and precondition had full support across them, so the packet identifies nothing that varies and therefore nothing that can be marked as not required."
+  },
+  {
+   "cites": [
+    "suspect-c31b222",
+    "suspect-c31a111",
+    "failure"
+   ],
+   "text": "Two commits touch the crashing file or its neighbours and are leads only, not confirmed causes: c31b222 \"MEI-41: Cache job detail responses\", which overlaps src/modules/jobs/api.ts and src/modules/jobs/apply.ts, and c31a111 \"MEI-40: Apply to jobs from the detail page\", which overlaps src/modules/jobs/apply.ts; if you are trying to force the repro, exercising the job-detail caching path is the most direct thing to try."
+  }
+ ],
+ "missing_evidence_questions": [
+  {
+   "cites": [
+    "step-4",
+    "failure"
+   ],
+   "text": "What does the body of the 200 response to GET /api/jobs/42 actually contain \u2014 is the detail field absent, null, or shaped differently than fetchJob expects at line 23?"
+  },
+  {
+   "cites": [
+    "step-4"
+   ],
+   "text": "Is job id 42 specific to these events, or does any job id reproduce it? The packet records only that one call target."
+  },
+  {
+   "cites": [
+    "suspect-c31b222",
+    "failure"
+   ],
+   "text": "Does the caching introduced by c31b222 store or replay a partial job payload, and does the crash only occur on a cache hit versus a fresh fetch?"
+  },
+  {
+   "cites": [
+    "incident",
+    "precondition-app.version",
+    "precondition-os.version",
+    "precondition-device.model",
+    "precondition-push.deliverable",
+    "precondition-profile.consistent"
+   ],
+   "text": "Does the crash reproduce outside app 3.1.0 / Android 15 / Pixel 8, or on other push and profile states? With 3 events all sharing these values, the packet cannot separate required conditions from coincidence."
+  },
+  {
+   "cites": [
+    "step-2",
+    "step-3",
+    "suspect-c31a111"
+   ],
+   "text": "Is there any step between tapping the job card and the detail fetch \u2014 for example an apply action touched by c31a111 \u2014 that the captured breadcrumbs did not record?"
+  }
+ ],
+ "steps_prose": [
+  {
+   "cites": [
+    "step-1"
+   ],
+   "text": "Open the jobs list screen at /jobs."
+  },
+  {
+   "cites": [
+    "step-2"
+   ],
+   "text": "Tap a job card (li.job-card) in the list."
+  },
+  {
+   "cites": [
+    "step-3"
+   ],
+   "text": "The app navigates to /jobs/detail."
+  },
+  {
+   "cites": [
+    "step-4",
+    "failure"
+   ],
+   "text": "The detail load issues GET /api/jobs/42, which returns HTTP 200; the crash surfaces in fetchJob at src/modules/jobs/api.ts line 23 with \"job.detail is null\", so the 200 response is reaching code that expects a detail field."
+  }
+ ],
+ "summary": {
+  "cites": [
+   "incident",
+   "failure",
+   "step-3",
+   "step-4"
+  ],
+  "text": "Three events show a NullPointerException with the message \"job.detail is null\", thrown in fetchJob at src/modules/jobs/api.ts:23, and it happens right after opening a job from the jobs list and the detail request GET /api/jobs/42 returns 200."
+ }
+}

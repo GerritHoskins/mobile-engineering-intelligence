@@ -1,0 +1,136 @@
+{
+ "conditions": [
+  {
+   "cites": [
+    "precondition-app.version",
+    "precondition-os.name",
+    "precondition-os.version",
+    "precondition-device.model"
+   ],
+   "text": "All three events ran app version 3.1.0 on iOS 18.4 on an iPhone15,2 (device model iPhone15,2), so reproduce on that combination first."
+  },
+  {
+   "cites": [
+    "precondition-push.deliverable",
+    "precondition-push.os_permission",
+    "precondition-push.provider_registration",
+    "precondition-profile.consistent"
+   ],
+   "text": "In every event push was deliverable with OS permission ALLOWED and provider registration REGISTERED, and the profile was consistent; these held uniformly but the packet does not establish they are causally required."
+  },
+  {
+   "cites": [
+    "variant-1",
+    "variant-2"
+   ],
+   "text": "What varies is the lead-in: one event has an empty prefix and one has a single unmapped sdk.session step, so that prefix is not a precondition."
+  },
+  {
+   "cites": [
+    "suspect-c31a111",
+    "suspect-c31b222",
+    "failure"
+   ],
+   "text": "Two commits touch the culprit file src/modules/jobs/apply.ts and are leads only, not confirmed causes: c31a111 \"MEI-40: Apply to jobs from the detail page\" and c31b222 \"MEI-41: Cache job detail responses\"."
+  },
+  {
+   "cites": [
+    "gap-1",
+    "gap-2",
+    "step-1",
+    "step-5"
+   ],
+   "text": "Coverage is incomplete: one event had no breadcrumbs and one had unmapped steps, so the five-step path rests on 2 of 3 events."
+  }
+ ],
+ "missing_evidence_questions": [
+  {
+   "cites": [
+    "gap-1",
+    "step-1",
+    "step-4"
+   ],
+   "text": "What did the event with no breadcrumbs actually do before the crash, and does it follow the same /jobs to apply path?"
+  },
+  {
+   "cites": [
+    "gap-2",
+    "variant-2"
+   ],
+   "text": "What is the UNMAPPED sdk.session step, and does mapping it change the reconstructed prefix?"
+  },
+  {
+   "cites": [
+    "step-5",
+    "failure"
+   ],
+   "text": "Is the 500 from POST /api/applications the cause of the undefined value read at apply.ts:57, or does the crash also occur when that call succeeds?"
+  },
+  {
+   "cites": [
+    "failure",
+    "suspect-c31a111",
+    "suspect-c31b222"
+   ],
+   "text": "Which object is undefined at apply.ts:57, and does the job detail caching introduced by c31b222 or the apply flow added in c31a111 leave it unset?"
+  },
+  {
+   "cites": [
+    "precondition-app.version",
+    "precondition-os.version",
+    "precondition-device.model"
+   ],
+   "text": "Does the crash reproduce outside app 3.1.0 on iOS 18.4 / iPhone15,2, or are those versions genuinely required?"
+  }
+ ],
+ "steps_prose": [
+  {
+   "cites": [
+    "step-1",
+    "incident"
+   ],
+   "text": "Navigate to /jobs (seen in 2 of the 3 events, support 0.67)."
+  },
+  {
+   "cites": [
+    "step-2"
+   ],
+   "text": "Tap a job card (li.job-card) in the list."
+  },
+  {
+   "cites": [
+    "step-3"
+   ],
+   "text": "Land on the job detail route /jobs/detail."
+  },
+  {
+   "cites": [
+    "step-4"
+   ],
+   "text": "Tap the Apply button (button#apply)."
+  },
+  {
+   "cites": [
+    "step-5",
+    "failure"
+   ],
+   "text": "The backend call POST /api/applications returns 500, and the crash surfaces in submitApplication at src/modules/jobs/apply.ts line 57 reading 'jobId' off an undefined value."
+  },
+  {
+   "cites": [
+    "variant-1",
+    "variant-2"
+   ],
+   "text": "One of the three events reached this sequence with no preceding steps, and another started with an unmapped sdk.session step, so nothing is required before the /jobs navigation as far as the packet shows."
+  }
+ ],
+ "summary": {
+  "cites": [
+   "incident",
+   "failure",
+   "step-4",
+   "step-5"
+  ],
+  "text": "The incident is a TypeError, \"Cannot read properties of undefined (reading 'jobId')\", thrown in submitApplication at src/modules/jobs/apply.ts:57 when a user taps Apply on a job detail page and the POST /api/applications call returns 500; it was reconstructed from 3 events."
+ }
+}
