@@ -24,6 +24,7 @@ def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument("--case", default="RP2")
     parser.add_argument("--wrong-from", default="S05", help="case whose frozen narrative plays the wrong answer")
+    parser.add_argument("--only", help="run just the negatives whose name starts with this (e.g. wrong)")
     args = parser.parse_args()
     load_dotenv(find_dotenv(usecwd=True))
     packet = json.loads((CASES_DIR / f"{args.case}.json").read_text())["packet"]
@@ -38,6 +39,8 @@ def main() -> None:
     client = anthropic.Anthropic(max_retries=2)
     total, ok = 0.0, True
     for name, candidate in negatives.items():
+        if args.only and not name.startswith(args.only):
+            continue
         verdict = grade.judge(client, packet, candidate, reference, random.Random(name))
         spent = cost(verdict["judge_model"], verdict["judge_usage"])
         total += spent
