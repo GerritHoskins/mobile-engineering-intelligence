@@ -112,9 +112,11 @@ def served_as_requested(served: str | None, requested: str) -> bool:
 class Outcome(Exception):
     """An attempt that ends in errors.jsonl rather than results.jsonl."""
 
-    def __init__(self, failure_class: str, message: str, model: str | None = None, usage: dict | None = None):
+    def __init__(self, failure_class: str, message: str, model: str | None = None, usage: dict | None = None,
+                 judge_model: str | None = None, judge_usage: dict | None = None):
         super().__init__(message)
         self.failure_class, self.model, self.usage = failure_class, model, usage
+        self.judge_model, self.judge_usage = judge_model, judge_usage
 
 
 # ------------------------------------------------------------------ run
@@ -209,7 +211,13 @@ def run_one(case: dict, rep: int, args, llm: AnthropicLLM, judge_client: anthrop
     else:
         reference = json.loads((flow / "baseline" / "ref" / f"{case['id']}.json").read_text())
         rng = random.Random(f"{case['id']}:{rep}:{args.variant}")
-        verdict = judge_with_retries(judge_client, packet, output, reference, rng)
+        try:
+            verdict = judge_with_retries(judge_client, packet, output, reference, rng)
+        except Outcome as outcome:  # the narrative was generated (and billed) before the judge failed
+            outcome.model, outcome.usage = call.get("model"), call.get("usage")
+            raise
+        except anthropic.APIError as error:
+            raise Outcome("grader_error", f"judge request failed: {error}", call.get("model"), call.get("usage"))
         scores["win"] = verdict["win"]
         scores["faults"] = float(len(verdict["candidate_faults"]))
         scores["both_bad"] = float(verdict["verdict"] == "both_bad")
@@ -240,7 +248,7 @@ def judge_with_retries(client, packet, output, reference, rng) -> dict:
                 raise Outcome("grader_error", f"judge unavailable: {error}")
             time.sleep(min(60, 2 ** attempt) + random.uniform(0, 1))
         except grade.JudgeError as error:
-            raise Outcome("grader_error", str(error), grade.JUDGE_MODEL, error.usage)
+            raise Outcome("grader_error", str(error), judge_model=grade.JUDGE_MODEL, judge_usage=error.usage)
 
 
 def cost(model: str | None, usage: dict | None) -> float:
@@ -268,10 +276,8 @@ def summarize(out_dir: Path, wall: float) -> None:
             continue
         half = 1.96 * statistics.stdev(means) / len(means) ** 0.5 if len(means) > 1 else float("nan")
         print(f"  {metric:16} {statistics.mean(means):.3f} ± {half:.3f}  (n={len(means)} cases)")
-    gen = [cost(r["model"], r["usage"]) for r in rows] + \
-          [cost(e.get("model"), e.get("usage")) for e in errors if e.get("failure_class") != "grader_error"]
-    judge_cost = [cost(r.get("judge_model"), r.get("judge_usage")) for r in rows] + \
-                 [cost(e.get("model"), e.get("usage")) for e in errors if e.get("failure_class") == "grader_error"]
+    gen = [cost(r["model"], r["usage"]) for r in rows + errors]
+    judge_cost = [cost(r.get("judge_model"), r.get("judge_usage")) for r in rows + errors]
     per_case = sorted(cost(r["model"], r["usage"]) + cost(r.get("judge_model"), r.get("judge_usage")) for r in rows)
     lat = sorted(r["latency_s"] for r in ok if r.get("latency_s"))
     outs = sorted(r["out_tokens"] for r in ok if r.get("out_tokens"))
@@ -325,7 +331,8 @@ def main() -> None:
             out = run_one(case, rep, args, llm, judge_client, args.flow)
         except Outcome as outcome:
             record = {"prompt_id": case["id"], "rep": rep, "failure_class": outcome.failure_class,
-                      "message": str(outcome), "model": outcome.model, "usage": outcome.usage}
+                      "message": str(outcome), "model": outcome.model, "usage": outcome.usage,
+                      "judge_model": outcome.judge_model, "judge_usage": outcome.judge_usage}
         except Exception as error:  # noqa: BLE001 -- anything else is a harness failure, never a score
             record = {"prompt_id": case["id"], "rep": rep, "failure_class": "harness_error",
                       "message": f"{type(error).__name__}: {error}", "model": None, "usage": None}
