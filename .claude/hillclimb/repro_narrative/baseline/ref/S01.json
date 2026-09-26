@@ -1,0 +1,139 @@
+{
+ "conditions": [
+  {
+   "cites": [
+    "precondition-app.version",
+    "precondition-os.name",
+    "precondition-os.version",
+    "precondition-device.model"
+   ],
+   "text": "All four events came from app version 3.1.0 on iOS 18.4, device iPhone15,2, so set up that combination to match the observed environment."
+  },
+  {
+   "cites": [
+    "precondition-push.deliverable",
+    "precondition-push.os_permission",
+    "precondition-push.provider_registration",
+    "precondition-profile.consistent"
+   ],
+   "text": "Push was deliverable in every event: OS permission ALLOWED and provider registration REGISTERED; the profile was also consistent in every event."
+  },
+  {
+   "cites": [
+    "incident",
+    "step-1",
+    "step-2",
+    "step-3",
+    "step-4",
+    "step-5",
+    "precondition-push.deliverable",
+    "precondition-profile.consistent"
+   ],
+   "text": "Every step and precondition in the packet has support 1.0 across the 4 events considered, so the packet does not identify any condition that varies or is optional; whether the push and profile states are actually required to trigger the crash is not established by the packet."
+  },
+  {
+   "cites": [
+    "step-5"
+   ],
+   "text": "To reproduce reliably you will likely need the applications endpoint to fail with a 500, since that response is present in all observed events."
+  },
+  {
+   "cites": [
+    "suspect-c31a111",
+    "failure"
+   ],
+   "text": "Commit c31a111 (\"MEI-40: Apply to jobs from the detail page\") touches the same file as the culprit frame, src/modules/jobs/detail.vue, making it a lead worth checking rather than a confirmed cause."
+  }
+ ],
+ "missing_evidence_questions": [
+  {
+   "cites": [
+    "failure"
+   ],
+   "text": "What object is undefined at src/modules/jobs/detail.vue:31 when 'jobId' is read, and where was it expected to be set?"
+  },
+  {
+   "cites": [
+    "step-5",
+    "failure"
+   ],
+   "text": "What causes POST /api/applications to return 500, and does the crash still occur when that call succeeds?"
+  },
+  {
+   "cites": [
+    "precondition-app.version",
+    "precondition-os.name",
+    "precondition-os.version",
+    "precondition-device.model",
+    "incident"
+   ],
+   "text": "Is the crash specific to app 3.1.0 / iOS 18.4 / iPhone15,2, or do other versions and devices reproduce it? The packet only contains events from this one combination."
+  },
+  {
+   "cites": [
+    "precondition-push.deliverable",
+    "precondition-push.os_permission",
+    "precondition-push.provider_registration",
+    "precondition-profile.consistent",
+    "incident"
+   ],
+   "text": "Do the push and profile states matter at all, or are they incidental to these 4 events?"
+  },
+  {
+   "cites": [
+    "suspect-c31a111",
+    "failure"
+   ],
+   "text": "Did commit c31a111 introduce the code path at line 31, and does the crash predate it?"
+  },
+  {
+   "cites": [
+    "step-2",
+    "step-4"
+   ],
+   "text": "Does the specific job selected from li.job-card affect whether the failure occurs?"
+  }
+ ],
+ "steps_prose": [
+  {
+   "cites": [
+    "step-1"
+   ],
+   "text": "Navigate to /jobs."
+  },
+  {
+   "cites": [
+    "step-2"
+   ],
+   "text": "Tap a job card (li.job-card) in the list."
+  },
+  {
+   "cites": [
+    "step-3"
+   ],
+   "text": "The app navigates to /jobs/detail."
+  },
+  {
+   "cites": [
+    "step-4"
+   ],
+   "text": "Tap the Apply button (button#apply)."
+  },
+  {
+   "cites": [
+    "step-5",
+    "failure"
+   ],
+   "text": "The backend call POST /api/applications returns 500, and onApplyClick at src/modules/jobs/detail.vue:31 throws the TypeError while reading 'jobId' off an undefined value."
+  }
+ ],
+ "summary": {
+  "cites": [
+   "incident",
+   "failure",
+   "step-4",
+   "step-5"
+  ],
+  "text": "Four Sentry events show a TypeError \"Cannot read properties of undefined (reading 'jobId')\" thrown in onApplyClick at src/modules/jobs/detail.vue line 31, occurring when a user taps Apply on a job detail page and the POST /api/applications call returns 500."
+ }
+}

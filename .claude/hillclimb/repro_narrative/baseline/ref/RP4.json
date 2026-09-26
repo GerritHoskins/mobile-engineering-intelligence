@@ -1,0 +1,104 @@
+{
+ "conditions": [
+  {
+   "cites": [
+    "precondition-app.version",
+    "precondition-os.name",
+    "precondition-os.version",
+    "precondition-device.model"
+   ],
+   "text": "Required setup, consistent across all events: app version 1.2.1 on iOS 18.4, device iPhone15,2 (from Sentry contexts)."
+  },
+  {
+   "cites": [
+    "precondition-profile.consistent"
+   ],
+   "text": "The profile state must be inconsistent: profile.consistent is false in every event, reported by module1.profile."
+  },
+  {
+   "cites": [
+    "varies-push.deliverable",
+    "varies-push.os_permission",
+    "varies-push.provider_registration"
+   ],
+   "text": "Push state is not a required condition because it varies: push.deliverable is false in one event and UNKNOWN in the other, push.os_permission is ALLOWED in one and UNKNOWN in the other, and push.provider_registration is NOT_REGISTERED in one event and REGISTERED in the other."
+  },
+  {
+   "cites": [
+    "suspects"
+   ],
+   "text": "No suspect commit is identified in this packet; the suspects entry is UNKNOWN, so there is no code change to point at as a lead."
+  }
+ ],
+ "missing_evidence_questions": [
+  {
+   "cites": [
+    "suspects",
+    "failure"
+   ],
+   "text": "Which change shipped as the \"hotfix\" referenced in the error message, and can a suspect commit or release diff be attached, given suspects is currently UNKNOWN?"
+  },
+  {
+   "cites": [
+    "precondition-profile.consistent",
+    "step-1"
+   ],
+   "text": "What makes profile.consistent false, and what sequence before reaching /profile puts the profile into that state?"
+  },
+  {
+   "cites": [
+    "failure"
+   ],
+   "text": "What does validateEmail compare at line 9 (which two email values mismatch), and where does each value come from?"
+  },
+  {
+   "cites": [
+    "varies-push.deliverable",
+    "varies-push.os_permission",
+    "varies-push.provider_registration",
+    "incident"
+   ],
+   "text": "Why is push.deliverable and push.os_permission UNKNOWN in one of the two events, and is push state genuinely irrelevant or just under-sampled at 2 events?"
+  },
+  {
+   "cites": [
+    "precondition-app.version",
+    "precondition-os.version",
+    "precondition-device.model",
+    "precondition-os.name"
+   ],
+   "text": "Does the failure reproduce on app versions other than 1.2.1, on other iOS versions, or on other device models, or is it specific to this configuration?"
+  }
+ ],
+ "steps_prose": [
+  {
+   "cites": [
+    "step-1",
+    "incident"
+   ],
+   "text": "Navigate to /profile; this step is present in all 2 events considered."
+  },
+  {
+   "cites": [
+    "step-2",
+    "incident"
+   ],
+   "text": "Tap button#save-profile; this step is also present in all events considered."
+  },
+  {
+   "cites": [
+    "failure"
+   ],
+   "text": "The save attempt then fails with Error \"Profile email mismatch after hotfix\" raised at validateEmail in src/modules/profile/email.ts line 9."
+  }
+ ],
+ "summary": {
+  "cites": [
+   "incident",
+   "failure",
+   "step-1",
+   "step-2"
+  ],
+  "text": "The incident is an Error \"Profile email mismatch after hotfix\" thrown in validateEmail (src/modules/profile/email.ts line 9), seen across 2 events when a user saves their profile on the /profile screen."
+ }
+}

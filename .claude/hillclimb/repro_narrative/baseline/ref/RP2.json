@@ -1,0 +1,141 @@
+{
+ "conditions": [
+  {
+   "cites": [
+    "precondition-app.version",
+    "precondition-os.name",
+    "precondition-os.version",
+    "precondition-device.model"
+   ],
+   "text": "Set up the reported environment: app version 1.4.0 on iOS 18.4, device iPhone15,2 \u2014 all three reported by Sentry contexts in every event."
+  },
+  {
+   "cites": [
+    "precondition-push.deliverable",
+    "precondition-push.os_permission"
+   ],
+   "text": "Push must be in a non-deliverable state with OS-level permission DENIED; both hold in all events."
+  },
+  {
+   "cites": [
+    "varies-push.provider_registration"
+   ],
+   "text": "Push provider registration is not a fixed condition: 2 events were REGISTERED and 1 was STALE."
+  },
+  {
+   "cites": [
+    "varies-profile.consistent"
+   ],
+   "text": "Profile consistency also varies and so is not required: one event true, one false, one UNKNOWN."
+  },
+  {
+   "cites": [
+    "variant-1",
+    "variant-2",
+    "variant-3"
+   ],
+   "text": "How the user arrives at the settings screen does not matter: one event came via /home then /settings, one via foreground then /inbox, and one after a 97-step prefix of paging through /search/results."
+  },
+  {
+   "cites": [
+    "gap-1",
+    "variant-3"
+   ],
+   "text": "Note that breadcrumbs were truncated in 1 event, so its full prefix is not fully known."
+  },
+  {
+   "cites": [
+    "suspects"
+   ],
+   "text": "No suspect commit was identified, so there is no specific change to revert or bisect against from this packet."
+  }
+ ],
+ "missing_evidence_questions": [
+  {
+   "cites": [
+    "failure",
+    "step-3"
+   ],
+   "text": "What exactly is null at src/modules/push/permission.ts:27 \u2014 the response object from POST /api/push/permission, or some other value whose 'status' is read?"
+  },
+  {
+   "cites": [
+    "step-3",
+    "precondition-push.os_permission"
+   ],
+   "text": "Why does POST /api/push/permission return 403, and is the 403 a required trigger or merely correlated with OS permission being DENIED?"
+  },
+  {
+   "cites": [
+    "varies-push.provider_registration"
+   ],
+   "text": "Does the crash still reproduce with provider registration STALE versus REGISTERED, given the split across events?"
+  },
+  {
+   "cites": [
+    "varies-profile.consistent"
+   ],
+   "text": "What is the real value of profile.consistent in the event where it is UNKNOWN, and does it affect reproduction at all?"
+  },
+  {
+   "cites": [
+    "gap-1"
+   ],
+   "text": "Can the truncated breadcrumb trail for the affected event be recovered to confirm no additional step is required?"
+  },
+  {
+   "cites": [
+    "suspects",
+    "failure"
+   ],
+   "text": "Which change introduced the null-handling path in requestPermission, since suspect commit analysis returned NONE_FOUND?"
+  },
+  {
+   "cites": [
+    "precondition-app.version",
+    "precondition-os.version",
+    "precondition-device.model"
+   ],
+   "text": "Does the crash reproduce on app versions, iOS versions or devices other than 1.4.0 / iOS 18.4 / iPhone15,2, which are the only ones observed?"
+  }
+ ],
+ "steps_prose": [
+  {
+   "cites": [
+    "step-1",
+    "incident"
+   ],
+   "text": "Navigate to /settings/notifications; this step is present in all 3 events considered."
+  },
+  {
+   "cites": [
+    "step-2",
+    "incident"
+   ],
+   "text": "Tap the button#enable-push control on that screen, also seen in every event."
+  },
+  {
+   "cites": [
+    "step-3",
+    "incident"
+   ],
+   "text": "The app issues POST /api/push/permission, which responds 403 in all events."
+  },
+  {
+   "cites": [
+    "failure",
+    "step-3"
+   ],
+   "text": "The crash then surfaces as TypeError: Cannot read properties of null (reading 'status') in requestPermission at src/modules/push/permission.ts line 27; the packet does not describe the code path between the 403 and the null read, so treat that link as unconfirmed."
+  }
+ ],
+ "summary": {
+  "cites": [
+   "incident",
+   "failure",
+   "step-3",
+   "step-2"
+  ],
+  "text": "Across 3 events, a TypeError \"Cannot read properties of null (reading 'status')\" is thrown in requestPermission at src/modules/push/permission.ts:27 when a user enables push from the notification settings screen and the backend permission call returns 403."
+ }
+}

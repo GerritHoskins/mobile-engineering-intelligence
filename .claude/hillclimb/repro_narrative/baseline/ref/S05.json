@@ -1,0 +1,128 @@
+{
+ "conditions": [
+  {
+   "cites": [
+    "precondition-app.version",
+    "precondition-os.name",
+    "precondition-os.version",
+    "precondition-device.model"
+   ],
+   "text": "Set up app version 3.2.0 on iOS 18.4, device model iPhone15,2 - these values came from Sentry contexts and held in all analyzed events."
+  },
+  {
+   "cites": [
+    "precondition-push.deliverable",
+    "precondition-push.os_permission",
+    "precondition-push.provider_registration"
+   ],
+   "text": "Push should be in a deliverable state: OS notification permission ALLOWED and provider registration REGISTERED, which was the case in every event."
+  },
+  {
+   "cites": [
+    "precondition-profile.consistent"
+   ],
+   "text": "The user profile was consistent in all events, so reproduce with a normally signed-in, consistent profile."
+  },
+  {
+   "cites": [
+    "precondition-app.version",
+    "precondition-os.name",
+    "precondition-os.version",
+    "precondition-device.model",
+    "precondition-push.deliverable",
+    "precondition-push.os_permission",
+    "precondition-push.provider_registration",
+    "precondition-profile.consistent",
+    "incident"
+   ],
+   "text": "Every precondition in the packet has full support across the 3 events, so nothing here is flagged as varying or optional; the packet gives no basis for saying any of these is unnecessary."
+  }
+ ],
+ "missing_evidence_questions": [
+  {
+   "cites": [
+    "gap-1",
+    "precondition-app.version",
+    "incident"
+   ],
+   "text": "Why is the culprit unmappable (CULPRIT_UNMAPPABLE across all 3 events) - are source maps or debug symbols missing for the 3.2.0 build, and can they be uploaded to resolve the frame?"
+  },
+  {
+   "cites": [
+    "failure"
+   ],
+   "text": "Which code path throws \"TypeError: t is undefined\", given the culprit frame is UNKNOWN?"
+  },
+  {
+   "cites": [
+    "suspects",
+    "step-1",
+    "step-2"
+   ],
+   "text": "Are there any candidate commits touching the /news screen or the share button, since the suspects field is UNKNOWN?"
+  },
+  {
+   "cites": [
+    "precondition-os.version",
+    "precondition-device.model",
+    "precondition-app.version",
+    "incident"
+   ],
+   "text": "Does the crash depend on the iOS 18.4 / iPhone15,2 / 3.2.0 combination, or does it also reproduce on other versions and devices not represented in these 3 events?"
+  },
+  {
+   "cites": [
+    "precondition-push.deliverable",
+    "precondition-push.os_permission",
+    "precondition-push.provider_registration",
+    "precondition-profile.consistent",
+    "incident"
+   ],
+   "text": "Do the push state and profile consistency preconditions actually matter for the crash, or do they just happen to be identical in all 3 events?"
+  }
+ ],
+ "steps_prose": [
+  {
+   "cites": [
+    "step-1"
+   ],
+   "text": "Navigate to /news; this step is present in all analyzed events."
+  },
+  {
+   "cites": [
+    "step-2"
+   ],
+   "text": "Tap the share control (button#share) on that screen; this step is also present in all analyzed events."
+  },
+  {
+   "cites": [
+    "failure",
+    "incident"
+   ],
+   "text": "Observe the failure: a TypeError with the message \"t is undefined\"."
+  },
+  {
+   "cites": [
+    "failure",
+    "gap-1",
+    "incident"
+   ],
+   "text": "Note that the packet does not identify where in the code this throws - the culprit frame is UNKNOWN and the symbolication/mapping gap CULPRIT_UNMAPPABLE affects all 3 events, so there is no specific function or file to watch while reproducing."
+  },
+  {
+   "cites": [
+    "suspects"
+   ],
+   "text": "No suspect commit is listed for this incident, so there is no candidate change to bisect against."
+  }
+ ],
+ "summary": {
+  "cites": [
+   "incident",
+   "failure",
+   "step-1",
+   "step-2"
+  ],
+  "text": "The incident is a \"TypeError: t is undefined\" crash seen across 3 analyzed events, occurring after the user opens the /news screen and taps the share button."
+ }
+}

@@ -87,5 +87,5 @@
   "app/llm/prompts.py",
   "app/llm/citations.py"
  ],
- "harness_sha": "682fa81c00e8abc4fe248730603c6c3c4e4b0fb322a1263bbe0a4de36ffbec20"
+ "harness_sha": "22485b6f875cb410b703640ca702f1ec7b649fafd69e7d923967d56fcf87177a"
 }

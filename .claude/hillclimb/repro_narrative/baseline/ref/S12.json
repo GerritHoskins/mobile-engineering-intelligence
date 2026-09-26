@@ -1,0 +1,101 @@
+{
+ "conditions": [
+  {
+   "cites": [
+    "precondition-app.version",
+    "precondition-os.name",
+    "precondition-os.version",
+    "precondition-device.model"
+   ],
+   "text": "Preconditions to set up, all consistent across every event: app version 3.3.0 on iOS 18.4, device iPhone15,2 (values come from Sentry contexts)."
+  },
+  {
+   "cites": [
+    "gap-1"
+   ],
+   "text": "Account and push state are unknown for all 3 events (push.deliverable, push.os_permission, push.provider_registration, profile.consistent were not captured), so it is not established whether any particular account setup is required."
+  },
+  {
+   "cites": [
+    "gap-1",
+    "incident"
+   ],
+   "text": "The packet records no varying attributes beyond that gap, so nothing here can be marked as optional or irrelevant with confidence."
+  },
+  {
+   "cites": [
+    "suspect-c33a666",
+    "failure"
+   ],
+   "text": "As a lead only: commit c33a666 \"MEI-60: Weather widget on home\" touches the same file as the culprit frame, src/modules/weather/widget.vue, so a build containing that change may be relevant to reproduction; this is not a proven cause."
+  }
+ ],
+ "missing_evidence_questions": [
+  {
+   "cites": [
+    "gap-1"
+   ],
+   "text": "What was the account state at crash time, specifically push.deliverable, push.os_permission, push.provider_registration and profile.consistent, which are unknown for all 3 events?"
+  },
+  {
+   "cites": [
+    "failure"
+   ],
+   "text": "What makes location undefined at src/modules/weather/widget.vue line 19 in render, and where is location supposed to be populated from before the widget renders?"
+  },
+  {
+   "cites": [
+    "precondition-app.version",
+    "precondition-os.name",
+    "precondition-os.version",
+    "precondition-device.model"
+   ],
+   "text": "Does the issue reproduce only on app version 3.3.0 / iOS 18.4 / iPhone15,2, or do other versions, OS versions and devices also hit it? The packet only shows these values."
+  },
+  {
+   "cites": [
+    "suspect-c33a666"
+   ],
+   "text": "Did the error start appearing with commit c33a666, and does reverting or building before it stop the failure?"
+  },
+  {
+   "cites": [
+    "step-1",
+    "step-2",
+    "incident"
+   ],
+   "text": "Are there additional user actions or state between foregrounding and navigating to /home that the 3 captured events did not record?"
+  }
+ ],
+ "steps_prose": [
+  {
+   "cites": [
+    "step-1",
+    "incident"
+   ],
+   "text": "Bring the app to the foreground; this lifecycle step was present in all 3 events considered."
+  },
+  {
+   "cites": [
+    "step-2",
+    "incident"
+   ],
+   "text": "Navigate to /home, which was also present in every event."
+  },
+  {
+   "cites": [
+    "failure"
+   ],
+   "text": "Observe the failure: an Error with value \"Weather widget: location undefined\" surfacing at src/modules/weather/widget.vue, function render, line 19."
+  }
+ ],
+ "summary": {
+  "cites": [
+   "incident",
+   "failure",
+   "step-1",
+   "step-2"
+  ],
+  "text": "The incident is an Error \"Weather widget: location undefined\" thrown in the weather widget's render function, seen across 3 events when the app is foregrounded and the user lands on the home screen."
+ }
+}

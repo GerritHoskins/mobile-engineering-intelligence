@@ -1,0 +1,138 @@
+{
+ "conditions": [
+  {
+   "cites": [
+    "incident",
+    "step-1",
+    "step-2",
+    "step-3",
+    "step-4",
+    "step-5",
+    "step-6"
+   ],
+   "text": "All six steps above were present in every one of the 3 events considered (support 1.0), so treat the sequence as the required path."
+  },
+  {
+   "cites": [
+    "precondition-app.version",
+    "precondition-os.name",
+    "precondition-os.version",
+    "precondition-device.model",
+    "precondition-flag.new_push_flow"
+   ],
+   "text": "Preconditions to set up, each seen in all events: app version 1.2.0, iOS 18.4, device iPhone15,2, and the new_push_flow flag turned on."
+  },
+  {
+   "cites": [
+    "varies-push.deliverable",
+    "varies-push.os_permission",
+    "varies-push.provider_registration",
+    "varies-profile.consistent"
+   ],
+   "text": "Conditions that vary across events and therefore are not required: push.deliverable was false in 2 events and true in 1; push.os_permission was ALLOWED in 2 and DENIED in 1; push.provider_registration was REGISTERED in 2 and STALE in 1; profile.consistent was false in 2 and true in 1."
+  },
+  {
+   "cites": [
+    "suspect-ce50197",
+    "failure"
+   ],
+   "text": "Commit ce50197 \"MEI-3: Refresh push token on resume\" touches the same file as the culprit frame and is a lead worth checking, not a confirmed cause."
+  }
+ ],
+ "missing_evidence_questions": [
+  {
+   "cites": [
+    "failure",
+    "step-6"
+   ],
+   "text": "What makes the object read at src/modules/push/registration.ts:42 undefined in refreshToken - is it the response body of the 401 POST /api/push/register, or some cached state?"
+  },
+  {
+   "cites": [
+    "step-1",
+    "step-2",
+    "step-6"
+   ],
+   "text": "Why does the register call return 401 on resume: is the session/auth token expired or cleared while backgrounded?"
+  },
+  {
+   "cites": [
+    "precondition-flag.new_push_flow",
+    "precondition-app.version",
+    "precondition-os.version",
+    "precondition-device.model"
+   ],
+   "text": "Does the crash still reproduce with flag.new_push_flow off, or on other app versions, OS versions and devices - only 1.2.0 / iOS 18.4 / iPhone15,2 appear in these events?"
+  },
+  {
+   "cites": [
+    "varies-push.os_permission",
+    "varies-push.deliverable",
+    "varies-push.provider_registration",
+    "varies-profile.consistent"
+   ],
+   "text": "Since permission, deliverability, provider registration and profile consistency all differ between events, which values (if any) change the outcome, and do any of them matter at all?"
+  },
+  {
+   "cites": [
+    "suspect-ce50197",
+    "failure"
+   ],
+   "text": "Did the crash start appearing only after commit ce50197 landed, and what did that commit change at or around line 42?"
+  },
+  {
+   "cites": [
+    "incident"
+   ],
+   "text": "Are 3 events enough to trust this path, or are there other events of the same incident with different step sequences?"
+  }
+ ],
+ "steps_prose": [
+  {
+   "cites": [
+    "step-1"
+   ],
+   "text": "Send the app to the background."
+  },
+  {
+   "cites": [
+    "step-2"
+   ],
+   "text": "Bring the app back to the foreground (resume)."
+  },
+  {
+   "cites": [
+    "step-3"
+   ],
+   "text": "Land on or navigate to /home."
+  },
+  {
+   "cites": [
+    "step-4"
+   ],
+   "text": "Navigate to /settings/notifications."
+  },
+  {
+   "cites": [
+    "step-5"
+   ],
+   "text": "Tap button#enable-push."
+  },
+  {
+   "cites": [
+    "step-6",
+    "failure"
+   ],
+   "text": "The app issues POST /api/push/register, which comes back 401, and the crash surfaces as a TypeError in refreshToken at src/modules/push/registration.ts line 42."
+  }
+ ],
+ "summary": {
+  "cites": [
+   "incident",
+   "failure",
+   "step-5",
+   "step-6"
+  ],
+  "text": "A TypeError \"Cannot read properties of undefined (reading 'token')\" is thrown in refreshToken at src/modules/push/registration.ts:42 when a user resumes the app and enables push notifications from settings, with the push registration call returning 401; the packet is based on 3 events."
+ }
+}

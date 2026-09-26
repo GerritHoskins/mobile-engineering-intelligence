@@ -1,0 +1,126 @@
+{
+ "conditions": [
+  {
+   "cites": [
+    "precondition-app.version",
+    "precondition-os.version",
+    "precondition-os.name",
+    "precondition-device.model"
+   ],
+   "text": "Set up: app version 3.2.0, Android 15, Pixel 8 \u2014 each held in all 3 events (support 1.0)."
+  },
+  {
+   "cites": [
+    "precondition-push.deliverable",
+    "precondition-push.os_permission",
+    "precondition-push.provider_registration",
+    "precondition-profile.consistent"
+   ],
+   "text": "Also present in every event: push notifications were not deliverable (push.deliverable false) even though the OS permission was ALLOWED and provider registration was REGISTERED, and the profile was consistent; the packet does not state whether any of these matter for triggering the crash."
+  },
+  {
+   "cites": [
+    "incident",
+    "precondition-app.version",
+    "precondition-device.model"
+   ],
+   "text": "No condition in this packet is recorded as varying between events, so there is nothing identified here as optional \u2014 but the sample is only 3 events, so conditions that look required may simply be untested elsewhere."
+  },
+  {
+   "cites": [
+    "gap-1",
+    "failure"
+   ],
+   "text": "Memory state, feed size and page count are not captured in the packet and therefore cannot be listed as required or optional."
+  }
+ ],
+ "missing_evidence_questions": [
+  {
+   "cites": [
+    "gap-1",
+    "failure"
+   ],
+   "text": "Can breadcrumbs be enabled or recovered for this crash, so the user actions immediately before the failure in loadPage are known?"
+  },
+  {
+   "cites": [
+    "failure",
+    "incident"
+   ],
+   "text": "How many feed pages had been loaded, and what was the heap usage, at the point of the 8388608-byte allocation?"
+  },
+  {
+   "cites": [
+    "suspect-c32a444",
+    "failure",
+    "precondition-app.version"
+   ],
+   "text": "What exactly does commit c32a444 change in src/modules/news/feed.ts around line 88, and did the crash start only in builds containing it?"
+  },
+  {
+   "cites": [
+    "precondition-device.model",
+    "precondition-os.version",
+    "precondition-app.version",
+    "incident"
+   ],
+   "text": "Does the crash occur on devices or OS versions other than Pixel 8 / Android 15, and on versions other than 3.2.0, or is the observed uniformity just an artifact of having only 3 events?"
+  },
+  {
+   "cites": [
+    "precondition-push.deliverable",
+    "precondition-push.os_permission",
+    "precondition-push.provider_registration",
+    "incident"
+   ],
+   "text": "Is the push.deliverable=false state with ALLOWED permission and REGISTERED provider related to this crash at all, or incidental to these 3 events?"
+  }
+ ],
+ "steps_prose": [
+  {
+   "cites": [
+    "precondition-app.version",
+    "precondition-device.model",
+    "precondition-os.version",
+    "precondition-os.name",
+    "incident"
+   ],
+   "text": "Install app version 3.2.0 on a Pixel 8 running Android 15 \u2014 that is the exact configuration present in all 3 events."
+  },
+  {
+   "cites": [
+    "failure"
+   ],
+   "text": "Drive the news feed paging path so that src/modules/news/feed.ts:88 executes loadPage, since that is the culprit frame recorded for the crash."
+  },
+  {
+   "cites": [
+    "incident",
+    "failure"
+   ],
+   "text": "Keep paging until an 8388608-byte (8 MB) allocation is attempted and fails with OutOfMemoryError."
+  },
+  {
+   "cites": [
+    "gap-1",
+    "incident"
+   ],
+   "text": "The number of pages, the feed content and any other user actions needed are not known: breadcrumbs are missing for all 3 events, so no action sequence can be reconstructed from this packet."
+  },
+  {
+   "cites": [
+    "suspect-c32a444",
+    "failure"
+   ],
+   "text": "As a lead rather than a proven cause, commit c32a444 (\"MEI-52: Local news feed paging\") touches the same file, src/modules/news/feed.ts, so exercising the paging behaviour introduced or changed there is the most direct route to the failing frame."
+  }
+ ],
+ "summary": {
+  "cites": [
+   "incident",
+   "failure",
+   "gap-1"
+  ],
+  "text": "The incident is an OutOfMemoryError (\"Failed to allocate 8388608 bytes\") that surfaces in loadPage at src/modules/news/feed.ts:88, seen across the 3 events considered; the packet contains no breadcrumbs, so the exact moment and user action that triggers it are not recorded."
+ }
+}
