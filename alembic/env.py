@@ -15,7 +15,8 @@ config = context.config
 # Interpret the config file for Python logging.
 # This line sets up loggers basically.
 if config.config_file_name is not None:
-    fileConfig(config.config_file_name)
+    # Keep loggers created before migrations run in-process (tests), e.g. app.access.
+    fileConfig(config.config_file_name, disable_existing_loggers=False)
 
 # Same resolution as the app (DATABASE_URL, else DB_* parts), so migrations and
 # the API can never point at different databases. "%" is escaped because

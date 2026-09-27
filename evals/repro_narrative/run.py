@@ -2,6 +2,7 @@
 
     uv run python -m evals.repro_narrative.run --variant baseline [--reps 1] [--cases RP2,S05]
     uv run python -m evals.repro_narrative.run --variant v1 --model claude-sonnet-5 --effort high
+    uv run python -m evals.repro_narrative.run --variant v4 --provider aws   # Claude Platform on AWS
 
 Each (case, rep) goes through the app's real entry point, app.llm.service.explain
 (regenerate=True, so stored outputs are never served), against a dedicated
@@ -42,7 +43,9 @@ from dotenv import find_dotenv, load_dotenv  # noqa: E402
 
 from app.db import SessionLocal  # noqa: E402
 from app.llm import config  # noqa: E402
-from app.llm.client import AnthropicLLM, LLMError, LLMRefused, LLMResult, LLMTruncated, LLMUnavailable  # noqa: E402
+from app.llm.client import (  # noqa: E402
+    PROVIDERS, AnthropicLLM, LLMError, LLMRefused, LLMResult, LLMTruncated, LLMUnavailable, sdk_client,
+)
 from app.llm.service import explain  # noqa: E402
 from app.orgs import load_org  # noqa: E402
 from evals.repro_narrative import grade  # noqa: E402
@@ -175,7 +178,7 @@ def run_one(case: dict, rep: int, args, llm: AnthropicLLM, judge_client: anthrop
     row = {"prompt_id": case["id"], "prompt": case["note"], "tags": tags(case), "variant": args.variant,
            "rep": rep, "model": call.get("model"), "usage": call.get("usage"),
            "latency_s": call.get("latency_s"), "out_tokens": (call.get("usage") or {}).get("output_tokens"),
-           "effort": args.effort, "prompt_version": config.PROMPT_VERSION,
+           "effort": args.effort, "provider": args.provider, "prompt_version": config.PROMPT_VERSION,
            "meta": {"retries": retries, "subject": subject, "fallback_used": call.get("fallback_used")}}
     trace = [{"role": "system", "content": recorder.system}, {"role": "user", "content": recorder.user}]
 
@@ -296,6 +299,8 @@ def main() -> None:
     parser.add_argument("--variant", required=True)
     parser.add_argument("--model", default=config.MODEL)
     parser.add_argument("--effort", default=config.EFFORT)
+    parser.add_argument("--provider", default=config.PROVIDER, choices=PROVIDERS,
+                        help="aws = Claude Platform on AWS (AWS_REGION, ANTHROPIC_AWS_WORKSPACE_ID, AWS credentials)")
     parser.add_argument("--reps", type=int, default=1)
     parser.add_argument("--cases", help="comma-separated case ids (default: all)")
     parser.add_argument("--concurrency", type=int, default=4)
@@ -319,9 +324,10 @@ def main() -> None:
         missing = [c["id"] for c, _ in todo if not (args.flow / "baseline" / "ref" / f"{c['id']}.json").exists()]
         if missing:
             sys.exit(f"No frozen baseline reference for {sorted(set(missing))}; run the baseline first.")
-    print(f"{args.variant}: {len(todo)} attempts on {args.model} (effort {args.effort}), {len(done)} already done")
+    print(f"{args.variant}: {len(todo)} attempts on {args.model} (effort {args.effort}, provider {args.provider}), "
+          f"{len(done)} already done")
 
-    llm = AnthropicLLM(anthropic.Anthropic(max_retries=0, timeout=args.timeout_s))
+    llm = AnthropicLLM(sdk_client(args.provider, max_retries=0, timeout=args.timeout_s))
     judge_client = anthropic.Anthropic(max_retries=0, timeout=args.timeout_s)
     lock = threading.Lock()
     started = time.monotonic()

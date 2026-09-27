@@ -4,6 +4,11 @@ structured JSON that is validated and citation-checked by the caller.
 Uses the official SDK on the beta messages path for the server-side refusal
 fallback (`fallbacks: "default"`). A refusal arrives as HTTP 200 with
 stop_reason "refusal", so stop_reason is checked before reading content.
+
+Providers (config.PROVIDER): the Claude API, or Claude Platform on AWS, which
+is Anthropic-operated with the same API surface -- including fallbacks and
+structured output -- so only the SDK client differs (see sdk_client). Amazon
+Bedrock is not supported: it lacks both features this client relies on.
 """
 
 import json
@@ -59,14 +64,28 @@ class LLMResult:
     usage: dict = field(default_factory=dict)
 
 
+PROVIDERS = ("anthropic", "aws")
+
+
+def sdk_client(provider: str | None = None, **options) -> anthropic.Anthropic:
+    """The SDK client for a provider. Both expose the same messages API, so
+    everything downstream (fallbacks, structured output, model ids) is shared."""
+    load_dotenv(find_dotenv(usecwd=True))
+    provider = provider or config.PROVIDER
+    if provider == "anthropic":
+        return anthropic.Anthropic(**options)
+    if provider == "aws":
+        return anthropic.AnthropicAWS(**options)
+    raise LLMMisconfigured(f"Unknown LLM_PROVIDER {provider!r}; expected one of {PROVIDERS}")
+
+
 class LLMClient(Protocol):
     def generate(self, *, system: str, user: str, schema: dict) -> LLMResult: ...
 
 
 class AnthropicLLM:
     def __init__(self, client: anthropic.Anthropic | None = None):
-        load_dotenv(find_dotenv(usecwd=True))
-        self._client = client or anthropic.Anthropic()
+        self._client = client or sdk_client()
 
     def generate(self, *, system: str, user: str, schema: dict) -> LLMResult:
         try:
@@ -82,6 +101,9 @@ class AnthropicLLM:
             )
         except anthropic.AuthenticationError as error:
             raise LLMMisconfigured("Anthropic API key missing or invalid") from error
+        except anthropic.PermissionDeniedError as error:
+            # Claude Platform on AWS: wrong workspace id or a missing IAM action on the role.
+            raise LLMMisconfigured(f"Not permitted to call the model ({error.status_code})") from error
         except (anthropic.RateLimitError, anthropic.APIConnectionError) as error:
             raise LLMUnavailable(str(error)) from error
         except anthropic.APIStatusError as error:

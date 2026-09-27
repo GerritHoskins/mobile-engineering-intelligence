@@ -6,9 +6,14 @@ readme = "README.md"
 requires-python = ">=3.13"
 dependencies = [
     "alembic>=1.20.0",
-    "anthropic>=1.8.0",
+    "anthropic[aws]>=1.8.0",
     "fastapi>=0.141.1",
     "httpx>=0.28.1",
+    "opentelemetry-exporter-otlp-proto-http>=1.45.0",
+    "opentelemetry-instrumentation-fastapi>=0.66b0",
+    "opentelemetry-instrumentation-httpx>=0.66b0",
+    "opentelemetry-instrumentation-sqlalchemy>=0.66b0",
+    "opentelemetry-sdk>=1.45.0",
     "psycopg[binary]>=3.3.5",
     "pydantic>=2.13.5",
     "python-dotenv>=1.2.3",

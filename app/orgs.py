@@ -82,6 +82,9 @@ class OrgConfig(_Strict):
     frame_paths: FramePathConfig
     impact: ImpactConfig = ImpactConfig()
     repro: ReproConfig = ReproConfig()
+    # Days to keep ingested event payloads and generated LLM text; None keeps
+    # them forever. Applied by `python -m app.retention`.
+    retention_days: int | None = None
 
     # ---- releases ----
 

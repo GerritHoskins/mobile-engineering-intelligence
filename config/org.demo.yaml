@@ -47,3 +47,7 @@ impact:
 repro:
   max_breadcrumbs: 100  # a trail this long was likely cut off at its start
   min_support: 1.0  # share of events that must agree before a value is a precondition
+
+# Event payloads (breadcrumbs, contexts, tags) and generated LLM text older than
+# this are deleted by `python -m app.retention --org demo` (scheduled after ingest).
+retention_days: 30
