@@ -4,6 +4,11 @@ it (stored outputs for the old version are then simply not reused)."""
 
 import os
 
+# "anthropic": the Claude API with ANTHROPIC_API_KEY (local development).
+# "aws": Claude Platform on AWS -- same API surface and model ids, authenticated
+# by IAM/SigV4 (e.g. the ECS task role); needs AWS_REGION and
+# ANTHROPIC_AWS_WORKSPACE_ID. Inference geography there is Global or US only.
+PROVIDER = os.environ.get("LLM_PROVIDER", "anthropic")
 MODEL = os.environ.get("LLM_MODEL", "claude-opus-5")
 EFFORT = os.environ.get("LLM_EFFORT", "high")
 MAX_TOKENS = 16000  # non-streaming: stays well under the SDK's HTTP timeout

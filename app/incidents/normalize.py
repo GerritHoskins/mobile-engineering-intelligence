@@ -2,6 +2,7 @@
 canonical rows here, and unknown shapes raise rather than silently defaulting."""
 
 from app.orgs import OrgConfig
+from app.privacy import minimise
 
 
 class UnrecognizedPayload(ValueError):
@@ -52,11 +53,12 @@ def normalize_event(org: OrgConfig, event: dict) -> dict:
         "occurred_at": event["dateCreated"],
         "user_id": (event.get("user") or {}).get("id"),
         "installation_id": tags.get("installation_id"),
-        "exception": {"type": last.get("type"), "value": last.get("value")},
+        "exception": minimise({"type": last.get("type"), "value": last.get("value")}),
         "frames": frames,
-        "breadcrumbs": crumbs,
-        "contexts": event.get("contexts") or {},
-        "tags": tags,
+        # Free-form payloads are minimised before they are stored (app.privacy).
+        "breadcrumbs": minimise(crumbs),
+        "contexts": minimise(event.get("contexts") or {}),
+        "tags": minimise(tags),
     }
 
 
