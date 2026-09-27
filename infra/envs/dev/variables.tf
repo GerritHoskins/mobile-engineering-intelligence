@@ -9,7 +9,7 @@ variable "region" {
 }
 
 variable "allowed_cidrs" {
-  description = "CIDRs allowed to reach the ALB, e.g. your public IP as a /32."
+  description = "IPv4 CIDRs allowed through CloudFront (the API has no auth yet), e.g. your public IP as a /32."
   type        = list(string)
 
   validation {
@@ -34,4 +34,37 @@ variable "existing_github_oidc_provider_arn" {
   description = "Set if the account already has a GitHub OIDC provider (only one is allowed)."
   type        = string
   default     = null
+}
+
+variable "alert_email" {
+  description = "Receives alarm and ingestion-failure notifications."
+  type        = string
+}
+
+variable "anthropic_aws_workspace_id" {
+  description = "Claude Platform on AWS workspace ID (wrkspc_...), created in the AWS console. Not a secret."
+  type        = string
+  default     = null
+}
+
+variable "ingestion_schedule_enabled" {
+  description = "Turn on once an image is deployed and the vendor secrets have values."
+  type        = bool
+  default     = false
+}
+
+variable "existing_network" {
+  description = "Use an existing VPC instead of creating one. Its private subnets need a NAT route."
+  type = object({
+    vpc_id             = string
+    public_subnet_ids  = list(string)
+    private_subnet_ids = list(string)
+  })
+  default = null
+}
+
+variable "tags" {
+  description = "Extra tags on every resource (e.g. an organisation's cost-centre or owner tags)."
+  type        = map(string)
+  default     = {}
 }

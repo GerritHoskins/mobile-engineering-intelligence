@@ -20,9 +20,9 @@ resource "aws_internet_gateway" "this" {
   tags = { Name = var.name }
 }
 
-# Public subnets hold the ALB and the Fargate tasks. There is deliberately no
-# NAT gateway: tasks get a public IP to reach ECR/Secrets Manager/CloudWatch,
-# and their security group only admits the ALB.
+# Public subnets hold the ALB and the NAT gateway. The Fargate tasks run in the
+# private subnets and reach ECR, Secrets Manager, CloudWatch, the vendor APIs
+# (Sentry, Jira, GitHub) and Claude Platform on AWS through the NAT.
 resource "aws_subnet" "public" {
   count = length(local.azs)
 
@@ -33,7 +33,7 @@ resource "aws_subnet" "public" {
   tags = { Name = "${var.name}-public-${local.azs[count.index]}" }
 }
 
-# Private subnets hold RDS only; they have no route out of the VPC.
+# Private subnets hold the tasks and RDS. Their only way out is the NAT gateway.
 resource "aws_subnet" "private" {
   count = length(local.azs)
 
@@ -62,8 +62,29 @@ resource "aws_route_table_association" "public" {
   route_table_id = aws_route_table.public.id
 }
 
+# One NAT gateway (not one per AZ): this is an apply -> verify -> destroy dev
+# stack, so an AZ outage taking egress down is acceptable; it halves the cost.
+resource "aws_eip" "nat" {
+  domain = "vpc"
+
+  tags = { Name = "${var.name}-nat" }
+}
+
+resource "aws_nat_gateway" "this" {
+  allocation_id = aws_eip.nat.id
+  subnet_id     = aws_subnet.public[0].id
+
+  tags       = { Name = var.name }
+  depends_on = [aws_internet_gateway.this]
+}
+
 resource "aws_route_table" "private" {
   vpc_id = aws_vpc.this.id
+
+  route {
+    cidr_block     = "0.0.0.0/0"
+    nat_gateway_id = aws_nat_gateway.this.id
+  }
 
   tags = { Name = "${var.name}-private" }
 }

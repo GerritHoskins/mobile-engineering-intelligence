@@ -1,0 +1,25 @@
+var ALLOWED = ${allowed};
+
+function toInt(ip) {
+  var p = ip.split('.');
+  return ((Number(p[0]) << 24) >>> 0) + (Number(p[1]) << 16) + (Number(p[2]) << 8) + Number(p[3]);
+}
+
+function inCidr(ip, cidr) {
+  var parts = cidr.split('/');
+  var bits = parts.length > 1 ? Number(parts[1]) : 32;
+  var mask = bits === 0 ? 0 : ((0xFFFFFFFF << (32 - bits)) >>> 0);
+  return ((toInt(ip) & mask) >>> 0) === ((toInt(parts[0]) & mask) >>> 0);
+}
+
+function handler(event) {
+  var ip = event.viewer.ip;
+  if (ip.indexOf(':') === -1) {
+    for (var i = 0; i < ALLOWED.length; i++) {
+      if (inCidr(ip, ALLOWED[i])) {
+        return event.request;
+      }
+    }
+  }
+  return { statusCode: 403, statusDescription: 'Forbidden' };
+}
