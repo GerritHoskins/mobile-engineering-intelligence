@@ -112,8 +112,12 @@ resource "aws_iam_role" "scheduler" {
 
 data "aws_iam_policy_document" "scheduler" {
   statement {
-    actions   = ["ecs:RunTask"]
-    resources = ["${aws_ecs_task_definition.this.arn_without_revision}:*"]
+    actions = ["ecs:RunTask"]
+    # The schedule passes the family ARN (latest revision); allow both forms.
+    resources = [
+      aws_ecs_task_definition.this.arn_without_revision,
+      "${aws_ecs_task_definition.this.arn_without_revision}:*",
+    ]
 
     condition {
       test     = "ArnEquals"

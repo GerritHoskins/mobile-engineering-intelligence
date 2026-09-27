@@ -97,7 +97,8 @@ resource "aws_cloudwatch_metric_alarm" "api_5xx" {
 resource "aws_cloudwatch_log_metric_filter" "llm_errors" {
   name           = "${var.name}-llm-errors"
   log_group_name = var.log_group_name
-  pattern        = "[method, route=\"*/summary\" || route=\"*/narrative\", status=502 || status=503, latency]"
+  # 500 = misconfigured (wrong workspace id, missing IAM action); 502/503 = model side.
+  pattern = "[method, route=\"*/summary\" || route=\"*/narrative\", status=500 || status=502 || status=503, latency]"
 
   metric_transformation {
     name          = local.llm_metric
@@ -166,7 +167,9 @@ resource "aws_cloudwatch_metric_alarm" "schedule_errors" {
   alarm_actions       = local.alarm_actions
 }
 
-# The task started but exited non-zero (vendor API error, bad credentials, ...).
+# The task exited non-zero (vendor API error, bad credentials, ...) or never
+# started at all (an empty vendor secret, an image that won't pull): the latter
+# has no container exit code, so it needs its own branch.
 resource "aws_cloudwatch_event_rule" "ingestion_failed" {
   name        = "${var.name}-ingestion-failed"
   description = "Ingestion task stopped with a non-zero exit code"
@@ -178,7 +181,10 @@ resource "aws_cloudwatch_event_rule" "ingestion_failed" {
       clusterArn = [var.cluster_arn]
       lastStatus = ["STOPPED"]
       group      = ["family:${var.jobs_family}"]
-      containers = { exitCode = [{ "anything-but" = 0 }] }
+      "$or" = [
+        { containers = { exitCode = [{ "anything-but" = 0 }] } },
+        { stopCode = ["TaskFailedToStart"] },
+      ]
     }
   })
 }
