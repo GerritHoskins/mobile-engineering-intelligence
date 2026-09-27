@@ -1,5 +1,6 @@
-output "alb_url" {
-  value = "http://${module.service.alb_dns_name}"
+output "url" {
+  description = "The API, over HTTPS, reachable from allowed_cidrs only."
+  value       = module.edge.url
 }
 
 output "ecr_repository_name" {
@@ -20,8 +21,9 @@ output "service_name" {
   value = module.service.service_name
 }
 
-output "task_definition_family" {
-  value = module.service.task_definition_family
+output "jobs_task_definition_family" {
+  description = "For one-off jobs: aws ecs run-task --task-definition <this> (override the command to seed)."
+  value       = module.jobs.task_definition_family
 }
 
 output "log_group_name" {
@@ -29,10 +31,19 @@ output "log_group_name" {
 }
 
 output "run_task_network_configuration" {
-  description = "For one-off tasks (e.g. seeding) via aws ecs run-task --network-configuration."
+  description = "For one-off tasks via aws ecs run-task --network-configuration."
   value = format(
-    "awsvpcConfiguration={subnets=[%s],securityGroups=[%s],assignPublicIp=ENABLED}",
-    join(",", module.network.public_subnet_ids),
+    "awsvpcConfiguration={subnets=[%s],securityGroups=[%s],assignPublicIp=DISABLED}",
+    join(",", local.network.private_subnet_ids),
     module.service.service_security_group_id,
   )
+}
+
+output "vendor_secret_names" {
+  description = "Fill each with: aws secretsmanager put-secret-value --secret-id <name> --secret-string ..."
+  value       = module.secrets.names
+}
+
+output "dashboard_name" {
+  value = module.observability.dashboard_name
 }

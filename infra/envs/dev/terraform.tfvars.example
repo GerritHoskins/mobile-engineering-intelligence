@@ -1,3 +1,10 @@
 aws_account_id = "123456789012"
-allowed_cidrs  = ["203.0.113.10/32"] # your public IP
+allowed_cidrs  = ["203.0.113.10/32"] # your public IPv4 (CloudFront allowlist)
 image_tag      = ""                  # set to the pushed git SHA for the second apply
+alert_email    = "you@example.com"    # confirm the SNS subscription email after apply
+
+# Claude Platform on AWS workspace (AWS console > Claude Platform on AWS > Workspaces).
+# anthropic_aws_workspace_id = "wrkspc_..."
+
+# After the image is deployed and the vendor secrets are filled in:
+# ingestion_schedule_enabled = true

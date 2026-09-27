@@ -11,12 +11,37 @@ variable "vpc_id" {
 }
 
 variable "public_subnet_ids" {
-  type = list(string)
+  description = "Subnets for the ALB."
+  type        = list(string)
 }
 
-variable "allowed_cidrs" {
-  description = "CIDRs allowed to reach the ALB on port 80."
+variable "private_subnet_ids" {
+  description = "Subnets for the tasks (egress through a NAT)."
   type        = list(string)
+}
+
+variable "origin_verify_header" {
+  description = "Header CloudFront adds to every origin request; the ALB forwards only requests carrying it."
+  type        = string
+  default     = "X-Origin-Verify"
+}
+
+variable "origin_verify_secret" {
+  description = "Value of the origin-verify header."
+  type        = string
+  sensitive   = true
+}
+
+variable "anthropic_aws_workspace_id" {
+  description = "Claude Platform on AWS workspace (wrkspc_...). Null leaves the LLM endpoints unconfigured."
+  type        = string
+  default     = null
+}
+
+variable "adot_version" {
+  description = "AWS Distro for OpenTelemetry collector image tag."
+  type        = string
+  default     = "v0.50.0"
 }
 
 variable "image_tag" {
@@ -30,14 +55,15 @@ variable "container_port" {
   default = 8000
 }
 
+# The API plus the ADOT sidecar.
 variable "cpu" {
   type    = number
-  default = 256
+  default = 512
 }
 
 variable "memory" {
   type    = number
-  default = 512
+  default = 1024
 }
 
 variable "db_host" {

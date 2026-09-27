@@ -157,24 +157,45 @@ Supporting tools:
 
 ## Deployment
 
-There is one AWS dev environment (`eu-central-1`), defined with Terraform under `infra/`:
+There is one AWS dev environment (`eu-central-1`), defined with Terraform under `infra/`. It is applied, verified and destroyed again, never left running.
 
 | Path | Purpose |
 |---|---|
 | `infra/bootstrap/` | Applied once, with local state. Creates the S3 bucket for Terraform state and a monthly budget alert. |
-| `infra/envs/dev/` | The environment. VPC with public and private subnets, RDS Postgres in the private subnets, and ECS Fargate behind an ALB with an HTTP listener. |
-| `infra/modules/` | `network`, `database`, `service` (ECR, ALB, ECS, IAM, logs) and `github_oidc` (the image-push role). |
+| `infra/envs/dev/` | The environment. It uses its own VPC, or an existing one via `existing_network`. |
+| `infra/modules/network` | VPC with public subnets (ALB, NAT gateway) and private subnets (tasks, RDS). |
+| `infra/modules/service` | ECR, the ALB, and ECS Fargate for the API. The ALB admits only CloudFront, which it checks by prefix list and a secret header. It also defines the API task's IAM role (Claude Platform on AWS and X-Ray) and an ADOT sidecar that sends traces to X-Ray. |
+| `infra/modules/edge` | CloudFront, with HTTPS on its default certificate. A CloudFront Function IPv4 allowlist (`allowed_cidrs`) stands in for authentication, which the API doesn't have yet. |
+| `infra/modules/database` | RDS Postgres in the private subnets. |
+| `infra/modules/secrets` | Secrets Manager entries for the ingestion credentials. Terraform creates them **empty**, and a person sets the values (below). |
+| `infra/modules/jobs` | The ingestion task (ingest, then retention). EventBridge Scheduler runs it every 6 hours. It is the only task that can read the vendor credentials. |
+| `infra/modules/observability` | SNS email alerts, and alarms for: API down, 5xx, LLM errors, database CPU and storage, and ingestion that failed to start or exited non-zero. Also a CloudWatch dashboard. |
+| `infra/modules/github_oidc` | The GitHub Actions role that pushes images. |
 
 ```sh
 cd infra/envs/dev
 cp backend.hcl.example backend.hcl && cp terraform.tfvars.example terraform.tfvars   # both gitignored; fill in
 terraform init -backend-config=backend.hcl
-terraform apply
+terraform apply                      # first pass: image_tag = "", schedule off
+# set each vendor credential yourself (names: terraform output vendor_secret_names)
+aws secretsmanager put-secret-value --secret-id mei-dev/sentry-read-token --secret-string "$SENTRY_READ_TOKEN"
 ```
 
-The RDS-managed password reaches the task as its own secret. `app/db.py` URL-quotes it when building the connection string, because it may contain characters like `@` or `/`.
+- **Database password:** the RDS-managed password reaches the task as its own secret. `app/db.py` URL-quotes it when building the connection string, because it may contain characters like `@` or `/`.
+- **LLM:** the API calls Claude through **Claude Platform on AWS** (`LLM_PROVIDER=aws`). It authenticates with the task role, so there's no API key.
+  - Set `anthropic_aws_workspace_id` to a workspace created in the AWS console.
+  - Inference geography on that platform is Global or US only, with no EU option. That's an open question for any GDPR review.
+- **Data handling:**
+  - Ingestion minimises personal data before storing it (`app/privacy.py`).
+  - `retention_days` in the org config bounds how long event payloads and generated text are kept.
+  - Request logs record route templates, never ids.
 
-**CI:** `.github/workflows/image.yml` builds the Docker image and pushes it to ECR, tagged with the commit SHA. It runs on pushes to `main` that touch app, config, migration or image files, and can also be triggered manually. It authenticates to AWS through GitHub OIDC, so no AWS keys are stored in the repo. The job is skipped until the repo variables `AWS_ROLE_ARN` and `ECR_REPOSITORY` (optionally `AWS_REGION`) are set. There is no CI test job yet; run `uv run pytest` locally before pushing.
+**CI:** `.github/workflows/ci.yml` runs the tests, `alembic check`, and `terraform fmt` and `validate` on every PR.
+
+`.github/workflows/image.yml` builds the Docker image and pushes it to ECR, tagged with the commit SHA.
+- It runs on pushes to `main` that touch app, config, migration or image files, and can also be triggered manually.
+- It authenticates to AWS through GitHub OIDC, so no AWS keys are stored in the repo.
+- It is skipped until the repo variables `AWS_ROLE_ARN` and `ECR_REPOSITORY` (optionally `AWS_REGION`) are set.
 
 ## Repository layout
 
